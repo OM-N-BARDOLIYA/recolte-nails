@@ -1,0 +1,99 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap');
+      .serif { font-family: 'Playfair Display', Georgia, serif; }
+      .sans { font-family: 'Plus Jakarta Sans', Arial, sans-serif; }
+    </style>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="15" flood-color="#1e1a1a" flood-opacity="0.08" />
+    </filter>
+    <filter id="card-shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="20" stdDeviation="25" flood-color="#1e1a1a" flood-opacity="0.06" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="#FAF8F5"/>
+  <circle cx="100" cy="100" r="250" fill="#E8A2A8" opacity="0.12" filter="blur(60px)"/>
+  <circle cx="1100" cy="550" r="300" fill="#D4AF37" opacity="0.08" filter="blur(70px)"/>
+
+  <!-- Main Card -->
+  <rect x="60" y="50" width="1080" height="575" rx="36" fill="#FFFFFF" stroke="#E8A2A8" stroke-opacity="0.25" stroke-width="1.5" filter="url(#card-shadow)"/>
+
+  <!-- Header Section -->
+  <text x="110" y="125" class="serif" font-size="14" font-style="italic" fill="#D88F95" letter-spacing="2">MAISON ÉCLAT &amp; RÉCOLTE NAILS PARIS</text>
+  <text x="110" y="170" class="serif" font-size="34" font-weight="700" fill="#1E1A1A" letter-spacing="0.5">Haute Brand Color Palette</text>
+  <text x="110" y="198" class="sans" font-size="13" font-weight="400" fill="#7A6F6D">Official design system color specifications, hex values, and typography tokens.</text>
+
+  <!-- Divider -->
+  <line x1="110" y1="225" x2="1030" y2="225" stroke="#E8A2A8" stroke-opacity="0.2" stroke-width="1"/>
+
+  <!-- Swatches Row -->
+  <!-- 1. Brand Rose -->
+  <g transform="translate(110, 260)">
+    <rect x="0" y="0" width="112" height="180" rx="20" fill="#E8A2A8" filter="url(#shadow)"/>
+    <rect x="0" y="195" width="112" height="90" rx="12" fill="#FAF8F5" stroke="#E8A2A8" stroke-opacity="0.3"/>
+    <text x="56" y="222" class="sans" font-size="11" font-weight="800" fill="#1E1A1A" text-anchor="middle">Brand Rose</text>
+    <text x="56" y="242" class="sans" font-size="12" font-weight="700" fill="#D88F95" text-anchor="middle">#E8A2A8</text>
+    <text x="56" y="262" class="sans" font-size="9" font-weight="600" fill="#7A6F6D" text-anchor="middle">Primary Brand</text>
+  </g>
+
+  <!-- 2. Rose Dark -->
+  <g transform="translate(242, 260)">
+    <rect x="0" y="0" width="112" height="180" rx="20" fill="#D88F95" filter="url(#shadow)"/>
+    <rect x="0" y="195" width="112" height="90" rx="12" fill="#FAF8F5" stroke="#E8A2A8" stroke-opacity="0.3"/>
+    <text x="56" y="222" class="sans" font-size="11" font-weight="800" fill="#1E1A1A" text-anchor="middle">Rose Dark</text>
+    <text x="56" y="242" class="sans" font-size="12" font-weight="700" fill="#D88F95" text-anchor="middle">#D88F95</text>
+    <text x="56" y="262" class="sans" font-size="9" font-weight="600" fill="#7A6F6D" text-anchor="middle">Active &amp; Accent</text>
+  </g>
+
+  <!-- 3. Blush Light -->
+  <g transform="translate(374, 260)">
+    <rect x="0" y="0" width="112" height="180" rx="20" fill="#FBEBEE" stroke="#E8A2A8" stroke-opacity="0.4" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="0" y="195" width="112" height="90" rx="12" fill="#FAF8F5" stroke="#E8A2A8" stroke-opacity="0.3"/>
+    <text x="56" y="222" class="sans" font-size="11" font-weight="800" fill="#1E1A1A" text-anchor="middle">Blush Silk</text>
+    <text x="56" y="242" class="sans" font-size="12" font-weight="700" fill="#D88F95" text-anchor="middle">#FBEBEE</text>
+    <text x="56" y="262" class="sans" font-size="9" font-weight="600" fill="#7A6F6D" text-anchor="middle">Soft Pill Tint</text>
+  </g>
+
+  <!-- 4. Haute Gold -->
+  <g transform="translate(506, 260)">
+    <rect x="0" y="0" width="112" height="180" rx="20" fill="#D4AF37" filter="url(#shadow)"/>
+    <rect x="0" y="195" width="112" height="90" rx="12" fill="#FAF8F5" stroke="#E8A2A8" stroke-opacity="0.3"/>
+    <text x="56" y="222" class="sans" font-size="11" font-weight="800" fill="#1E1A1A" text-anchor="middle">Haute Gold</text>
+    <text x="56" y="242" class="sans" font-size="12" font-weight="700" fill="#D4AF37" text-anchor="middle">#D4AF37</text>
+    <text x="56" y="262" class="sans" font-size="9" font-weight="600" fill="#7A6F6D" text-anchor="middle">Luxury Star/Foil</text>
+  </g>
+
+  <!-- 5. Silk Cream -->
+  <g transform="translate(638, 260)">
+    <rect x="0" y="0" width="112" height="180" rx="20" fill="#FAF8F5" stroke="#E8A2A8" stroke-opacity="0.4" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="0" y="195" width="112" height="90" rx="12" fill="#FAF8F5" stroke="#E8A2A8" stroke-opacity="0.3"/>
+    <text x="56" y="222" class="sans" font-size="11" font-weight="800" fill="#1E1A1A" text-anchor="middle">Silk Cream</text>
+    <text x="56" y="242" class="sans" font-size="12" font-weight="700" fill="#7A6F6D" text-anchor="middle">#FAF8F5</text>
+    <text x="56" y="262" class="sans" font-size="9" font-weight="600" fill="#7A6F6D" text-anchor="middle">Canvas BG</text>
+  </g>
+
+  <!-- 6. Velvet Charcoal -->
+  <g transform="translate(770, 260)">
+    <rect x="0" y="0" width="112" height="180" rx="20" fill="#1E1A1A" filter="url(#shadow)"/>
+    <rect x="0" y="195" width="112" height="90" rx="12" fill="#FAF8F5" stroke="#E8A2A8" stroke-opacity="0.3"/>
+    <text x="56" y="222" class="sans" font-size="11" font-weight="800" fill="#1E1A1A" text-anchor="middle">Deep Charcoal</text>
+    <text x="56" y="242" class="sans" font-size="12" font-weight="700" fill="#1E1A1A" text-anchor="middle">#1E1A1A</text>
+    <text x="56" y="262" class="sans" font-size="9" font-weight="600" fill="#7A6F6D" text-anchor="middle">Editorial Text</text>
+  </g>
+
+  <!-- 7. WhatsApp Green -->
+  <g transform="translate(902, 260)">
+    <rect x="0" y="0" width="112" height="180" rx="20" fill="#25D366" filter="url(#shadow)"/>
+    <rect x="0" y="195" width="112" height="90" rx="12" fill="#FAF8F5" stroke="#E8A2A8" stroke-opacity="0.3"/>
+    <text x="56" y="222" class="sans" font-size="11" font-weight="800" fill="#1E1A1A" text-anchor="middle">WhatsApp</text>
+    <text x="56" y="242" class="sans" font-size="12" font-weight="700" fill="#25D366" text-anchor="middle">#25D366</text>
+    <text x="56" y="262" class="sans" font-size="9" font-weight="600" fill="#7A6F6D" text-anchor="middle">Direct Order CTA</text>
+  </g>
+
+  <!-- Footer Info -->
+  <text x="110" y="585" class="sans" font-size="11" font-weight="600" fill="#A09593">Maison Éclat &amp; Récolte Nails Paris • Brand Assets • Master Color Specs</text>
+  <text x="1030" y="585" class="sans" font-size="11" font-weight="700" fill="#D88F95" text-anchor="end">7016266727</text>
+</svg>

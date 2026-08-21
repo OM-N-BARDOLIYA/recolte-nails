@@ -8,10 +8,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $featuredProducts = Product::where('is_bestseller', true)->take(8)->get();
-        $skincareSpotlight = Product::where('category', 'Skincare')->take(4)->get();
-        $newArrivals = Product::latest()->take(4)->get();
-        
-        return view('home', compact('featuredProducts', 'skincareSpotlight', 'newArrivals'));
+        $featuredProducts = Product::where('is_bestseller', true)->take(4)->get();
+        $popularNails = Product::take(4)->get();
+        $pressOnSets = Product::where('category', 'Press-On Nails')->get();
+        $nailCare = Product::where('category', 'Nail Care & Elixirs')->get();
+
+        return view('home', compact('featuredProducts', 'popularNails', 'pressOnSets', 'nailCare'));
     }
 }

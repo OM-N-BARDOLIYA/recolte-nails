@@ -44,7 +44,14 @@ class ProductController extends Controller
         }
 
         $products = $query->get();
-        $categories = ['Skincare', 'Makeup', 'Haircare', 'Fragrance', 'Body Care', 'Nails'];
+        $categories = [
+            'Press-On Nails',
+            'BIAB & Builder Gels',
+            'Gel Polishes',
+            'Nail Care & Elixirs',
+            'Nail Art & Accents',
+            'Nail Tools & Kits'
+        ];
         $selectedCategory = $request->get('category', 'all');
         $searchQuery = $request->get('search', '');
         $currentSort = $sort;
