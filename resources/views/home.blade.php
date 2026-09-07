@@ -4,10 +4,10 @@
 
 @section('content')
 
-    <!-- ── 1. 100% FULL HORIZONTAL HIGH-DEFINITION HERO BANNER (COMPACT PANORAMIC HEIGHT) ── -->
+    <!-- ── 1. 100% FULL HORIZONTAL HIGH-DEFINITION HERO BANNER ── -->
     <section class="w-full relative overflow-hidden bg-[#F5E6DE] select-none m-0 p-0 block leading-none">
-        <!-- High-Resolution Photography Background -->
-        <div class="relative w-full aspect-[24/8] min-h-[260px] sm:min-h-[320px] lg:min-h-[380px] max-h-[420px] flex items-center justify-center py-6 sm:py-8">
+        <!-- High-Resolution Photography Background with Increased Height -->
+        <div class="relative w-full aspect-[21/9] sm:aspect-[21/8] min-h-[340px] sm:min-h-[420px] lg:min-h-[500px] max-h-[560px] flex items-center justify-center py-10 sm:py-14 lg:py-16">
             
             <img 
                 src="{{ asset('images/banners/recolte-hd-hero-bg.jpg') }}" 
@@ -23,32 +23,32 @@
             <div class="relative z-10 text-center px-4 sm:px-6 max-w-xl mx-auto flex flex-col items-center">
                 
                 <!-- Brand Title with Trademark -->
-                <h1 class="font-serif text-2xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-[#111111] leading-none mb-1 drop-shadow-xs">
-                    Recolte<sup class="text-[10px] sm:text-xs font-normal">®</sup>
+                <h1 class="font-serif text-3xl sm:text-5xl lg:text-[52px] font-bold tracking-tight text-[#111111] leading-none mb-1.5 sm:mb-2 drop-shadow-xs">
+                    Recolte<sup class="text-xs sm:text-sm font-normal">®</sup>
                 </h1>
 
                 <!-- Brand Sub-Descriptor -->
-                <p class="text-[8px] sm:text-[9.5px] lg:text-[10.5px] tracking-[0.32em] text-[#333333] font-medium uppercase mb-1.5 sm:mb-2">
+                <p class="text-[9px] sm:text-xs lg:text-[12px] tracking-[0.35em] text-[#333333] font-medium uppercase mb-2 sm:mb-2.5">
                     NAILS &nbsp;•&nbsp; BEAUTY &nbsp;•&nbsp; YOU
                 </p>
 
                 <!-- Script Accent Line -->
-                <p class="font-['Great_Vibes',cursive] text-xl sm:text-3xl lg:text-[34px] text-[#111111] font-normal leading-tight mb-1 sm:mb-2 transform -rotate-1">
+                <p class="font-['Great_Vibes',cursive] text-2xl sm:text-4xl lg:text-[42px] text-[#111111] font-normal leading-tight mb-2 sm:mb-3 transform -rotate-1">
                     Create &nbsp;•&nbsp; Express &nbsp;•&nbsp; Shine
                 </p>
 
                 <!-- Subtitle Tagline -->
-                <p class="text-[10px] sm:text-xs lg:text-[13px] font-medium text-[#444444] tracking-wide max-w-md mb-3.5 sm:mb-4.5 leading-normal">
+                <p class="text-xs sm:text-sm lg:text-[15px] font-medium text-[#444444] tracking-wide max-w-md mb-4 sm:mb-6 leading-relaxed">
                     Premium Nail Products for Professionals &amp; Enthusiasts
                 </p>
 
                 <!-- Solid Black SHOP NOW Button -->
                 <a 
                     href="{{ route('products.index') }}" 
-                    class="inline-flex items-center gap-2 px-6 sm:px-8 py-2 sm:py-2.5 bg-[#111111] hover:bg-[#A33B47] text-white text-[10px] sm:text-[11px] font-bold tracking-[0.18em] uppercase transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
+                    class="inline-flex items-center gap-2.5 px-8 sm:px-10 py-2.5 sm:py-3.5 bg-[#111111] hover:bg-[#A33B47] text-white text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
                 >
                     <span>SHOP NOW</span>
-                    <span class="text-xs">→</span>
+                    <span class="text-sm">→</span>
                 </a>
 
             </div>
