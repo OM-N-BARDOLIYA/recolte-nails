@@ -125,7 +125,7 @@
 
 
 
-        <!-- ── 3. SHOP BY CATEGORY / POPULAR PRODUCTS (3 CLEAN CARDS) ── -->
+        <!-- ── 3. SHOP BY CATEGORY (3 CLEAN PRODUCT BOTTLE CARDS) ── -->
         <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             <!-- Centered Header matching reference -->
             <div class="text-center space-y-2">
@@ -137,35 +137,72 @@
                 </p>
             </div>
 
-            <!-- 3 Clean Product Cards Grid (Same to same as reference) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
-                @foreach(collect($popularNails ?? $featuredProducts ?? [])->take(3) as $prod)
-                    <a 
-                        href="{{ route('products.show', $prod->slug) }}" 
-                        class="group flex flex-col items-center text-center transition-all duration-300"
-                    >
-                        <!-- Rounded Photo Card -->
-                        <div class="w-full aspect-square rounded-2xl sm:rounded-3xl overflow-hidden bg-[#FAF5F0] border border-black/5 shadow-2xs group-hover:shadow-md transition-all duration-300">
-                            <img 
-                                src="{{ $prod->main_image }}" 
-                                alt="{{ $prod->title }}" 
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&q=80'"
-                            />
-                        </div>
+            <!-- 3 Clean Product Bottle Cards Grid (Exact match to reference) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
+                
+                <!-- 1. Gel Polish -->
+                <a 
+                    href="{{ route('products.index', ['category' => 'Gel Polishes']) }}" 
+                    class="group flex flex-col items-center text-center transition-all duration-300"
+                >
+                    <div class="w-full aspect-square rounded-2xl sm:rounded-3xl overflow-hidden bg-[#FAF5F0] border border-black/5 shadow-2xs group-hover:shadow-md transition-all duration-300 flex items-center justify-center p-3">
+                        <img 
+                            src="{{ asset('images/products/recolte-gel-polish.jpg') }}" 
+                            alt="Gel Polish Collection" 
+                            class="w-full h-full object-cover rounded-xl sm:rounded-2xl transition-transform duration-500 group-hover:scale-105"
+                        />
+                    </div>
+                    <h3 class="font-sans font-semibold text-base sm:text-lg text-[#171412] mt-3.5 sm:mt-4 group-hover:text-rose-dark transition-colors">
+                        Gel Polish
+                    </h3>
+                    <div class="text-xs sm:text-sm font-medium text-gray-500 group-hover:text-[#111111] flex items-center justify-center gap-1.5 mt-1 transition-colors">
+                        <span>Shop Now</span>
+                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+                    </div>
+                </a>
 
-                        <!-- Centered Title -->
-                        <h3 class="font-sans font-semibold text-base sm:text-lg text-[#171412] mt-3.5 sm:mt-4 group-hover:text-rose-dark transition-colors line-clamp-1">
-                            {{ $prod->title }}
-                        </h3>
+                <!-- 2. Builder Gel -->
+                <a 
+                    href="{{ route('products.index', ['category' => 'BIAB & Builder Gels']) }}" 
+                    class="group flex flex-col items-center text-center transition-all duration-300"
+                >
+                    <div class="w-full aspect-square rounded-2xl sm:rounded-3xl overflow-hidden bg-[#FAF5F0] border border-black/5 shadow-2xs group-hover:shadow-md transition-all duration-300 flex items-center justify-center p-3">
+                        <img 
+                            src="{{ asset('images/products/recolte-builder-gel.jpg') }}" 
+                            alt="Builder Gel" 
+                            class="w-full h-full object-cover rounded-xl sm:rounded-2xl transition-transform duration-500 group-hover:scale-105"
+                        />
+                    </div>
+                    <h3 class="font-sans font-semibold text-base sm:text-lg text-[#171412] mt-3.5 sm:mt-4 group-hover:text-rose-dark transition-colors">
+                        Builder Gel
+                    </h3>
+                    <div class="text-xs sm:text-sm font-medium text-gray-500 group-hover:text-[#111111] flex items-center justify-center gap-1.5 mt-1 transition-colors">
+                        <span>Shop Now</span>
+                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+                    </div>
+                </a>
 
-                        <!-- Centered Shop Now Link -->
-                        <div class="text-xs sm:text-sm font-medium text-gray-500 group-hover:text-[#111111] flex items-center justify-center gap-1.5 mt-1 transition-colors">
-                            <span>Shop Now</span>
-                            <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
-                        </div>
-                    </a>
-                @endforeach
+                <!-- 3. Top Coat -->
+                <a 
+                    href="{{ route('products.index', ['category' => 'Nail Art & Accents']) }}" 
+                    class="group flex flex-col items-center text-center transition-all duration-300"
+                >
+                    <div class="w-full aspect-square rounded-2xl sm:rounded-3xl overflow-hidden bg-[#FAF5F0] border border-black/5 shadow-2xs group-hover:shadow-md transition-all duration-300 flex items-center justify-center p-3">
+                        <img 
+                            src="{{ asset('images/products/recolte-top-coat.jpg') }}" 
+                            alt="Top Coat" 
+                            class="w-full h-full object-cover rounded-xl sm:rounded-2xl transition-transform duration-500 group-hover:scale-105"
+                        />
+                    </div>
+                    <h3 class="font-sans font-semibold text-base sm:text-lg text-[#171412] mt-3.5 sm:mt-4 group-hover:text-rose-dark transition-colors">
+                        Top Coat
+                    </h3>
+                    <div class="text-xs sm:text-sm font-medium text-gray-500 group-hover:text-[#111111] flex items-center justify-center gap-1.5 mt-1 transition-colors">
+                        <span>Shop Now</span>
+                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+                    </div>
+                </a>
+
             </div>
         </section>
 
