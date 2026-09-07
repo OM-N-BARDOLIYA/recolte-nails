@@ -160,27 +160,27 @@
             </div>
         </section>
 
-        <!-- ── 4. LUXURY NAIL STUDIO ATELIER BANNER (MATCHING REFERENCE IMAGE) ── -->
+        <!-- ── 4. LUXURY RÉCOLTE NAIL ATELIER BANNER (EDITORIAL BRAND HIGHLIGHT) ── -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="relative rounded-3xl overflow-hidden shadow-luxury bg-[#111111] min-h-[320px] sm:min-h-[380px] lg:min-h-[420px] flex items-center">
+            <div class="relative rounded-3xl overflow-hidden shadow-luxury bg-[#161012] min-h-[340px] sm:min-h-[400px] lg:min-h-[440px] flex items-center">
                 
-                <!-- Background Image: Salon Interior on Right -->
+                <!-- Background Image: High-Definition Manicure & Botanical Couture on Right -->
                 <img 
-                    src="{{ asset('images/banners/recolte-studio-luxe-banner.png') }}" 
-                    alt="Récolte Luxury Nail Studio Interior" 
+                    src="{{ asset('images/banners/recolte-couture-hand.jpg') }}" 
+                    alt="Récolte Haute Nail Couture Handcrafting" 
                     class="absolute inset-0 w-full h-full object-cover object-right pointer-events-none"
                     loading="lazy"
                 />
 
                 <!-- Deep Dark Vignette Overlay on Left for Flawless Readability -->
-                <div class="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/85 sm:via-[#111111]/70 to-transparent pointer-events-none"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-[#161012] via-[#161012]/90 sm:via-[#161012]/75 to-transparent pointer-events-none"></div>
 
                 <!-- Left Content Layer -->
                 <div class="relative z-10 max-w-xl p-8 sm:p-12 lg:p-16 space-y-4 sm:space-y-5">
                     
                     <!-- Top Subtitle Badge -->
-                    <span class="inline-block text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.28em] text-white/70">
-                        WELCOME TO RÉCOLTE NAIL ATELIER
+                    <span class="inline-block text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.28em] text-[#E8B0B4]">
+                        ✦ HAUTE ATELIER CRAFTSMANSHIP
                     </span>
 
                     <!-- Main Serif Headline -->
@@ -191,24 +191,32 @@
 
                     <!-- Descriptive Paragraph -->
                     <p class="text-xs sm:text-sm text-gray-300 font-light leading-relaxed max-w-md">
-                        At Récolte Nail Atelier, we believe every detail matters. Our mission is to deliver exceptional nail couture in a relaxing, luxurious environment.
+                        At Récolte Nails, we believe true luxury is sculpted into every millimeter. Experience reusable 7-layer Japanese gel press-on couture, strengthening BIAB builder gels, and 24K gold damask rose elixirs crafted for instant, damage-free elegance.
                     </p>
 
-                    <!-- Calligraphy Sign-off & Interactive Action -->
-                    <div class="pt-2 flex flex-wrap items-center gap-6">
+                    <!-- Calligraphy Sign-off & Actions -->
+                    <div class="pt-2 flex flex-wrap items-center gap-5 sm:gap-6">
                         <div class="font-['Great_Vibes',cursive] text-2xl sm:text-3xl text-white/95 flex items-center gap-2">
-                            <span>Treat Yourself</span>
-                            <span class="text-rose-light">♡</span>
+                            <span>Treat Your Nails</span>
+                            <span class="text-[#E8B0B4]">♡</span>
                         </div>
 
                         <a 
-                            href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text=Hello%20R%C3%A9colte%20Nails!%20I%20would%20like%20to%20book%20a%20luxury%20nail%20session."
+                            href="{{ route('products.index') }}" 
+                            class="px-6 py-2.5 rounded-full bg-rose-dark hover:bg-[#852C37] text-white text-xs font-bold tracking-wider uppercase transition-all shadow-md hover:scale-105 flex items-center gap-1.5"
+                            style="background-color: #A33B47; color: #FFFFFF;"
+                        >
+                            <span>Explore Collection</span>
+                            <span>↗</span>
+                        </a>
+
+                        <a 
+                            href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text=Hello%20R%C3%A9colte%20Nails!%20I%20would%20like%20to%20consult%20about%20bespoke%20sizing%20and%20nail%20sets."
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="px-5 py-2 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#111111] backdrop-blur-md border border-white/30 text-xs font-semibold tracking-wide transition-all shadow-sm flex items-center gap-1.5 hover:scale-105"
+                            class="text-xs text-gray-300 hover:text-white font-medium underline underline-offset-4 transition-colors"
                         >
-                            <span>Book Atelier Visit</span>
-                            <span>↗</span>
+                            WhatsApp Sizing Concierge 💬
                         </a>
                     </div>
 
