@@ -4,16 +4,56 @@
 
 @section('content')
 
-    <!-- ── 1. 100% FULL HORIZONTAL PANORAMIC HERO BANNER (NO MARGINS FROM ANY SIDE) ── -->
-    <section class="w-full m-0 p-0 overflow-hidden block leading-none">
-        <a href="{{ route('products.index') }}" class="block w-full group select-none">
+    <!-- ── 1. 100% FULL HORIZONTAL HIGH-DEFINITION HERO BANNER (NO MARGINS, NEVER BLURRY) ── -->
+    <section class="w-full relative overflow-hidden bg-[#F5E6DE] select-none m-0 p-0 block leading-none">
+        <!-- High-Resolution Photography Background -->
+        <div class="relative w-full aspect-[21/9] min-h-[360px] sm:min-h-[440px] lg:min-h-[500px] flex items-center justify-center">
+            
             <img 
-                src="{{ asset('images/banners/recolte-exact-hero-banner.png') }}" 
-                alt="Recolte Nails - Create • Express • Shine | Premium Nail Products for Professionals & Enthusiasts" 
-                class="w-full h-auto object-cover block border-0 m-0 p-0"
+                src="{{ asset('images/banners/recolte-hd-hero-bg.jpg') }}" 
+                alt="Recolte Nails - Haute Nail Couture & Care" 
+                class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
                 loading="eager"
             />
-        </a>
+
+            <!-- Subtle Center Focus Overlay for crystal-clear readability -->
+            <div class="absolute inset-0 bg-white/10 pointer-events-none"></div>
+
+            <!-- Vector Sharp Centerpiece Typography & Interactive CTA -->
+            <div class="relative z-10 text-center px-4 sm:px-6 max-w-2xl mx-auto flex flex-col items-center">
+                
+                <!-- Brand Title with Trademark -->
+                <h1 class="font-serif text-3xl sm:text-5xl lg:text-[58px] font-bold tracking-tight text-[#111111] leading-none mb-1 drop-shadow-xs">
+                    Recolte<sup class="text-xs sm:text-base font-normal">®</sup>
+                </h1>
+
+                <!-- Brand Sub-Descriptor -->
+                <p class="text-[9px] sm:text-[11px] lg:text-xs tracking-[0.35em] text-[#333333] font-medium uppercase mb-2 sm:mb-3">
+                    NAILS &nbsp;•&nbsp; BEAUTY &nbsp;•&nbsp; YOU
+                </p>
+
+                <!-- Script Accent Line -->
+                <p class="font-['Great_Vibes',cursive] text-2xl sm:text-4xl lg:text-[42px] text-[#111111] font-normal leading-tight mb-2 sm:mb-3 transform -rotate-1">
+                    Create &nbsp;•&nbsp; Express &nbsp;•&nbsp; Shine
+                </p>
+
+                <!-- Subtitle Tagline -->
+                <p class="text-[11px] sm:text-xs lg:text-sm font-medium text-[#444444] tracking-wide max-w-lg mb-5 sm:mb-6 leading-normal">
+                    Premium Nail Products for Professionals &amp; Enthusiasts
+                </p>
+
+                <!-- Solid Black SHOP NOW Button -->
+                <a 
+                    href="{{ route('products.index') }}" 
+                    class="inline-flex items-center gap-2 px-7 sm:px-9 py-2.5 sm:py-3.5 bg-[#111111] hover:bg-[#A33B47] text-white text-[11px] sm:text-xs font-bold tracking-[0.18em] uppercase transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
+                >
+                    <span>SHOP NOW</span>
+                    <span class="text-sm">→</span>
+                </a>
+
+            </div>
+
+        </div>
     </section>
 
     <!-- ── 5-COLUMN VALUE & TRUST PROPOSITION STRIP (DIRECTLY UNDER BANNER) ── -->
