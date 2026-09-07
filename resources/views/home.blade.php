@@ -162,84 +162,52 @@
 
     </div>
 
-    <!-- ── 4. FULL-WIDTH HORIZONTAL EDITORIAL BANNER: NAILS THAT SPEAK (CLEAN PINTEREST STYLE) ── -->
-    <section class="w-full bg-gradient-to-r from-[#FAF3EE] via-[#F6ECE5] to-[#F1E3DA] border-y border-[#EADBCE] py-16 sm:py-24 relative overflow-hidden">
-        
-        <!-- Ambient Decorative Watercolor / Sparkle Accents -->
-        <div class="absolute -top-24 -right-24 w-96 h-96 bg-[#E8B0B4]/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-[#C9A24B]/10 rounded-full blur-3xl pointer-events-none"></div>
+    <!-- ── 4. FULL-WIDTH HORIZONTAL EDITORIAL BANNER: BEAUTY. CARE. CONFIDENCE. ── -->
+    <section class="w-full relative overflow-hidden bg-[#121011] border-y border-stone-800">
+        <!-- Background Image Container with Gradient Fade on Mobile/Desktop -->
+        <div 
+            class="w-full bg-cover bg-center sm:bg-right-center py-20 sm:py-28 lg:py-32 relative"
+            style="background-image: url('{{ asset('images/banners/recolte-studio-bg-blend.jpg') }}');"
+        >
+            <!-- Gradient Overlay to guarantee high contrast on left text -->
+            <div class="absolute inset-0 bg-gradient-to-r from-[#121011] via-[#121011]/95 sm:via-[#121011]/85 lg:via-[#121011]/70 to-transparent pointer-events-none"></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-                
-                <!-- ── LEFT COLUMN: MINIMAL EDITORIAL TAGLINE & CTA ── -->
-                <div class="lg:col-span-6 space-y-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="max-w-xl lg:max-w-lg space-y-6">
                     
-                    <!-- Tagline Pill Badge -->
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8B0B4]/30 border border-[#E8B0B4]/50 text-[#7D2833] text-xs font-bold tracking-[0.2em] uppercase">
-                        <span>✦</span> CONFIDENCE IN EVERY DETAIL
+                    <!-- Eyebrow Tagline -->
+                    <div class="text-[#D9A3AA] text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase">
+                        WELCOME TO RÉCOLTE ATELIER
                     </div>
 
-                    <!-- Clean Display Headline -->
-                    <div>
-                        <h2 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-extrabold text-[#2B2121] uppercase tracking-tight leading-none">
-                            NAILS
-                        </h2>
-                        <div class="font-['Great_Vibes',cursive] text-5xl sm:text-6xl lg:text-7xl text-[#A33B47] flex items-center gap-3 transform -rotate-1 mt-1">
-                            <span>that speak</span>
-                            <span class="text-3xl sm:text-4xl text-[#C48B71]">♡</span>
-                        </div>
-                    </div>
+                    <!-- Main Serif Headline -->
+                    <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight uppercase leading-[1.1]">
+                        <span class="text-white block">BEAUTY. CARE.</span>
+                        <span class="text-[#E8A5AC] block">CONFIDENCE.</span>
+                    </h2>
 
-                    <!-- Single Clean Tagline Description -->
-                    <p class="text-base sm:text-lg text-[#6A5A58] font-normal leading-relaxed max-w-lg">
-                        Flawless salon-sculpted press-on sets and restorative gel elixirs crafted for effortless everyday beauty.
+                    <!-- Concise Mission Description -->
+                    <p class="text-stone-300 text-sm sm:text-base font-light leading-relaxed max-w-md">
+                        At Récolte Atelier, we believe every detail matters. Our mission is to deliver exceptional handcrafted nail couture in a relaxing, luxurious environment.
                     </p>
 
-                    <!-- Single CTA Button -->
-                    <div class="pt-2">
+                    <!-- Handwritten Script Sign-off & CTA -->
+                    <div class="pt-2 flex flex-wrap items-center gap-6">
+                        <div class="font-['Great_Vibes',cursive] text-4xl sm:text-5xl text-[#E8A5AC] flex items-center gap-2">
+                            <span>Treat Yourself</span>
+                            <span class="text-2xl sm:text-3xl text-[#E599A2]">♡</span>
+                        </div>
+
                         <a 
                             href="{{ route('products.index') }}" 
-                            class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#1A1818] hover:bg-[#A33B47] text-white text-xs font-bold tracking-[0.18em] uppercase transition-all duration-300 shadow-luxury hover:shadow-xl hover:scale-105"
+                            class="px-6 py-2.5 rounded-full bg-white/10 hover:bg-[#E8A5AC] text-white hover:text-[#121011] border border-white/20 hover:border-[#E8A5AC] text-xs font-bold tracking-wider uppercase transition-all duration-300 shadow-md hover:scale-105 inline-flex items-center gap-2"
                         >
-                            <span>Explore The Collection</span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
-                            </svg>
+                            <span>Explore Atelier</span>
+                            <span>→</span>
                         </a>
                     </div>
 
                 </div>
-
-                <!-- ── RIGHT COLUMN: ONE HIGH-RES EDITORIAL MANICURE IMAGE ── -->
-                <div class="lg:col-span-6 relative">
-                    
-                    <div class="relative rounded-[32px] overflow-hidden shadow-2xl border-4 border-white bg-white aspect-[4/5] sm:max-w-md mx-auto group">
-                        <img 
-                            src="{{ asset('images/banners/recolte-couture-hand.jpg') }}" 
-                            alt="Récolte Couture Manicure Hand" 
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                        
-                        <!-- Top Washi Minimal Badge -->
-                        <div class="absolute top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-[#EBD8CE]/90 backdrop-blur-md shadow-xs border border-white/60 text-[10px] font-bold text-[#5A4545] tracking-[0.15em] uppercase">
-                            small details, big confidence ♡
-                        </div>
-
-                        <!-- Bottom Floating Pill -->
-                        <div class="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-white/90 backdrop-blur-md shadow-sm border border-white flex items-center justify-between">
-                            <div class="space-y-0.5">
-                                <div class="text-[11px] font-bold text-[#2B2121] uppercase tracking-wider">Récolte Couture Atelier</div>
-                                <div class="font-['Great_Vibes',cursive] text-lg text-[#A33B47] leading-none">your nails, your vibe ♡</div>
-                            </div>
-                            <a href="{{ route('products.index') }}" class="w-8 h-8 rounded-full bg-[#1A1818] text-white flex items-center justify-center text-xs font-bold hover:bg-[#A33B47] transition-colors">
-                                ↗
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-
             </div>
         </div>
     </section>
