@@ -125,84 +125,38 @@
 
 
 
-        <!-- ── 3. SHOP BY CATEGORY (3 CLEAN PRODUCT BOTTLE CARDS) ── -->
-        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-            <!-- Centered Header matching reference -->
-            <div class="text-center space-y-2">
-                <h2 class="font-serif text-3xl sm:text-4xl lg:text-[40px] font-normal text-[#171412] tracking-tight">
-                    Shop by Category
-                </h2>
-                <p class="text-sm sm:text-base text-gray-500 font-normal">
-                    Everything you need for perfect nails
-                </p>
+        <!-- ── 3. DISCOVER POPULAR NAIL PRODUCTS ── -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div class="space-y-1">
+                    <div class="text-[10px] font-extrabold uppercase tracking-[0.2em] text-rose-dark">
+                        Haute Nail Collection
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-[#1E1A1A] tracking-tight">
+                        <span class="font-sans">Discover</span> <span class="font-serif italic font-normal text-rose-dark">Our Popular</span> <br />
+                        <span class="font-sans">Nail Products & Sets</span>
+                    </h2>
+                </div>
+
+                <!-- Top Action Pills -->
+                <div class="flex items-center gap-3 flex-wrap">
+                    <a href="{{ route('products.index') }}"
+                        class="px-5 py-2.5 rounded-full bg-rose-dark text-white text-xs font-bold hover:bg-[#852C37] transition-all shadow-sm">
+                        See All Products ({{ \App\Models\Product::count() }}) ↗
+                    </a>
+                    <a href="https://wa.me/917016266727?text=Hello%20R%C3%A9colte%20Nails!%20I%20want%20to%20claim%20the%2020%25%20first%20order%20discount%20on%20press-on%20nails."
+                        target="_blank"
+                        class="px-5 py-2.5 rounded-full bg-[#E8DDD4] border border-charcoal/10 text-[#1E1A1A] text-xs font-bold hover:bg-rose-light hover:text-rose-dark transition-all shadow-sm">
+                        Custom Sizing Consultation ↗
+                    </a>
+                </div>
             </div>
 
-            <!-- 3 Clean Product Bottle Cards Grid (Exact match to reference) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
-                
-                <!-- 1. Gel Polish -->
-                <a 
-                    href="{{ route('products.index', ['category' => 'Gel Polishes']) }}" 
-                    class="group flex flex-col items-center text-center transition-all duration-300"
-                >
-                    <div class="w-full aspect-square rounded-2xl sm:rounded-3xl overflow-hidden bg-[#FAF5F0] border border-black/5 shadow-2xs group-hover:shadow-md transition-all duration-300 flex items-center justify-center p-3">
-                        <img 
-                            src="{{ asset('images/products/recolte-gel-polish.jpg') }}" 
-                            alt="Gel Polish Collection" 
-                            class="w-full h-full object-cover rounded-xl sm:rounded-2xl transition-transform duration-500 group-hover:scale-105"
-                        />
-                    </div>
-                    <h3 class="font-sans font-semibold text-base sm:text-lg text-[#171412] mt-3.5 sm:mt-4 group-hover:text-rose-dark transition-colors">
-                        Gel Polish
-                    </h3>
-                    <div class="text-xs sm:text-sm font-medium text-gray-500 group-hover:text-[#111111] flex items-center justify-center gap-1.5 mt-1 transition-colors">
-                        <span>Shop Now</span>
-                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
-                    </div>
-                </a>
-
-                <!-- 2. Builder Gel -->
-                <a 
-                    href="{{ route('products.index', ['category' => 'BIAB & Builder Gels']) }}" 
-                    class="group flex flex-col items-center text-center transition-all duration-300"
-                >
-                    <div class="w-full aspect-square rounded-2xl sm:rounded-3xl overflow-hidden bg-[#FAF5F0] border border-black/5 shadow-2xs group-hover:shadow-md transition-all duration-300 flex items-center justify-center p-3">
-                        <img 
-                            src="{{ asset('images/products/recolte-builder-gel.jpg') }}" 
-                            alt="Builder Gel" 
-                            class="w-full h-full object-cover rounded-xl sm:rounded-2xl transition-transform duration-500 group-hover:scale-105"
-                        />
-                    </div>
-                    <h3 class="font-sans font-semibold text-base sm:text-lg text-[#171412] mt-3.5 sm:mt-4 group-hover:text-rose-dark transition-colors">
-                        Builder Gel
-                    </h3>
-                    <div class="text-xs sm:text-sm font-medium text-gray-500 group-hover:text-[#111111] flex items-center justify-center gap-1.5 mt-1 transition-colors">
-                        <span>Shop Now</span>
-                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
-                    </div>
-                </a>
-
-                <!-- 3. Top Coat -->
-                <a 
-                    href="{{ route('products.index', ['category' => 'Nail Art & Accents']) }}" 
-                    class="group flex flex-col items-center text-center transition-all duration-300"
-                >
-                    <div class="w-full aspect-square rounded-2xl sm:rounded-3xl overflow-hidden bg-[#FAF5F0] border border-black/5 shadow-2xs group-hover:shadow-md transition-all duration-300 flex items-center justify-center p-3">
-                        <img 
-                            src="{{ asset('images/products/recolte-top-coat.jpg') }}" 
-                            alt="Top Coat" 
-                            class="w-full h-full object-cover rounded-xl sm:rounded-2xl transition-transform duration-500 group-hover:scale-105"
-                        />
-                    </div>
-                    <h3 class="font-sans font-semibold text-base sm:text-lg text-[#171412] mt-3.5 sm:mt-4 group-hover:text-rose-dark transition-colors">
-                        Top Coat
-                    </h3>
-                    <div class="text-xs sm:text-sm font-medium text-gray-500 group-hover:text-[#111111] flex items-center justify-center gap-1.5 mt-1 transition-colors">
-                        <span>Shop Now</span>
-                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
-                    </div>
-                </a>
-
+            <!-- 3 Product Cards Grid with Original Product Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+                @foreach(collect($popularNails ?? $featuredProducts ?? [])->take(3) as $prod)
+                    <x-product-card :product="$prod" />
+                @endforeach
             </div>
         </section>
 
