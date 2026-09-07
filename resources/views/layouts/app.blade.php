@@ -18,27 +18,27 @@
 
 <body class="min-h-screen flex flex-col bg-[#FAF8F5] text-charcoal font-sans antialiased selection:bg-rose-light selection:text-rose-dark">
 
-    <!-- ── 1. MAIN NAVIGATION (MATCHING REFERENCE IMAGE DESIGN WITH ORIGINAL CONTENTS) ── -->
+    <!-- ── 1. MAIN NAVIGATION (COMPACT SLEEK HEIGHT & ENHANCED TYPOGRAPHY) ── -->
     <header class="sticky top-0 z-50 bg-white/98 backdrop-blur-md border-b border-gray-100 shadow-2xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-18 sm:h-20">
+            <div class="flex items-center justify-between h-14 sm:h-16">
                 
                 <!-- ── 1. RECOLTE BRAND LOGO (LEFT) ── -->
                 <a href="{{ route('home') }}" class="flex flex-col items-start group shrink-0 select-none">
-                    <span class="font-serif text-2xl sm:text-[28px] font-bold tracking-tight text-[#111111] group-hover:text-[#A33B47] transition-colors leading-none">
-                        Recolte<sup class="text-xs font-normal">®</sup>
+                    <span class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-[#111111] group-hover:text-[#A33B47] transition-colors leading-none">
+                        Recolte<sup class="text-[10px] sm:text-xs font-normal">®</sup>
                     </span>
-                    <span class="text-[8px] sm:text-[9px] tracking-[0.28em] text-[#666666] font-medium uppercase mt-0.5">
+                    <span class="text-[7.5px] sm:text-[8.5px] tracking-[0.26em] text-[#666666] font-medium uppercase mt-0.5">
                         NAILS &nbsp;•&nbsp; BEAUTY &nbsp;•&nbsp; YOU
                     </span>
                 </a>
 
-                <!-- ── 2. CENTER NAVIGATION LINKS (ORIGINAL CONTENTS: HOME, ABOUT, CONTACT, CATALOG) ── -->
-                <nav class="hidden md:flex items-center gap-8 lg:gap-10 text-xs sm:text-[13px] font-medium text-[#222222]">
+                <!-- ── 2. CENTER NAVIGATION LINKS (ENHANCED FONT SIZE: 15PX) ── -->
+                <nav class="hidden md:flex items-center gap-7 lg:gap-9 text-sm sm:text-[15px] font-semibold text-[#222222]">
                     <!-- Home -->
                     <a 
                         href="{{ route('home') }}" 
-                        class="transition-colors hover:text-[#A33B47] relative py-1 {{ request()->routeIs('home') ? 'text-[#A33B47] font-semibold' : 'text-[#333333]' }}"
+                        class="transition-colors hover:text-[#A33B47] relative py-1 {{ request()->routeIs('home') ? 'text-[#A33B47]' : 'text-[#2b2b2b]' }}"
                     >
                         Home
                         @if(request()->routeIs('home'))
@@ -49,7 +49,7 @@
                     <!-- About -->
                     <a 
                         href="{{ route('about') }}" 
-                        class="transition-colors hover:text-[#A33B47] relative py-1 {{ request()->routeIs('about') ? 'text-[#A33B47] font-semibold' : 'text-[#333333]' }}"
+                        class="transition-colors hover:text-[#A33B47] relative py-1 {{ request()->routeIs('about') ? 'text-[#A33B47]' : 'text-[#2b2b2b]' }}"
                     >
                         About
                         @if(request()->routeIs('about'))
@@ -60,7 +60,7 @@
                     <!-- Contact -->
                     <a 
                         href="{{ route('contact') }}" 
-                        class="transition-colors hover:text-[#A33B47] relative py-1 {{ request()->routeIs('contact') ? 'text-[#A33B47] font-semibold' : 'text-[#333333]' }}"
+                        class="transition-colors hover:text-[#A33B47] relative py-1 {{ request()->routeIs('contact') ? 'text-[#A33B47]' : 'text-[#2b2b2b]' }}"
                     >
                         Contact
                         @if(request()->routeIs('contact'))
@@ -71,7 +71,7 @@
                     <!-- Catalog -->
                     <a 
                         href="{{ route('products.index') }}" 
-                        class="transition-colors hover:text-[#A33B47] relative py-1 {{ request()->routeIs('products.*') ? 'text-[#A33B47] font-semibold' : 'text-[#333333]' }}"
+                        class="transition-colors hover:text-[#A33B47] relative py-1 {{ request()->routeIs('products.*') ? 'text-[#A33B47]' : 'text-[#2b2b2b]' }}"
                     >
                         Catalog
                         @if(request()->routeIs('products.*'))
