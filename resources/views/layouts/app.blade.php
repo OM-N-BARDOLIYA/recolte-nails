@@ -12,124 +12,155 @@
 
 <body class="min-h-screen flex flex-col bg-[#FAF8F5] text-charcoal font-sans antialiased selection:bg-rose-light selection:text-rose-dark">
 
-    <!-- ── FLOATING LUXURY CAPSULE NAVBAR (EXACT STATE BEFORE COLOR PALETTE CHANGE) ── -->
-    <header class="sticky top-0 z-50 py-4 px-4 sm:px-6 lg:px-8 bg-transparent">
-        <div class="max-w-7xl mx-auto">
-            
-            <!-- Floating Capsule Master Container -->
-            <div class="w-full rounded-full bg-white/95 backdrop-blur-lg border border-black/[0.04] shadow-[0_10px_30px_rgba(0,0,0,0.06)] px-6 sm:px-9 py-2.5 flex items-center justify-between transition-all">
+    <!-- ── 1. MAIN NAVIGATION (EXACT MATCH TO CLIENT REFERENCE SCREENSHOT) ── -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-2xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-18 sm:h-20">
                 
-                <!-- ── 1. OFFICIAL RÉCOLTE BRAND LOGO (LEFT) ── -->
-                <a href="{{ route('home') }}" class="flex items-center gap-2 group shrink-0">
-                    <img 
-                        src="{{ asset('images/logo.png') }}?v={{ time() }}" 
-                        alt="Récolte Nails Logo" 
-                        class="h-9 sm:h-11 w-auto max-w-[130px] sm:max-w-[150px] object-contain transition-transform duration-300 group-hover:scale-105 select-none" 
-                    />
+                <!-- ── 1. RECOLTE BRAND LOGO (LEFT) ── -->
+                <a href="{{ route('home') }}" class="flex flex-col items-start group shrink-0 select-none">
+                    <span class="font-serif text-2xl sm:text-[28px] font-bold tracking-tight text-[#111111] group-hover:text-[#A33B47] transition-colors leading-none">
+                        Recolte<sup class="text-xs font-normal">®</sup>
+                    </span>
+                    <span class="text-[8px] sm:text-[9px] tracking-[0.28em] text-[#666666] font-medium uppercase mt-0.5">
+                        NAILS &nbsp;•&nbsp; BEAUTY &nbsp;•&nbsp; YOU
+                    </span>
                 </a>
 
-                <!-- ── 2. CENTER NAVIGATION LINKS (WITH ROSE ACTIVE UNDERLINE) ── -->
-                <nav class="hidden md:flex items-center gap-8 lg:gap-10">
+                <!-- ── 2. CENTER NAVIGATION LINKS ── -->
+                <nav class="hidden md:flex items-center gap-7 lg:gap-9 text-xs sm:text-[13px] font-medium text-[#222222]">
                     <!-- Home -->
                     <a 
                         href="{{ route('home') }}" 
-                        class="text-sm font-bold transition-all relative py-1 {{ request()->routeIs('home') ? 'text-rose-dark' : 'text-charcoal/80 hover:text-rose-dark' }}"
+                        class="transition-colors hover:text-[#A33B47] relative py-1 {{ request()->routeIs('home') ? 'text-[#A33B47] font-semibold' : 'text-[#333333]' }}"
                     >
                         Home
                         @if(request()->routeIs('home'))
-                            <span class="absolute bottom-0 left-0 right-0 h-[2px] bg-rose-dark rounded-full"></span>
+                            <span class="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C48B71] rounded-full"></span>
+                        @endif
+                    </a>
+
+                    <!-- Shop -->
+                    <a 
+                        href="{{ route('products.index') }}" 
+                        class="transition-colors hover:text-[#A33B47] relative py-1 {{ request()->routeIs('products.*') ? 'text-[#A33B47] font-semibold' : 'text-[#333333]' }}"
+                    >
+                        Shop
+                        @if(request()->routeIs('products.*'))
+                            <span class="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C48B71] rounded-full"></span>
                         @endif
                     </a>
 
                     <!-- About -->
                     <a 
                         href="{{ route('about') }}" 
-                        class="text-sm font-bold transition-all relative py-1 {{ request()->routeIs('about') ? 'text-rose-dark' : 'text-charcoal/80 hover:text-rose-dark' }}"
+                        class="transition-colors hover:text-[#A33B47] relative py-1 {{ request()->routeIs('about') ? 'text-[#A33B47] font-semibold' : 'text-[#333333]' }}"
                     >
                         About
                         @if(request()->routeIs('about'))
-                            <span class="absolute bottom-0 left-0 right-0 h-[2px] bg-rose-dark rounded-full"></span>
+                            <span class="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C48B71] rounded-full"></span>
+                        @endif
+                    </a>
+
+                    <!-- Collections -->
+                    <a 
+                        href="{{ route('products.index') }}#categories" 
+                        class="transition-colors hover:text-[#A33B47] relative py-1 text-[#333333]"
+                    >
+                        Collections
+                    </a>
+
+                    <!-- Franchise -->
+                    <a 
+                        href="{{ route('franchise') }}" 
+                        class="transition-colors hover:text-[#A33B47] relative py-1 {{ request()->routeIs('franchise') ? 'text-[#A33B47] font-semibold' : 'text-[#333333]' }}"
+                    >
+                        Franchise
+                        @if(request()->routeIs('franchise'))
+                            <span class="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C48B71] rounded-full"></span>
                         @endif
                     </a>
 
                     <!-- Contact -->
                     <a 
                         href="{{ route('contact') }}" 
-                        class="text-sm font-bold transition-all relative py-1 {{ request()->routeIs('contact') ? 'text-rose-dark' : 'text-charcoal/80 hover:text-rose-dark' }}"
+                        class="transition-colors hover:text-[#A33B47] relative py-1 {{ request()->routeIs('contact') ? 'text-[#A33B47] font-semibold' : 'text-[#333333]' }}"
                     >
                         Contact
                         @if(request()->routeIs('contact'))
-                            <span class="absolute bottom-0 left-0 right-0 h-[2px] bg-rose-dark rounded-full"></span>
-                        @endif
-                    </a>
-
-                    <!-- Catalog -->
-                    <a 
-                        href="{{ route('products.index') }}" 
-                        class="text-sm font-bold transition-all relative py-1 {{ request()->routeIs('products.*') ? 'text-rose-dark' : 'text-charcoal/80 hover:text-rose-dark' }}"
-                    >
-                        Catalog
-                        @if(request()->routeIs('products.*'))
-                            <span class="absolute bottom-0 left-0 right-0 h-[2px] bg-rose-dark rounded-full"></span>
+                            <span class="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C48B71] rounded-full"></span>
                         @endif
                     </a>
                 </nav>
 
-                <!-- ── 3. RIGHT ACTIONS: CART & WHATSAPP CTA PILL ── -->
-                <div class="flex items-center gap-3 sm:gap-4 shrink-0">
+                <!-- ── 3. RIGHT ICONS: SEARCH, USER, CART (EXACT MATCH TO SCREENSHOT) ── -->
+                <div class="flex items-center gap-4 sm:gap-5 text-[#171412]">
                     
-                    <!-- Shopping Bag / Cart Trigger Button -->
+                    <!-- Search Icon Button -->
+                    <a 
+                        href="{{ route('products.index') }}"
+                        class="p-1 hover:text-[#A33B47] transition-colors"
+                        aria-label="Search Products"
+                    >
+                        <svg class="w-4.5 h-4.5 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </a>
+
+                    <!-- Account / User Icon -->
+                    <a 
+                        href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="p-1 hover:text-[#A33B47] transition-colors"
+                        aria-label="Account / Support"
+                    >
+                        <svg class="w-4.5 h-4.5 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                    </a>
+
+                    <!-- Shopping Bag / Cart with Badge Counter -->
                     <button 
                         type="button"
                         @click="$store.cart.isOpen = true"
-                        class="relative p-2.5 sm:px-3.5 sm:py-2 rounded-full bg-[#FAF8F5] hover:bg-rose-light text-charcoal border border-charcoal/10 transition-all flex items-center gap-2 group shadow-2xs"
-                        aria-label="Open Shopping Bag"
+                        class="p-1 hover:text-[#A33B47] transition-colors relative flex items-center select-none cursor-pointer"
+                        aria-label="View Shopping Cart"
                     >
-                        <svg class="w-4.5 h-4.5 text-charcoal group-hover:text-rose-dark transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4.5 h-4.5 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                         </svg>
-                        <span class="hidden sm:inline text-xs font-bold text-charcoal group-hover:text-rose-dark">Bag</span>
                         
-                        <!-- Live Counter Badge -->
+                        <!-- Badge Counter (Small Black Circle with white number) -->
                         <span 
-                            x-show="$store.cart.totalCount > 0" 
                             x-text="$store.cart.totalCount"
-                            class="px-1.5 py-0.5 rounded-full bg-rose-dark text-white text-[10px] font-extrabold leading-none min-w-[18px] text-center shadow-xs"
-                            style="background-color: #A33B47; color: #FFFFFF;"
-                        ></span>
+                            class="absolute -top-1 -right-1.5 w-4 h-4 rounded-full bg-[#111111] text-white text-[9px] font-bold flex items-center justify-center leading-none"
+                        >0</span>
                     </button>
 
-                    <!-- Primary Action Button (Dark Rose Theme) -->
-                    <a 
-                        href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text=Hello%20R%C3%A9colte%20Nails!%20I%20would%20like%20to%20order%20a%20custom%20press-on%20set." 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="px-5 sm:px-6 py-2.5 rounded-full bg-rose-dark hover:bg-[#852C37] text-white text-xs font-bold shadow-sm transition-all duration-300 hover:scale-105 flex items-center gap-1.5 hover:opacity-95"
-                        style="background-color: #A33B47; color: #FFFFFF;"
+                    <!-- Mobile Hamburger Button -->
+                    <button 
+                        type="button"
+                        @click="mobileMenuOpen = !mobileMenuOpen" 
+                        class="md:hidden p-1 hover:text-[#A33B47] transition-colors ml-1" 
+                        aria-label="Toggle Navigation Menu"
                     >
-                        <span class="text-white font-bold">Order on WhatsApp</span>
-                        <span class="text-xs font-normal text-white" aria-hidden="true">↗</span>
-                    </a>
-
-                    <!-- Mobile Menu Button -->
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-1.5 text-charcoal" aria-label="Toggle Navigation Menu">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                        <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
                     </button>
                 </div>
 
             </div>
 
             <!-- Mobile Navigation Dropdown -->
-            <div x-show="mobileMenuOpen" x-cloak class="md:hidden mt-3 p-4 rounded-3xl bg-white/95 border border-rose/30 shadow-lg space-y-2 backdrop-blur-md">
-                <a href="{{ route('home') }}" class="block px-3 py-2.5 rounded-xl text-sm font-bold {{ request()->routeIs('home') ? 'text-rose-dark bg-rose-light/50' : 'text-charcoal' }}">Home</a>
-                <a href="{{ route('about') }}" class="block px-3 py-2.5 rounded-xl text-sm font-bold {{ request()->routeIs('about') ? 'text-rose-dark bg-rose-light/50' : 'text-charcoal' }}">About</a>
-                <a href="{{ route('contact') }}" class="block px-3 py-2.5 rounded-xl text-sm font-bold {{ request()->routeIs('contact') ? 'text-rose-dark bg-rose-light/50' : 'text-charcoal' }}">Contact</a>
-                <a href="{{ route('products.index') }}" class="block px-3 py-2.5 rounded-xl text-sm font-bold {{ request()->routeIs('products.*') ? 'text-rose-dark bg-rose-light/50' : 'text-charcoal' }}">Catalog</a>
-                <button type="button" @click="mobileMenuOpen = false; $store.cart.isOpen = true" class="w-full text-left px-3 py-2.5 rounded-xl text-sm font-bold text-charcoal bg-[#FAF8F5] flex items-center justify-between">
-                    <span>🛍️ View Shopping Bag</span>
-                    <span x-show="$store.cart.totalCount > 0" x-text="$store.cart.totalCount + ' items'" class="text-xs text-rose-dark font-bold"></span>
-                </button>
-                <a href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}" target="_blank" class="block px-3 py-2.5 rounded-xl text-sm font-bold bg-rose-dark text-white text-center" style="background-color: #A33B47; color: #FFFFFF;">Chat on WhatsApp (7016266727)</a>
+            <div x-show="mobileMenuOpen" x-cloak class="md:hidden py-3 border-t border-gray-100 space-y-1">
+                <a href="{{ route('home') }}" class="block px-3 py-2 rounded-md text-xs font-semibold {{ request()->routeIs('home') ? 'text-[#A33B47] bg-[#FBEFE9]' : 'text-gray-800' }}">Home</a>
+                <a href="{{ route('products.index') }}" class="block px-3 py-2 rounded-md text-xs font-semibold {{ request()->routeIs('products.*') ? 'text-[#A33B47] bg-[#FBEFE9]' : 'text-gray-800' }}">Shop</a>
+                <a href="{{ route('about') }}" class="block px-3 py-2 rounded-md text-xs font-semibold {{ request()->routeIs('about') ? 'text-[#A33B47] bg-[#FBEFE9]' : 'text-gray-800' }}">About</a>
+                <a href="{{ route('products.index') }}#categories" class="block px-3 py-2 rounded-md text-xs font-semibold text-gray-800">Collections</a>
+                <a href="{{ route('franchise') }}" class="block px-3 py-2 rounded-md text-xs font-semibold {{ request()->routeIs('franchise') ? 'text-[#A33B47] bg-[#FBEFE9]' : 'text-gray-800' }}">Franchise</a>
+                <a href="{{ route('contact') }}" class="block px-3 py-2 rounded-md text-xs font-semibold {{ request()->routeIs('contact') ? 'text-[#A33B47] bg-[#FBEFE9]' : 'text-gray-800' }}">Contact</a>
             </div>
 
         </div>

@@ -9,179 +9,84 @@
 
 
 
-        <!-- ── 1. BENTO HERO SECTION: BEAUTIFUL NAILS, MADE PERSONAL ── -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-
-                <!-- ── LEFT TALL CARD: MODEL WITH MANICURE & PRESS-ON NAILS (5S ROTATING SLIDESHOW) ── -->
-                <div x-data="{
-                            currentSlide: 0,
-                            slides: [
-                                {
-                                    img: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1000&q=85',
-                                    title: 'Make Your Nails<br />Look Gorgeous!',
-                                    category: 'Handcrafted Press-Ons',
-                                    link: '{{ route('products.show', 'french-pearl-chrome-press-on-nails') }}'
-                                },
-                                {
-                                    img: 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=1000&q=85',
-                                    title: 'Velvet Cat Eye<br />Haute Shimmer',
-                                    category: 'Magnetic Salon Gels',
-                                    link: '{{ route('products.show', 'velvet-cateye-magnetic-gel-polish') }}'
-                                },
-                                {
-                                    img: 'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=1000&q=85',
-                                    title: 'Glazed Donut<br />Pearl Luster',
-                                    category: 'Artisan Chrome Sets',
-                                    link: '{{ route('products.show', 'glazed-donut-chrome-powder-palette') }}'
-                                },
-                                {
-                                    img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=85',
-                                    title: 'Damage-Free<br />Natural BIAB Care',
-                                    category: 'Builder Gel Systems',
-                                    link: '{{ route('products.show', 'biab-rose-builder-gel-reinforcement') }}'
-                                }
-                            ],
-                            init() {
-                                setInterval(() => {
-                                    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-                                }, 5000);
-                            }
-                        }"
-                    class="lg:col-span-4 relative rounded-3xl overflow-hidden min-h-[520px] lg:min-h-[580px] bg-[#E8DDD4] shadow-luxury group">
-                    <!-- Background Images with Smooth Cross-Fade Animation -->
-                    <template x-for="(slide, idx) in slides" :key="idx">
-                        <img :src="slide.img" alt="Luxury Nail Art"
-                            class="absolute inset-0 w-full h-full object-cover object-center transition-all duration-1000 ease-in-out"
-                            :class="currentSlide === idx ? 'opacity-100 scale-100 z-0' : 'opacity-0 scale-105 pointer-events-none'" />
-                    </template>
-
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/20 to-black/20 z-10 pointer-events-none">
-                    </div>
-
-                    <!-- Top Right Pill: See Details -->
-                    <a :href="slides[currentSlide].link"
-                        class="absolute top-5 right-5 px-4 py-1.5 rounded-full bg-white/75 backdrop-blur-md text-[#1E1A1A] text-[11px] font-semibold hover:bg-white transition-all shadow-sm z-20">
-                        See Details
+        <!-- ── 1. LUXURY PANORAMIC HERO BANNER ── -->
+        <section class="w-full">
+            <div class="max-w-[1440px] mx-auto px-0 sm:px-4 lg:px-8">
+                <div class="relative overflow-hidden sm:rounded-2xl shadow-xs bg-[#F7EAE2]">
+                    <a href="{{ route('products.index') }}" class="block relative group">
+                        <img 
+                            src="{{ asset('images/banners/recolte-exact-hero-banner.png') }}" 
+                            alt="Recolte Nails - Create • Express • Shine | Premium Nail Products for Professionals & Enthusiasts" 
+                            class="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-[1.01]"
+                            loading="eager"
+                        />
                     </a>
-
-                    <!-- Bottom Text, Indicator Dots & Circular Arrow Button -->
-                    <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4 text-white z-20">
-                        <div class="space-y-2">
-                            <!-- Delicate 5s Progress Dots -->
-                            <div class="flex items-center gap-1.5 pb-1">
-                                <template x-for="(s, i) in slides" :key="i">
-                                    <button @click="currentSlide = i" class="h-1.5 rounded-full transition-all duration-500"
-                                        :class="currentSlide === i ? 'w-6 bg-rose-light' : 'w-1.5 bg-white/40 hover:bg-white/70'"
-                                        aria-label="Slide Indicator"></button>
-                                </template>
-                            </div>
-
-                            <p class="text-xs uppercase tracking-widest text-gold-light font-bold"
-                                x-text="slides[currentSlide].category"></p>
-                            <h3 class="font-serif text-lg sm:text-xl font-bold leading-tight"
-                                x-html="slides[currentSlide].title"></h3>
-                        </div>
-                        <a :href="slides[currentSlide].link"
-                            class="w-10 h-10 rounded-full bg-white text-[#1E1A1A] flex items-center justify-center text-sm font-bold shrink-0 hover:bg-rose-dark hover:text-white transition-all shadow-md">
-                            ↗
-                        </a>
-                    </div>
                 </div>
+            </div>
 
-                <!-- ── CENTER & RIGHT BENTO GRID (8 COLUMNS) ── -->
-                <div class="lg:col-span-8 flex flex-col justify-between gap-6">
-
-                    <!-- Top Row: Editorial Headline + Glazed Nails Card -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
-
-                        <!-- Center Editorial Headline Card -->
-                        <div
-                            class="md:col-span-7 bg-[#FAF8F5] rounded-3xl p-8 sm:p-10 flex flex-col justify-between space-y-6">
-                            <div class="space-y-4">
-                                <div
-                                    class="text-sm sm:text-base font-serif italic text-rose-dark font-semibold tracking-wide">
-                                    {{ $hero['badge'] ?? 'Nails by Récolte • Paris' }}</div>
-
-                                <h1
-                                    class="text-3xl sm:text-4xl lg:text-[2.6rem] font-bold text-[#1E1A1A] leading-[1.12] tracking-tight">
-                                    <span class="font-sans">Beautiful</span> <span
-                                        class="font-serif italic font-normal text-rose-dark">Nails,</span> <br />
-                                    <span class="font-sans">Made Personal.</span>
-                                </h1>
-
-                                <p class="text-xs sm:text-sm text-[#1E1A1A]-muted font-light leading-relaxed max-w-md">
-                                    Reusable salon-quality press-on sets, strengthening BIAB builder gels, and 24K gold
-                                    cuticle elixirs crafted for instant, damage-free luxury manicures.
-                                </p>
-                            </div>
-
-                            <div>
-                                <a href="{{ route('products.index', ['category' => 'Press-On Nails']) }}"
-                                    class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-rose-dark hover:bg-[#852C37] text-white text-xs font-bold transition-all hover:scale-105 shadow-md">
-                                    <span>Explore Nail Collection</span>
-                                    <span>↗</span>
-                                </a>
-                            </div>
+            <!-- ── 5-COLUMN VALUE & TRUST PROPOSITION STRIP (UNDER BANNER) ── -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-8">
+                <div class="grid grid-cols-2 md:grid-cols-5 divide-y md:divide-y-0 md:divide-x divide-gray-200/80 bg-white sm:rounded-2xl py-6 sm:py-8 px-2 sm:px-6 border border-gray-100 shadow-2xs">
+                    
+                    <!-- Item 1: Premium Quality Products -->
+                    <div class="flex flex-col items-center text-center p-3 sm:p-4 group">
+                        <div class="text-[#171412] group-hover:text-[#A33B47] transition-colors mb-2.5">
+                            <svg class="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" class="hidden" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 9l10 13L22 9l-10-7zm0 0v22M2 9h20M7 9l5 13 5-13" />
+                            </svg>
                         </div>
-
-                        <!-- Top Right Glazed Nails Card (Dynamic CMS Hero Top Right Card) -->
-                        <div class="md:col-span-5 relative rounded-3xl overflow-hidden min-h-[260px] bg-[#E8DDD4] shadow-luxury group">
-                            <img src="{{ $hero['top_right_image'] ?? 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=800&q=80' }}"
-                                alt="Haute Nails"
-                                class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
-
-                            <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent z-10 pointer-events-none"></div>
-
-                            <a href="{{ $hero['top_right_link'] ?? route('products.index') }}"
-                                class="absolute bottom-4 right-4 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md text-[#1E1A1A] text-[11px] font-semibold hover:bg-white transition-all shadow-sm z-20">
-                                See Details ↗
-                            </a>
-                        </div>
-
+                        <span class="text-xs sm:text-[13px] font-bold text-[#171412] tracking-tight">Premium Quality</span>
+                        <span class="text-[11px] sm:text-xs text-[#666666] font-normal mt-0.5">Products</span>
                     </div>
 
-                    <!-- Bottom Row: BIAB Solutions Card + +120K Stat Metric Card -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
-
-                        <!-- Advanced BIAB Solutions Card (Dynamic CMS Mini Banner) -->
-                        <div class="md:col-span-7 bg-[#E8DDD4] rounded-3xl p-6 sm:p-7 flex items-center justify-between gap-4">
-                            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden shadow-sm shrink-0 relative bg-white/50">
-                                <img src="{{ $hero['mini_banner_image'] ?? 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80' }}"
-                                    alt="BIAB Builder Gel Bottle"
-                                    class="w-full h-full object-cover" />
-                            </div>
-                            <div class="space-y-2">
-                                <h4 class="font-serif text-sm sm:text-base font-bold text-[#1E1A1A] leading-snug">
-                                    {{ $hero['mini_banner_title'] ?? 'BIAB™ Builder Gel Systems' }}
-                                </h4>
-                                <p class="text-[11px] text-[#1E1A1A]-muted leading-relaxed">
-                                    {{ $hero['mini_banner_desc'] ?? 'Salon-strength natural nail reinforcement and 4+ week chip-free growth.' }}
-                                </p>
-                                <a href="{{ $hero['mini_banner_url'] ?? route('products.index', ['category' => 'BIAB & Builder Gels']) }}"
-                                    class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-rose-dark text-white text-[10px] font-bold hover:bg-[#852C37] transition-all shadow-sm"
-                                    style="background-color: #A33B47; color: #FFFFFF;">
-                                    <span>{{ $hero['mini_banner_btn'] ?? 'See All Gel Products ↗' }}</span>
-                                </a>
-                            </div>
+                    <!-- Item 2: Safe & Skin Friendly Formulas -->
+                    <div class="flex flex-col items-center text-center p-3 sm:p-4 group">
+                        <div class="text-[#171412] group-hover:text-[#A33B47] transition-colors mb-2.5">
+                            <svg class="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                            </svg>
                         </div>
+                        <span class="text-xs sm:text-[13px] font-bold text-[#171412] tracking-tight">Safe & Skin Friendly</span>
+                        <span class="text-[11px] sm:text-xs text-[#666666] font-normal mt-0.5">Formulas</span>
+                    </div>
 
-                        <!-- +120K Metric Stat Card -->
-                        <div
-                            class="md:col-span-5 bg-white rounded-3xl p-6 sm:p-7 flex flex-col justify-center space-y-2 border border-black/[0.04] shadow-[0_8px_30px_rgba(30,26,26,0.06)] transition-all duration-300 hover:shadow-lg">
-                            <div class="font-sans text-3xl sm:text-4xl font-extrabold text-[#1E1A1A] tracking-tight">+120K
-                            </div>
-                            <div class="text-[11px] font-bold text-rose-dark uppercase tracking-wider">Custom Nail Sets
-                                Delivered</div>
-                            <p class="text-[10px] text-[#1E1A1A]-muted leading-relaxed">Your Nails Deserve the Best. Explore
-                                our Handcrafted Salon Formulations Today!</p>
+                    <!-- Item 3: Fast & Reliable Shipping -->
+                    <div class="flex flex-col items-center text-center p-3 sm:p-4 group">
+                        <div class="text-[#171412] group-hover:text-[#A33B47] transition-colors mb-2.5">
+                            <svg class="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375A1.125 1.125 0 012.25 17.625V6.375c0-.621.504-1.125 1.125-1.125h11.25c.621 0 1.125.504 1.125 1.125v1.5m-13.5 0h13.5m0 0l3 3m-3-3v8.625c0 .621.504 1.125 1.125 1.125H21a.75.75 0 00.75-.75V11.25l-2.25-3H16.5m0 0v8.625m3.75 1.875a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H16.5" />
+                            </svg>
                         </div>
+                        <span class="text-xs sm:text-[13px] font-bold text-[#171412] tracking-tight">Fast & Reliable</span>
+                        <span class="text-[11px] sm:text-xs text-[#666666] font-normal mt-0.5">Shipping</span>
+                    </div>
 
+                    <!-- Item 4: Expert Support Always -->
+                    <div class="flex flex-col items-center text-center p-3 sm:p-4 group">
+                        <div class="text-[#171412] group-hover:text-[#A33B47] transition-colors mb-2.5">
+                            <svg class="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" class="hidden" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 12.75v1.5a6.75 6.75 0 01-13.5 0v-1.5m0 0A3.75 3.75 0 019 9h6a3.75 3.75 0 013.75 3.75zm-13.5 0a3.75 3.75 0 00-2.25 3.425v.825a3 3 0 003 3h1.5m11.25-7.25a3.75 3.75 0 012.25 3.425v.825a3 3 0 01-3 3h-1.5" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75v3m-3 0h6" />
+                            </svg>
+                        </div>
+                        <span class="text-xs sm:text-[13px] font-bold text-[#171412] tracking-tight">Expert Support</span>
+                        <span class="text-[11px] sm:text-xs text-[#666666] font-normal mt-0.5">Always</span>
+                    </div>
+
+                    <!-- Item 5: Trusted by Professionals -->
+                    <div class="flex flex-col items-center text-center p-3 sm:p-4 group col-span-2 md:col-span-1">
+                        <div class="text-[#171412] group-hover:text-[#A33B47] transition-colors mb-2.5">
+                            <svg class="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                            </svg>
+                        </div>
+                        <span class="text-xs sm:text-[13px] font-bold text-[#171412] tracking-tight">Trusted by</span>
+                        <span class="text-[11px] sm:text-xs text-[#666666] font-normal mt-0.5">Professionals</span>
                     </div>
 
                 </div>
-
             </div>
         </section>
 
