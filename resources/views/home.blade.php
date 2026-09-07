@@ -160,89 +160,58 @@
             </div>
         </section>
 
-        <!-- ── 4. RADIANT NAIL RITUALS: 2x2 PHOTO GRID & EDITORIAL ── -->
+        <!-- ── 4. LUXURY NAIL STUDIO ATELIER BANNER (MATCHING REFERENCE IMAGE) ── -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div class="relative rounded-3xl overflow-hidden shadow-luxury bg-[#111111] min-h-[320px] sm:min-h-[380px] lg:min-h-[420px] flex items-center">
+                
+                <!-- Background Image: Salon Interior on Right -->
+                <img 
+                    src="{{ asset('images/banners/recolte-studio-luxe-banner.png') }}" 
+                    alt="Récolte Luxury Nail Studio Interior" 
+                    class="absolute inset-0 w-full h-full object-cover object-right pointer-events-none"
+                    loading="lazy"
+                />
 
-                <!-- Left 2x2 Image Grid with Floating Pills -->
-                <div class="lg:col-span-7 grid grid-cols-2 gap-4">
+                <!-- Deep Dark Vignette Overlay on Left for Flawless Readability -->
+                <div class="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/85 sm:via-[#111111]/70 to-transparent pointer-events-none"></div>
 
-                    <!-- 1. Press-On Sets -->
-                    <div class="relative rounded-3xl overflow-hidden aspect-[4/3] bg-[#E8DDD4] shadow-sm group">
-                        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&q=80"
-                            alt="Press-On Nails"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent">
+                <!-- Left Content Layer -->
+                <div class="relative z-10 max-w-xl p-8 sm:p-12 lg:p-16 space-y-4 sm:space-y-5">
+                    
+                    <!-- Top Subtitle Badge -->
+                    <span class="inline-block text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.28em] text-white/70">
+                        WELCOME TO RÉCOLTE NAIL ATELIER
+                    </span>
+
+                    <!-- Main Serif Headline -->
+                    <h2 class="font-serif text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-tight text-white uppercase leading-[1.12]">
+                        BEAUTY. CARE.<br />
+                        <span class="text-[#E8B0B4]">CONFIDENCE.</span>
+                    </h2>
+
+                    <!-- Descriptive Paragraph -->
+                    <p class="text-xs sm:text-sm text-gray-300 font-light leading-relaxed max-w-md">
+                        At Récolte Nail Atelier, we believe every detail matters. Our mission is to deliver exceptional nail couture in a relaxing, luxurious environment.
+                    </p>
+
+                    <!-- Calligraphy Sign-off & Interactive Action -->
+                    <div class="pt-2 flex flex-wrap items-center gap-6">
+                        <div class="font-['Great_Vibes',cursive] text-2xl sm:text-3xl text-white/95 flex items-center gap-2">
+                            <span>Treat Yourself</span>
+                            <span class="text-rose-light">♡</span>
                         </div>
-                        <a href="{{ route('products.index', ['category' => 'Press-On Nails']) }}"
-                            class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md text-[11px] font-semibold text-[#1E1A1A] flex items-center gap-1 hover:bg-white transition-all shadow-sm">
-                            <span>Press-On Sets</span> <span>↗</span>
-                        </a>
-                    </div>
 
-                    <!-- 2. BIAB Builder Gel -->
-                    <div class="relative rounded-3xl overflow-hidden aspect-[4/3] bg-[#E8DDD4] shadow-sm group">
-                        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80"
-                            alt="BIAB Gel"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent">
-                        </div>
-                        <a href="{{ route('products.index', ['category' => 'BIAB & Builder Gels']) }}"
-                            class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md text-[11px] font-semibold text-[#1E1A1A] flex items-center gap-1 hover:bg-white transition-all shadow-sm">
-                            <span>BIAB Builder Gel</span> <span>↗</span>
-                        </a>
-                    </div>
-
-                    <!-- 3. Cuticle Elixirs -->
-                    <div class="relative rounded-3xl overflow-hidden aspect-[4/3] bg-[#E8DDD4] shadow-sm group">
-                        <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80"
-                            alt="Cuticle Oil"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent">
-                        </div>
-                        <a href="{{ route('products.index', ['category' => 'Nail Care & Elixirs']) }}"
-                            class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md text-[11px] font-semibold text-[#1E1A1A] flex items-center gap-1 hover:bg-white transition-all shadow-sm">
-                            <span>Cuticle Elixirs</span> <span>↗</span>
-                        </a>
-                    </div>
-
-                    <!-- 4. Chrome Powders -->
-                    <div class="relative rounded-3xl overflow-hidden aspect-[4/3] bg-[#E8DDD4] shadow-sm group">
-                        <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=600&q=80"
-                            alt="Chrome Nail Powder"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent">
-                        </div>
-                        <a href="{{ route('products.index', ['category' => 'Nail Art & Accents']) }}"
-                            class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md text-[11px] font-semibold text-[#1E1A1A] flex items-center gap-1 hover:bg-white transition-all shadow-sm">
-                            <span>Chrome Glaze</span> <span>↗</span>
-                        </a>
-                    </div>
-
-                </div>
-
-                <!-- Right Column: Editorial Text -->
-                <div class="lg:col-span-5 space-y-6">
-                    <div class="space-y-4">
-                        <h2 class="text-3xl sm:text-4xl font-bold text-[#1E1A1A] leading-tight tracking-tight">
-                            <span class="font-sans">Radiant Nail Rituals:</span> <br />
-                            <span class="font-serif italic font-normal text-rose-dark">Your Path to</span> <br />
-                            <span class="font-sans">Flawless Nails</span>
-                        </h2>
-
-                        <p class="text-xs sm:text-sm text-[#1E1A1A]-muted font-light leading-relaxed max-w-md">
-                            Experience damage-free nail luxury. From instant salon-perfect press-on sets to strengthening
-                            BIAB gels and 24K gold cuticle treatments.
-                        </p>
-                    </div>
-
-                    <div>
-                        <a href="{{ route('products.index') }}"
-                            class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-rose-dark hover:bg-[#852C37] text-white text-xs font-bold transition-all hover:scale-105 shadow-md">
-                            <span>Explore Nail Rituals</span>
+                        <a 
+                            href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text=Hello%20R%C3%A9colte%20Nails!%20I%20would%20like%20to%20book%20a%20luxury%20nail%20session."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="px-5 py-2 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#111111] backdrop-blur-md border border-white/30 text-xs font-semibold tracking-wide transition-all shadow-sm flex items-center gap-1.5 hover:scale-105"
+                        >
+                            <span>Book Atelier Visit</span>
                             <span>↗</span>
                         </a>
                     </div>
+
                 </div>
 
             </div>
