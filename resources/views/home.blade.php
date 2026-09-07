@@ -167,7 +167,7 @@
         <!-- Background Image Container with Compact Height Matching Hero Section -->
         <div 
             class="relative w-full aspect-[24/8] min-h-[260px] sm:min-h-[320px] lg:min-h-[380px] max-h-[420px] bg-cover bg-right flex items-center py-6 sm:py-8"
-            style="background-image: url('{{ asset('images/banners/recolte-nail-editorial-banner.jpg') }}');"
+            style="background-image: url('{{ asset('images/banners/recolte-natural-nude-banner.jpg') }}');"
         >
             <!-- Gradient Overlay to guarantee high contrast on left text -->
             <div class="absolute inset-0 bg-gradient-to-r from-[#121011] via-[#121011]/95 sm:via-[#121011]/80 md:via-[#121011]/55 to-transparent pointer-events-none"></div>
