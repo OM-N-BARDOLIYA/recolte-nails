@@ -134,6 +134,12 @@ class PageController extends Controller
         return view('contact', compact('settings'));
     }
 
+    public function franchise()
+    {
+        $settings = SiteSetting::all()->pluck('value', 'key');
+        return view('franchise', compact('settings'));
+    }
+
     public function submitInquiry(Request $request)
     {
         $validated = $request->validate([
