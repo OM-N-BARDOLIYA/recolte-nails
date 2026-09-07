@@ -160,70 +160,147 @@
             </div>
         </section>
 
-        <!-- ── 4. LUXURY RÉCOLTE NAIL ATELIER BANNER (EDITORIAL BRAND HIGHLIGHT) ── -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="relative rounded-3xl overflow-hidden shadow-luxury bg-[#161012] min-h-[340px] sm:min-h-[400px] lg:min-h-[440px] flex items-center">
+    </div>
+
+    <!-- ── 4. FULL-WIDTH HORIZONTAL EDITORIAL BANNER: NAILS THAT SPEAK (PINTEREST STYLE) ── -->
+    <section class="w-full bg-gradient-to-br from-[#FAF2ED] via-[#F8ECE5] to-[#F5E3DA] border-y border-[#EEDAD0] py-14 sm:py-20 relative overflow-hidden">
+        
+        <!-- Ambient Decorative Watercolor / Sparkle Accents -->
+        <div class="absolute -top-20 -right-20 w-96 h-96 bg-[#E8B0B4]/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-20 -left-20 w-96 h-96 bg-[#C9A24B]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                 
-                <!-- Background Image: High-Definition Manicure & Botanical Couture on Right -->
-                <img 
-                    src="{{ asset('images/banners/recolte-couture-hand.jpg') }}" 
-                    alt="Récolte Haute Nail Couture Handcrafting" 
-                    class="absolute inset-0 w-full h-full object-cover object-right pointer-events-none"
-                    loading="lazy"
-                />
-
-                <!-- Deep Dark Vignette Overlay on Left for Flawless Readability -->
-                <div class="absolute inset-0 bg-gradient-to-r from-[#161012] via-[#161012]/90 sm:via-[#161012]/75 to-transparent pointer-events-none"></div>
-
-                <!-- Left Content Layer -->
-                <div class="relative z-10 max-w-xl p-8 sm:p-12 lg:p-16 space-y-4 sm:space-y-5">
+                <!-- ── LEFT COLUMN: EDITORIAL CONTENT & 4 VALUE BULLETS ── -->
+                <div class="lg:col-span-6 space-y-6">
                     
-                    <!-- Top Subtitle Badge -->
-                    <span class="inline-block text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.28em] text-[#E8B0B4]">
-                        ✦ HAUTE ATELIER CRAFTSMANSHIP
-                    </span>
+                    <!-- Display Heading -->
+                    <div>
+                        <h2 class="font-serif text-4xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-[#2B2121] uppercase leading-none">
+                            NAILS
+                        </h2>
+                        <div class="font-['Great_Vibes',cursive] text-3xl sm:text-4xl lg:text-[46px] text-[#A33B47] flex items-center gap-2 transform -rotate-1 -mt-1">
+                            <span>that speak</span>
+                            <span class="text-2xl text-[#C48B71]">♡</span>
+                        </div>
+                        <div class="inline-block px-4 py-1.5 rounded-full bg-[#E8B0B4]/35 text-[#7D2833] text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.22em] mt-3">
+                            CONFIDENCE IN EVERY DETAIL
+                        </div>
+                    </div>
 
-                    <!-- Main Serif Headline -->
-                    <h2 class="font-serif text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-tight text-white uppercase leading-[1.12]">
-                        BEAUTY. CARE.<br />
-                        <span class="text-[#E8B0B4]">CONFIDENCE.</span>
-                    </h2>
-
-                    <!-- Descriptive Paragraph -->
-                    <p class="text-xs sm:text-sm text-gray-300 font-light leading-relaxed max-w-md">
-                        At Récolte Nails, we believe true luxury is sculpted into every millimeter. Experience reusable 7-layer Japanese gel press-on couture, strengthening BIAB builder gels, and 24K gold damask rose elixirs crafted for instant, damage-free elegance.
-                    </p>
-
-                    <!-- Calligraphy Sign-off & Actions -->
-                    <div class="pt-2 flex flex-wrap items-center gap-5 sm:gap-6">
-                        <div class="font-['Great_Vibes',cursive] text-2xl sm:text-3xl text-white/95 flex items-center gap-2">
-                            <span>Treat Your Nails</span>
-                            <span class="text-[#E8B0B4]">♡</span>
+                    <!-- 4 Icon Feature Points (Pinterest Style) -->
+                    <div class="space-y-4 pt-2">
+                        
+                        <!-- 1. Beautiful Nails -->
+                        <div class="flex items-start gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-[#E8B0B4]/35 text-[#852C37] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-110 transition-transform mt-0.5">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xs sm:text-sm font-bold text-[#2B2121] uppercase tracking-wider">BEAUTIFUL NAILS</h4>
+                                <p class="text-[11px] sm:text-xs text-[#665555] font-normal leading-relaxed">Flawless salon-sculpted press-on sets crafted just for you.</p>
+                            </div>
                         </div>
 
-                        <a 
-                            href="{{ route('products.index') }}" 
-                            class="px-6 py-2.5 rounded-full bg-rose-dark hover:bg-[#852C37] text-white text-xs font-bold tracking-wider uppercase transition-all shadow-md hover:scale-105 flex items-center gap-1.5"
-                            style="background-color: #A33B47; color: #FFFFFF;"
-                        >
-                            <span>Explore Collection</span>
-                            <span>↗</span>
-                        </a>
+                        <!-- 2. Premium Quality -->
+                        <div class="flex items-start gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-[#E8B0B4]/35 text-[#852C37] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-110 transition-transform mt-0.5">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 9l10 13L22 9l-10-7zm0 0v22M2 9h20M7 9l5 13 5-13"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xs sm:text-sm font-bold text-[#2B2121] uppercase tracking-wider">PREMIUM QUALITY</h4>
+                                <p class="text-[11px] sm:text-xs text-[#665555] font-normal leading-relaxed">7-layer UV-cured Japanese gel &amp; natural BIAB strength.</p>
+                            </div>
+                        </div>
 
-                        <a 
-                            href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text=Hello%20R%C3%A9colte%20Nails!%20I%20would%20like%20to%20consult%20about%20bespoke%20sizing%20and%20nail%20sets."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="text-xs text-gray-300 hover:text-white font-medium underline underline-offset-4 transition-colors"
-                        >
-                            WhatsApp Sizing Concierge 💬
-                        </a>
+                        <!-- 3. Latest Trends -->
+                        <div class="flex items-start gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-[#E8B0B4]/35 text-[#852C37] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-110 transition-transform mt-0.5">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xs sm:text-sm font-bold text-[#2B2121] uppercase tracking-wider">LATEST ATELIER TRENDS</h4>
+                                <p class="text-[11px] sm:text-xs text-[#665555] font-normal leading-relaxed">Glazed chrome powders, velvet cat-eye, and French pearl.</p>
+                            </div>
+                        </div>
+
+                        <!-- 4. Self-Care & Health -->
+                        <div class="flex items-start gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-[#E8B0B4]/35 text-[#852C37] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-110 transition-transform mt-0.5">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xs sm:text-sm font-bold text-[#2B2121] uppercase tracking-wider">SELF-CARE COUTURE</h4>
+                                <p class="text-[11px] sm:text-xs text-[#665555] font-normal leading-relaxed">24K gold damask rose elixirs for damage-free nail matrices.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Sign-off Quote & Primary Button -->
+                    <div class="pt-4 border-t border-[#E8D4CC]/80 flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                            <p class="font-['Great_Vibes',cursive] text-2xl sm:text-3xl text-[#7D2833] leading-tight">Good nails, Good mood,</p>
+                            <p class="font-serif text-sm sm:text-base font-bold tracking-widest text-[#2B2121] uppercase">GOOD DAY! ♡</p>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <a 
+                                href="{{ route('products.index') }}" 
+                                class="px-7 py-3 rounded-full bg-[#111111] hover:bg-[#A33B47] text-white text-xs font-bold tracking-wider uppercase transition-all shadow-md hover:scale-105 flex items-center gap-1.5"
+                            >
+                                <span>Shop Atelier Sets</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ── RIGHT COLUMN: PINTEREST-STYLE LUXURY NAIL COLLAGE ── -->
+                <div class="lg:col-span-6 relative">
+                    
+                    <!-- Main Featured Photo Card: Manicured Hand & Jasmine Flowers -->
+                    <div class="relative rounded-3xl overflow-hidden shadow-luxury border-4 border-white bg-white aspect-[4/5] sm:max-w-md mx-auto group">
+                        <img 
+                            src="{{ asset('images/banners/recolte-couture-hand.jpg') }}" 
+                            alt="Récolte Couture Manicure Hand" 
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        
+                        <!-- Top Washi Tape Aesthetic Badge -->
+                        <div class="absolute top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-sm bg-[#EBD8CE]/90 backdrop-blur-md shadow-xs border border-white/50 text-[10px] font-semibold text-[#5A4545] tracking-wider uppercase">
+                            small details, big confidence
+                        </div>
+
+                        <!-- Bottom Floating Pill -->
+                        <div class="absolute bottom-4 left-4 right-4 p-3 rounded-2xl bg-white/90 backdrop-blur-md shadow-sm border border-white flex items-center justify-between">
+                            <div class="space-y-0.5">
+                                <div class="text-[10px] font-bold text-[#2B2121] uppercase tracking-wider">Natural BIAB &amp; Gel Sets</div>
+                                <div class="font-['Great_Vibes',cursive] text-lg text-[#A33B47] leading-none">your nails, your vibe ♡</div>
+                            </div>
+                            <a href="{{ route('products.index') }}" class="w-8 h-8 rounded-full bg-[#111111] text-white flex items-center justify-center text-xs font-bold hover:bg-[#A33B47] transition-colors">
+                                ↗
+                            </a>
+                        </div>
                     </div>
 
                 </div>
 
             </div>
-        </section>
+        </div>
+    </section>
+
+    <div class="space-y-24 pb-24 pt-16">
 
         <!-- ── 5. TIMELESS NAIL CARE: AGELESS BEAUTY STARTS HERE ── -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
