@@ -35,14 +35,19 @@
         </button>
     </div>
 
-    <!-- 2. PRODUCT INFO (Directly Under Image matching reference) -->
+    <!-- 2. PRODUCT INFO & DETAILS -->
     <div class="space-y-2 pt-1">
         
-        <!-- Product Title -->
+        <!-- Product Title & Tagline -->
         <a href="{{ route('products.show', $product->slug) }}" class="block">
             <h3 class="font-serif text-base sm:text-[17px] font-normal text-charcoal hover:text-rose-dark transition-colors line-clamp-1">
                 {{ $product->title }}
             </h3>
+            @if(!empty($product->tagline))
+                <p class="text-[11px] text-charcoal/60 line-clamp-1 italic font-light pt-0.5">
+                    {{ $product->tagline }}
+                </p>
+            @endif
         </a>
 
         <!-- Shade Color Dots Row (Matching Reference Swatches) -->
@@ -62,7 +67,7 @@
             @endif
         </div>
 
-        <!-- Rating Stars Row + Review Count (e.g. ★★★★★ (10)) -->
+        <!-- Rating Stars Row + Review Count -->
         <div class="flex items-center gap-1.5 text-xs">
             <div class="flex items-center text-[#E5A93C] text-xs">
                 @php
@@ -80,7 +85,7 @@
             </span>
         </div>
 
-        <!-- Price (Clean Standalone Price matching reference) -->
+        <!-- Clean Price Tag -->
         <div class="flex items-baseline gap-2 pt-0.5">
             <span class="text-base sm:text-[17px] font-normal text-charcoal">
                 ₹{{ number_format($product->price) }}

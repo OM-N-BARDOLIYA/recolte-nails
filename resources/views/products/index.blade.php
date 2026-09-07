@@ -129,8 +129,8 @@
                         <button 
                             type="button"
                             @click="applyFilter('{{ $key }}')"
-                            :class="selectedCategory === '{{ $key }}' ? 'bg-charcoal text-white ring-2 ring-charcoal/20 scale-105 shadow-md font-bold' : 'bg-[#FAF8F5] text-charcoal/80 border border-charcoal/10 hover:bg-rose-light hover:text-rose-dark font-semibold'"
-                            class="flex-shrink-0 px-4 py-2 rounded-full text-xs transition-all duration-300 shadow-sm"
+                            :class="selectedCategory === '{{ $key }}' ? 'bg-rose-dark text-white ring-2 ring-rose-dark/20 scale-105 shadow-md font-bold' : 'bg-[#FAF8F5] text-charcoal/80 border border-charcoal/10 hover:bg-rose-light hover:text-rose-dark font-semibold'"
+                            class="flex-shrink-0 px-5 py-2.5 rounded-full text-sm transition-all duration-300 shadow-sm"
                         >
                             {{ $label }}
                         </button>
@@ -158,14 +158,14 @@
                         x-model="searchQuery"
                         @keydown.enter="applyFilter(null, null, searchQuery)"
                         placeholder="Search press-ons, BIAB, chrome, oils..."
-                        class="w-full pl-11 pr-24 py-3 rounded-2xl border border-charcoal/20 text-xs text-charcoal bg-[#FAF8F5] focus:bg-white focus:outline-none focus:border-charcoal focus:ring-2 focus:ring-charcoal/10 transition-all font-medium"
+                        class="w-full pl-11 pr-24 py-3 rounded-2xl border border-charcoal/20 text-xs text-charcoal bg-[#FAF8F5] focus:bg-white focus:outline-none focus:border-rose-dark focus:ring-2 focus:ring-rose-dark/10 transition-all font-medium"
                     />
                     <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-charcoal/40">
                         <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                     </div>
                     <button 
                         type="submit" 
-                        class="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-charcoal hover:bg-[#2A2321] text-white text-xs font-bold rounded-xl transition-all shadow-sm"
+                        class="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-rose-dark hover:bg-[#852C37] text-white text-xs font-bold rounded-xl transition-all shadow-sm"
                     >
                         Search
                     </button>
@@ -179,7 +179,7 @@
                             id="sort-select"
                             x-model="sortOption"
                             @change="applyFilter(null, sortOption, null)"
-                            class="px-3.5 py-2 rounded-xl border border-charcoal/20 bg-[#FAF8F5] text-xs font-semibold text-charcoal focus:outline-none focus:border-charcoal cursor-pointer"
+                            class="px-3.5 py-2 rounded-xl border border-charcoal/20 bg-[#FAF8F5] text-xs font-semibold text-charcoal focus:outline-none focus:border-rose-dark cursor-pointer"
                         >
                             <option value="featured">Featured</option>
                             <option value="price_asc">Price: Low to High</option>
@@ -224,7 +224,7 @@
                     <button 
                         type="button" 
                         @click="resetAll()"
-                        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-charcoal text-white text-xs font-bold uppercase tracking-wider shadow-md hover:bg-[#2A2321] transition-all"
+                        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-rose-dark text-white text-xs font-bold uppercase tracking-wider shadow-md hover:bg-[#852C37] transition-all"
                     >
                         Reset & View All Nails
                     </button>
