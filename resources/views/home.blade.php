@@ -163,44 +163,44 @@
     </div>
 
     <!-- ── 4. FULL-WIDTH HORIZONTAL EDITORIAL BANNER: BEAUTY. CARE. CONFIDENCE. ── -->
-    <section class="w-full relative overflow-hidden bg-[#121011] border-y border-stone-800">
-        <!-- Background Image Container with Gradient Fade on Mobile/Desktop -->
+    <section class="w-full relative overflow-hidden bg-[#121011] border-y border-stone-800 m-0 p-0 block leading-none">
+        <!-- Background Image Container with Compact Height Matching Hero Section -->
         <div 
-            class="w-full bg-cover bg-center sm:bg-right-center py-20 sm:py-28 lg:py-32 relative"
-            style="background-image: url('{{ asset('images/banners/recolte-studio-bg-blend.jpg') }}');"
+            class="relative w-full aspect-[24/8] min-h-[260px] sm:min-h-[320px] lg:min-h-[380px] max-h-[420px] bg-cover bg-right flex items-center py-6 sm:py-8"
+            style="background-image: url('{{ asset('images/banners/recolte-nail-editorial-banner.jpg') }}');"
         >
             <!-- Gradient Overlay to guarantee high contrast on left text -->
-            <div class="absolute inset-0 bg-gradient-to-r from-[#121011] via-[#121011]/95 sm:via-[#121011]/85 lg:via-[#121011]/70 to-transparent pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#121011] via-[#121011]/95 sm:via-[#121011]/80 md:via-[#121011]/55 to-transparent pointer-events-none"></div>
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="max-w-xl lg:max-w-lg space-y-6">
+            <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="max-w-lg space-y-3 sm:space-y-4">
                     
                     <!-- Eyebrow Tagline -->
-                    <div class="text-[#D9A3AA] text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase">
+                    <div class="text-[#D9A3AA] text-[10px] sm:text-xs font-semibold tracking-[0.25em] uppercase">
                         WELCOME TO RÉCOLTE ATELIER
                     </div>
 
                     <!-- Main Serif Headline -->
-                    <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight uppercase leading-[1.1]">
+                    <h2 class="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight uppercase leading-[1.1]">
                         <span class="text-white block">BEAUTY. CARE.</span>
                         <span class="text-[#E8A5AC] block">CONFIDENCE.</span>
                     </h2>
 
                     <!-- Concise Mission Description -->
-                    <p class="text-stone-300 text-sm sm:text-base font-light leading-relaxed max-w-md">
-                        At Récolte Atelier, we believe every detail matters. Our mission is to deliver exceptional handcrafted nail couture in a relaxing, luxurious environment.
+                    <p class="text-stone-300 text-[11px] sm:text-xs lg:text-sm font-light leading-relaxed max-w-md">
+                        At Récolte Atelier, we believe every detail matters. Our mission is to deliver exceptional handcrafted nail couture for effortless everyday elegance.
                     </p>
 
                     <!-- Handwritten Script Sign-off & CTA -->
-                    <div class="pt-2 flex flex-wrap items-center gap-6">
-                        <div class="font-['Great_Vibes',cursive] text-4xl sm:text-5xl text-[#E8A5AC] flex items-center gap-2">
+                    <div class="pt-1 flex flex-wrap items-center gap-4 sm:gap-6">
+                        <div class="font-['Great_Vibes',cursive] text-2xl sm:text-3xl lg:text-4xl text-[#E8A5AC] flex items-center gap-1.5">
                             <span>Treat Yourself</span>
-                            <span class="text-2xl sm:text-3xl text-[#E599A2]">♡</span>
+                            <span class="text-lg sm:text-2xl text-[#E599A2]">♡</span>
                         </div>
 
                         <a 
                             href="{{ route('products.index') }}" 
-                            class="px-6 py-2.5 rounded-full bg-white/10 hover:bg-[#E8A5AC] text-white hover:text-[#121011] border border-white/20 hover:border-[#E8A5AC] text-xs font-bold tracking-wider uppercase transition-all duration-300 shadow-md hover:scale-105 inline-flex items-center gap-2"
+                            class="px-5 sm:px-6 py-2 rounded-full bg-white/10 hover:bg-[#E8A5AC] text-white hover:text-[#121011] border border-white/20 hover:border-[#E8A5AC] text-[10px] sm:text-xs font-bold tracking-wider uppercase transition-all duration-300 shadow-md hover:scale-105 inline-flex items-center gap-1.5"
                         >
                             <span>Explore Atelier</span>
                             <span>→</span>
