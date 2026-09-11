@@ -242,13 +242,29 @@
         </div>
     </section>
 
-    <!-- ── 4. INSTAGRAM / COMMUNITY GRID (5 AUTHENTIC RÉCOLTE PHOTOS - MATCHES HOME PAGE) ── -->
+    <!-- ── 4. INSTAGRAM / COMMUNITY GRID (AUTHENTIC RÉCOLTE COMMUNITY POSTS) ── -->
     @php
-        $insta1 = (!empty($instagram['img1']) && !str_contains($instagram['img1'], 'unsplash.com')) ? $instagram['img1'] : asset('images/products/recolte-cat-gel-polish.jpg');
-        $insta2 = (!empty($instagram['img2']) && !str_contains($instagram['img2'], 'unsplash.com')) ? $instagram['img2'] : asset('images/banners/recolte-acrylic-banner.jpg');
-        $insta3 = (!empty($instagram['img3']) && !str_contains($instagram['img3'], 'unsplash.com')) ? $instagram['img3'] : asset('images/products/recolte-cat-top-coat.jpg');
-        $insta4 = (!empty($instagram['img4']) && !str_contains($instagram['img4'], 'unsplash.com')) ? $instagram['img4'] : asset('images/products/recolte-cat-painting-gel.jpg');
-        $insta5 = (!empty($instagram['img5']) && !str_contains($instagram['img5'], 'unsplash.com')) ? $instagram['img5'] : asset('images/products/recolte-cat-nail-kits.jpg');
+        $rawImgs = [
+            $instagram['img1'] ?? null,
+            $instagram['img2'] ?? null,
+            $instagram['img3'] ?? null,
+            $instagram['img4'] ?? null,
+            $instagram['img5'] ?? null,
+        ];
+        $instaList = [];
+        foreach ($rawImgs as $img) {
+            if (!empty($img) && !str_contains($img, 'recolte-cat-gel-polish.jpg') && !str_contains($img, 'unsplash.com')) {
+                $instaList[] = $img;
+            }
+        }
+        if (empty($instaList)) {
+            $instaList = [
+                asset('images/products/recolte-cat-top-coat.jpg'),
+                asset('images/products/recolte-cat-painting-gel.jpg'),
+                asset('images/products/recolte-cat-nail-kits.jpg'),
+            ];
+        }
+        $gridCols = count($instaList) <= 3 ? 'lg:grid-cols-3' : (count($instaList) == 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-5');
     @endphp
     <section class="py-20 sm:py-24 bg-[#FAF8F5] border-t border-[#ECE6DE]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
@@ -285,13 +301,13 @@
                 </div>
             </div>
 
-            <!-- 5 Authentic Récolte Instagram Grid Posts -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-5">
-                <!-- Post 1: Pink Gel Polish Collection -->
+            <!-- Authentic Récolte Instagram Grid Posts -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 {{ $gridCols }} gap-4 sm:gap-6">
+                @foreach($instaList as $idx => $imgSrc)
                 <a href="https://www.instagram.com/recolte_gelpolish/" target="_blank"
                     class="group relative rounded-none overflow-hidden aspect-square bg-[#FAF5F0] border border-[#ECE6DE] shadow-2xs">
-                    <img src="{{ $insta1 }}"
-                        alt="Récolte Gel Polish Collection"
+                    <img src="{{ $imgSrc }}"
+                        alt="Récolte Community Post {{ $idx + 1 }}"
                         class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108" />
                     <div
                         class="absolute inset-0 bg-[#171412]/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center p-3">
@@ -301,66 +317,7 @@
                         </span>
                     </div>
                 </a>
-
-                <!-- Post 2: Haute Acrylic Couture -->
-                <a href="https://www.instagram.com/recolte_gelpolish/" target="_blank"
-                    class="group relative rounded-none overflow-hidden aspect-square bg-[#FAF5F0] border border-[#ECE6DE] shadow-2xs">
-                    <img src="{{ $insta2 }}"
-                        alt="Récolte Haute Acrylic Couture"
-                        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108" />
-                    <div
-                        class="absolute inset-0 bg-[#171412]/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center p-3">
-                        <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-none bg-white text-[#171412] text-xs font-bold uppercase tracking-wider shadow-md transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                            <span>View Post</span>
-                            <span>↗</span>
-                        </span>
-                    </div>
-                </a>
-
-                <!-- Post 3: Rose Gold Top Coat -->
-                <a href="https://www.instagram.com/recolte_gelpolish/" target="_blank"
-                    class="group relative rounded-none overflow-hidden aspect-square bg-[#FAF5F0] border border-[#ECE6DE] shadow-2xs">
-                    <img src="{{ $insta3 }}"
-                        alt="Récolte Rose Gold Finish"
-                        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108" />
-                    <div
-                        class="absolute inset-0 bg-[#171412]/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center p-3">
-                        <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-none bg-white text-[#171412] text-xs font-bold uppercase tracking-wider shadow-md transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                            <span>View Post</span>
-                            <span>↗</span>
-                        </span>
-                    </div>
-                </a>
-
-                <!-- Post 4: Painting Gel -->
-                <a href="https://www.instagram.com/recolte_gelpolish/" target="_blank"
-                    class="group relative rounded-none overflow-hidden aspect-square bg-[#FAF5F0] border border-[#ECE6DE] shadow-2xs">
-                    <img src="{{ $insta4 }}"
-                        alt="Récolte Painting Gel Glitter"
-                        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108" />
-                    <div
-                        class="absolute inset-0 bg-[#171412]/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center p-3">
-                        <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-none bg-white text-[#171412] text-xs font-bold uppercase tracking-wider shadow-md transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                            <span>View Post</span>
-                            <span>↗</span>
-                        </span>
-                    </div>
-                </a>
-
-                <!-- Post 5: Salon Sets & Kits Arch Collection -->
-                <a href="https://www.instagram.com/recolte_gelpolish/" target="_blank"
-                    class="group relative rounded-none overflow-hidden aspect-square bg-[#FAF5F0] border border-[#ECE6DE] shadow-2xs">
-                    <img src="{{ $insta5 }}"
-                        alt="Récolte Atelier Arch Sets"
-                        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108" />
-                    <div
-                        class="absolute inset-0 bg-[#171412]/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center p-3">
-                        <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-none bg-white text-[#171412] text-xs font-bold uppercase tracking-wider shadow-md transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                            <span>View Post</span>
-                            <span>↗</span>
-                        </span>
-                    </div>
-                </a>
+                @endforeach
             </div>
         </div>
     </section>

@@ -75,31 +75,31 @@
                         <div
                             class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-none bg-white/10 text-[#FAF8F5] text-[10.5px] font-semibold uppercase tracking-[0.2em] border border-white/15">
                             <span class="text-[#A33B47]">✦</span>
-                            <span>HAUTE NAIL COUTURE &amp; CARE ARCHIVES</span>
+                            <span>{{ $catalog_hero['badge'] ?? 'HAUTE NAIL COUTURE & CARE ARCHIVES' }}</span>
                         </div>
 
                         <h1
                             class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#FAF8F5] leading-tight">
-                            The Atelier <span class="italic font-normal text-[#C5A880]">Catalog</span>
+                            {{ $catalog_hero['title_prefix'] ?? 'The Atelier' }} <span class="italic font-normal text-[#C5A880]">{{ $catalog_hero['title_highlight'] ?? 'Catalog' }}</span>
                         </h1>
 
                         <p class="text-xs sm:text-sm text-[#D4CDC5] font-light leading-relaxed max-w-lg">
-                            Artisanal salon-quality press-on nails, salon-grade Japanese gel polishes, magnetic cat-eye
-                            glazes, and 24K gold cuticle elixirs designed for zero natural nail damage.
+                            {{ $catalog_hero['description'] ?? 'Artisanal salon-quality press-on nails, salon-grade Japanese gel polishes, magnetic cat-eye glazes, and 24K gold cuticle elixirs designed for zero natural nail damage.' }}
                         </p>
                     </div>
 
+                    @if(!isset($catalog_consultation['is_enabled']) || $catalog_consultation['is_enabled'])
                     <!-- Fast WhatsApp Consultation Card (Square) -->
                     <div
                         class="bg-white/5 backdrop-blur-md rounded-none p-6 border border-white/10 space-y-3.5 shrink-0 max-w-sm">
                         <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#C5A880]">
-                            <span>📏</span>
-                            <span>Bespoke Sizing Consultation</span>
+                            <span>{{ $catalog_consultation['icon'] ?? '📏' }}</span>
+                            <span>{{ $catalog_consultation['tag'] ?? 'Bespoke Sizing Consultation' }}</span>
                         </div>
                         <p class="text-xs text-[#A89F97] font-light leading-relaxed">
-                            Send a quick photo of your natural nail bed for custom fit recommendations from our artists.
+                            {{ $catalog_consultation['description'] ?? 'Send a quick photo of your natural nail bed for custom fit recommendations from our artists.' }}
                         </p>
-                        <a href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text=Hello%20R%C3%A9colte%20Nails!%20I%20need%20help%20measuring%20my%20nail%20sizes%20for%20press-ons."
+                        <a href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text={{ urlencode($catalog_consultation['whatsapp_msg'] ?? 'Hello Récolte Nails! I need help measuring my nail sizes for press-ons.') }}"
                             target="_blank" rel="noopener noreferrer"
                             class="w-full py-3 px-5 rounded-none bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-xs flex items-center justify-center gap-2 group">
                             <svg class="w-4 h-4 fill-current transition-transform group-hover:scale-110"
@@ -107,10 +107,11 @@
                                 <path
                                     d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.144 4.18 4.287-1.124z" />
                             </svg>
-                            <span>Sizing Advice on WhatsApp</span>
+                            <span>{{ $catalog_consultation['btn_text'] ?? 'Sizing Advice on WhatsApp' }}</span>
                             <span class="text-xs transition-transform group-hover:translate-x-0.5">↗</span>
                         </a>
                     </div>
+                    @endif
                 </div>
             </div>
 

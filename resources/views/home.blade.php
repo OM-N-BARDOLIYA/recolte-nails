@@ -19,11 +19,14 @@
             <!-- Vector Sharp Centerpiece Typography & Interactive CTA -->
             <div class="relative z-10 text-center px-4 sm:px-6 max-w-xl mx-auto flex flex-col items-center">
 
-                <!-- Brand Title with Trademark -->
-                <h1
-                    class="font-serif text-3xl sm:text-5xl lg:text-[52px] font-bold tracking-tight text-[#111111] leading-none mb-1.5 sm:mb-2 drop-shadow-xs">
-                    {{ $hero['brand_title'] ?? 'Recolte' }}<sup class="text-xs sm:text-sm font-normal">{{ $hero['brand_trademark'] ?? '®' }}</sup>
-                </h1>
+                <!-- Company Actual Logo from Navbar -->
+                <div class="mb-2 sm:mb-3">
+                    <img 
+                        src="{{ asset('images/logo.png') }}?v={{ time() }}" 
+                        alt="Récolte Nails Logo" 
+                        class="h-14 sm:h-20 lg:h-24 w-auto object-contain select-none drop-shadow-xs" 
+                    />
+                </div>
 
                 <!-- Brand Sub-Descriptor -->
                 <p
@@ -295,18 +298,17 @@
                     </div>
                 </div>
 
-                <!-- 5 Authentic Récolte Instagram Grid Posts -->
+                <!-- Authentic Récolte Community Grid Posts -->
                 @php
                     $instaPosts = $instagram['posts'] ?? [
-                        ['image' => asset('images/products/recolte-cat-gel-polish.jpg'), 'alt' => 'Récolte Gel Polish Collection', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
-                        ['image' => asset('images/banners/recolte-acrylic-banner.jpg'), 'alt' => 'Récolte Haute Acrylic & Gel Couture', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
                         ['image' => asset('images/products/recolte-cat-top-coat.jpg'), 'alt' => 'Récolte Rose Gold Finish', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
                         ['image' => asset('images/products/recolte-cat-painting-gel.jpg'), 'alt' => 'Récolte Painting Gel Glitter', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
                         ['image' => asset('images/products/recolte-cat-nail-kits.jpg'), 'alt' => 'Récolte Atelier Arch Sets', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
                     ];
+                    $gridCols = count($instaPosts) <= 3 ? 'lg:grid-cols-3' : (count($instaPosts) == 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-5');
                 @endphp
 
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 {{ $gridCols }} gap-4 sm:gap-6">
                     @foreach($instaPosts as $post)
                     <a href="{{ $post['link'] ?? 'https://www.instagram.com/recolte_gelpolish/' }}" target="_blank"
                         class="group relative overflow-hidden aspect-square bg-[#FAF5F0] border border-[#ECE6DE] shadow-2xs">

@@ -59,8 +59,6 @@ class AdminPageController extends Controller
             'profile_url' => 'https://www.instagram.com/recolte_gelpolish/',
             'btn_text' => 'Follow @recolte_gelpolish',
             'posts' => [
-                ['image' => asset('images/products/recolte-cat-gel-polish.jpg'), 'alt' => 'Récolte Gel Polish Collection', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
-                ['image' => asset('images/banners/recolte-acrylic-banner.jpg'), 'alt' => 'Récolte Haute Acrylic & Gel Couture', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
                 ['image' => asset('images/products/recolte-cat-top-coat.jpg'), 'alt' => 'Récolte Rose Gold Finish', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
                 ['image' => asset('images/products/recolte-cat-painting-gel.jpg'), 'alt' => 'Récolte Painting Gel Glitter', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
                 ['image' => asset('images/products/recolte-cat-nail-kits.jpg'), 'alt' => 'Récolte Atelier Arch Sets', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
@@ -176,8 +174,10 @@ class AdminPageController extends Controller
 
         // 5. Instagram Community
         $existingInsta = PageContent::getSection('home', 'instagram', []);
+        $existingCount = count($existingInsta['posts'] ?? []);
+        $numPosts = (int) $request->input('insta_post_count', $existingCount > 0 ? $existingCount : 3);
         $posts = [];
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < $numPosts; $i++) {
             $postImg = $request->input("insta_{$i}_image", $existingInsta['posts'][$i]['image'] ?? '');
             if ($request->hasFile("insta_{$i}_image_file")) {
                 $f = $request->file("insta_{$i}_image_file");
@@ -186,11 +186,13 @@ class AdminPageController extends Controller
                 $postImg = asset('uploads/pages/' . $fn);
             }
 
-            $posts[] = [
-                'image' => $postImg,
-                'alt' => $request->input("insta_{$i}_alt", "Récolte Instagram Post {$i}"),
-                'link' => $request->input("insta_{$i}_link", 'https://www.instagram.com/recolte_gelpolish/'),
-            ];
+            if (!empty($postImg)) {
+                $posts[] = [
+                    'image' => $postImg,
+                    'alt' => $request->input("insta_{$i}_alt", "Récolte Community Post " . ($i + 1)),
+                    'link' => $request->input("insta_{$i}_link", 'https://www.instagram.com/recolte_gelpolish/'),
+                ];
+            }
         }
 
         PageContent::setSection('home', 'instagram', [
@@ -277,11 +279,9 @@ class AdminPageController extends Controller
             'handle' => '@recolte_gelpolish',
             'profile_url' => 'https://www.instagram.com/recolte_gelpolish/',
             'btn_text' => 'Follow @recolte_gelpolish',
-            'img1' => asset('images/products/recolte-cat-gel-polish.jpg'),
-            'img2' => asset('images/banners/recolte-acrylic-banner.jpg'),
-            'img3' => asset('images/products/recolte-cat-top-coat.jpg'),
-            'img4' => asset('images/products/recolte-cat-painting-gel.jpg'),
-            'img5' => asset('images/products/recolte-cat-nail-kits.jpg'),
+            'img1' => asset('images/products/recolte-cat-top-coat.jpg'),
+            'img2' => asset('images/products/recolte-cat-painting-gel.jpg'),
+            'img3' => asset('images/products/recolte-cat-nail-kits.jpg'),
         ]);
 
         $concierge = PageContent::getSection('about', 'concierge', [
@@ -363,10 +363,10 @@ class AdminPageController extends Controller
             'step4_desc' => $request->input('step4_desc', ''),
         ]);
 
-        // 3. Instagram Community Gallery (5 Photos)
+        // 3. Instagram Community Gallery (3 Photos)
         $existingInsta = PageContent::getSection('about', 'instagram', []);
         $instaImgs = [];
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <= 3; $i++) {
             $imgKey = "img{$i}";
             $imgVal = $request->input("insta_img{$i}", $existingInsta[$imgKey] ?? '');
             if ($request->hasFile("insta_img{$i}_file")) {
@@ -385,11 +385,9 @@ class AdminPageController extends Controller
             'handle' => $request->input('insta_handle', '@recolte_gelpolish'),
             'profile_url' => $request->input('insta_profile_url', 'https://www.instagram.com/recolte_gelpolish/'),
             'btn_text' => $request->input('insta_btn_text', 'Follow @recolte_gelpolish'),
-            'img1' => $instaImgs['img1'],
-            'img2' => $instaImgs['img2'],
-            'img3' => $instaImgs['img3'],
-            'img4' => $instaImgs['img4'],
-            'img5' => $instaImgs['img5'],
+            'img1' => $instaImgs['img1'] ?? '',
+            'img2' => $instaImgs['img2'] ?? '',
+            'img3' => $instaImgs['img3'] ?? '',
         ]);
 
         // 4. Haute VIP Concierge Banner & 3 Showcase Photos
@@ -428,4 +426,167 @@ class AdminPageController extends Controller
 
         return back()->with('success', 'All About Atelier sections, hero slides, creation journey, VIP concierge, and Instagram gallery updated successfully!');
     }
+
+    public function contact()
+    {
+        $header = PageContent::getSection('contact', 'header', [
+            'badge' => 'Get in Touch',
+            'title_prefix' => 'The',
+            'title_highlight' => 'Concierge',
+            'title_suffix' => 'Lounge',
+            'subtitle' => 'Our Parisian studio specialists are ready to assist with custom nail sizing, bespoke press-on designs, and express order dispatch.',
+        ]);
+
+        $cards = PageContent::getSection('contact', 'cards', [
+            'whatsapp_title' => 'WhatsApp Concierge',
+            'whatsapp_desc' => 'Chat directly with our studio artists for instant sizing help and real-time guidance.',
+            'whatsapp_btn_text' => 'Open Direct WhatsApp',
+            'email_title' => 'Email Atelier',
+            'email_desc' => 'For wholesale inquiries, press collaborations, and custom bridal suites.',
+            'email' => 'concierge@recoltenails.com',
+            'address_title' => 'Paris Atelier',
+            'address' => '12 Rue de la Paix, 75001 Paris, France. By appointment only.',
+            'hours_title' => 'Concierge Hours',
+            'hours_tz' => 'Paris Time',
+            'hours_mon_fri' => '9:00 AM – 8:00 PM',
+            'hours_sat' => '10:00 AM – 6:00 PM',
+            'hours_sun' => '12:00 PM – 5:00 PM',
+            'hours_response_badge' => 'WhatsApp response typically under 2 minutes',
+        ]);
+
+        $defaultTopics = [
+            ['id' => 'sizing', 'label' => 'Sizing & Curve Fit', 'msg' => 'Hello Récolte Nails! I need help finding my perfect nail size and curve measurements.'],
+            ['id' => 'custom', 'label' => 'Custom Press-On Art', 'msg' => 'Hello Récolte Nails! I have custom design inspiration for a handcrafted press-on set.'],
+            ['id' => 'care', 'label' => 'Nail Care & Top Coats', 'msg' => 'Hello Récolte Nails! I have questions about your nourishing nail care and salon finish top coats.'],
+            ['id' => 'shades', 'label' => 'Gel Polish & Colors', 'msg' => 'Hello Récolte Nails! I would like shade recommendations from your color catalog.'],
+            ['id' => 'order', 'label' => 'Order & Delivery', 'msg' => 'Hello Récolte Nails! I have an inquiry regarding my order or express delivery.'],
+            ['id' => 'wholesale', 'label' => 'Wholesale & Salon B2B', 'msg' => 'Hello Récolte Nails! I am interested in wholesale salon orders and professional supply.'],
+        ];
+
+        $topics_widget = PageContent::getSection('contact', 'topics_widget', [
+            'badge' => 'Direct Specialist Connection',
+            'title_prefix' => 'Choose Your',
+            'title_highlight' => 'Inquiry Topic',
+            'subtitle' => 'Select the topic that best fits your needs, and our studio artists will prepare customized answers before your WhatsApp chat opens.',
+            'btn_text' => 'Start WhatsApp Conversation',
+            'badge1_text' => 'Direct Artists',
+            'badge2_text' => '< 2-Min Reply',
+            'badge3_text' => 'Zero Waiting',
+            'topics' => $defaultTopics,
+        ]);
+
+        return view('admin.pages.contact', compact('header', 'cards', 'topics_widget'));
+    }
+
+    public function updateContact(Request $request)
+    {
+        // 1. Header
+        PageContent::setSection('contact', 'header', [
+            'badge' => $request->input('header_badge', 'Get in Touch'),
+            'title_prefix' => $request->input('header_title_prefix', 'The'),
+            'title_highlight' => $request->input('header_title_highlight', 'Concierge'),
+            'title_suffix' => $request->input('header_title_suffix', 'Lounge'),
+            'subtitle' => $request->input('header_subtitle', ''),
+        ]);
+
+        // 2. Cards & Hours
+        PageContent::setSection('contact', 'cards', [
+            'whatsapp_title' => $request->input('whatsapp_title', 'WhatsApp Concierge'),
+            'whatsapp_desc' => $request->input('whatsapp_desc', ''),
+            'whatsapp_btn_text' => $request->input('whatsapp_btn_text', 'Open Direct WhatsApp'),
+            'email_title' => $request->input('email_title', 'Email Atelier'),
+            'email_desc' => $request->input('email_desc', ''),
+            'email' => $request->input('contact_email', 'concierge@recoltenails.com'),
+            'address_title' => $request->input('address_title', 'Paris Atelier'),
+            'address' => $request->input('contact_address', '12 Rue de la Paix, 75001 Paris, France. By appointment only.'),
+            'hours_title' => $request->input('hours_title', 'Concierge Hours'),
+            'hours_tz' => $request->input('hours_tz', 'Paris Time'),
+            'hours_mon_fri' => $request->input('hours_mon_fri', '9:00 AM – 8:00 PM'),
+            'hours_sat' => $request->input('hours_sat', '10:00 AM – 6:00 PM'),
+            'hours_sun' => $request->input('hours_sun', '12:00 PM – 5:00 PM'),
+            'hours_response_badge' => $request->input('hours_response_badge', 'WhatsApp response typically under 2 minutes'),
+        ]);
+
+        // 3. WhatsApp Inquiry Topics Widget
+        $topics = [];
+        $rawTopics = $request->input('topics', []);
+        if (is_array($rawTopics)) {
+            foreach ($rawTopics as $t) {
+                if (!empty($t['label'])) {
+                    $topics[] = [
+                        'id' => \Illuminate\Support\Str::slug($t['label']),
+                        'label' => $t['label'],
+                        'msg' => $t['msg'] ?? '',
+                    ];
+                }
+            }
+        }
+        if (empty($topics)) {
+            $topics = [
+                ['id' => 'sizing', 'label' => 'Sizing & Curve Fit', 'msg' => 'Hello Récolte Nails! I need help finding my perfect nail size and curve measurements.'],
+                ['id' => 'custom', 'label' => 'Custom Press-On Art', 'msg' => 'Hello Récolte Nails! I have custom design inspiration for a handcrafted press-on set.'],
+                ['id' => 'care', 'label' => 'Nail Care & Top Coats', 'msg' => 'Hello Récolte Nails! I have questions about your nourishing nail care and salon finish top coats.'],
+                ['id' => 'shades', 'label' => 'Gel Polish & Colors', 'msg' => 'Hello Récolte Nails! I would like shade recommendations from your color catalog.'],
+                ['id' => 'order', 'label' => 'Order & Delivery', 'msg' => 'Hello Récolte Nails! I have an inquiry regarding my order or express delivery.'],
+                ['id' => 'wholesale', 'label' => 'Wholesale & Salon B2B', 'msg' => 'Hello Récolte Nails! I am interested in wholesale salon orders and professional supply.'],
+            ];
+        }
+
+        PageContent::setSection('contact', 'topics_widget', [
+            'badge' => $request->input('topics_badge', 'Direct Specialist Connection'),
+            'title_prefix' => $request->input('topics_title_prefix', 'Choose Your'),
+            'title_highlight' => $request->input('topics_title_highlight', 'Inquiry Topic'),
+            'subtitle' => $request->input('topics_subtitle', ''),
+            'btn_text' => $request->input('topics_btn_text', 'Start WhatsApp Conversation'),
+            'badge1_text' => $request->input('badge1_text', 'Direct Artists'),
+            'badge2_text' => $request->input('badge2_text', '< 2-Min Reply'),
+            'badge3_text' => $request->input('badge3_text', 'Zero Waiting'),
+            'topics' => $topics,
+        ]);
+
+        return back()->with('success', 'Contact Lounge content, channels, operating hours, and WhatsApp inquiry topics updated successfully!');
+    }
+
+    public function catalog()
+    {
+        $hero = PageContent::getSection('catalog', 'hero', [
+            'badge' => 'HAUTE NAIL COUTURE & CARE ARCHIVES',
+            'title_prefix' => 'The Atelier',
+            'title_highlight' => 'Catalog',
+            'description' => 'Artisanal salon-quality press-on nails, salon-grade Japanese gel polishes, magnetic cat-eye glazes, and 24K gold cuticle elixirs designed for zero natural nail damage.',
+        ]);
+
+        $consultation = PageContent::getSection('catalog', 'consultation', [
+            'is_enabled' => true,
+            'tag' => 'Bespoke Sizing Consultation',
+            'icon' => '📏',
+            'description' => 'Send a quick photo of your natural nail bed for custom fit recommendations from our artists.',
+            'btn_text' => 'Sizing Advice on WhatsApp',
+            'whatsapp_msg' => 'Hello Récolte Nails! I need help measuring my nail sizes for press-ons.',
+        ]);
+
+        return view('admin.pages.catalog', compact('hero', 'consultation'));
+    }
+
+    public function updateCatalog(Request $request)
+    {
+        PageContent::setSection('catalog', 'hero', [
+            'badge' => $request->input('hero_badge', 'HAUTE NAIL COUTURE & CARE ARCHIVES'),
+            'title_prefix' => $request->input('hero_title_prefix', 'The Atelier'),
+            'title_highlight' => $request->input('hero_title_highlight', 'Catalog'),
+            'description' => $request->input('hero_description', ''),
+        ]);
+
+        PageContent::setSection('catalog', 'consultation', [
+            'is_enabled' => $request->has('consultation_enabled'),
+            'tag' => $request->input('consultation_tag', 'Bespoke Sizing Consultation'),
+            'icon' => $request->input('consultation_icon', '📏'),
+            'description' => $request->input('consultation_description', ''),
+            'btn_text' => $request->input('consultation_btn_text', 'Sizing Advice on WhatsApp'),
+            'whatsapp_msg' => $request->input('consultation_whatsapp_msg', 'Hello Récolte Nails! I need help measuring my nail sizes for press-ons.'),
+        ]);
+
+        return back()->with('success', 'Catalog page header & consultation card updated successfully!');
+    }
 }
+

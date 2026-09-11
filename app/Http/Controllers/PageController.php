@@ -111,7 +111,54 @@ class PageController extends Controller
     public function contact()
     {
         $settings = SiteSetting::all()->pluck('value', 'key');
-        return view('contact', compact('settings'));
+
+        $header = PageContent::getSection('contact', 'header', [
+            'badge' => 'Get in Touch',
+            'title_prefix' => 'The',
+            'title_highlight' => 'Concierge',
+            'title_suffix' => 'Lounge',
+            'subtitle' => 'Our Parisian studio specialists are ready to assist with custom nail sizing, bespoke press-on designs, and express order dispatch.',
+        ]);
+
+        $cards = PageContent::getSection('contact', 'cards', [
+            'whatsapp_title' => 'WhatsApp Concierge',
+            'whatsapp_desc' => 'Chat directly with our studio artists for instant sizing help and real-time guidance.',
+            'whatsapp_btn_text' => 'Open Direct WhatsApp',
+            'email_title' => 'Email Atelier',
+            'email_desc' => 'For wholesale inquiries, press collaborations, and custom bridal suites.',
+            'email' => $settings['contact_email'] ?? 'concierge@recoltenails.com',
+            'address_title' => 'Paris Atelier',
+            'address' => $settings['contact_address'] ?? '12 Rue de la Paix, 75001 Paris, France. By appointment only.',
+            'hours_title' => 'Concierge Hours',
+            'hours_tz' => 'Paris Time',
+            'hours_mon_fri' => '9:00 AM – 8:00 PM',
+            'hours_sat' => '10:00 AM – 6:00 PM',
+            'hours_sun' => '12:00 PM – 5:00 PM',
+            'hours_response_badge' => 'WhatsApp response typically under 2 minutes',
+        ]);
+
+        $defaultTopics = [
+            ['id' => 'sizing', 'label' => 'Sizing & Curve Fit', 'msg' => 'Hello Récolte Nails! I need help finding my perfect nail size and curve measurements.'],
+            ['id' => 'custom', 'label' => 'Custom Press-On Art', 'msg' => 'Hello Récolte Nails! I have custom design inspiration for a handcrafted press-on set.'],
+            ['id' => 'care', 'label' => 'Nail Care & Top Coats', 'msg' => 'Hello Récolte Nails! I have questions about your nourishing nail care and salon finish top coats.'],
+            ['id' => 'shades', 'label' => 'Gel Polish & Colors', 'msg' => 'Hello Récolte Nails! I would like shade recommendations from your color catalog.'],
+            ['id' => 'order', 'label' => 'Order & Delivery', 'msg' => 'Hello Récolte Nails! I have an inquiry regarding my order or express delivery.'],
+            ['id' => 'wholesale', 'label' => 'Wholesale & Salon B2B', 'msg' => 'Hello Récolte Nails! I am interested in wholesale salon orders and professional supply.'],
+        ];
+
+        $topics_widget = PageContent::getSection('contact', 'topics_widget', [
+            'badge' => 'Direct Specialist Connection',
+            'title_prefix' => 'Choose Your',
+            'title_highlight' => 'Inquiry Topic',
+            'subtitle' => 'Select the topic that best fits your needs, and our studio artists will prepare customized answers before your WhatsApp chat opens.',
+            'btn_text' => 'Start WhatsApp Conversation',
+            'badge1_text' => 'Direct Artists',
+            'badge2_text' => '< 2-Min Reply',
+            'badge3_text' => 'Zero Waiting',
+            'topics' => $defaultTopics,
+        ]);
+
+        return view('contact', compact('settings', 'header', 'cards', 'topics_widget'));
     }
 
     public function franchise()

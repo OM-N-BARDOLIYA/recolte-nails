@@ -42,8 +42,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Dynamic Page Editors
         Route::get('pages/home', [AdminPageController::class, 'home'])->name('pages.home');
         Route::post('pages/home', [AdminPageController::class, 'updateHome'])->name('pages.home.update');
+        Route::get('pages/catalog', [AdminPageController::class, 'catalog'])->name('pages.catalog');
+        Route::post('pages/catalog', [AdminPageController::class, 'updateCatalog'])->name('pages.catalog.update');
         Route::get('pages/about', [AdminPageController::class, 'about'])->name('pages.about');
         Route::post('pages/about', [AdminPageController::class, 'updateAbout'])->name('pages.about.update');
+        Route::get('pages/contact', [AdminPageController::class, 'contact'])->name('pages.contact');
+        Route::post('pages/contact', [AdminPageController::class, 'updateContact'])->name('pages.contact.update');
 
         // Studio & WhatsApp Settings
         Route::get('settings', [AdminSettingController::class, 'index'])->name('settings.index');

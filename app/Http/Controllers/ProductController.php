@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\PageContent;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -59,8 +60,23 @@ class ProductController extends Controller
         $selectedCategory = $request->get('category', 'all');
         $searchQuery = $request->get('search', '');
         $currentSort = $sort;
+        $catalog_hero = PageContent::getSection('catalog', 'hero', [
+            'badge' => 'HAUTE NAIL COUTURE & CARE ARCHIVES',
+            'title_prefix' => 'The Atelier',
+            'title_highlight' => 'Catalog',
+            'description' => 'Artisanal salon-quality press-on nails, salon-grade Japanese gel polishes, magnetic cat-eye glazes, and 24K gold cuticle elixirs designed for zero natural nail damage.',
+        ]);
 
-        return view('products.index', compact('products', 'categories', 'selectedCategory', 'searchQuery', 'currentSort'));
+        $catalog_consultation = PageContent::getSection('catalog', 'consultation', [
+            'is_enabled' => true,
+            'tag' => 'Bespoke Sizing Consultation',
+            'icon' => '📏',
+            'description' => 'Send a quick photo of your natural nail bed for custom fit recommendations from our artists.',
+            'btn_text' => 'Sizing Advice on WhatsApp',
+            'whatsapp_msg' => 'Hello Récolte Nails! I need help measuring my nail sizes for press-ons.',
+        ]);
+
+        return view('products.index', compact('products', 'categories', 'selectedCategory', 'searchQuery', 'currentSort', 'catalog_hero', 'catalog_consultation'));
     }
 
     public function show($slug)

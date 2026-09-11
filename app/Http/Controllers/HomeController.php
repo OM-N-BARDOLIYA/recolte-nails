@@ -97,8 +97,6 @@ class HomeController extends Controller
             'profile_url' => 'https://www.instagram.com/recolte_gelpolish/',
             'btn_text' => 'Follow @recolte_gelpolish',
             'posts' => [
-                ['image' => asset('images/products/recolte-cat-gel-polish.jpg'), 'alt' => 'Récolte Gel Polish Collection', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
-                ['image' => asset('images/banners/recolte-acrylic-banner.jpg'), 'alt' => 'Récolte Haute Acrylic & Gel Couture', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
                 ['image' => asset('images/products/recolte-cat-top-coat.jpg'), 'alt' => 'Récolte Rose Gold Finish', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
                 ['image' => asset('images/products/recolte-cat-painting-gel.jpg'), 'alt' => 'Récolte Painting Gel Glitter', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
                 ['image' => asset('images/products/recolte-cat-nail-kits.jpg'), 'alt' => 'Récolte Atelier Arch Sets', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
