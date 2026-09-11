@@ -13,12 +13,12 @@
     <div 
         @click.away="modalOpen = false" 
         data-lenis-prevent
-        class="bg-white rounded-3xl border border-rose/20 shadow-2xl max-w-md w-full p-6 sm:p-7 space-y-5 relative transform transition-all max-h-[90vh] overflow-y-auto"
+        class="bg-white rounded-none border border-rose/20 shadow-2xl max-w-md w-full p-6 sm:p-7 space-y-5 relative transform transition-all max-h-[90vh] overflow-y-auto"
     >
-        <!-- Close Button -->
+        <!-- Close Button (Square) -->
         <button 
             @click="modalOpen = false" 
-            class="absolute top-4 right-4 w-8 h-8 rounded-full bg-cream-dark/50 hover:bg-rose-light text-charcoal/60 hover:text-charcoal flex items-center justify-center text-lg font-bold transition-all"
+            class="absolute top-4 right-4 w-8 h-8 rounded-none bg-cream-dark/50 hover:bg-rose-light text-charcoal/60 hover:text-charcoal flex items-center justify-center text-lg font-bold border border-charcoal/10 transition-all"
             aria-label="Close Modal"
         >
             &times;
@@ -32,7 +32,7 @@
                     <img 
                         :src="modalProduct.main_image" 
                         :alt="modalProduct.title" 
-                        class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-rose/20 shadow-sm shrink-0"
+                        class="w-16 h-16 sm:w-20 sm:h-20 rounded-none object-cover border border-rose/20 shadow-sm shrink-0"
                     />
                     <div class="space-y-0.5 min-w-0">
                         <span class="text-[9px] uppercase font-extrabold text-rose-dark tracking-[0.16em]" x-text="modalProduct.category"></span>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <!-- Shade Swatch Selector -->
+                <!-- Shade Swatch Selector (Square Buttons) -->
                 <template x-if="modalProduct.shades && modalProduct.shades.length > 0">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
@@ -59,9 +59,9 @@
                                     type="button"
                                     @click="modalShade = shade.name" 
                                     :class="modalShade === shade.name ? 'border-rose-dark bg-rose-light/70 font-bold ring-2 ring-rose/30 shadow-sm' : 'border-charcoal/15 bg-white text-charcoal hover:bg-cream-dark/40'" 
-                                    class="px-3 py-1.5 rounded-xl border text-xs text-charcoal flex items-center gap-2 transition-all"
+                                    class="px-3 py-1.5 rounded-none border text-xs text-charcoal flex items-center gap-2 transition-all"
                                 >
-                                    <span class="w-3.5 h-3.5 rounded-full border border-black/20 shrink-0" :style="'background-color:' + (shade.hex || '#E8B4B8')"></span>
+                                    <span class="w-3.5 h-3.5 rounded-none border border-black/20 shrink-0" :style="'background-color:' + (shade.hex || '#E8B4B8')"></span>
                                     <span x-text="shade.name"></span>
                                 </button>
                             </template>
@@ -69,7 +69,7 @@
                     </div>
                 </template>
 
-                <!-- Size / Volume Selector -->
+                <!-- Size / Volume Selector (Square Buttons) -->
                 <template x-if="modalProduct.sizes && modalProduct.sizes.length > 0">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
@@ -82,7 +82,7 @@
                                     type="button"
                                     @click="modalSize = size" 
                                     :class="modalSize === size ? 'border-rose-dark bg-rose-light/70 font-bold ring-2 ring-rose/30 shadow-sm' : 'border-charcoal/15 bg-white text-charcoal hover:bg-cream-dark/40'" 
-                                    class="px-3.5 py-1.5 rounded-xl border text-xs text-charcoal transition-all"
+                                    class="px-3.5 py-1.5 rounded-none border text-xs text-charcoal transition-all uppercase tracking-wider font-semibold"
                                 >
                                     <span x-text="size"></span>
                                 </button>
@@ -91,34 +91,22 @@
                     </div>
                 </template>
 
-                <!-- WhatsApp Proceed Button with Formatted Inquiry -->
+                <!-- WhatsApp Proceed Button with Formatted Inquiry (Square) -->
                 <div class="pt-2">
                     <a 
                         :href="'https://wa.me/917016266727?text=' + encodeURIComponent(
-                            '✨ *HAUTE NAIL ORDER & INQUIRY | RÉCOLTE NAILS* ✨
-
-' +
-                            'Hello Récolte Nails Studio! 🌸
-' +
-                            'I would like to inquire about and place an order for this handcrafted nail product:
-
-' +
-                            '💅 *Product:* ' + modalProduct.title + '
-' +
-                            '💰 *Price:* ₹' + Number(modalProduct.price).toLocaleString('en-IN') + '
-' +
-                            (modalShade ? '🎨 *Selected Shade:* ' + modalShade + '
-' : '') +
-                            (modalSize ? '📏 *Selected Size / Volume:* ' + modalSize + '
-' : '') +
-                            '🖼️ *Product Image:* ' + modalProduct.main_image + '
-
-' +
+                            '✨ *HAUTE NAIL ORDER & INQUIRY | RÉCOLTE NAILS* ✨\n\n' +
+                            'Hello Récolte Nails Studio! 🌸\n' +
+                            'I would like to inquire about and place an order for this handcrafted nail product:\n\n' +
+                            '💅 *Product:* ' + modalProduct.title + '\n' +
+                            '💰 *Price:* ₹' + Number(modalProduct.price).toLocaleString('en-IN') + '\n' +
+                            (modalShade ? '🎨 *Selected Shade:* ' + modalShade + '\n' : '') +
+                            (modalSize ? '📏 *Selected Size / Volume:* ' + modalSize + '\n' : '') +
+                            '🖼️ *Product Image:* ' + modalProduct.main_image + '\n\n' +
                             'Please confirm stock availability and custom sizing delivery timelines. Thank you! 💕'
                         )" 
                         target="_blank" 
-                        class="w-full py-3.5 bg-rose-dark hover:bg-[#852C37] text-white rounded-2xl font-bold text-xs shadow-md hover:scale-[1.02] flex items-center justify-center gap-2.5 transition-all duration-300"
-                        style="background-color: #A33B47; color: #FFFFFF;"
+                        class="w-full py-3.5 bg-[#A33B47] hover:bg-[#78232D] text-white rounded-none font-bold text-xs uppercase tracking-wider shadow-md flex items-center justify-center gap-2.5 transition-colors duration-200"
                     >
                         <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.144 4.18 4.287-1.124z"/></svg>
                         <span>Proceed to WhatsApp Order ↗</span>

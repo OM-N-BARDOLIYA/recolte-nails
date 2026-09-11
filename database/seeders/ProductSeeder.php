@@ -43,35 +43,6 @@ class ProductSeeder extends Seeder
                 'sizes' => ['XS (Petite)', 'S (Natural)', 'M (Standard)', 'L (Wide)', 'Custom Sizing Kit']
             ],
             [
-                'title' => 'BIAB™ Rose Builder Gel Reinforcement',
-                'slug' => 'biab-rose-builder-gel-reinforcement',
-                'tagline' => 'Salon-Strength Nail Foundation',
-                'category' => 'BIAB & Builder Gels',
-                'price' => 1850,
-                'original_price' => 2200,
-                'rating' => 4.9,
-                'reviews_count' => 98,
-                'is_bestseller' => true,
-                'main_image' => 'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=800&q=85',
-                'images' => [
-                    'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&q=85'
-                ],
-                'description' => 'Salon-strength natural nail reinforcement and 4+ week chip-free growth foundation.',
-                'benefits' => [
-                    'Reinforces brittle, thin, or damaged natural nails',
-                    'Self-leveling high-viscosity formula with zero heat spikes',
-                    'Long-wearing 4+ weeks with flawless mirror shine'
-                ],
-                'key_ingredients' => ['Pro-Vitamin B5', 'Plant Keratin Complex', 'Low-Heat Oligomers'],
-                'how_to_use' => 'Apply base coat, brush a slip layer of BIAB, build apex and cure for 60s under LED lamp.',
-                'shades' => [
-                    ['name' => 'Dolly Rose Pink', 'hex' => '#E3A8AF'],
-                    ['name' => 'Milky White', 'hex' => '#F8F6F0'],
-                    ['name' => 'Nude Cashmere', 'hex' => '#D9B8A4']
-                ],
-                'sizes' => ['15ml Salon Bottle', '30ml Refill Jar', 'Pro Duo Pack']
-            ],
-            [
                 'title' => '24K Gold Damask Rose Cuticle Elixir',
                 'slug' => '24k-gold-damask-rose-cuticle-elixir',
                 'tagline' => 'Restorative Botanical Therapy',

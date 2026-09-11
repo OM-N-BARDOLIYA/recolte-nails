@@ -20,14 +20,14 @@
                     href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text=Hello%20R%C3%A9colte%20Nails!%20I%20am%20interested%20in%20a%20Franchise%20/%20Studio%20Partnership." 
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="px-8 py-3.5 bg-[#111111] hover:bg-[#A33B47] text-white text-xs font-bold tracking-wider uppercase rounded-full shadow-md transition-all hover:scale-105 inline-flex items-center gap-2"
+                    class="px-8 py-3.5 bg-[#111111] hover:bg-black text-white text-xs font-bold tracking-wider uppercase rounded-none shadow-md transition-colors duration-200 inline-flex items-center gap-2"
                 >
                     <span>Chat on WhatsApp</span>
                     <span>→</span>
                 </a>
                 <a 
                     href="{{ route('contact') }}" 
-                    class="px-8 py-3.5 bg-white hover:bg-gray-50 text-[#111111] text-xs font-bold tracking-wider uppercase rounded-full border border-gray-200 shadow-xs transition-all"
+                    class="px-8 py-3.5 bg-white hover:bg-gray-50 text-[#111111] text-xs font-bold tracking-wider uppercase rounded-none border border-gray-200 shadow-xs transition-all"
                 >
                     Submit Partnership Form
                 </a>
@@ -38,18 +38,18 @@
     <!-- Franchise Highlights -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-xs space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-[#FBEFE9] text-[#A33B47] flex items-center justify-center text-xl font-serif">
+            <div class="bg-white rounded-none p-8 border border-gray-100 shadow-xs space-y-4">
+                <div class="w-12 h-12 rounded-none bg-[#FBEFE9] text-[#A33B47] flex items-center justify-center text-xl font-serif">
                     01
                 </div>
                 <h3 class="font-serif text-lg font-bold text-[#111111]">Exclusive Atelier Formulations</h3>
                 <p class="text-xs text-gray-600 leading-relaxed">
-                    Direct access to salon-grade BIAB builder gels, 7-layer cured press-on sets, and organic 24K gold cuticle treatments with high gross margins.
+                    Direct access to salon-grade Japanese gel polishes, 7-layer cured press-on sets, and organic 24K gold cuticle treatments with high gross margins.
                 </p>
             </div>
 
-            <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-xs space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-[#FBEFE9] text-[#A33B47] flex items-center justify-center text-xl font-serif">
+            <div class="bg-white rounded-none p-8 border border-gray-100 shadow-xs space-y-4">
+                <div class="w-12 h-12 rounded-none bg-[#FBEFE9] text-[#A33B47] flex items-center justify-center text-xl font-serif">
                     02
                 </div>
                 <h3 class="font-serif text-lg font-bold text-[#111111]">Complete Studio Brand Kit</h3>
@@ -58,8 +58,8 @@
                 </p>
             </div>
 
-            <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-xs space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-[#FBEFE9] text-[#A33B47] flex items-center justify-center text-xl font-serif">
+            <div class="bg-white rounded-none p-8 border border-gray-100 shadow-xs space-y-4">
+                <div class="w-12 h-12 rounded-none bg-[#FBEFE9] text-[#A33B47] flex items-center justify-center text-xl font-serif">
                     03
                 </div>
                 <h3 class="font-serif text-lg font-bold text-[#111111]">Dedicated Account Manager</h3>

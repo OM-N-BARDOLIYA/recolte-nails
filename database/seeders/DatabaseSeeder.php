@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             'instagram_handle' => '@recolte_gelpolish',
             'tiktok_url' => 'https://tiktok.com/@recoltenails',
             'pinterest_url' => 'https://pinterest.com/recoltenails',
-            'footer_bio' => 'Récolte Nails is a Parisian haute nail couture house specializing in handcrafted reusable press-on sets, strengthening BIAB builder gels, and 24K organic damask rose cuticle elixirs for salon luxury at home.',
+            'footer_bio' => 'Récolte Nails is a Parisian haute nail couture house specializing in handcrafted reusable press-on sets, salon-grade Japanese gel polishes, and 24K organic damask rose cuticle elixirs for salon luxury at home.',
             'copyright' => '© 2026 Récolte Nails Paris. All rights reserved. Handcrafted with Japanese salon gels.'
         ];
 
@@ -54,13 +54,6 @@ class DatabaseSeeder extends Seeder
                 'icon_emoji' => '💅',
                 'description' => 'Handcrafted reusable salon gel press-on nails with Japanese gel layering.',
                 'sort_order' => 1,
-            ],
-            [
-                'name' => 'BIAB & Builder Gels',
-                'slug' => 'biab-builder-gels',
-                'icon_emoji' => '✨',
-                'description' => 'Strengthening Builder in a Bottle systems for natural nail growth.',
-                'sort_order' => 2,
             ],
             [
                 'name' => 'Gel Polishes',
@@ -127,35 +120,6 @@ class DatabaseSeeder extends Seeder
                 'sizes' => ['XS (Petite)', 'S (Natural)', 'M (Standard)', 'L (Wide)', 'Custom Sizing Kit'],
                 'benefits' => ['4+ Weeks Chip-Free Wear', '100% Reusable Up to 5 Times', 'Zero Natural Nail Damage', 'Instant 5-Minute Application'],
                 'sort_order' => 1,
-            ],
-            [
-                'title' => 'BIAB™ Rose Builder Gel Reinforcement',
-                'slug' => 'biab-rose-builder-gel-reinforcement',
-                'category' => 'BIAB & Builder Gels',
-                'category_id' => 2,
-                'price' => 1850.00,
-                'original_price' => 2200.00,
-                'rating' => 4.9,
-                'reviews_count' => 98,
-                'is_bestseller' => true,
-                'is_active' => true,
-                'tagline' => 'High-viscosity builder in a bottle for natural nail reinforcement & length.',
-                'description' => 'Our cult-favorite BIAB (Builder in a Bottle) formula creates an unbreakable glass-like shield over fragile or peeling natural nails. Self-leveling with zero heat spike under LED/UV lamps, promoting strong natural nail growth.',
-                'key_ingredients' => 'Oligomer Cross-Linked Gel, Hydrolyzed Keratin, Vitamin E, Damask Rose Mineral Extract',
-                'how_to_use' => 'Apply thin base layer, cure for 60s under LED. Build apex with bead of BIAB, invert hand for self-leveling, cure for 60s. Finish with top coat.',
-                'main_image' => 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&q=80',
-                'images' => [
-                    'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&q=80',
-                    'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80',
-                ],
-                'shades' => [
-                    ['name' => 'Soft Rose Quartz', 'hex' => '#E8B4B8'],
-                    ['name' => 'Milky Marshmallow', 'hex' => '#F4EAE6'],
-                    ['name' => 'Clear Diamond Glass', 'hex' => '#FFFFFF'],
-                ],
-                'sizes' => ['15ml Studio Bottle', '30ml Pro Refill', '50ml Salon Tub'],
-                'benefits' => ['Eliminates Nail Breakage', 'No Heat-Spike LED Curing', 'Self-Leveling Apex Control', 'Lasts 4+ Weeks'],
-                'sort_order' => 2,
             ],
             [
                 'title' => '24K Gold Damask Rose Cuticle Elixir',
@@ -274,17 +238,17 @@ class DatabaseSeeder extends Seeder
         $homeHero = [
             'badge' => 'Nails by Récolte • Paris',
             'title' => 'Beautiful Nails, Made Personal.',
-            'subtitle' => 'Reusable salon-quality press-on sets, strengthening BIAB builder gels, and 24K gold cuticle elixirs crafted for instant, damage-free luxury manicures.',
+            'subtitle' => 'Reusable salon-quality press-on sets, salon-grade Japanese gel polishes, and 24K gold cuticle elixirs crafted for instant, damage-free luxury manicures.',
             'cta_text' => 'Explore Nail Collection ↗',
             'cta_url' => '/products',
             'left_card_tag' => 'HANDCRAFTED PRESS-ONS',
             'left_card_title' => 'Make Your Nails Look Gorgeous!',
             'left_card_image' => 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&q=80',
             'top_right_image' => 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=600&q=80',
-            'mini_banner_title' => 'BIAB™ Builder Gel Systems',
-            'mini_banner_desc' => 'Salon-strength natural nail reinforcement and 4+ week chip-free growth.',
+            'mini_banner_title' => 'Japanese Salon Gel Systems',
+            'mini_banner_desc' => 'Salon-strength natural nail care and 4+ week chip-free wear.',
             'mini_banner_btn' => 'See All Gel Products ↗',
-            'mini_banner_url' => '/products?category=biab-builder-gels',
+            'mini_banner_url' => '/products?category=gel-polishes',
             'metric_number' => '+120K',
             'metric_title' => 'CUSTOM NAIL SETS DELIVERED',
             'metric_text' => 'Your Nails Deserve the Best. Explore our Handcrafted Salon Formulations Today!',
@@ -308,12 +272,12 @@ class DatabaseSeeder extends Seeder
         $homeRituals = [
             'badge' => 'RADIANT NAIL RITUALS',
             'title' => 'The Art of Parisian Nail Care',
-            'subtitle' => 'Explore our complete suite of handcrafted luxury manicures, strengthening builder systems, and organic botanical care.',
+            'subtitle' => 'Explore our complete suite of handcrafted luxury manicures, salon gel polishes, and organic botanical care.',
             'card1_title' => 'Press-On Couture',
             'card1_sub' => 'Instant 4-week salon wear',
             'card1_img' => 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&q=80',
-            'card2_title' => 'BIAB Reinforcement',
-            'card2_sub' => 'Builder in a Bottle growth',
+            'card2_title' => 'Japanese Gel Polish',
+            'card2_sub' => '7-Layer salon shine',
             'card2_img' => 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=600&q=80',
             'card3_title' => 'Organic Damask Rose',
             'card3_sub' => '24K Gold cuticle elixirs',
@@ -322,7 +286,7 @@ class DatabaseSeeder extends Seeder
             'card4_sub' => 'Flawless application tools',
             'card4_img' => 'https://images.unsplash.com/photo-1599458356314-91ca8ca575c5?auto=format&fit=crop&w=600&q=80',
             'editorial_quote' => 'Nails are the period at the end of the sentence. They complete the look.',
-            'editorial_desc' => 'True beauty begins with nail health. Our dual-phase approach combines reusable haute couture sets with strengthening BIAB therapy to deliver salon-perfect results without compromise.',
+            'editorial_desc' => 'True beauty begins with nail health. Our dual-phase approach combines reusable haute couture sets with strengthening salon gel therapy to deliver salon-perfect results without compromise.',
         ];
         PageContent::setSection('home', 'rituals', $homeRituals);
 
@@ -354,7 +318,7 @@ class DatabaseSeeder extends Seeder
             'paragraphs' => [
                 'Founded in Paris, Récolte Nails was born from a singular atelier obsession: creating salon-grade, bespoke press-on couture and organic nail elixirs that enhance your elegance without ever compromising the health of your natural nail bed.',
                 'Every press-on set in our archives is meticulously layered by master nail artists using Japanese salon gels, optical chrome pigments, and hand-painted artistry to guarantee 4+ weeks of chip-free, luminous wear.',
-                'Our philosophy bridges the world of runway aesthetics with pure botanical care. From our 24K gold damask rose elixirs formulated in Grasse to our revolutionary HEMA-free BIAB builder gels, we ensure that salon glamour and natural nail wellness coexist seamlessly.'
+                'Our philosophy bridges the world of runway aesthetics with pure botanical care. From our 24K gold damask rose elixirs formulated in Grasse to our revolutionary HEMA-free Japanese salon gels, we ensure that salon glamour and natural nail wellness coexist seamlessly.'
             ],
             'stat1_num' => '4+ Weeks',
             'stat1_label' => 'Chip-Free Salon Wear',

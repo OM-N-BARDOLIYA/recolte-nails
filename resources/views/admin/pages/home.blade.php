@@ -5,9 +5,17 @@
 @section('content')
 <div class="space-y-6 max-w-5xl mx-auto" x-data="{ 
     activeTab: 'hero',
-    leftImg: '{{ $hero['left_card_image'] ?? 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&q=80' }}',
-    topRightImg: '{{ $hero['top_right_image'] ?? 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=800&q=80' }}',
-    bannerImg: '{{ $hero['mini_banner_image'] ?? 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80' }}',
+    heroBg: '{{ $hero['bg_image'] ?? asset('images/banners/recolte-hd-hero-bg.jpg') }}?v={{ file_exists(public_path('images/banners/recolte-hd-hero-bg.jpg')) ? filemtime(public_path('images/banners/recolte-hd-hero-bg.jpg')) : time() }}',
+    cat0: '{{ $categories_section['categories'][0]['image'] ?? asset('images/products/recolte-cat-gel-polish.jpg') }}',
+    cat1: '{{ $categories_section['categories'][1]['image'] ?? asset('images/products/recolte-cat-top-coat.jpg') }}',
+    cat2: '{{ $categories_section['categories'][2]['image'] ?? asset('images/products/recolte-cat-painting-gel.jpg') }}',
+    cat3: '{{ $categories_section['categories'][3]['image'] ?? asset('images/products/recolte-cat-nail-kits.jpg') }}',
+    showcaseImg: '{{ $showcase['image'] ?? asset('images/banners/recolte-colors-showcase.jpg') }}?v={{ file_exists(public_path('images/banners/recolte-colors-showcase.jpg')) ? filemtime(public_path('images/banners/recolte-colors-showcase.jpg')) : time() }}',
+    insta0: '{{ $instagram['posts'][0]['image'] ?? asset('images/products/recolte-cat-gel-polish.jpg') }}',
+    insta1: '{{ $instagram['posts'][1]['image'] ?? asset('images/banners/recolte-acrylic-banner.jpg') }}',
+    insta2: '{{ $instagram['posts'][2]['image'] ?? asset('images/products/recolte-cat-top-coat.jpg') }}',
+    insta3: '{{ $instagram['posts'][3]['image'] ?? asset('images/products/recolte-cat-painting-gel.jpg') }}',
+    insta4: '{{ $instagram['posts'][4]['image'] ?? asset('images/products/recolte-cat-nail-kits.jpg') }}',
     handleFile(e, key) {
         const file = e.target.files[0];
         if (file) {
@@ -16,14 +24,15 @@
     }
 }">
     
+    <!-- Top Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-            <div class="text-[11px] font-extrabold uppercase tracking-widest text-rose-dark">Front Storefront CMS</div>
+            <div class="text-[11px] font-extrabold uppercase tracking-widest text-[#A33B47]">Front Storefront CMS</div>
             <h1 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal">Homepage Content Manager</h1>
-            <p class="text-xs text-charcoal/70">Manage every single headline, banner, ritual card, metric, and social section on your live homepage.</p>
+            <p class="text-xs text-charcoal/70">100% matched to live website: HD Hero Banner, 5-Column Trust Strip, Shop by Category, Colors Showcase, and Instagram Grid.</p>
         </div>
 
-        <a href="{{ route('home') }}" target="_blank" class="px-4 py-2 rounded-2xl bg-white hover:bg-rose-light text-xs font-bold text-charcoal border border-charcoal/10 transition-all shadow-2xs shrink-0">
+        <a href="{{ route('home') }}" target="_blank" class="px-4 py-2 rounded-2xl bg-white hover:bg-rose-light text-xs font-bold text-charcoal border border-charcoal/15 transition-all shadow-2xs shrink-0">
             View Live Homepage ↗
         </a>
     </div>
@@ -34,45 +43,45 @@
             type="button"
             @click="activeTab = 'hero'" 
             class="px-4 py-2 rounded-2xl text-xs font-bold transition-all shrink-0 cursor-pointer"
-            :class="activeTab === 'hero' ? 'bg-[#A33B47] text-white shadow-sm' : 'bg-white text-charcoal/70 hover:bg-rose-light border border-charcoal/10'"
+            :class="activeTab === 'hero' ? 'bg-[#A33B47] text-white shadow-sm' : 'bg-white text-charcoal/70 hover:bg-rose-light border border-charcoal/15'"
         >
-            <span>✨</span> 1. Hero &amp; Bento Grid
+            <span>✨</span> 1. Hero Banner
         </button>
 
         <button 
             type="button"
-            @click="activeTab = 'pillars'" 
+            @click="activeTab = 'trust'" 
             class="px-4 py-2 rounded-2xl text-xs font-bold transition-all shrink-0 cursor-pointer"
-            :class="activeTab === 'pillars' ? 'bg-[#A33B47] text-white shadow-sm' : 'bg-white text-charcoal/70 hover:bg-rose-light border border-charcoal/10'"
+            :class="activeTab === 'trust' ? 'bg-[#A33B47] text-white shadow-sm' : 'bg-white text-charcoal/70 hover:bg-rose-light border border-charcoal/15'"
         >
-            <span>🛡️</span> 2. Formulation &amp; Zero Damage
+            <span>🛡️</span> 2. Trust Proposition Strip
         </button>
 
         <button 
             type="button"
-            @click="activeTab = 'rituals'" 
+            @click="activeTab = 'categories'" 
             class="px-4 py-2 rounded-2xl text-xs font-bold transition-all shrink-0 cursor-pointer"
-            :class="activeTab === 'rituals' ? 'bg-[#A33B47] text-white shadow-sm' : 'bg-white text-charcoal/70 hover:bg-rose-light border border-charcoal/10'"
+            :class="activeTab === 'categories' ? 'bg-[#A33B47] text-white shadow-sm' : 'bg-white text-charcoal/70 hover:bg-rose-light border border-charcoal/15'"
         >
-            <span>🌸</span> 3. Radiant Rituals 2x2
+            <span>🧴</span> 3. Shop by Category (4 Cards)
         </button>
 
         <button 
             type="button"
-            @click="activeTab = 'philosophy'" 
+            @click="activeTab = 'showcase'" 
             class="px-4 py-2 rounded-2xl text-xs font-bold transition-all shrink-0 cursor-pointer"
-            :class="activeTab === 'philosophy' ? 'bg-[#A33B47] text-white shadow-sm' : 'bg-white text-charcoal/70 hover:bg-rose-light border border-charcoal/10'"
+            :class="activeTab === 'showcase' ? 'bg-[#A33B47] text-white shadow-sm' : 'bg-white text-charcoal/70 hover:bg-rose-light border border-charcoal/15'"
         >
-            <span>💎</span> 4. Timeless Philosophy
+            <span>🎨</span> 4. Colors Showcase Banner
         </button>
 
         <button 
             type="button"
             @click="activeTab = 'instagram'" 
             class="px-4 py-2 rounded-2xl text-xs font-bold transition-all shrink-0 cursor-pointer"
-            :class="activeTab === 'instagram' ? 'bg-[#A33B47] text-white shadow-sm' : 'bg-white text-charcoal/70 hover:bg-rose-light border border-charcoal/10'"
+            :class="activeTab === 'instagram' ? 'bg-[#A33B47] text-white shadow-sm' : 'bg-white text-charcoal/70 hover:bg-rose-light border border-charcoal/15'"
         >
-            <span>📸</span> 5. Instagram Gallery
+            <span>📸</span> 5. Instagram Community
         </button>
     </div>
 
@@ -80,430 +89,377 @@
     <form method="POST" action="{{ route('admin.pages.home.update') }}" enctype="multipart/form-data" class="space-y-8">
         @csrf
 
-        <!-- TAB 1: HERO & BENTO GRID -->
+        <!-- ════════════════ TAB 1: HERO BANNER ════════════════ -->
         <div x-show="activeTab === 'hero'" class="space-y-6">
-            <div class="p-6 sm:p-8 rounded-3xl bg-white border border-charcoal/10 space-y-5 shadow-2xs">
-                <h2 class="font-serif text-xl font-bold text-charcoal border-b border-charcoal/10 pb-3">Hero Main Copy &amp; Primary Action</h2>
+            <div class="p-6 sm:p-8 rounded-3xl bg-white border border-charcoal/15 space-y-6 shadow-2xs">
+                <div class="border-b border-charcoal/10 pb-3">
+                    <h2 class="font-serif text-xl font-bold text-charcoal">Full-Width High-Definition Hero Banner</h2>
+                    <p class="text-[11px] text-charcoal/60">Configure the centerpiece hero banner background photography, brand titles, cursive accent, and primary CTA button.</p>
+                </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div class="space-y-1.5 sm:col-span-2">
-                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Hero Badge Text</label>
-                        <input type="text" name="hero_badge" value="{{ old('hero_badge', $hero['badge'] ?? 'Nails by Récolte • Paris') }}" required class="w-full px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-charcoal text-xs font-bold focus:outline-none focus:border-rose-dark focus:bg-white">
+                    
+                    <!-- Background Image File & URL -->
+                    <div class="sm:col-span-2 space-y-3 p-4 rounded-2xl bg-[#FAF8F5] border border-charcoal/10">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/80 block">Hero Background Photography (Full-Width High-Definition)</label>
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                            <div class="md:col-span-8 space-y-2">
+                                <input 
+                                    type="file" 
+                                    name="hero_bg_image_file" 
+                                    accept="image/*"
+                                    @change="handleFile($event, 'heroBg')"
+                                    class="w-full px-3 py-2 rounded-xl bg-white border border-charcoal/15 text-xs text-charcoal file:mr-3 file:py-1.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#171412] file:text-white cursor-pointer"
+                                />
+                                <input 
+                                    type="text" 
+                                    name="hero_bg_image" 
+                                    x-model="heroBg"
+                                    placeholder="Or Image URL..." 
+                                    class="w-full px-3 py-2 rounded-xl bg-white border border-charcoal/15 text-xs font-mono"
+                                />
+                                <p class="text-[10px] text-charcoal/60">Recommended ratio: 21:9 or panoramic HD landscape photo. High resolution.</p>
+                            </div>
+                            <div class="md:col-span-4 flex flex-col items-center justify-center p-2 rounded-xl bg-white border border-charcoal/10 shadow-2xs">
+                                <span class="text-[10px] font-bold text-charcoal/60 uppercase mb-1.5">Live Preview</span>
+                                <div class="w-full aspect-[21/9] rounded-lg overflow-hidden bg-stone-100 border border-charcoal/10">
+                                    <img :src="heroBg" class="w-full h-full object-cover" alt="Hero Preview" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="space-y-1.5 sm:col-span-2">
-                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Main Headline (H1)</label>
-                        <input type="text" name="hero_title" value="{{ old('hero_title', $hero['title'] ?? 'Beautiful Nails, Made Personal.') }}" required class="w-full px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-charcoal text-base font-serif font-bold focus:outline-none focus:border-rose-dark focus:bg-white">
-                    </div>
-
-                    <div class="space-y-1.5 sm:col-span-2">
-                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Hero Subtitle Paragraph</label>
-                        <textarea name="hero_subtitle" rows="3" required class="w-full px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-charcoal text-xs leading-relaxed focus:outline-none focus:border-rose-dark focus:bg-white">{{ old('hero_subtitle', $hero['subtitle'] ?? 'Reusable salon-quality press-on sets, strengthening BIAB builder gels, and 24K gold cuticle elixirs crafted for instant, damage-free luxury manicures.') }}</textarea>
+                    <!-- Brand Title & Trademark -->
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Brand Title</label>
+                        <input type="text" name="hero_brand_title" value="{{ old('hero_brand_title', $hero['brand_title'] ?? 'Recolte') }}" required class="w-full px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-charcoal text-base font-serif font-bold focus:outline-none focus:border-[#A33B47] focus:bg-white">
                     </div>
 
                     <div class="space-y-1.5">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Trademark Symbol</label>
+                        <input type="text" name="hero_brand_trademark" value="{{ old('hero_brand_trademark', $hero['brand_trademark'] ?? '®') }}" class="w-full px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-charcoal text-base font-serif font-bold focus:outline-none focus:border-[#A33B47] focus:bg-white">
+                    </div>
+
+                    <!-- Sub-Descriptor & Script Line -->
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Sub-Descriptor Line</label>
+                        <input type="text" name="hero_sub_descriptor" value="{{ old('hero_sub_descriptor', $hero['sub_descriptor'] ?? 'NAILS • BEAUTY • YOU') }}" required class="w-full px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-charcoal text-xs font-bold tracking-widest uppercase focus:outline-none focus:border-[#A33B47] focus:bg-white">
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Script Cursive Accent Line</label>
+                        <input type="text" name="hero_script_line" value="{{ old('hero_script_line', $hero['script_line'] ?? 'Create • Express • Shine') }}" required class="w-full px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-charcoal text-sm font-serif italic focus:outline-none focus:border-[#A33B47] focus:bg-white">
+                    </div>
+
+                    <!-- Subtitle Tagline -->
+                    <div class="space-y-1.5 sm:col-span-2">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Subtitle Tagline</label>
+                        <input type="text" name="hero_subtitle" value="{{ old('hero_subtitle', $hero['subtitle'] ?? 'Premium Nail Products for Professionals & Enthusiasts') }}" required class="w-full px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-charcoal text-xs leading-relaxed focus:outline-none focus:border-[#A33B47] focus:bg-white">
+                    </div>
+
+                    <!-- CTA Button Text & Link -->
+                    <div class="space-y-1.5">
                         <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Hero CTA Button Text</label>
-                        <input type="text" name="hero_cta_text" value="{{ old('hero_cta_text', $hero['cta_text'] ?? 'Explore Nail Collection ↗') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-charcoal text-xs font-bold">
+                        <input type="text" name="hero_cta_text" value="{{ old('hero_cta_text', $hero['cta_text'] ?? 'SHOP NOW') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-charcoal text-xs font-bold">
                     </div>
 
                     <div class="space-y-1.5">
                         <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Hero CTA Link Target</label>
                         <input type="text" name="hero_cta_url" value="{{ old('hero_cta_url', $hero['cta_url'] ?? '/products') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-mono">
                     </div>
-                </div>
-            </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                
-                <!-- 1. Left Bento Feature Card (Tall Card) -->
-                <div class="p-6 rounded-3xl bg-white border border-charcoal/10 space-y-4 shadow-2xs">
-                    <div class="flex items-center justify-between border-b border-charcoal/10 pb-2">
-                        <h3 class="font-serif text-lg font-bold text-charcoal">1. Left Bento Feature Card</h3>
-                        <span class="text-[10px] text-rose-dark font-bold uppercase tracking-wider">Tall Vertical Card</span>
-                    </div>
-
-                    <div class="space-y-3">
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70">Tagline Pill</label>
-                            <input type="text" name="hero_left_card_tag" value="{{ old('hero_left_card_tag', $hero['left_card_tag'] ?? 'HANDCRAFTED PRESS-ONS') }}" class="w-full px-3 py-2 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-semibold">
-                        </div>
-
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70">Card Headline</label>
-                            <input type="text" name="hero_left_card_title" value="{{ old('hero_left_card_title', $hero['left_card_title'] ?? 'Make Your Nails Look Gorgeous!') }}" class="w-full px-3 py-2 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-bold">
-                        </div>
-
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70">Card Target Link (See Details ↗)</label>
-                            <input type="text" name="hero_left_card_link" value="{{ old('hero_left_card_link', $hero['left_card_link'] ?? '/products') }}" class="w-full px-3 py-2 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-mono">
-                        </div>
-
-                        <!-- Image File Upload & URL -->
-                        <div class="space-y-2 pt-2 border-t border-charcoal/10">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70 block">Select / Upload Image</label>
-                            
-                            <input 
-                                type="file" 
-                                name="hero_left_card_image_file" 
-                                accept="image/*"
-                                @change="handleFile($event, 'leftImg')"
-                                class="w-full px-3 py-1.5 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs text-charcoal file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-[#A33B47] file:text-white cursor-pointer"
-                            />
-                            
-                            <input 
-                                type="text" 
-                                name="hero_left_card_image" 
-                                x-model="leftImg"
-                                placeholder="Or enter Image URL (https://...)" 
-                                class="w-full px-3 py-1.5 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs"
-                            />
-
-                            <!-- Live Preview Box -->
-                            <div class="flex items-center gap-3 pt-2">
-                                <span class="text-[10px] font-bold text-charcoal/60 uppercase">Live Preview:</span>
-                                <img :src="leftImg" class="w-16 h-20 rounded-xl object-cover bg-stone-100 border border-charcoal/15 shadow-sm">
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <!-- 2. Top Right Bento Card -->
-                <div class="p-6 rounded-3xl bg-white border border-charcoal/10 space-y-4 shadow-2xs">
-                    <div class="flex items-center justify-between border-b border-charcoal/10 pb-2">
-                        <h3 class="font-serif text-lg font-bold text-charcoal">2. Top Right Bento Card</h3>
-                        <span class="text-[10px] text-rose-dark font-bold uppercase tracking-wider">Top Right Card</span>
-                    </div>
-
-                    <div class="space-y-3">
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70">Card Target Link (See Details ↗)</label>
-                            <input type="text" name="hero_top_right_link" value="{{ old('hero_top_right_link', $hero['top_right_link'] ?? '/products') }}" class="w-full px-3 py-2 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-mono">
-                        </div>
-
-                        <!-- Image File Upload & URL -->
-                        <div class="space-y-2 pt-2 border-t border-charcoal/10">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70 block">Select / Upload Image</label>
-                            
-                            <input 
-                                type="file" 
-                                name="hero_top_right_image_file" 
-                                accept="image/*"
-                                @change="handleFile($event, 'topRightImg')"
-                                class="w-full px-3 py-1.5 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs text-charcoal file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-[#A33B47] file:text-white cursor-pointer"
-                            />
-                            
-                            <input 
-                                type="text" 
-                                name="hero_top_right_image" 
-                                x-model="topRightImg"
-                                placeholder="Or enter Image URL (https://...)" 
-                                class="w-full px-3 py-1.5 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs"
-                            />
-
-                            <!-- Live Preview Box -->
-                            <div class="flex items-center gap-3 pt-2">
-                                <span class="text-[10px] font-bold text-charcoal/60 uppercase">Live Preview:</span>
-                                <img :src="topRightImg" class="w-16 h-16 rounded-xl object-cover bg-stone-100 border border-charcoal/15 shadow-sm">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <!-- Bottom Mini Banner -->
-                <div class="p-6 rounded-3xl bg-white border border-charcoal/10 space-y-4 shadow-2xs">
-                    <h3 class="font-serif text-lg font-bold text-charcoal border-b border-charcoal/10 pb-2">Bento Mini Banner</h3>
-                    <div class="space-y-3">
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70">Banner Title</label>
-                            <input type="text" name="hero_mini_banner_title" value="{{ old('hero_mini_banner_title', $hero['mini_banner_title'] ?? 'BIAB™ Builder Gel Systems') }}" class="w-full px-3 py-2 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-bold">
-                        </div>
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70">Banner Subtitle</label>
-                            <input type="text" name="hero_mini_banner_desc" value="{{ old('hero_mini_banner_desc', $hero['mini_banner_desc'] ?? 'Salon-strength natural nail reinforcement and 4+ week chip-free growth.') }}" class="w-full px-3 py-2 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs">
-                        </div>
-
-                        <!-- Mini Banner Image Upload -->
-                        <div class="space-y-2 pt-2 border-t border-charcoal/10">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70 block">Bottle / Product Image</label>
-                            <input 
-                                type="file" 
-                                name="hero_mini_banner_image_file" 
-                                accept="image/*"
-                                @change="handleFile($event, 'bannerImg')"
-                                class="w-full px-3 py-1.5 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs text-charcoal file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-[#A33B47] file:text-white cursor-pointer"
-                            />
-                            <input 
-                                type="text" 
-                                name="hero_mini_banner_image" 
-                                x-model="bannerImg"
-                                placeholder="Image URL..." 
-                                class="w-full px-3 py-1.5 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs"
-                            />
-                            <div class="flex items-center gap-3 pt-2">
-                                <span class="text-[10px] font-bold text-charcoal/60 uppercase">Live Preview:</span>
-                                <img :src="bannerImg" class="w-16 h-16 rounded-xl object-cover bg-stone-100 border border-charcoal/15 shadow-sm">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70">Button Text</label>
-                                <input type="text" name="hero_mini_banner_btn" value="{{ old('hero_mini_banner_btn', $hero['mini_banner_btn'] ?? 'See All Gel Products ↗') }}" class="w-full px-3 py-2 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-bold">
-                            </div>
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70">Button URL</label>
-                                <input type="text" name="hero_mini_banner_url" value="{{ old('hero_mini_banner_url', $hero['mini_banner_url'] ?? '/products?category=biab-builder-gels') }}" class="w-full px-3 py-2 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-mono">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- +120K Metric Card -->
-                <div class="p-6 rounded-3xl bg-white border border-charcoal/10 space-y-4 shadow-2xs">
-                    <h3 class="font-serif text-lg font-bold text-charcoal border-b border-charcoal/10 pb-2">Global Sets Metric Card</h3>
-                    <div class="space-y-3">
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70">Metric Number</label>
-                            <input type="text" name="hero_metric_number" value="{{ old('hero_metric_number', $hero['metric_number'] ?? '+120K') }}" class="w-full px-3 py-2 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-sm font-bold text-charcoal">
-                        </div>
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70">Metric Title</label>
-                            <input type="text" name="hero_metric_title" value="{{ old('hero_metric_title', $hero['metric_title'] ?? 'CUSTOM NAIL SETS DELIVERED') }}" class="w-full px-3 py-2 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-bold text-rose-dark">
-                        </div>
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70">Metric Subtext</label>
-                            <input type="text" name="hero_metric_text" value="{{ old('hero_metric_text', $hero['metric_text'] ?? 'Your Nails Deserve the Best. Explore our Handcrafted Salon Formulations Today!') }}" class="w-full px-3 py-2 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs">
-                        </div>
-                    </div>
+                <div class="pt-4 border-t border-charcoal/10 flex justify-end">
+                    <button type="submit" class="px-6 py-2.5 rounded-full bg-[#171412] hover:bg-black text-white text-xs font-bold tracking-wider uppercase transition-all shadow-sm">
+                        Save Hero Changes 💾
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- TAB 2: UNLOCK YOUR BEST NAILS DUAL CARDS -->
-        <div x-show="activeTab === 'pillars'" class="space-y-6">
-            <div class="p-6 sm:p-8 rounded-3xl bg-white border border-charcoal/10 space-y-6 shadow-2xs">
+        <!-- ════════════════ TAB 2: TRUST PROPOSITION STRIP ════════════════ -->
+        <div x-show="activeTab === 'trust'" class="space-y-6">
+            <div class="p-6 sm:p-8 rounded-3xl bg-white border border-charcoal/15 space-y-6 shadow-2xs">
                 <div class="border-b border-charcoal/10 pb-3">
-                    <h2 class="font-serif text-xl font-bold text-charcoal">"Unlock Your Best Nails" — Dual Showcase Cards &amp; Social Proof</h2>
-                    <p class="text-[11px] text-charcoal/60">This section is located right below the Hero Bento Grid on your homepage.</p>
+                    <h2 class="font-serif text-xl font-bold text-charcoal">5-Column Value &amp; Trust Proposition Strip</h2>
+                    <p class="text-[11px] text-charcoal/60">Appears directly below the hero banner. Highlight your 5 core luxury assurances.</p>
                 </div>
 
-                <!-- Left Editorial Headline & Proof -->
+                @php 
+                    $trustItems = $trust_strip['items'] ?? [
+                        ['title' => 'Premium Quality', 'sub' => 'Products'],
+                        ['title' => 'Safe & Skin Friendly', 'sub' => 'Formulas'],
+                        ['title' => 'Fast & Reliable', 'sub' => 'Shipping'],
+                        ['title' => 'Expert Support', 'sub' => 'Always'],
+                        ['title' => 'Trusted by', 'sub' => 'Professionals'],
+                    ];
+                @endphp
+
+                <div class="space-y-4">
+                    @for($i = 0; $i < 5; $i++)
+                    <div class="p-4 rounded-2xl bg-[#FAF8F5] border border-charcoal/10 grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                        <div class="sm:col-span-2 font-serif font-bold text-sm text-[#A33B47]">
+                            Item {{ $i + 1 }}
+                        </div>
+                        <div class="sm:col-span-5 space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/60 block">Main Headline</label>
+                            <input type="text" name="trust_{{ $i }}_title" value="{{ old("trust_{$i}_title", $trustItems[$i]['title'] ?? '') }}" required class="w-full px-3 py-2 rounded-xl bg-white border border-charcoal/15 text-xs font-bold text-charcoal">
+                        </div>
+                        <div class="sm:col-span-5 space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/60 block">Sub-Text</label>
+                            <input type="text" name="trust_{{ $i }}_sub" value="{{ old("trust_{$i}_sub", $trustItems[$i]['sub'] ?? '') }}" required class="w-full px-3 py-2 rounded-xl bg-white border border-charcoal/15 text-xs text-charcoal">
+                        </div>
+                    </div>
+                    @endfor
+                </div>
+
+                <div class="pt-4 border-t border-charcoal/10 flex justify-end">
+                    <button type="submit" class="px-6 py-2.5 rounded-full bg-[#171412] hover:bg-black text-white text-xs font-bold tracking-wider uppercase transition-all shadow-sm">
+                        Save Trust Strip Changes 💾
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════ TAB 3: SHOP BY CATEGORY ════════════════ -->
+        <div x-show="activeTab === 'categories'" class="space-y-6">
+            <div class="p-6 sm:p-8 rounded-3xl bg-white border border-charcoal/15 space-y-6 shadow-2xs">
+                <div class="border-b border-charcoal/10 pb-3">
+                    <h2 class="font-serif text-xl font-bold text-charcoal">Shop by Category (4 Clean Product Bottle Cards)</h2>
+                    <p class="text-[11px] text-charcoal/60">Strictly 1 horizontal row of 4 clean, centered product bottle cards.</p>
+                </div>
+
+                <!-- Section Header Title & Subtitle -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-2xl bg-[#FAF8F5] border border-charcoal/10">
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Section Header Title</label>
+                        <input type="text" name="categories_title" value="{{ old('categories_title', $categories_section['title'] ?? 'Shop by Category') }}" required class="w-full px-3 py-2 rounded-xl bg-white border border-charcoal/15 text-sm font-serif font-bold text-charcoal">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Section Header Subtitle</label>
+                        <input type="text" name="categories_subtitle" value="{{ old('categories_subtitle', $categories_section['subtitle'] ?? 'Everything you need for perfect nails') }}" required class="w-full px-3 py-2 rounded-xl bg-white border border-charcoal/15 text-xs text-charcoal">
+                    </div>
+                </div>
+
+                <!-- 4 Category Cards -->
+                @php $cats = $categories_section['categories'] ?? []; @endphp
+                <div class="space-y-5">
+                    @for($i = 0; $i < 4; $i++)
+                    <div class="p-5 rounded-2xl bg-[#FAF8F5] border border-charcoal/10 space-y-4">
+                        <div class="flex items-center justify-between border-b border-charcoal/10 pb-2">
+                            <span class="font-serif font-bold text-sm text-[#A33B47]">Category Card {{ $i + 1 }}</span>
+                            <span class="text-[11px] font-bold text-charcoal/60" x-text="cat{{ $i }}"></span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                            <!-- Left: Inputs -->
+                            <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70 block">Category Name</label>
+                                    <input type="text" name="cat_{{ $i }}_title" value="{{ old("cat_{$i}_title", $cats[$i]['title'] ?? '') }}" required class="w-full px-3 py-2 rounded-xl bg-white border border-charcoal/15 text-xs font-bold">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70 block">Button Text</label>
+                                    <input type="text" name="cat_{{ $i }}_btn_text" value="{{ old("cat_{$i}_btn_text", $cats[$i]['btn_text'] ?? 'Shop Now') }}" class="w-full px-3 py-2 rounded-xl bg-white border border-charcoal/15 text-xs">
+                                </div>
+                                <div class="space-y-1 sm:col-span-2">
+                                    <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70 block">Link Target (URL)</label>
+                                    <input type="text" name="cat_{{ $i }}_link" value="{{ old("cat_{$i}_link", $cats[$i]['link'] ?? '/products') }}" class="w-full px-3 py-2 rounded-xl bg-white border border-charcoal/15 text-xs font-mono">
+                                </div>
+                                <div class="space-y-1 sm:col-span-2">
+                                    <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal/70 block">Upload Image / Replace</label>
+                                    <input 
+                                        type="file" 
+                                        name="cat_{{ $i }}_image_file" 
+                                        accept="image/*" 
+                                        @change="handleFile($event, 'cat{{ $i }}')"
+                                        class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs text-charcoal file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-[#171412] file:text-white cursor-pointer"
+                                    />
+                                    <input 
+                                        type="text" 
+                                        name="cat_{{ $i }}_image" 
+                                        x-model="cat{{ $i }}"
+                                        placeholder="Or Image URL..." 
+                                        class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs font-mono mt-1"
+                                    />
+                                </div>
+                            </div>
+
+                            <!-- Right: Preview -->
+                            <div class="md:col-span-4 flex flex-col items-center justify-center p-3 rounded-xl bg-white border border-charcoal/10 shadow-2xs">
+                                <span class="text-[10px] font-bold text-charcoal/60 uppercase mb-1.5">Card Preview</span>
+                                <div class="w-24 h-24 rounded-2xl overflow-hidden bg-[#FAF7F4] border border-[#ECE6DE] p-2 flex items-center justify-center">
+                                    <img :src="cat{{ $i }}" class="w-full h-full object-cover rounded-xl" alt="Category {{ $i + 1 }}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endfor
+                </div>
+
+                <div class="pt-4 border-t border-charcoal/10 flex justify-end">
+                    <button type="submit" class="px-6 py-2.5 rounded-full bg-[#171412] hover:bg-black text-white text-xs font-bold tracking-wider uppercase transition-all shadow-sm">
+                        Save Categories Changes 💾
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════ TAB 4: COLORS SHOWCASE BANNER ════════════════ -->
+        <div x-show="activeTab === 'showcase'" class="space-y-6">
+            <div class="p-6 sm:p-8 rounded-3xl bg-white border border-charcoal/15 space-y-6 shadow-2xs">
+                <div class="border-b border-charcoal/10 pb-3">
+                    <h2 class="font-serif text-xl font-bold text-charcoal">Colors Showcase Banner ("Colors that cultivate confidence")</h2>
+                    <p class="text-[11px] text-charcoal/60">Full-width editorial split banner with headline, description, pill action button, and right-half color showcase photography.</p>
+                </div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div class="space-y-1.5">
                         <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Headline Line 1</label>
-                        <input type="text" name="title_line1" value="{{ old('title_line1', $pillars['title_line1'] ?? 'Unlock Your Best') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-bold">
+                        <input type="text" name="showcase_title_line1" value="{{ old('showcase_title_line1', $showcase['title_line1'] ?? 'Colors that') }}" required class="w-full px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-charcoal text-base font-serif font-bold">
                     </div>
 
                     <div class="space-y-1.5">
-                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Headline Line 2 (Italic Accent)</label>
-                        <input type="text" name="title_line2" value="{{ old('title_line2', $pillars['title_line2'] ?? 'Nails:') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-serif italic text-rose-dark font-bold">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Headline Line 2</label>
+                        <input type="text" name="showcase_title_line2" value="{{ old('showcase_title_line2', $showcase['title_line2'] ?? 'cultivate confidence') }}" required class="w-full px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-charcoal text-base font-serif font-bold">
+                    </div>
+
+                    <div class="space-y-1.5 sm:col-span-2">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Description Paragraph</label>
+                        <textarea name="showcase_description" rows="3" required class="w-full px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-charcoal text-xs leading-relaxed">{{ old('showcase_description', $showcase['description'] ?? 'Dedicated to salon-grade perfection, Japanese gel formulas, and effortless everyday elegance.') }}</textarea>
                     </div>
 
                     <div class="space-y-1.5">
-                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Headline Line 3</label>
-                        <input type="text" name="title_line3" value="{{ old('title_line3', $pillars['title_line3'] ?? 'Trusted by') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-bold">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Pill Button Text</label>
+                        <input type="text" name="showcase_btn_text" value="{{ old('showcase_btn_text', $showcase['btn_text'] ?? 'Find more') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-charcoal text-xs font-bold">
                     </div>
 
                     <div class="space-y-1.5">
-                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Headline Line 4</label>
-                        <input type="text" name="title_line4" value="{{ old('title_line4', $pillars['title_line4'] ?? 'Nail Enthusiasts') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-bold">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Pill Button Link (URL)</label>
+                        <input type="text" name="showcase_btn_url" value="{{ old('showcase_btn_url', $showcase['btn_url'] ?? '/products') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-mono">
                     </div>
 
-                    <div class="space-y-1.5">
-                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Confidence Badge Title</label>
-                        <input type="text" name="proof_title" value="{{ old('proof_title', $pillars['proof_title'] ?? 'Shop with Confidence') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-bold">
-                    </div>
-
-                    <div class="space-y-1.5">
-                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Confidence Badge Subtext</label>
-                        <input type="text" name="proof_sub" value="{{ old('proof_sub', $pillars['proof_sub'] ?? '10K+ Happy Custom Sets') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs">
-                    </div>
-
-                    <div class="space-y-1.5">
-                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Button Label</label>
-                        <input type="text" name="pillars_cta_text" value="{{ old('pillars_cta_text', $pillars['cta_text'] ?? 'Shop Nail Bestsellers') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-bold">
-                    </div>
-
-                    <div class="space-y-1.5">
-                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Button Target URL</label>
-                        <input type="text" name="pillars_cta_url" value="{{ old('pillars_cta_url', $pillars['cta_url'] ?? '/products') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-mono">
+                    <!-- Right-Half Banner Image Upload -->
+                    <div class="sm:col-span-2 space-y-3 p-4 rounded-2xl bg-[#FAF8F5] border border-charcoal/10">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/80 block">Showcase Right-Half Photography (Swatches &amp; Bottles)</label>
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                            <div class="md:col-span-8 space-y-2">
+                                <input 
+                                    type="file" 
+                                    name="showcase_image_file" 
+                                    accept="image/*"
+                                    @change="handleFile($event, 'showcaseImg')"
+                                    class="w-full px-3 py-2 rounded-xl bg-white border border-charcoal/15 text-xs text-charcoal file:mr-3 file:py-1.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#171412] file:text-white cursor-pointer"
+                                />
+                                <input 
+                                    type="text" 
+                                    name="showcase_image" 
+                                    x-model="showcaseImg"
+                                    placeholder="Or Image URL..." 
+                                    class="w-full px-3 py-2 rounded-xl bg-white border border-charcoal/15 text-xs font-mono"
+                                />
+                            </div>
+                            <div class="md:col-span-4 flex flex-col items-center justify-center p-2 rounded-xl bg-white border border-charcoal/10 shadow-2xs">
+                                <span class="text-[10px] font-bold text-charcoal/60 uppercase mb-1.5">Live Preview</span>
+                                <div class="w-full aspect-[4/3] rounded-lg overflow-hidden bg-stone-100 border border-charcoal/10">
+                                    <img :src="showcaseImg" class="w-full h-full object-cover" alt="Showcase Preview" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Right Dual Image Cards -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-charcoal/10">
-                    
-                    <!-- Card 1: Warm Glowing Nail Art -->
-                    <div class="p-5 rounded-2xl bg-[#FAF8F5] border border-charcoal/10 space-y-3">
-                        <div class="font-bold text-xs text-charcoal">Right Card 1: Warm Glowing Set</div>
-                        
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase text-charcoal/70">Card 1 Image URL</label>
-                            <input type="text" name="card1_image" value="{{ old('card1_image', $pillars['card1_image'] ?? 'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=800&q=80') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs">
-                        </div>
-
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase text-charcoal/70">Card 1 Link URL (See Details ↗)</label>
-                            <input type="text" name="card1_link" value="{{ old('card1_link', $pillars['card1_link'] ?? '/products/french-pearl-chrome-press-on-set') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs font-mono">
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-2">
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold uppercase text-charcoal/70">Hashtag 1</label>
-                                <input type="text" name="card1_tag1" value="{{ old('card1_tag1', $pillars['card1_tag1'] ?? '#HandmadePressOns') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs font-semibold">
-                            </div>
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold uppercase text-charcoal/70">Hashtag 2</label>
-                                <input type="text" name="card1_tag2" value="{{ old('card1_tag2', $pillars['card1_tag2'] ?? '#GlazedNails') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs font-semibold">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 2: Velvet Polish & BIAB -->
-                    <div class="p-5 rounded-2xl bg-[#FAF8F5] border border-charcoal/10 space-y-3">
-                        <div class="font-bold text-xs text-charcoal">Right Card 2: Velvet Polish &amp; BIAB</div>
-
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase text-charcoal/70">Card 2 Image URL</label>
-                            <input type="text" name="card2_image" value="{{ old('card2_image', $pillars['card2_image'] ?? 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=800&q=80') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs">
-                        </div>
-
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase text-charcoal/70">Card 2 Link URL (See Details ↗)</label>
-                            <input type="text" name="card2_link" value="{{ old('card2_link', $pillars['card2_link'] ?? '/products/velvet-cat-eye-magnetic-gel-polish') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs font-mono">
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-2">
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold uppercase text-charcoal/70">Hashtag 1</label>
-                                <input type="text" name="card2_tag1" value="{{ old('card2_tag1', $pillars['card2_tag1'] ?? '#VelvetNails') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs font-semibold">
-                            </div>
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold uppercase text-charcoal/70">Hashtag 2</label>
-                                <input type="text" name="card2_tag2" value="{{ old('card2_tag2', $pillars['card2_tag2'] ?? '#CatEyeGel') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs font-semibold">
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="pt-4 border-t border-charcoal/10 flex justify-end">
+                    <button type="submit" class="px-6 py-2.5 rounded-full bg-[#171412] hover:bg-black text-white text-xs font-bold tracking-wider uppercase transition-all shadow-sm">
+                        Save Showcase Changes 💾
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- TAB 3: RADIANT RITUALS 2x2 -->
-        <div x-show="activeTab === 'rituals'" class="space-y-6">
-            <div class="p-6 sm:p-8 rounded-3xl bg-white border border-charcoal/10 space-y-6 shadow-2xs">
-                <h2 class="font-serif text-xl font-bold text-charcoal border-b border-charcoal/10 pb-3">4 Ritual Feature Cards &amp; Editorial Box</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="p-4 rounded-2xl bg-[#FAF8F5] border border-charcoal/10 space-y-2">
-                        <div class="font-bold text-xs text-charcoal">Card 1: Press-On Couture</div>
-                        <input type="text" name="ritual1_title" value="{{ old('ritual1_title', $rituals['card1_title'] ?? 'Press-On Couture') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs font-bold">
-                        <input type="text" name="ritual1_sub" value="{{ old('ritual1_sub', $rituals['card1_sub'] ?? 'Instant 4-week salon wear') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs">
-                        <input type="text" name="ritual1_img" value="{{ old('ritual1_img', $rituals['card1_img'] ?? 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&q=80') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs">
-                    </div>
-                    <div class="p-4 rounded-2xl bg-[#FAF8F5] border border-charcoal/10 space-y-2">
-                        <div class="font-bold text-xs text-charcoal">Card 2: BIAB Reinforcement</div>
-                        <input type="text" name="ritual2_title" value="{{ old('ritual2_title', $rituals['card2_title'] ?? 'BIAB Reinforcement') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs font-bold">
-                        <input type="text" name="ritual2_sub" value="{{ old('ritual2_sub', $rituals['card2_sub'] ?? 'Builder in a Bottle growth') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs">
-                        <input type="text" name="ritual2_img" value="{{ old('ritual2_img', $rituals['card2_img'] ?? 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=600&q=80') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs">
-                    </div>
-                    <div class="p-4 rounded-2xl bg-[#FAF8F5] border border-charcoal/10 space-y-2">
-                        <div class="font-bold text-xs text-charcoal">Card 3: 24K Cuticle Elixir</div>
-                        <input type="text" name="ritual3_title" value="{{ old('ritual3_title', $rituals['card3_title'] ?? 'Organic Damask Rose') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs font-bold">
-                        <input type="text" name="ritual3_sub" value="{{ old('ritual3_sub', $rituals['card3_sub'] ?? '24K Gold cuticle elixirs') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs">
-                        <input type="text" name="ritual3_img" value="{{ old('ritual3_img', $rituals['card3_img'] ?? 'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=600&q=80') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs">
-                    </div>
-                    <div class="p-4 rounded-2xl bg-[#FAF8F5] border border-charcoal/10 space-y-2">
-                        <div class="font-bold text-xs text-charcoal">Card 4: Prep Kits &amp; Tools</div>
-                        <input type="text" name="ritual4_title" value="{{ old('ritual4_title', $rituals['card4_title'] ?? 'Artisan Prep Kits') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs font-bold">
-                        <input type="text" name="ritual4_sub" value="{{ old('ritual4_sub', $rituals['card4_sub'] ?? 'Flawless application tools') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs">
-                        <input type="text" name="ritual4_img" value="{{ old('ritual4_img', $rituals['card4_img'] ?? 'https://images.unsplash.com/photo-1599458356314-91ca8ca575c5?auto=format&fit=crop&w=600&q=80') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs">
-                    </div>
-                </div>
-
-                <div class="p-5 rounded-2xl bg-[#FAF8F5] border border-charcoal/10 space-y-3">
-                    <div class="font-serif text-base font-bold text-charcoal">Editorial Quote &amp; Story Box</div>
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-charcoal/70">Featured Quote</label>
-                        <input type="text" name="editorial_quote" value="{{ old('editorial_quote', $rituals['editorial_quote'] ?? 'Nails are the period at the end of the sentence. They complete the look.') }}" class="w-full px-3 py-2 rounded-xl bg-white border border-charcoal/15 text-xs italic font-serif">
-                    </div>
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-charcoal/70">Editorial Narrative</label>
-                        <textarea name="editorial_desc" rows="3" class="w-full px-3 py-2 rounded-xl bg-white border border-charcoal/15 text-xs leading-relaxed">{{ old('editorial_desc', $rituals['editorial_desc'] ?? 'True beauty begins with nail health...') }}</textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 4: TIMELESS PHILOSOPHY -->
-        <div x-show="activeTab === 'philosophy'" class="space-y-6">
-            <div class="p-6 sm:p-8 rounded-3xl bg-white border border-charcoal/10 space-y-6 shadow-2xs">
-                <h2 class="font-serif text-xl font-bold text-charcoal border-b border-charcoal/10 pb-3">Haute Atelier Philosophy Section</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-charcoal/70">Badge Label</label>
-                        <input type="text" name="phil_badge" value="{{ old('phil_badge', $philosophy['badge'] ?? 'HAUTE ATELIER PHILOSOPHY') }}" class="w-full px-3 py-2 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-bold">
-                    </div>
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-charcoal/70">Section Title</label>
-                        <input type="text" name="phil_title" value="{{ old('phil_title', $philosophy['title'] ?? 'Timeless Nail Care. Ageless Beauty Starts Here.') }}" class="w-full px-3 py-2 rounded-xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-serif font-bold">
-                    </div>
-                </div>
-                <div class="space-y-4 pt-3 border-t border-charcoal/10">
-                    <div class="p-4 rounded-2xl bg-[#FAF8F5] border border-charcoal/10 space-y-2">
-                        <input type="text" name="phil_p1_title" value="{{ old('phil_p1_title', $philosophy['p1_title'] ?? '100% Non-Toxic & HEMA-Free') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs font-bold">
-                        <textarea name="phil_p1_desc" rows="2" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs">{{ old('phil_p1_desc', $philosophy['p1_desc'] ?? 'Pure formulas free from harsh allergens...') }}</textarea>
-                    </div>
-                    <div class="p-4 rounded-2xl bg-[#FAF8F5] border border-charcoal/10 space-y-2">
-                        <input type="text" name="phil_p2_title" value="{{ old('phil_p2_title', $philosophy['p2_title'] ?? 'Reusable Up to 5+ Times') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs font-bold">
-                        <textarea name="phil_p2_desc" rows="2" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs">{{ old('phil_p2_desc', $philosophy['p2_desc'] ?? 'Crafted with premium salon resins...') }}</textarea>
-                    </div>
-                    <div class="p-4 rounded-2xl bg-[#FAF8F5] border border-charcoal/10 space-y-2">
-                        <input type="text" name="phil_p3_title" value="{{ old('phil_p3_title', $philosophy['p3_title'] ?? 'Bespoke Sizing Precision') }}" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs font-bold">
-                        <textarea name="phil_p3_desc" rows="2" class="w-full px-3 py-1.5 rounded-xl bg-white border border-charcoal/15 text-xs">{{ old('phil_p3_desc', $philosophy['p3_desc'] ?? 'Available in 5 tailored size curves...') }}</textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 5: INSTAGRAM -->
+        <!-- ════════════════ TAB 5: INSTAGRAM COMMUNITY ════════════════ -->
         <div x-show="activeTab === 'instagram'" class="space-y-6">
-            <div class="p-6 sm:p-8 rounded-3xl bg-white border border-charcoal/10 space-y-5 shadow-2xs">
-                <h2 class="font-serif text-xl font-bold text-charcoal border-b border-charcoal/10 pb-3">Instagram &amp; Global Community Showcase</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div class="p-6 sm:p-8 rounded-3xl bg-white border border-charcoal/15 space-y-6 shadow-2xs">
+                <div class="border-b border-charcoal/10 pb-3">
+                    <h2 class="font-serif text-xl font-bold text-charcoal">Official Instagram Showcase (@recolte_gelpolish)</h2>
+                    <p class="text-[11px] text-charcoal/60">Configure community headline, handle link, follow button, and the 5 real Instagram gallery cards.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="space-y-1.5">
-                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Badge Label</label>
-                        <input type="text" name="insta_badge" value="{{ old('insta_badge', $instagram['badge'] ?? 'PARISIAN NAIL COMMUNITY') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-bold">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Badge Tag</label>
+                        <input type="text" name="insta_badge" value="{{ old('insta_badge', $instagram['badge'] ?? 'Atelier Community') }}" required class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-bold text-charcoal">
                     </div>
+
                     <div class="space-y-1.5">
                         <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Section Title</label>
-                        <input type="text" name="insta_title" value="{{ old('insta_title', $instagram['title'] ?? 'Join Our Global Atelier Gallery') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-serif font-bold">
+                        <input type="text" name="insta_title" value="{{ old('insta_title', $instagram['title'] ?? 'Join Our Nail Community') }}" required class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-sm font-serif font-bold text-charcoal">
                     </div>
+
                     <div class="space-y-1.5 sm:col-span-2">
-                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Subtitle</label>
-                        <input type="text" name="insta_subtitle" value="{{ old('insta_subtitle', $instagram['subtitle'] ?? 'Tag @recolte_gelpolish on Instagram with your Récolte manicures to be featured.') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Subtitle Paragraph</label>
+                        <textarea name="insta_subtitle" rows="2" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs leading-relaxed text-charcoal">{{ old('insta_subtitle', $instagram['subtitle'] ?? 'Follow @recolte_gelpolish for seasonal nail art tutorials, custom press-on launches, and salon-grade transformations.') }}</textarea>
                     </div>
+
                     <div class="space-y-1.5">
-                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Button Label</label>
-                        <input type="text" name="insta_btn_text" value="{{ old('insta_btn_text', $instagram['btn_text'] ?? 'Follow @recolte_gelpolish on Instagram ↗') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-bold">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Instagram Handle</label>
+                        <input type="text" name="insta_handle" value="{{ old('insta_handle', $instagram['handle'] ?? '@recolte_gelpolish') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-mono text-charcoal">
                     </div>
+
                     <div class="space-y-1.5">
-                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Button Link Target</label>
-                        <input type="text" name="insta_btn_url" value="{{ old('insta_btn_url', $instagram['btn_url'] ?? 'https://www.instagram.com/recolte_gelpolish/') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-mono">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Profile Target URL</label>
+                        <input type="text" name="insta_profile_url" value="{{ old('insta_profile_url', $instagram['profile_url'] ?? 'https://www.instagram.com/recolte_gelpolish/') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-mono">
+                    </div>
+
+                    <div class="space-y-1.5 sm:col-span-2">
+                        <label class="text-xs font-bold uppercase tracking-wider text-charcoal/70 block">Follow Button Text</label>
+                        <input type="text" name="insta_btn_text" value="{{ old('insta_btn_text', $instagram['btn_text'] ?? 'Follow @recolte_gelpolish') }}" class="w-full px-4 py-2.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/15 text-xs font-bold text-charcoal">
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="flex items-center justify-between pt-4 border-t border-charcoal/10">
-            <div class="text-xs text-charcoal/60">
-                All changes save directly to the <span class="font-mono font-bold text-rose-dark">recoltenails_web_cms</span> database.
+                <!-- 5 Instagram Gallery Posts -->
+                @php $posts = $instagram['posts'] ?? []; @endphp
+                <div class="pt-4 border-t border-charcoal/10 space-y-4">
+                    <h3 class="font-serif text-base font-bold text-charcoal">5 Gallery Photo Posts</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                        @for($i = 0; $i < 5; $i++)
+                        <div class="p-3.5 rounded-2xl bg-[#FAF8F5] border border-charcoal/10 space-y-3 flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <span class="font-serif text-xs font-bold text-[#A33B47] block">Post {{ $i + 1 }}</span>
+                                <div class="w-full aspect-square rounded-xl overflow-hidden bg-stone-100 border border-charcoal/15 shadow-2xs">
+                                    <img :src="insta{{ $i }}" class="w-full h-full object-cover" alt="Post {{ $i + 1 }}" />
+                                </div>
+                                <input 
+                                    type="file" 
+                                    name="insta_{{ $i }}_image_file" 
+                                    accept="image/*"
+                                    @change="handleFile($event, 'insta{{ $i }}')"
+                                    class="w-full text-[10px] text-charcoal file:mr-1 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-bold file:bg-[#171412] file:text-white cursor-pointer"
+                                />
+                                <input 
+                                    type="text" 
+                                    name="insta_{{ $i }}_image" 
+                                    x-model="insta{{ $i }}"
+                                    placeholder="Image URL..." 
+                                    class="w-full px-2 py-1 rounded-lg bg-white border border-charcoal/15 text-[10px] font-mono"
+                                />
+                            </div>
+                            <div class="space-y-1 pt-1 border-t border-charcoal/10">
+                                <label class="text-[9px] font-bold uppercase text-charcoal/60">Alt / Title</label>
+                                <input type="text" name="insta_{{ $i }}_alt" value="{{ old("insta_{$i}_alt", $posts[$i]['alt'] ?? "Post " . ($i + 1)) }}" class="w-full px-2 py-1 rounded-lg bg-white border border-charcoal/15 text-[10px]">
+                            </div>
+                        </div>
+                        @endfor
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-charcoal/10 flex justify-end">
+                    <button type="submit" class="px-6 py-2.5 rounded-full bg-[#171412] hover:bg-black text-white text-xs font-bold tracking-wider uppercase transition-all shadow-sm">
+                        Save Instagram Changes 💾
+                    </button>
+                </div>
             </div>
-            <button type="submit" class="px-8 py-3.5 rounded-2xl bg-rose-dark hover:bg-[#852C37] text-white text-xs sm:text-sm font-bold shadow-md transition-all hover:scale-105 flex items-center gap-2 cursor-pointer" style="background-color: #A33B47; color: #FFFFFF;">
-                <span>Save All Homepage Content</span>
-                <span>→</span>
-            </button>
         </div>
 
     </form>

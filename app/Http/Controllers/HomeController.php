@@ -47,12 +47,63 @@ class HomeController extends Controller
             ->orderBy('sort_order', 'asc')
             ->get();
 
-        // Dynamic Page Contents
-        $hero = PageContent::getSection('home', 'hero', []);
-        $pillars = PageContent::getSection('home', 'pillars', []);
-        $rituals = PageContent::getSection('home', 'rituals', []);
-        $philosophy = PageContent::getSection('home', 'philosophy', []);
-        $instagram = PageContent::getSection('home', 'instagram', []);
+        // Dynamic Page Contents matching live storefront sections
+        $hero = PageContent::getSection('home', 'hero', [
+            'bg_image' => asset('images/banners/recolte-hd-hero-bg.jpg'),
+            'brand_title' => 'Recolte',
+            'brand_trademark' => '®',
+            'sub_descriptor' => 'NAILS • BEAUTY • YOU',
+            'script_line' => 'Create • Express • Shine',
+            'subtitle' => 'Premium Nail Products for Professionals & Enthusiasts',
+            'cta_text' => 'SHOP NOW',
+            'cta_url' => '/products',
+        ]);
+
+        $trust_strip = PageContent::getSection('home', 'trust_strip', [
+            'items' => [
+                ['title' => 'Premium Quality', 'sub' => 'Products', 'icon' => 'diamond'],
+                ['title' => 'Safe & Skin Friendly', 'sub' => 'Formulas', 'icon' => 'shield'],
+                ['title' => 'Fast & Reliable', 'sub' => 'Shipping', 'icon' => 'truck'],
+                ['title' => 'Expert Support', 'sub' => 'Always', 'icon' => 'support'],
+                ['title' => 'Trusted by', 'sub' => 'Professionals', 'icon' => 'star'],
+            ]
+        ]);
+
+        $categories_section = PageContent::getSection('home', 'categories_section', [
+            'title' => 'Shop by Category',
+            'subtitle' => 'Everything you need for perfect nails',
+            'categories' => [
+                ['title' => 'Gel Polish', 'btn_text' => 'Shop Now', 'link' => '/products?category=Gel+Polishes', 'image' => asset('images/products/recolte-cat-gel-polish.jpg')],
+                ['title' => 'Top Coat', 'btn_text' => 'Shop Now', 'link' => '/products?category=Nail+Care+%26+Elixirs', 'image' => asset('images/products/recolte-cat-top-coat.jpg')],
+                ['title' => 'Painting Gel', 'btn_text' => 'Shop Now', 'link' => '/products?category=Nail+Art+%26+Accents', 'image' => asset('images/products/recolte-cat-painting-gel.jpg')],
+                ['title' => 'Sets & Kits', 'btn_text' => 'Shop Now', 'link' => '/products?category=Nail+Tools+%26+Kits', 'image' => asset('images/products/recolte-cat-nail-kits.jpg')],
+            ]
+        ]);
+
+        $showcase = PageContent::getSection('home', 'showcase', [
+            'title_line1' => 'Colors that',
+            'title_line2' => 'cultivate confidence',
+            'description' => 'Dedicated to salon-grade perfection, Japanese gel formulas, and effortless everyday elegance.',
+            'btn_text' => 'Find more',
+            'btn_url' => '/products',
+            'image' => asset('images/banners/recolte-colors-showcase.jpg'),
+        ]);
+
+        $instagram = PageContent::getSection('home', 'instagram', [
+            'badge' => 'Atelier Community',
+            'title' => 'Join Our Nail Community',
+            'subtitle' => 'Follow @recolte_gelpolish for seasonal nail art tutorials, custom press-on launches, and salon-grade transformations.',
+            'handle' => '@recolte_gelpolish',
+            'profile_url' => 'https://www.instagram.com/recolte_gelpolish/',
+            'btn_text' => 'Follow @recolte_gelpolish',
+            'posts' => [
+                ['image' => asset('images/products/recolte-cat-gel-polish.jpg'), 'alt' => 'Récolte Gel Polish Collection', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
+                ['image' => asset('images/banners/recolte-acrylic-banner.jpg'), 'alt' => 'Récolte Haute Acrylic & Gel Couture', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
+                ['image' => asset('images/products/recolte-cat-top-coat.jpg'), 'alt' => 'Récolte Rose Gold Finish', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
+                ['image' => asset('images/products/recolte-cat-painting-gel.jpg'), 'alt' => 'Récolte Painting Gel Glitter', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
+                ['image' => asset('images/products/recolte-cat-nail-kits.jpg'), 'alt' => 'Récolte Atelier Arch Sets', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
+            ]
+        ]);
 
         $settings = SiteSetting::all()->pluck('value', 'key');
 
@@ -63,9 +114,9 @@ class HomeController extends Controller
             'pressOnSets',
             'nailCare',
             'hero',
-            'pillars',
-            'rituals',
-            'philosophy',
+            'trust_strip',
+            'categories_section',
+            'showcase',
             'instagram',
             'settings'
         ));
