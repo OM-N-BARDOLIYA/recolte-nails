@@ -4,55 +4,211 @@
 
 @section('content')
 
-    <!-- ── 1. 100% FULL HORIZONTAL HIGH-DEFINITION HERO BANNER ── -->
-    <section class="w-full relative overflow-hidden bg-[#F5E6DE] select-none m-0 p-0 block leading-none">
-        <!-- High-Resolution Photography Background with Increased Height -->
-        <div
-            class="relative w-full aspect-[21/9] sm:aspect-[21/8] min-h-[340px] sm:min-h-[420px] lg:min-h-[500px] max-h-[560px] flex items-center justify-center py-10 sm:py-14 lg:py-16">
+    <!-- ── 1. 100% FULL HORIZONTAL HIGH-DEFINITION HERO BANNER SLIDER ── -->
+    @php
+        $heroSlides = !empty($hero['slides']) && is_array($hero['slides']) ? $hero['slides'] : [
+            [
+                'bg_image' => asset('images/banners/hero-slide-main-recolte.png'),
+                'sub_descriptor' => 'NAILS • BEAUTY • YOU',
+                'script_line' => 'Create • Express • Shine',
+                'subtitle' => 'Premium Nail Products for Professionals & Enthusiasts',
+                'cta_text' => 'SHOP NOW',
+                'cta_url' => '/products',
+            ],
+            [
+                'bg_image' => asset('images/banners/hero-slide-spotlight-96.png'),
+                'sub_descriptor' => 'SPOTLIGHT ATELIER • 96 SALON SHADES',
+                'script_line' => 'Curated Color Harmony',
+                'subtitle' => '96 Master Palette Gel Polish Shades Engineered for Runway Manicures & Salon Artists',
+                'cta_text' => 'EXPLORE 96 PALETTES',
+                'cta_url' => '/products?category=Gel+Polishes',
+            ],
+            [
+                'bg_image' => asset('images/banners/hero-slide-dust-collector.png'),
+                'sub_descriptor' => 'PROFESSIONAL SALON TECH • AIR PURITY',
+                'script_line' => 'Pure Salon Comfort',
+                'subtitle' => 'High-Powered Turbo Ventilation & Micro-Filtration for a Clean, Dust-Free Atelier Environment',
+                'cta_text' => 'DISCOVER EQUIPMENT',
+                'cta_url' => '/products?category=Nail+Tools+%26+Kits',
+            ],
+            [
+                'bg_image' => asset('images/banners/hero-slide-uv-led-lamp.png'),
+                'sub_descriptor' => 'ADVANCED UV/LED TECH • DUAL OPTICS',
+                'script_line' => 'Fast & Flawless Curing',
+                'subtitle' => 'Salon-Grade Smart Timing & 120s Sensor Curing for Mirror-Shine Durability and Zero Heat Spikes',
+                'cta_text' => 'SHOP UV/LED LAMPS',
+                'cta_url' => '/products?category=Nail+Tools+%26+Kits',
+            ],
+            [
+                'bg_image' => asset('images/banners/hero-slide-cat-eye-60.png'),
+                'sub_descriptor' => 'VELVET MAGNETIC COUTURE • 60 SHADES',
+                'script_line' => 'Chameleon Magnetic Depth',
+                'subtitle' => '60 Dimensional Cat-Eye Magnetic Gels with Pearlescent Beams & Multi-Angle Velvet Reflections',
+                'cta_text' => 'SHOP CAT EYE GELS',
+                'cta_url' => '/products?category=Nail+Art+%26+Accents',
+            ],
+        ];
+    @endphp
 
-            <img src="{{ !empty($hero['bg_image']) ? (str_contains($hero['bg_image'], '?') ? $hero['bg_image'] : $hero['bg_image'] . '?v=' . (file_exists(public_path('images/banners/recolte-hd-hero-bg.jpg')) ? filemtime(public_path('images/banners/recolte-hd-hero-bg.jpg')) : time())) : asset('images/banners/recolte-hd-hero-bg.jpg?v=' . time()) }}" alt="Recolte Nails - Haute Nail Couture & Care"
-                class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none" loading="eager" />
+    <section 
+        x-data="{
+            current: 0,
+            total: {{ count($heroSlides) }},
+            paused: false,
+            timer: null,
+            touchStartX: 0,
+            touchEndX: 0,
+            init() {
+                this.startTimer();
+            },
+            startTimer() {
+                this.timer = setInterval(() => {
+                    if (!this.paused) {
+                        this.next();
+                    }
+                }, 5500);
+            },
+            resetTimer() {
+                if (this.timer) clearInterval(this.timer);
+                this.startTimer();
+            },
+            next() {
+                this.current = (this.current + 1) % this.total;
+            },
+            prev() {
+                this.current = (this.current - 1 + this.total) % this.total;
+            },
+            goTo(index) {
+                this.current = index;
+                this.resetTimer();
+            },
+            handleTouchStart(e) {
+                this.touchStartX = e.changedTouches[0].screenX;
+            },
+            handleTouchEnd(e) {
+                this.touchEndX = e.changedTouches[0].screenX;
+                if (this.touchStartX - this.touchEndX > 45) {
+                    this.next();
+                    this.resetTimer();
+                } else if (this.touchEndX - this.touchStartX > 45) {
+                    this.prev();
+                    this.resetTimer();
+                }
+            }
+        }"
+        @mouseenter="paused = true"
+        @mouseleave="paused = false"
+        @touchstart.passive="handleTouchStart($event)"
+        @touchend.passive="handleTouchEnd($event)"
+        class="w-full relative overflow-hidden bg-[#F5E6DE] select-none m-0 p-0 block leading-none group"
+    >
+        <!-- High-Resolution Photography Background with Proportional Height -->
+        <div class="relative w-full aspect-[21/9] sm:aspect-[21/8] min-h-[340px] sm:min-h-[420px] lg:min-h-[500px] max-h-[560px] flex items-center justify-center py-10 sm:py-14 lg:py-16 overflow-hidden">
 
-            <!-- Subtle Center Focus Overlay for crystal-clear readability -->
-            <div class="absolute inset-0 bg-white/10 pointer-events-none"></div>
+            @foreach($heroSlides as $index => $slide)
+            <!-- Slide {{ $index + 1 }} -->
+            <div 
+                class="absolute inset-0 w-full h-full flex items-center justify-center py-10 sm:py-14 lg:py-16 transition-opacity duration-1000 ease-in-out"
+                :class="current === {{ $index }} ? 'opacity-100 pointer-events-auto z-10' : 'opacity-0 pointer-events-none z-0'"
+            >
+                <!-- Background Image with smooth subtle Ken Burns depth effect -->
+                @php
+                    $slideImg = !empty($slide['bg_image']) ? $slide['bg_image'] : asset('images/banners/hero-slide-spotlight-96.png');
+                    $versionStr = str_contains($slideImg, '?') ? '' : '?v=' . time();
+                @endphp
+                <img 
+                    src="{{ $slideImg . $versionStr }}" 
+                    alt="Récolte Nails - {{ $slide['sub_descriptor'] ?? 'Haute Nail Couture & Care' }}"
+                    class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none transition-transform duration-[6500ms] ease-out"
+                    :class="current === {{ $index }} ? 'scale-100' : 'scale-105'"
+                    loading="{{ $index === 0 ? 'eager' : 'lazy' }}" 
+                />
 
-            <!-- Vector Sharp Centerpiece Typography & Interactive CTA -->
-            <div class="relative z-10 text-center px-4 sm:px-6 max-w-xl mx-auto flex flex-col items-center">
+                @if(empty($slide['is_image_banner']))
+                    <!-- Subtle Center Focus Overlay for crystal-clear readability -->
+                    <div class="absolute inset-0 bg-white/10 pointer-events-none"></div>
 
-                <!-- Company Actual Logo from Navbar -->
-                <div class="mb-2 sm:mb-3">
-                    <img 
-                        src="{{ asset('images/logo.png') }}?v={{ time() }}" 
-                        alt="Récolte Nails Logo" 
-                        class="h-14 sm:h-20 lg:h-24 w-auto object-contain select-none drop-shadow-xs" 
-                    />
-                </div>
+                    <!-- Vector Sharp Centerpiece Typography & Interactive CTA (Exact alignment maintained) -->
+                    <div 
+                        class="relative z-10 text-center px-4 sm:px-6 max-w-xl mx-auto flex flex-col items-center transition-all duration-700 delay-150 ease-out"
+                        :class="current === {{ $index }} ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'"
+                    >
 
-                <!-- Brand Sub-Descriptor -->
-                <p
-                    class="text-[9px] sm:text-xs lg:text-[12px] tracking-[0.35em] text-[#333333] font-medium uppercase mb-2 sm:mb-2.5">
-                    {{ $hero['sub_descriptor'] ?? 'NAILS • BEAUTY • YOU' }}
-                </p>
+                        <!-- Company Actual Logo from Navbar -->
+                        <div class="mb-2 sm:mb-3">
+                            <img 
+                                src="{{ asset('images/logo.png') }}?v={{ time() }}" 
+                                alt="Récolte Nails Logo" 
+                                class="h-14 sm:h-20 lg:h-24 w-auto object-contain select-none drop-shadow-xs" 
+                            />
+                        </div>
 
-                <!-- Script Accent Line -->
-                <p
-                    class="font-['Great_Vibes',cursive] text-2xl sm:text-4xl lg:text-[42px] text-[#111111] font-normal leading-tight mb-2 sm:mb-3 transform -rotate-1">
-                    {{ $hero['script_line'] ?? 'Create • Express • Shine' }}
-                </p>
+                        <!-- Brand Sub-Descriptor -->
+                        <p class="text-[9px] sm:text-xs lg:text-[12px] tracking-[0.35em] text-[#333333] font-medium uppercase mb-2 sm:mb-2.5">
+                            {{ $slide['sub_descriptor'] ?? 'NAILS • BEAUTY • YOU' }}
+                        </p>
 
-                <!-- Subtitle Tagline -->
-                <p
-                    class="text-xs sm:text-sm lg:text-[15px] font-medium text-[#444444] tracking-wide max-w-md mb-4 sm:mb-6 leading-relaxed">
-                    {{ $hero['subtitle'] ?? 'Premium Nail Products for Professionals & Enthusiasts' }}
-                </p>
+                        <!-- Script Accent Line -->
+                        <p class="font-['Great_Vibes',cursive] text-2xl sm:text-4xl lg:text-[42px] text-[#111111] font-normal leading-tight mb-2 sm:mb-3 transform -rotate-1">
+                            {!! $slide['script_line'] ?? 'Create • Express • Shine' !!}
+                        </p>
 
-                <!-- Solid Black SHOP NOW Button -->
-                <a href="{{ $hero['cta_url'] ?? route('products.index') }}"
-                    class="inline-flex items-center gap-2.5 px-8 sm:px-10 py-2.5 sm:py-3.5 bg-[#111111] hover:bg-black text-white text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 shadow-md hover:shadow-lg">
-                    <span>{{ $hero['cta_text'] ?? 'SHOP NOW' }}</span>
-                    <span class="text-sm">→</span>
-                </a>
+                        <!-- Subtitle Tagline -->
+                        <p class="text-xs sm:text-sm lg:text-[15px] font-medium text-[#444444] tracking-wide max-w-md mb-4 sm:mb-6 leading-relaxed">
+                            {{ $slide['subtitle'] ?? 'Premium Nail Products for Professionals & Enthusiasts' }}
+                        </p>
 
+                        <!-- Solid Black SHOP NOW Button -->
+                        <a href="{{ $slide['cta_url'] ?? route('products.index') }}"
+                            class="inline-flex items-center gap-2.5 px-8 sm:px-10 py-2.5 sm:py-3.5 bg-[#111111] hover:bg-black text-white text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 shadow-md hover:shadow-lg">
+                            <span>{{ $slide['cta_text'] ?? 'SHOP NOW' }}</span>
+                            <span class="text-sm">→</span>
+                        </a>
+
+                    </div>
+                @else
+                    <!-- Clean Clickable Link for complete Banner Artwork with embedded CTA -->
+                    <a href="{{ $slide['cta_url'] ?? route('products.index') }}" class="absolute inset-0 z-10 block" aria-label="Shop Now">
+                        <span class="sr-only">{{ $slide['cta_text'] ?? 'SHOP NOW' }}</span>
+                    </a>
+                @endif
+            </div>
+            @endforeach
+
+            <!-- Slider Arrows (Previous & Next) -->
+            <button 
+                type="button" 
+                @click="prev(); resetTimer();"
+                aria-label="Previous slide"
+                class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/70 hover:bg-white text-[#111111] backdrop-blur-md border border-white/80 shadow-sm hover:shadow-md flex items-center justify-center transition-all duration-300 opacity-60 group-hover:opacity-100 hover:scale-105 active:scale-95 cursor-pointer"
+            >
+                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
+            <button 
+                type="button" 
+                @click="next(); resetTimer();"
+                aria-label="Next slide"
+                class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/70 hover:bg-white text-[#111111] backdrop-blur-md border border-white/80 shadow-sm hover:shadow-md flex items-center justify-center transition-all duration-300 opacity-60 group-hover:opacity-100 hover:scale-105 active:scale-95 cursor-pointer"
+            >
+                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+
+            <!-- Slider Navigation Indicators (Luxury Pill Progress Dots) -->
+            <div class="absolute bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+                @foreach($heroSlides as $idx => $s)
+                <button 
+                    type="button" 
+                    @click="goTo({{ $idx }})"
+                    aria-label="Go to slide {{ $idx + 1 }}"
+                    class="h-1.5 sm:h-2 rounded-full transition-all duration-500 cursor-pointer"
+                    :class="current === {{ $idx }} ? 'w-8 sm:w-10 bg-[#111111] shadow-xs' : 'w-2 bg-[#111111]/30 hover:bg-[#111111]/60'"
+                ></button>
+                @endforeach
             </div>
 
         </div>
@@ -162,10 +318,10 @@
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
                 @php
                     $defaultCats = [
-                        ['title' => 'Gel Polish', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Gel Polishes']), 'image' => asset('images/products/recolte-cat-gel-polish.jpg')],
-                        ['title' => 'Top Coat', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Nail Care & Elixirs']), 'image' => asset('images/products/recolte-cat-top-coat.jpg')],
-                        ['title' => 'Painting Gel', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Nail Art & Accents']), 'image' => asset('images/products/recolte-cat-painting-gel.jpg')],
-                        ['title' => 'Sets & Kits', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Nail Tools & Kits']), 'image' => asset('images/products/recolte-cat-nail-kits.jpg')],
+                        ['title' => 'Shades', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Gel Polishes']), 'image' => asset('images/products/recolte-cat-nail-kits.jpg')],
+                        ['title' => 'UV Lamps', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Nail Tools & Kits']), 'image' => asset('images/products/recolte-cat-uv-lamps.jpg')],
+                        ['title' => 'Builder Gel', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Builder Gel']), 'image' => asset('images/products/recolte-cat-builder-gel.jpg')],
+                        ['title' => 'Tips', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Press-On Sets']), 'image' => asset('images/products/recolte-cat-tips.jpg')],
                     ];
                     $cats = $categories_section['categories'] ?? $defaultCats;
                 @endphp
@@ -176,7 +332,7 @@
                     $catTitle = !empty($cat['title']) ? $cat['title'] : ($defCat['title'] ?? 'Category');
                     $catBtn = !empty($cat['btn_text']) ? $cat['btn_text'] : 'Shop Now';
                     $catLink = !empty($cat['link']) ? $cat['link'] : ($defCat['link'] ?? route('products.index'));
-                    $catImg = !empty($cat['image']) ? $cat['image'] : ($defCat['image'] ?? asset('images/products/recolte-cat-gel-polish.jpg'));
+                    $catImg = !empty($cat['image']) ? $cat['image'] : ($defCat['image'] ?? asset('images/products/recolte-cat-nail-kits.jpg'));
                 @endphp
                 <a href="{{ $catLink }}"
                     class="group flex flex-col items-center text-center transition-all duration-300">
@@ -251,8 +407,8 @@
                 <img 
                     src="{{ $showcaseFinalUrl }}" 
                     alt="Colors that cultivate confidence - Récolte Professional Gel Polish" 
-                    class="h-full w-full object-cover object-[center_65%]"
-                    style="object-position: center 65%;"
+                    class="h-full w-full object-cover object-bottom"
+                    style="object-position: center bottom;"
                     loading="lazy"
                 />
             </div>
@@ -298,27 +454,76 @@
                     </div>
                 </div>
 
-                <!-- Authentic Récolte Community Grid Posts -->
+                <!-- Authentic Récolte Community Grid Video Reels -->
                 @php
                     $instaPosts = $instagram['posts'] ?? [
-                        ['image' => asset('images/products/recolte-cat-top-coat.jpg'), 'alt' => 'Récolte Rose Gold Finish', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
-                        ['image' => asset('images/products/recolte-cat-painting-gel.jpg'), 'alt' => 'Récolte Painting Gel Glitter', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
-                        ['image' => asset('images/products/recolte-cat-nail-kits.jpg'), 'alt' => 'Récolte Atelier Arch Sets', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
+                        [
+                            'video' => asset('videos/community/community-reel-1.mp4'),
+                            'poster' => asset('videos/community/community-reel-1-poster.jpg'),
+                            'image' => asset('videos/community/community-reel-1-poster.jpg'),
+                            'alt' => 'Récolte Salon Gel Application',
+                            'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                        ],
+                        [
+                            'video' => asset('videos/community/community-reel-2.mp4'),
+                            'poster' => asset('videos/community/community-reel-2-poster.jpg'),
+                            'image' => asset('videos/community/community-reel-2-poster.jpg'),
+                            'alt' => 'Crimson & Gold Atelier Waves',
+                            'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                        ],
+                        [
+                            'video' => asset('videos/community/community-reel-3.mp4'),
+                            'poster' => asset('videos/community/community-reel-3-poster.jpg'),
+                            'image' => asset('videos/community/community-reel-3-poster.jpg'),
+                            'alt' => 'Rose Gold Leopard Couture Art',
+                            'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                        ],
                     ];
                     $gridCols = count($instaPosts) <= 3 ? 'lg:grid-cols-3' : (count($instaPosts) == 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-5');
                 @endphp
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 {{ $gridCols }} gap-4 sm:gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 {{ $gridCols }} gap-5 sm:gap-6">
                     @foreach($instaPosts as $post)
                     <a href="{{ $post['link'] ?? 'https://www.instagram.com/recolte_gelpolish/' }}" target="_blank"
-                        class="group relative overflow-hidden aspect-square bg-[#FAF5F0] border border-[#ECE6DE] shadow-2xs">
-                        <img src="{{ $post['image'] }}"
-                            alt="{{ $post['alt'] ?? 'Récolte Instagram Post' }}"
-                            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108" />
+                        class="group relative overflow-hidden aspect-[9/14] sm:aspect-square md:aspect-[9/14] lg:aspect-[9/13] bg-[#171412] border border-[#ECE6DE] shadow-xs hover:shadow-lg transition-all duration-500 block">
+                        
+                        @if(!empty($post['video']))
+                        <video 
+                            src="{{ $post['video'] }}"
+                            @if(!empty($post['poster'])) poster="{{ $post['poster'] }}" @endif
+                            autoplay 
+                            loop 
+                            muted 
+                            playsinline 
+                            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        ></video>
+                        @else
+                        <img src="{{ $post['image'] ?? ($post['poster'] ?? '') }}"
+                            alt="{{ $post['alt'] ?? 'Récolte Community Reel' }}"
+                            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+                        @endif
+
+                        <!-- Reel / Community Badge Indicator -->
+                        <div class="absolute top-3 right-3 z-10">
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider rounded-none border border-white/20 shadow-xs">
+                                <svg class="w-2.5 h-2.5 fill-[#D4AF37]" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                                <span>Reel</span>
+                            </span>
+                        </div>
+
+                        <!-- Post Title / Alt Caption Gradient -->
+                        <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/85 via-black/45 to-transparent z-10 pointer-events-none">
+                            <p class="text-xs font-serif font-medium text-white/95 line-clamp-1">{{ $post['alt'] ?? 'Récolte Community Reel' }}</p>
+                            <span class="text-[10px] text-[#C5A880] font-mono tracking-wider">@recolte_gelpolish</span>
+                        </div>
+
+                        <!-- Interactive Hover Action Overlay -->
                         <div
-                            class="absolute inset-0 bg-[#171412]/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center p-3">
-                            <span class="inline-flex items-center gap-1.5 px-4 py-2 bg-white text-[#171412] text-xs font-bold uppercase tracking-wider shadow-md transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                                <span>View Post</span>
+                            class="absolute inset-0 bg-[#171412]/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center p-3 z-20">
+                            <span class="inline-flex items-center gap-2 px-4 py-2.5 bg-white text-[#171412] text-xs font-bold uppercase tracking-wider shadow-md transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                                <span>Watch Reel</span>
                                 <span>↗</span>
                             </span>
                         </div>

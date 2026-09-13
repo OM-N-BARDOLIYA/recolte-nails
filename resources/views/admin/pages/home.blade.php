@@ -5,15 +5,21 @@
 @section('content')
 <div class="space-y-6 max-w-5xl mx-auto" x-data="{ 
     activeTab: 'hero',
-    heroBg: '{{ $hero['bg_image'] ?? asset('images/banners/recolte-hd-hero-bg.jpg') }}?v={{ file_exists(public_path('images/banners/recolte-hd-hero-bg.jpg')) ? filemtime(public_path('images/banners/recolte-hd-hero-bg.jpg')) : time() }}',
-    cat0: '{{ $categories_section['categories'][0]['image'] ?? asset('images/products/recolte-cat-gel-polish.jpg') }}',
-    cat1: '{{ $categories_section['categories'][1]['image'] ?? asset('images/products/recolte-cat-top-coat.jpg') }}',
-    cat2: '{{ $categories_section['categories'][2]['image'] ?? asset('images/products/recolte-cat-painting-gel.jpg') }}',
-    cat3: '{{ $categories_section['categories'][3]['image'] ?? asset('images/products/recolte-cat-nail-kits.jpg') }}',
+    activeHeroSlide: 0,
+    heroBg: '{{ $hero['bg_image'] ?? asset('images/banners/hero-slide-main-recolte.png') }}',
+    slide0: '{{ $hero['slides'][0]['bg_image'] ?? $hero['bg_image'] ?? asset('images/banners/hero-slide-main-recolte.png') }}',
+    slide1: '{{ $hero['slides'][1]['bg_image'] ?? asset('images/banners/hero-slide-spotlight-96.png') }}',
+    slide2: '{{ $hero['slides'][2]['bg_image'] ?? asset('images/banners/hero-slide-dust-collector.png') }}',
+    slide3: '{{ $hero['slides'][3]['bg_image'] ?? asset('images/banners/hero-slide-uv-led-lamp.png') }}',
+    slide4: '{{ $hero['slides'][4]['bg_image'] ?? asset('images/banners/hero-slide-cat-eye-60.png') }}',
+    cat0: '{{ $categories_section['categories'][0]['image'] ?? asset('images/products/recolte-cat-nail-kits.jpg') }}',
+    cat1: '{{ $categories_section['categories'][1]['image'] ?? asset('images/products/recolte-cat-uv-lamps.jpg') }}',
+    cat2: '{{ $categories_section['categories'][2]['image'] ?? asset('images/products/recolte-cat-builder-gel.jpg') }}',
+    cat3: '{{ $categories_section['categories'][3]['image'] ?? asset('images/products/recolte-cat-tips.jpg') }}',
     showcaseImg: '{{ $showcase['image'] ?? asset('images/banners/recolte-colors-showcase.jpg') }}?v={{ file_exists(public_path('images/banners/recolte-colors-showcase.jpg')) ? filemtime(public_path('images/banners/recolte-colors-showcase.jpg')) : time() }}',
-    insta0: '{{ $instagram['posts'][0]['image'] ?? asset('images/products/recolte-cat-top-coat.jpg') }}',
-    insta1: '{{ $instagram['posts'][1]['image'] ?? asset('images/products/recolte-cat-painting-gel.jpg') }}',
-    insta2: '{{ $instagram['posts'][2]['image'] ?? asset('images/products/recolte-cat-nail-kits.jpg') }}',
+    video0: '{{ $instagram['posts'][0]['video'] ?? asset('videos/community/community-reel-1.mp4') }}',
+    video1: '{{ $instagram['posts'][1]['video'] ?? asset('videos/community/community-reel-2.mp4') }}',
+    video2: '{{ $instagram['posts'][2]['video'] ?? asset('videos/community/community-reel-3.mp4') }}',
     handleFile(e, key) {
         const file = e.target.files[0];
         if (file) {
@@ -91,101 +97,189 @@
     <form method="POST" action="{{ route('admin.pages.home.update') }}" enctype="multipart/form-data" class="space-y-8">
         @csrf
 
-        <!-- ════════════════ TAB 1: HERO BANNER ════════════════ -->
+        <!-- ════════════════ TAB 1: HERO BANNER (5-SLIDE CAROUSEL) ════════════════ -->
         <div x-show="activeTab === 'hero'" class="space-y-6">
             <div class="p-6 sm:p-8 rounded-none bg-white border border-[#ECE6DE] space-y-6 shadow-2xs">
-                <div class="border-b border-[#ECE6DE] pb-4">
-                    <h2 class="font-serif text-xl font-medium text-[#171412]">Full-Width High-Definition Hero Banner</h2>
-                    <p class="text-xs text-[#6A625A] mt-1 font-light">Configure the centerpiece hero banner background photography, brand titles, cursive accent, and primary CTA button.</p>
+                <div class="border-b border-[#ECE6DE] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                        <h2 class="font-serif text-xl font-medium text-[#171412]">High-Definition Hero Carousel (5 Rotating Slides)</h2>
+                        <p class="text-xs text-[#6A625A] mt-1 font-light">Configure each of the 5 rotating slides, imagery, typography, CTA targets, and the brand emblem synchronized with the live storefront.</p>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAF8F5] border border-[#ECE6DE] text-[10.5px] font-bold text-[#A33B47] uppercase tracking-wider shrink-0">
+                        <span>5 Slides Active</span>
+                    </span>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    
-                    <!-- Background Image File & URL -->
-                    <div class="sm:col-span-2 space-y-3 p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE]">
-                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Hero Background Photography (Full-Width High-Definition)</label>
-                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-                            <div class="md:col-span-8 space-y-2">
-                                <input 
-                                    type="file" 
-                                    name="hero_bg_image_file" 
-                                    accept="image/*"
-                                    @change="handleFile($event, 'heroBg')"
-                                    class="w-full px-3 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] file:mr-3 file:py-1.5 file:px-4 file:rounded-none file:border-0 file:text-xs file:font-bold file:uppercase file:tracking-wider file:bg-[#171412] file:text-white cursor-pointer"
-                                />
-                                <input 
-                                    type="text" 
-                                    name="hero_bg_image" 
-                                    x-model="heroBg"
-                                    placeholder="Or Image URL..." 
-                                    class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-mono text-[#171412] focus:border-[#171412] focus:outline-none"
-                                />
-                                <p class="text-[10px] text-[#8C7A6B]">Recommended ratio: 21:9 or panoramic HD landscape photo. High resolution.</p>
-                            </div>
-                            <div class="md:col-span-4 flex flex-col items-center justify-center p-2 rounded-none bg-white border border-[#ECE6DE] shadow-2xs">
-                                <span class="text-[10px] font-semibold text-[#8C7A6B] uppercase tracking-wider mb-1.5">Live Preview</span>
-                                <div class="w-full aspect-[21/9] rounded-none overflow-hidden bg-stone-100 border border-[#ECE6DE]">
-                                    <img :src="heroBg" class="w-full h-full object-cover" alt="Hero Preview" />
-                                </div>
-                            </div>
-                        </div>
+                <!-- Brand Emblem & Identity (Global for Hero) -->
+                <div class="p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] space-y-4">
+                    <div class="flex items-center justify-between border-b border-[#ECE6DE] pb-2">
+                        <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#8C7A6B]">Core Brand Identity Emblem</span>
+                        <span class="text-[10px] text-[#A33B47] font-semibold">Shared Across All Slides</span>
                     </div>
-
-                    <!-- Hero Centerpiece Brand Emblem Note & Preview -->
-                    <div class="sm:col-span-2 p-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                        <div class="space-y-0.5">
-                            <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Hero Centerpiece Brand Emblem</label>
-                            <p class="text-xs text-[#6A625A]">The hero banner features the official company logo identical to the navigation header.</p>
-                        </div>
-                        <div class="px-4 py-2 bg-white border border-[#ECE6DE] shadow-2xs shrink-0">
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                        <div class="sm:col-span-4 flex items-center gap-3 p-3 bg-white border border-[#ECE6DE] shadow-2xs">
                             <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Logo Preview" class="h-8 w-auto object-contain">
+                            <div>
+                                <p class="text-xs font-serif font-bold text-[#171412]">Récolte Atelier</p>
+                                <p class="text-[10px] text-[#8C7A6B]">Official Brand Mark</p>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-5 space-y-1">
+                            <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Brand Title Text</label>
+                            <input type="text" name="hero_brand_title" value="{{ old('hero_brand_title', $hero['brand_title'] ?? 'Recolte') }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-[#171412] text-sm font-serif font-bold focus:outline-none focus:border-[#171412]">
+                        </div>
+                        <div class="sm:col-span-3 space-y-1">
+                            <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Trademark Mark</label>
+                            <input type="text" name="hero_brand_trademark" value="{{ old('hero_brand_trademark', $hero['brand_trademark'] ?? '®') }}" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-[#171412] text-sm font-serif font-bold focus:outline-none focus:border-[#171412]">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide Navigation Switcher (5 Slides) -->
+                @php
+                    $heroSlides = $hero['slides'] ?? [
+                        [
+                            'bg_image' => asset('images/banners/hero-slide-main-recolte.png'),
+                            'sub_descriptor' => 'NAILS • BEAUTY • YOU',
+                            'script_line' => 'Create • Express • Shine',
+                            'subtitle' => 'Premium Nail Products for Professionals & Enthusiasts',
+                            'cta_text' => 'SHOP NOW',
+                            'cta_url' => '/products',
+                        ],
+                        [
+                            'bg_image' => asset('images/banners/hero-slide-spotlight-96.png'),
+                            'sub_descriptor' => 'SPOTLIGHT ATELIER • 96 SALON SHADES',
+                            'script_line' => 'Curated Color Harmony',
+                            'subtitle' => '96 Master Palette Gel Polish Shades Engineered for Runway Manicures & Salon Artists',
+                            'cta_text' => 'EXPLORE 96 PALETTES',
+                            'cta_url' => '/products?category=Gel+Polishes',
+                        ],
+                        [
+                            'bg_image' => asset('images/banners/hero-slide-dust-collector.png'),
+                            'sub_descriptor' => 'PROFESSIONAL SALON TECH • AIR PURITY',
+                            'script_line' => 'Pure Salon Comfort',
+                            'subtitle' => 'High-Powered Turbo Ventilation & Micro-Filtration for a Clean, Dust-Free Atelier Environment',
+                            'cta_text' => 'DISCOVER EQUIPMENT',
+                            'cta_url' => '/products?category=Nail+Tools+%26+Kits',
+                        ],
+                        [
+                            'bg_image' => asset('images/banners/hero-slide-uv-led-lamp.png'),
+                            'sub_descriptor' => 'ADVANCED UV/LED TECH • DUAL OPTICS',
+                            'script_line' => 'Fast & Flawless Curing',
+                            'subtitle' => 'Salon-Grade Smart Timing & 120s Sensor Curing for Mirror-Shine Durability and Zero Heat Spikes',
+                            'cta_text' => 'SHOP UV/LED LAMPS',
+                            'cta_url' => '/products?category=Nail+Tools+%26+Kits',
+                        ],
+                        [
+                            'bg_image' => asset('images/banners/hero-slide-cat-eye-60.png'),
+                            'sub_descriptor' => 'VELVET MAGNETIC COUTURE • 60 SHADES',
+                            'script_line' => 'Chameleon Magnetic Depth',
+                            'subtitle' => '60 Dimensional Cat-Eye Magnetic Gels with Pearlescent Beams & Multi-Angle Velvet Reflections',
+                            'cta_text' => 'SHOP CAT EYE GELS',
+                            'cta_url' => '/products?category=Nail+Art+%26+Accents',
+                        ],
+                    ];
+                    $slideTitles = [
+                        'Slide 1 (Flagship / Main Banner)',
+                        'Slide 2 (96 Salon Shades Spotlight)',
+                        'Slide 3 (Professional Salon Dust Collector)',
+                        'Slide 4 (Smart UV/LED Dual Light Lamp)',
+                        'Slide 5 (60 Velvet Cat Eye Magnetic Gels)',
+                    ];
+                @endphp
+
+                <div class="space-y-3">
+                    <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Select Slide To Edit</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+                        @for($i = 0; $i < 5; $i++)
+                        <button 
+                            type="button" 
+                            @click="activeHeroSlide = {{ $i }}"
+                            class="p-2.5 border text-left transition-all cursor-pointer flex flex-col justify-between h-20"
+                            :class="activeHeroSlide === {{ $i }} ? 'border-[#171412] bg-[#171412] text-white shadow-sm' : 'border-[#ECE6DE] bg-[#FAF8F5] hover:bg-white text-[#171412]'"
+                        >
+                            <span class="text-[10px] font-bold uppercase tracking-wider" :class="activeHeroSlide === {{ $i }} ? 'text-[#FAF8F5]' : 'text-[#8C7A6B]'">Slide {{ $i + 1 }}</span>
+                            <span class="text-xs font-serif font-medium line-clamp-1" :class="activeHeroSlide === {{ $i }} ? 'text-white' : 'text-[#171412]'">
+                                {{ ['Main Flagship', '96 Shades', 'Dust Collector', 'UV/LED Lamp', 'Cat Eye 60'][$i] }}
+                            </span>
+                            <span class="text-[9px]" :class="activeHeroSlide === {{ $i }} ? 'text-[#C5A880]' : 'text-[#A33B47]'">● Live Active</span>
+                        </button>
+                        @endfor
+                    </div>
+                </div>
+
+                <!-- Slide Panels -->
+                @for($i = 0; $i < 5; $i++)
+                <div x-show="activeHeroSlide === {{ $i }}" class="space-y-5 p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE]">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#ECE6DE] pb-3 gap-2">
+                        <div>
+                            <span class="text-xs font-serif font-bold text-[#A33B47] uppercase tracking-wider">{{ $slideTitles[$i] }}</span>
+                            <p class="text-[11px] text-[#6A625A]">Editing slide {{ $i + 1 }} of 5. Synchronized directly with storefront hero slider.</p>
+                        </div>
+                        <span class="text-[11px] font-mono text-[#8C7A6B] truncate max-w-xs" x-text="slide{{ $i }}"></span>
+                    </div>
+
+                    <!-- Slide Background Image Upload & Live 21:9 Preview -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
+                        <div class="md:col-span-7 space-y-2.5">
+                            <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Slide {{ $i + 1 }} Background Photography (Full Banner)</label>
+                            <input 
+                                type="file" 
+                                name="slide_{{ $i }}_bg_image_file" 
+                                accept="image/*"
+                                @change="handleFile($event, 'slide{{ $i }}')"
+                                class="w-full px-3 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] file:mr-3 file:py-1.5 file:px-3 file:rounded-none file:border-0 file:text-[10.5px] file:font-bold file:uppercase file:bg-[#171412] file:text-white cursor-pointer"
+                            />
+                            <input 
+                                type="text" 
+                                name="slide_{{ $i }}_bg_image" 
+                                x-model="slide{{ $i }}"
+                                placeholder="Or image URL..." 
+                                class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-mono text-[#171412] focus:border-[#171412] focus:outline-none"
+                            />
+                            <p class="text-[10px] text-[#8C7A6B]">High-resolution panorama (recommended 2048×818 or 21:9 ratio). Crisp silk vector rendering.</p>
+                        </div>
+                        <div class="md:col-span-5 flex flex-col items-center justify-center p-2.5 rounded-none bg-white border border-[#ECE6DE] shadow-2xs">
+                            <span class="text-[10px] font-semibold text-[#8C7A6B] uppercase tracking-wider mb-1.5">Slide {{ $i + 1 }} Banner Preview</span>
+                            <div class="w-full aspect-[21/9] rounded-none overflow-hidden bg-stone-100 border border-[#ECE6DE]">
+                                <img :src="slide{{ $i }}" class="w-full h-full object-cover" alt="Slide {{ $i + 1 }} Preview" />
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Brand Title & Trademark -->
-                    <div class="space-y-1.5">
-                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Brand Title</label>
-                        <input type="text" name="hero_brand_title" value="{{ old('hero_brand_title', $hero['brand_title'] ?? 'Recolte') }}" required class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-base font-serif font-bold focus:outline-none focus:border-[#171412] focus:bg-white transition-colors">
-                    </div>
+                    <!-- Slide Typography & Content Fields -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-[#ECE6DE]">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Sub-Descriptor Line</label>
+                            <input type="text" name="slide_{{ $i }}_sub_descriptor" value="{{ old("slide_{$i}_sub_descriptor", $heroSlides[$i]['sub_descriptor'] ?? '') }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-[#171412] text-xs font-bold tracking-widest uppercase focus:outline-none focus:border-[#171412]">
+                        </div>
 
-                    <div class="space-y-1.5">
-                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Trademark Symbol</label>
-                        <input type="text" name="hero_brand_trademark" value="{{ old('hero_brand_trademark', $hero['brand_trademark'] ?? '®') }}" class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-base font-serif font-bold focus:outline-none focus:border-[#171412] focus:bg-white transition-colors">
-                    </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Script Cursive Accent Line</label>
+                            <input type="text" name="slide_{{ $i }}_script_line" value="{{ old("slide_{$i}_script_line", $heroSlides[$i]['script_line'] ?? '') }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-[#171412] text-xs font-serif italic focus:outline-none focus:border-[#171412]">
+                        </div>
 
-                    <!-- Sub-Descriptor & Script Line -->
-                    <div class="space-y-1.5">
-                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Sub-Descriptor Line</label>
-                        <input type="text" name="hero_sub_descriptor" value="{{ old('hero_sub_descriptor', $hero['sub_descriptor'] ?? 'NAILS • BEAUTY • YOU') }}" required class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs font-bold tracking-widest uppercase focus:outline-none focus:border-[#171412] focus:bg-white transition-colors">
-                    </div>
+                        <div class="space-y-1 sm:col-span-2">
+                            <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Subtitle Tagline</label>
+                            <input type="text" name="slide_{{ $i }}_subtitle" value="{{ old("slide_{$i}_subtitle", $heroSlides[$i]['subtitle'] ?? '') }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-[#171412] text-xs leading-relaxed focus:outline-none focus:border-[#171412]">
+                        </div>
 
-                    <div class="space-y-1.5">
-                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Script Cursive Accent Line</label>
-                        <input type="text" name="hero_script_line" value="{{ old('hero_script_line', $hero['script_line'] ?? 'Create • Express • Shine') }}" required class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-sm font-serif italic focus:outline-none focus:border-[#171412] focus:bg-white transition-colors">
-                    </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">CTA Button Text</label>
+                            <input type="text" name="slide_{{ $i }}_cta_text" value="{{ old("slide_{$i}_cta_text", $heroSlides[$i]['cta_text'] ?? 'SHOP NOW') }}" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-[#171412] text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-[#171412]">
+                        </div>
 
-                    <!-- Subtitle Tagline -->
-                    <div class="space-y-1.5 sm:col-span-2">
-                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Subtitle Tagline</label>
-                        <input type="text" name="hero_subtitle" value="{{ old('hero_subtitle', $hero['subtitle'] ?? 'Premium Nail Products for Professionals & Enthusiasts') }}" required class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs leading-relaxed focus:outline-none focus:border-[#171412] focus:bg-white transition-colors">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">CTA Target URL</label>
+                            <input type="text" name="slide_{{ $i }}_cta_url" value="{{ old("slide_{$i}_cta_url", $heroSlides[$i]['cta_url'] ?? '/products') }}" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-mono text-[#171412] focus:outline-none focus:border-[#171412]">
+                        </div>
                     </div>
-
-                    <!-- CTA Button Text & Link -->
-                    <div class="space-y-1.5">
-                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Hero CTA Button Text</label>
-                        <input type="text" name="hero_cta_text" value="{{ old('hero_cta_text', $hero['cta_text'] ?? 'SHOP NOW') }}" class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-[#171412] focus:bg-white transition-colors">
-                    </div>
-
-                    <div class="space-y-1.5">
-                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Hero CTA Link Target</label>
-                        <input type="text" name="hero_cta_url" value="{{ old('hero_cta_url', $hero['cta_url'] ?? '/products') }}" class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs font-mono text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white transition-colors">
-                    </div>
-
                 </div>
+                @endfor
 
                 <div class="pt-4 border-t border-[#ECE6DE] flex justify-end">
                     <button type="submit" class="px-6 py-2.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] transition-all shadow-xs">
-                        Save Hero Changes 💾
+                        Save Hero Carousel Changes 💾
                     </button>
                 </div>
             </div>
@@ -376,7 +470,7 @@
                             <div class="md:col-span-4 flex flex-col items-center justify-center p-2 rounded-none bg-white border border-[#ECE6DE] shadow-2xs">
                                 <span class="text-[10px] font-semibold text-[#8C7A6B] uppercase tracking-wider mb-1.5">Live Preview</span>
                                 <div class="w-full aspect-[4/3] rounded-none overflow-hidden bg-stone-100 border border-[#ECE6DE]">
-                                    <img :src="showcaseImg" class="w-full h-full object-cover" alt="Showcase Preview" />
+                                    <img :src="showcaseImg" class="w-full h-full object-cover object-bottom" style="object-position: center bottom;" alt="Showcase Preview" />
                                 </div>
                             </div>
                         </div>
@@ -431,43 +525,69 @@
                     </div>
                 </div>
 
-                <!-- Community Gallery Posts -->
+                <!-- Community Video Reels (3 Looping Reels) -->
                 @php 
                     $posts = $instagram['posts'] ?? []; 
-                    $postCount = count($posts) > 0 ? count($posts) : 3;
+                    $postCount = 3;
                 @endphp
                 <input type="hidden" name="insta_post_count" value="{{ $postCount }}">
                 <div class="pt-4 border-t border-[#ECE6DE] space-y-4">
-                    <div class="flex items-center justify-between">
-                        <h3 class="font-serif text-base font-medium text-[#171412]">{{ $postCount }} Community Gallery Posts</h3>
-                        <span class="text-[11px] text-[#8C7A6B]">Displaying {{ $postCount }} curated community showcase cards</span>
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <h3 class="font-serif text-base font-medium text-[#171412]">3 Continuous Looping Video Reels</h3>
+                            <p class="text-[11px] text-[#6A625A]">Upload MP4/WebM video clips or provide video URLs. Each reel plays continuously on a muted loop.</p>
+                        </div>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAF8F5] border border-[#ECE6DE] text-[10.5px] font-bold text-[#A33B47] uppercase tracking-wider shrink-0">
+                            <span>3 Looping Reels</span>
+                        </span>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 {{ $postCount <= 3 ? 'lg:grid-cols-3' : ($postCount == 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-5') }} gap-4">
-                        @for($i = 0; $i < $postCount; $i++)
-                        <div class="p-3.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] space-y-3 flex flex-col justify-between">
-                            <div class="space-y-2">
-                                <span class="font-serif text-xs font-bold text-[#A33B47] block">Post {{ $i + 1 }}</span>
-                                <div class="w-full aspect-square rounded-none overflow-hidden bg-stone-100 border border-[#ECE6DE] shadow-2xs">
-                                    <img :src="insta{{ $i }}" class="w-full h-full object-cover" alt="Post {{ $i + 1 }}" />
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        @for($i = 0; $i < 3; $i++)
+                        <div class="p-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] space-y-3.5 flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between border-b border-[#ECE6DE] pb-1.5">
+                                    <span class="font-serif text-xs font-bold text-[#A33B47]">Reel {{ $i + 1 }}</span>
+                                    <span class="text-[9.5px] font-bold uppercase tracking-wider text-[#8C7A6B]">Looping Video</span>
                                 </div>
-                                <input 
-                                    type="file" 
-                                    name="insta_{{ $i }}_image_file" 
-                                    accept="image/*" 
-                                    @change="handleFile($event, 'insta{{ $i }}')"
-                                    class="w-full text-[10px] text-[#171412] file:mr-1 file:py-1 file:px-2 file:rounded-none file:border-0 file:text-[10px] file:font-bold file:uppercase file:bg-[#171412] file:text-white cursor-pointer"
-                                />
-                                <input 
-                                    type="text" 
-                                    name="insta_{{ $i }}_image" 
-                                    x-model="insta{{ $i }}"
-                                    placeholder="Image URL..." 
-                                    class="w-full px-2 py-1 rounded-none bg-white border border-[#ECE6DE] text-[10px] font-mono text-[#171412] focus:outline-none focus:border-[#171412]"
-                                />
+
+                                <!-- Live Video Preview -->
+                                <div class="w-full aspect-[9/13] rounded-none overflow-hidden bg-black border border-[#ECE6DE] shadow-2xs relative">
+                                    <video :src="video{{ $i }}" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                                    <div class="absolute top-2 right-2 px-2 py-0.5 bg-black/70 text-white text-[9px] font-bold uppercase tracking-wider border border-white/20">
+                                        ▶ Looping
+                                    </div>
+                                </div>
+
+                                <!-- Video Upload & URL -->
+                                <div class="space-y-1.5 pt-1">
+                                    <label class="text-[10px] font-semibold uppercase tracking-wider text-[#8C7A6B] block">Upload Video File (.mp4 / .webm)</label>
+                                    <input 
+                                        type="file" 
+                                        name="insta_{{ $i }}_video_file" 
+                                        accept="video/mp4,video/webm,video/quicktime" 
+                                        @change="handleFile($event, 'video{{ $i }}')"
+                                        class="w-full text-[10px] text-[#171412] file:mr-2 file:py-1 file:px-2.5 file:rounded-none file:border-0 file:text-[10px] file:font-bold file:uppercase file:bg-[#171412] file:text-white cursor-pointer"
+                                    />
+                                    <input 
+                                        type="text" 
+                                        name="insta_{{ $i }}_video" 
+                                        x-model="video{{ $i }}"
+                                        placeholder="Or video file URL (.mp4)..." 
+                                        class="w-full px-2.5 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-[10px] font-mono text-[#171412] focus:outline-none focus:border-[#171412]"
+                                    />
+                                </div>
                             </div>
-                            <div class="space-y-1 pt-1 border-t border-[#ECE6DE]">
-                                <label class="text-[9px] font-semibold uppercase tracking-wider text-[#8C7A6B]">Alt / Title</label>
-                                <input type="text" name="insta_{{ $i }}_alt" value="{{ old("insta_{$i}_alt", $posts[$i]['alt'] ?? "Post " . ($i + 1)) }}" class="w-full px-2 py-1 rounded-none bg-white border border-[#ECE6DE] text-[10px] text-[#171412] focus:outline-none focus:border-[#171412]">
+
+                            <div class="space-y-2 pt-2 border-t border-[#ECE6DE]">
+                                <div class="space-y-1">
+                                    <label class="text-[9px] font-semibold uppercase tracking-wider text-[#8C7A6B] block">Reel Caption / Title</label>
+                                    <input type="text" name="insta_{{ $i }}_alt" value="{{ old("insta_{$i}_alt", $posts[$i]['alt'] ?? "Reel " . ($i + 1)) }}" class="w-full px-2.5 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] focus:outline-none focus:border-[#171412]">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[9px] font-semibold uppercase tracking-wider text-[#8C7A6B] block">Instagram Post / Profile Target URL</label>
+                                    <input type="text" name="insta_{{ $i }}_link" value="{{ old("insta_{$i}_link", $posts[$i]['link'] ?? 'https://www.instagram.com/recolte_gelpolish/') }}" class="w-full px-2.5 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-[10px] font-mono text-[#171412] focus:outline-none focus:border-[#171412]">
+                                </div>
                             </div>
                         </div>
                         @endfor

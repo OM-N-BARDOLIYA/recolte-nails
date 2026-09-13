@@ -1,5 +1,9 @@
-# Always Require Approval Before Making Changes
+# Implementation Plan Requirement
 
-Before making any file modifications or executing tasks:
-1. Always generate an implementation plan artifact with `RequestFeedback: true` and `UserFacing: true` so the user is prompted with the interactive **Proceed / Decline** buttons in the UI.
-2. Wait for the user's explicit approval / button click before modifying any code or assets.
+Only create an implementation plan artifact (`RequestFeedback: true`, `UserFacing: true`) for:
+- Major new feature additions
+- Significant architectural or structural changes
+- Complex, multi-system integrations
+
+For bug fixes, UI tweaks, text/content edits, styling, minor modifications, and standard updates:
+- Proceed directly with implementation without generating an implementation plan or blocking for approval.

@@ -11,7 +11,7 @@ class AdminPageController extends Controller
     public function home()
     {
         $hero = PageContent::getSection('home', 'hero', [
-            'bg_image' => asset('images/banners/recolte-hd-hero-bg.jpg'),
+            'bg_image' => asset('images/banners/hero-slide-main-recolte.png'),
             'brand_title' => 'Recolte',
             'brand_trademark' => '®',
             'sub_descriptor' => 'NAILS • BEAUTY • YOU',
@@ -19,6 +19,48 @@ class AdminPageController extends Controller
             'subtitle' => 'Premium Nail Products for Professionals & Enthusiasts',
             'cta_text' => 'SHOP NOW',
             'cta_url' => '/products',
+            'slides' => [
+                [
+                    'bg_image' => asset('images/banners/hero-slide-main-recolte.png'),
+                    'sub_descriptor' => 'NAILS • BEAUTY • YOU',
+                    'script_line' => 'Create • Express • Shine',
+                    'subtitle' => 'Premium Nail Products for Professionals & Enthusiasts',
+                    'cta_text' => 'SHOP NOW',
+                    'cta_url' => '/products',
+                ],
+                [
+                    'bg_image' => asset('images/banners/hero-slide-spotlight-96.png'),
+                    'sub_descriptor' => 'SPOTLIGHT ATELIER • 96 SALON SHADES',
+                    'script_line' => 'Curated Color Harmony',
+                    'subtitle' => '96 Master Palette Gel Polish Shades Engineered for Runway Manicures & Salon Artists',
+                    'cta_text' => 'EXPLORE 96 PALETTES',
+                    'cta_url' => '/products?category=Gel+Polishes',
+                ],
+                [
+                    'bg_image' => asset('images/banners/hero-slide-dust-collector.png'),
+                    'sub_descriptor' => 'PROFESSIONAL SALON TECH • AIR PURITY',
+                    'script_line' => 'Pure Salon Comfort',
+                    'subtitle' => 'High-Powered Turbo Ventilation & Micro-Filtration for a Clean, Dust-Free Atelier Environment',
+                    'cta_text' => 'DISCOVER EQUIPMENT',
+                    'cta_url' => '/products?category=Nail+Tools+%26+Kits',
+                ],
+                [
+                    'bg_image' => asset('images/banners/hero-slide-uv-led-lamp.png'),
+                    'sub_descriptor' => 'ADVANCED UV/LED TECH • DUAL OPTICS',
+                    'script_line' => 'Fast & Flawless Curing',
+                    'subtitle' => 'Salon-Grade Smart Timing & 120s Sensor Curing for Mirror-Shine Durability and Zero Heat Spikes',
+                    'cta_text' => 'SHOP UV/LED LAMPS',
+                    'cta_url' => '/products?category=Nail+Tools+%26+Kits',
+                ],
+                [
+                    'bg_image' => asset('images/banners/hero-slide-cat-eye-60.png'),
+                    'sub_descriptor' => 'VELVET MAGNETIC COUTURE • 60 SHADES',
+                    'script_line' => 'Chameleon Magnetic Depth',
+                    'subtitle' => '60 Dimensional Cat-Eye Magnetic Gels with Pearlescent Beams & Multi-Angle Velvet Reflections',
+                    'cta_text' => 'SHOP CAT EYE GELS',
+                    'cta_url' => '/products?category=Nail+Art+%26+Accents',
+                ],
+            ]
         ]);
 
         $trust_strip = PageContent::getSection('home', 'trust_strip', [
@@ -35,10 +77,10 @@ class AdminPageController extends Controller
             'title' => 'Shop by Category',
             'subtitle' => 'Everything you need for perfect nails',
             'categories' => [
-                ['title' => 'Gel Polish', 'btn_text' => 'Shop Now', 'link' => '/products?category=Gel+Polishes', 'image' => asset('images/products/recolte-cat-gel-polish.jpg')],
-                ['title' => 'Top Coat', 'btn_text' => 'Shop Now', 'link' => '/products?category=Nail+Care+%26+Elixirs', 'image' => asset('images/products/recolte-cat-top-coat.jpg')],
-                ['title' => 'Painting Gel', 'btn_text' => 'Shop Now', 'link' => '/products?category=Nail+Art+%26+Accents', 'image' => asset('images/products/recolte-cat-painting-gel.jpg')],
-                ['title' => 'Sets & Kits', 'btn_text' => 'Shop Now', 'link' => '/products?category=Nail+Tools+%26+Kits', 'image' => asset('images/products/recolte-cat-nail-kits.jpg')],
+                ['title' => 'Shades', 'btn_text' => 'Shop Now', 'link' => '/products?category=Gel+Polishes', 'image' => asset('images/products/recolte-cat-nail-kits.jpg')],
+                ['title' => 'UV Lamps', 'btn_text' => 'Shop Now', 'link' => '/products?category=Nail+Tools+%26+Kits', 'image' => asset('images/products/recolte-cat-uv-lamps.jpg')],
+                ['title' => 'Builder Gel', 'btn_text' => 'Shop Now', 'link' => '/products?category=Builder+Gel', 'image' => asset('images/products/recolte-cat-builder-gel.jpg')],
+                ['title' => 'Tips', 'btn_text' => 'Shop Now', 'link' => '/products?category=Press-On+Sets', 'image' => asset('images/products/recolte-cat-tips.jpg')],
             ]
         ]);
 
@@ -59,9 +101,27 @@ class AdminPageController extends Controller
             'profile_url' => 'https://www.instagram.com/recolte_gelpolish/',
             'btn_text' => 'Follow @recolte_gelpolish',
             'posts' => [
-                ['image' => asset('images/products/recolte-cat-top-coat.jpg'), 'alt' => 'Récolte Rose Gold Finish', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
-                ['image' => asset('images/products/recolte-cat-painting-gel.jpg'), 'alt' => 'Récolte Painting Gel Glitter', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
-                ['image' => asset('images/products/recolte-cat-nail-kits.jpg'), 'alt' => 'Récolte Atelier Arch Sets', 'link' => 'https://www.instagram.com/recolte_gelpolish/'],
+                [
+                    'video' => asset('videos/community/community-reel-1.mp4'),
+                    'poster' => asset('videos/community/community-reel-1-poster.jpg'),
+                    'image' => asset('videos/community/community-reel-1-poster.jpg'),
+                    'alt' => 'Récolte Salon Gel Application',
+                    'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                ],
+                [
+                    'video' => asset('videos/community/community-reel-2.mp4'),
+                    'poster' => asset('videos/community/community-reel-2-poster.jpg'),
+                    'image' => asset('videos/community/community-reel-2-poster.jpg'),
+                    'alt' => 'Crimson & Gold Atelier Waves',
+                    'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                ],
+                [
+                    'video' => asset('videos/community/community-reel-3.mp4'),
+                    'poster' => asset('videos/community/community-reel-3-poster.jpg'),
+                    'image' => asset('videos/community/community-reel-3-poster.jpg'),
+                    'alt' => 'Rose Gold Leopard Couture Art',
+                    'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                ],
             ]
         ]);
 
@@ -72,7 +132,7 @@ class AdminPageController extends Controller
     {
         // 1. Hero Banner
         $existingHero = PageContent::getSection('home', 'hero', []);
-        $heroBg = $request->input('hero_bg_image', $existingHero['bg_image'] ?? asset('images/banners/recolte-hd-hero-bg.jpg'));
+        $heroBg = $request->input('hero_bg_image', $existingHero['bg_image'] ?? asset('images/banners/hero-slide-main-recolte.png'));
         if ($request->hasFile('hero_bg_image_file')) {
             $f = $request->file('hero_bg_image_file');
             $fn = 'home_hero_bg_' . time() . '.' . $f->getClientOriginalExtension();
@@ -80,15 +140,87 @@ class AdminPageController extends Controller
             $heroBg = asset('uploads/pages/' . $fn);
         }
 
+        $defaultSlides = [
+            [
+                'bg_image' => asset('images/banners/hero-slide-main-recolte.png'),
+                'sub_descriptor' => 'NAILS • BEAUTY • YOU',
+                'script_line' => 'Create • Express • Shine',
+                'subtitle' => 'Premium Nail Products for Professionals & Enthusiasts',
+                'cta_text' => 'SHOP NOW',
+                'cta_url' => '/products',
+            ],
+            [
+                'bg_image' => asset('images/banners/hero-slide-spotlight-96.png'),
+                'sub_descriptor' => 'SPOTLIGHT ATELIER • 96 SALON SHADES',
+                'script_line' => 'Curated Color Harmony',
+                'subtitle' => '96 Master Palette Gel Polish Shades Engineered for Runway Manicures & Salon Artists',
+                'cta_text' => 'EXPLORE 96 PALETTES',
+                'cta_url' => '/products?category=Gel+Polishes',
+            ],
+            [
+                'bg_image' => asset('images/banners/hero-slide-dust-collector.png'),
+                'sub_descriptor' => 'PROFESSIONAL SALON TECH • AIR PURITY',
+                'script_line' => 'Pure Salon Comfort',
+                'subtitle' => 'High-Powered Turbo Ventilation & Micro-Filtration for a Clean, Dust-Free Atelier Environment',
+                'cta_text' => 'DISCOVER EQUIPMENT',
+                'cta_url' => '/products?category=Nail+Tools+%26+Kits',
+            ],
+            [
+                'bg_image' => asset('images/banners/hero-slide-uv-led-lamp.png'),
+                'sub_descriptor' => 'ADVANCED UV/LED TECH • DUAL OPTICS',
+                'script_line' => 'Fast & Flawless Curing',
+                'subtitle' => 'Salon-Grade Smart Timing & 120s Sensor Curing for Mirror-Shine Durability and Zero Heat Spikes',
+                'cta_text' => 'SHOP UV/LED LAMPS',
+                'cta_url' => '/products?category=Nail+Tools+%26+Kits',
+            ],
+            [
+                'bg_image' => asset('images/banners/hero-slide-cat-eye-60.png'),
+                'sub_descriptor' => 'VELVET MAGNETIC COUTURE • 60 SHADES',
+                'script_line' => 'Chameleon Magnetic Depth',
+                'subtitle' => '60 Dimensional Cat-Eye Magnetic Gels with Pearlescent Beams & Multi-Angle Velvet Reflections',
+                'cta_text' => 'SHOP CAT EYE GELS',
+                'cta_url' => '/products?category=Nail+Art+%26+Accents',
+            ],
+        ];
+        $slides = $existingHero['slides'] ?? $defaultSlides;
+
+        // Process slide updates if provided
+        for ($i = 0; $i < 5; $i++) {
+            $prevSlide = $slides[$i] ?? ($defaultSlides[$i] ?? []);
+            $slideImg = $request->input("slide_{$i}_bg_image", $prevSlide['bg_image'] ?? '');
+            if ($request->hasFile("slide_{$i}_bg_image_file")) {
+                $f = $request->file("slide_{$i}_bg_image_file");
+                $fn = "home_hero_slide_{$i}_" . time() . '.' . $f->getClientOriginalExtension();
+                $f->move(public_path('uploads/pages'), $fn);
+                $slideImg = asset('uploads/pages/' . $fn);
+            }
+
+            $subDesc = $request->input("slide_{$i}_sub_descriptor", $prevSlide['sub_descriptor'] ?? '');
+            $scriptLine = $request->input("slide_{$i}_script_line", $prevSlide['script_line'] ?? '');
+            $subTitle = $request->input("slide_{$i}_subtitle", $prevSlide['subtitle'] ?? '');
+            $ctaText = $request->input("slide_{$i}_cta_text", $prevSlide['cta_text'] ?? 'SHOP NOW');
+            $ctaUrl = $request->input("slide_{$i}_cta_url", $prevSlide['cta_url'] ?? '/products');
+
+            $slides[$i] = [
+                'bg_image' => $slideImg ?: ($prevSlide['bg_image'] ?? ''),
+                'sub_descriptor' => $subDesc,
+                'script_line' => $scriptLine,
+                'subtitle' => $subTitle,
+                'cta_text' => $ctaText,
+                'cta_url' => $ctaUrl,
+            ];
+        }
+
         PageContent::setSection('home', 'hero', [
-            'bg_image' => $heroBg,
+            'bg_image' => $slides[0]['bg_image'] ?? $heroBg,
             'brand_title' => $request->input('hero_brand_title', 'Recolte'),
             'brand_trademark' => $request->input('hero_brand_trademark', '®'),
-            'sub_descriptor' => $request->input('hero_sub_descriptor', 'NAILS • BEAUTY • YOU'),
-            'script_line' => $request->input('hero_script_line', 'Create • Express • Shine'),
-            'subtitle' => $request->input('hero_subtitle', 'Premium Nail Products for Professionals & Enthusiasts'),
-            'cta_text' => $request->input('hero_cta_text', 'SHOP NOW'),
-            'cta_url' => $request->input('hero_cta_url', '/products'),
+            'sub_descriptor' => $slides[0]['sub_descriptor'] ?? $request->input('hero_sub_descriptor', 'NAILS • BEAUTY • YOU'),
+            'script_line' => $slides[0]['script_line'] ?? $request->input('hero_script_line', 'Create • Express • Shine'),
+            'subtitle' => $slides[0]['subtitle'] ?? $request->input('hero_subtitle', 'Premium Nail Products for Professionals & Enthusiasts'),
+            'cta_text' => $slides[0]['cta_text'] ?? $request->input('hero_cta_text', 'SHOP NOW'),
+            'cta_url' => $slides[0]['cta_url'] ?? $request->input('hero_cta_url', '/products'),
+            'slides' => $slides,
         ]);
 
         // 2. Trust Proposition Strip
@@ -119,10 +251,10 @@ class AdminPageController extends Controller
         // 3. Shop by Category (4 Clean Cards)
         $existingCats = PageContent::getSection('home', 'categories_section', []);
         $defaultCats = [
-            ['title' => 'Gel Polish', 'btn_text' => 'Shop Now', 'link' => '/products?category=Gel+Polishes', 'image' => asset('images/products/recolte-cat-gel-polish.jpg')],
-            ['title' => 'Top Coat', 'btn_text' => 'Shop Now', 'link' => '/products?category=Nail+Care+%26+Elixirs', 'image' => asset('images/products/recolte-cat-top-coat.jpg')],
-            ['title' => 'Painting Gel', 'btn_text' => 'Shop Now', 'link' => '/products?category=Nail+Art+%26+Accents', 'image' => asset('images/products/recolte-cat-painting-gel.jpg')],
-            ['title' => 'Sets & Kits', 'btn_text' => 'Shop Now', 'link' => '/products?category=Nail+Tools+%26+Kits', 'image' => asset('images/products/recolte-cat-nail-kits.jpg')],
+            ['title' => 'Shades', 'btn_text' => 'Shop Now', 'link' => '/products?category=Gel+Polishes', 'image' => asset('images/products/recolte-cat-nail-kits.jpg')],
+            ['title' => 'UV Lamps', 'btn_text' => 'Shop Now', 'link' => '/products?category=Nail+Tools+%26+Kits', 'image' => asset('images/products/recolte-cat-uv-lamps.jpg')],
+            ['title' => 'Builder Gel', 'btn_text' => 'Shop Now', 'link' => '/products?category=Builder+Gel', 'image' => asset('images/products/recolte-cat-builder-gel.jpg')],
+            ['title' => 'Tips', 'btn_text' => 'Shop Now', 'link' => '/products?category=Press-On+Sets', 'image' => asset('images/products/recolte-cat-tips.jpg')],
         ];
         $cats = [];
         for ($i = 0; $i < 4; $i++) {
@@ -178,18 +310,21 @@ class AdminPageController extends Controller
         $numPosts = (int) $request->input('insta_post_count', $existingCount > 0 ? $existingCount : 3);
         $posts = [];
         for ($i = 0; $i < $numPosts; $i++) {
-            $postImg = $request->input("insta_{$i}_image", $existingInsta['posts'][$i]['image'] ?? '');
-            if ($request->hasFile("insta_{$i}_image_file")) {
-                $f = $request->file("insta_{$i}_image_file");
-                $fn = "home_insta_{$i}_" . time() . '.' . $f->getClientOriginalExtension();
+            $prevPost = $existingInsta['posts'][$i] ?? [];
+            $postVideo = $request->input("insta_{$i}_video", $prevPost['video'] ?? '');
+            if ($request->hasFile("insta_{$i}_video_file")) {
+                $f = $request->file("insta_{$i}_video_file");
+                $fn = "home_insta_video_{$i}_" . time() . '.' . $f->getClientOriginalExtension();
                 $f->move(public_path('uploads/pages'), $fn);
-                $postImg = asset('uploads/pages/' . $fn);
+                $postVideo = asset('uploads/pages/' . $fn);
             }
 
-            if (!empty($postImg)) {
+            if (!empty($postVideo)) {
                 $posts[] = [
-                    'image' => $postImg,
-                    'alt' => $request->input("insta_{$i}_alt", "Récolte Community Post " . ($i + 1)),
+                    'video' => $postVideo,
+                    'poster' => '',
+                    'image' => $postVideo,
+                    'alt' => $request->input("insta_{$i}_alt", "Récolte Community Reel " . ($i + 1)),
                     'link' => $request->input("insta_{$i}_link", 'https://www.instagram.com/recolte_gelpolish/'),
                 ];
             }
