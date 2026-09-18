@@ -103,12 +103,12 @@
         class="w-full relative overflow-hidden bg-[#F5E6DE] select-none m-0 p-0 block leading-none group"
     >
         <!-- High-Resolution Photography Background with Proportional Height -->
-        <div class="relative w-full aspect-[21/9] sm:aspect-[21/8] min-h-[340px] sm:min-h-[420px] lg:min-h-[500px] max-h-[560px] flex items-center justify-center py-10 sm:py-14 lg:py-16 overflow-hidden">
+        <div class="relative w-full aspect-[21/9] sm:aspect-[21/8] min-h-[340px] sm:min-h-[420px] lg:min-h-[500px] max-h-[560px] flex items-center justify-start overflow-hidden">
 
             @foreach($heroSlides as $index => $slide)
             <!-- Slide {{ $index + 1 }} -->
             <div 
-                class="absolute inset-0 w-full h-full flex items-center justify-center py-10 sm:py-14 lg:py-16 transition-opacity duration-1000 ease-in-out"
+                class="absolute inset-0 w-full h-full flex items-center justify-start transition-opacity duration-1000 ease-in-out"
                 :class="current === {{ $index }} ? 'opacity-100 pointer-events-auto z-10' : 'opacity-0 pointer-events-none z-0'"
             >
                 <!-- Background Image with smooth subtle Ken Burns depth effect -->
@@ -125,46 +125,48 @@
                 />
 
                 @if(empty($slide['is_image_banner']))
-                    <!-- Subtle Center Focus Overlay for crystal-clear readability -->
-                    <div class="absolute inset-0 bg-white/10 pointer-events-none"></div>
+                    <!-- Subtle Left Reading Veil for crystal-clear legibility over silk background -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/35 via-white/10 to-transparent pointer-events-none"></div>
 
-                    <!-- Vector Sharp Centerpiece Typography & Interactive CTA (Exact alignment maintained) -->
-                    <div 
-                        class="relative z-10 text-center px-4 sm:px-6 max-w-xl mx-auto flex flex-col items-center transition-all duration-700 delay-150 ease-out"
-                        :class="current === {{ $index }} ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'"
-                    >
+                    <!-- Vector Sharp Left-Aligned Typography & Interactive CTA -->
+                    <div class="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:pl-20 sm:pr-8 lg:pl-24 lg:pr-12 flex items-center justify-start">
+                        <div 
+                            class="text-left max-w-xs sm:max-w-md lg:max-w-xl flex flex-col items-start transition-all duration-700 delay-150 ease-out"
+                            :class="current === {{ $index }} ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'"
+                        >
 
-                        <!-- Company Actual Logo from Navbar -->
-                        <div class="mb-2 sm:mb-3">
-                            <img 
-                                src="{{ asset('images/logo.png') }}?v={{ time() }}" 
-                                alt="Récolte Nails Logo" 
-                                class="h-14 sm:h-20 lg:h-24 w-auto object-contain select-none drop-shadow-xs" 
-                            />
+                            <!-- Company Actual Logo from Navbar -->
+                            <div class="mb-2 sm:mb-3">
+                                <img 
+                                    src="{{ asset('images/logo.png') }}?v={{ time() }}" 
+                                    alt="Récolte Nails Logo" 
+                                    class="h-12 sm:h-16 lg:h-20 w-auto object-contain select-none drop-shadow-xs" 
+                                />
+                            </div>
+
+                            <!-- Brand Sub-Descriptor -->
+                            <p class="text-[9px] sm:text-xs lg:text-[12px] tracking-[0.35em] text-[#333333] font-medium uppercase mb-2 sm:mb-2.5 text-left">
+                                {{ $slide['sub_descriptor'] ?? 'NAILS • BEAUTY • YOU' }}
+                            </p>
+
+                            <!-- Script Accent Line -->
+                            <p class="font-['Great_Vibes',cursive] text-2xl sm:text-4xl lg:text-[42px] text-[#111111] font-normal leading-tight mb-2 sm:mb-3 text-left">
+                                {!! $slide['script_line'] ?? 'Create • Express • Shine' !!}
+                            </p>
+
+                            <!-- Subtitle Tagline -->
+                            <p class="text-xs sm:text-sm lg:text-[15px] font-medium text-[#444444] tracking-wide max-w-xs sm:max-w-md mb-4 sm:mb-6 leading-relaxed text-left">
+                                {{ $slide['subtitle'] ?? 'Premium Nail Products for Professionals & Enthusiasts' }}
+                            </p>
+
+                            <!-- Solid Black SHOP NOW Button -->
+                            <a href="{{ $slide['cta_url'] ?? route('products.index') }}"
+                                class="inline-flex items-center gap-2.5 px-7 sm:px-10 py-2.5 sm:py-3.5 bg-[#111111] hover:bg-black text-white text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 shadow-md hover:shadow-lg">
+                                <span>{{ $slide['cta_text'] ?? 'SHOP NOW' }}</span>
+                                <span class="text-sm">→</span>
+                            </a>
+
                         </div>
-
-                        <!-- Brand Sub-Descriptor -->
-                        <p class="text-[9px] sm:text-xs lg:text-[12px] tracking-[0.35em] text-[#333333] font-medium uppercase mb-2 sm:mb-2.5">
-                            {{ $slide['sub_descriptor'] ?? 'NAILS • BEAUTY • YOU' }}
-                        </p>
-
-                        <!-- Script Accent Line -->
-                        <p class="font-['Great_Vibes',cursive] text-2xl sm:text-4xl lg:text-[42px] text-[#111111] font-normal leading-tight mb-2 sm:mb-3 transform -rotate-1">
-                            {!! $slide['script_line'] ?? 'Create • Express • Shine' !!}
-                        </p>
-
-                        <!-- Subtitle Tagline -->
-                        <p class="text-xs sm:text-sm lg:text-[15px] font-medium text-[#444444] tracking-wide max-w-md mb-4 sm:mb-6 leading-relaxed">
-                            {{ $slide['subtitle'] ?? 'Premium Nail Products for Professionals & Enthusiasts' }}
-                        </p>
-
-                        <!-- Solid Black SHOP NOW Button -->
-                        <a href="{{ $slide['cta_url'] ?? route('products.index') }}"
-                            class="inline-flex items-center gap-2.5 px-8 sm:px-10 py-2.5 sm:py-3.5 bg-[#111111] hover:bg-black text-white text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 shadow-md hover:shadow-lg">
-                            <span>{{ $slide['cta_text'] ?? 'SHOP NOW' }}</span>
-                            <span class="text-sm">→</span>
-                        </a>
-
                     </div>
                 @else
                     <!-- Clean Clickable Link for complete Banner Artwork with embedded CTA -->

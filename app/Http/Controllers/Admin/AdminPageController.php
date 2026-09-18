@@ -408,15 +408,30 @@ class AdminPageController extends Controller
         ]);
 
         $instagram = PageContent::getSection('about', 'instagram', [
+            'badge' => 'Atelier Community',
             'tag' => 'Atelier Community',
             'title' => 'Join Our Nail Community',
             'subtitle' => 'Follow @recolte_gelpolish for seasonal nail art tutorials, custom press-on launches, and salon-grade transformations.',
             'handle' => '@recolte_gelpolish',
             'profile_url' => 'https://www.instagram.com/recolte_gelpolish/',
             'btn_text' => 'Follow @recolte_gelpolish',
-            'img1' => asset('images/products/recolte-cat-top-coat.jpg'),
-            'img2' => asset('images/products/recolte-cat-painting-gel.jpg'),
-            'img3' => asset('images/products/recolte-cat-nail-kits.jpg'),
+            'posts' => [
+                [
+                    'video' => asset('videos/community/community-reel-1.mp4'),
+                    'alt' => 'Récolte Salon Gel Application',
+                    'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                ],
+                [
+                    'video' => asset('videos/community/community-reel-2.mp4'),
+                    'alt' => 'Crimson & Gold Atelier Waves',
+                    'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                ],
+                [
+                    'video' => asset('videos/community/community-reel-3.mp4'),
+                    'alt' => 'Rose Gold Leopard Couture Art',
+                    'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                ],
+            ]
         ]);
 
         $concierge = PageContent::getSection('about', 'concierge', [
@@ -498,31 +513,41 @@ class AdminPageController extends Controller
             'step4_desc' => $request->input('step4_desc', ''),
         ]);
 
-        // 3. Instagram Community Gallery (3 Photos)
+        // 3. Instagram Community Video Reels (3 Looping Reels)
         $existingInsta = PageContent::getSection('about', 'instagram', []);
-        $instaImgs = [];
-        for ($i = 1; $i <= 3; $i++) {
-            $imgKey = "img{$i}";
-            $imgVal = $request->input("insta_img{$i}", $existingInsta[$imgKey] ?? '');
-            if ($request->hasFile("insta_img{$i}_file")) {
-                $f = $request->file("insta_img{$i}_file");
-                $fn = "about_insta{$i}_" . time() . '.' . $f->getClientOriginalExtension();
+        $existingCount = count($existingInsta['posts'] ?? []);
+        $numPosts = (int) $request->input('insta_post_count', $existingCount > 0 ? $existingCount : 3);
+        $posts = [];
+        for ($i = 0; $i < $numPosts; $i++) {
+            $prevPost = $existingInsta['posts'][$i] ?? [];
+            $postVideo = $request->input("insta_{$i}_video", $prevPost['video'] ?? '');
+            if ($request->hasFile("insta_{$i}_video_file")) {
+                $f = $request->file("insta_{$i}_video_file");
+                $fn = "about_insta_video_{$i}_" . time() . '.' . $f->getClientOriginalExtension();
                 $f->move(public_path('uploads/pages'), $fn);
-                $imgVal = asset('uploads/pages/' . $fn);
+                $postVideo = asset('uploads/pages/' . $fn);
             }
-            $instaImgs[$imgKey] = $imgVal;
+
+            if (!empty($postVideo)) {
+                $posts[] = [
+                    'video' => $postVideo,
+                    'poster' => '',
+                    'image' => $postVideo,
+                    'alt' => $request->input("insta_{$i}_alt", "Récolte Community Reel " . ($i + 1)),
+                    'link' => $request->input("insta_{$i}_link", 'https://www.instagram.com/recolte_gelpolish/'),
+                ];
+            }
         }
 
         PageContent::setSection('about', 'instagram', [
-            'tag' => $request->input('insta_tag', 'Atelier Community'),
+            'badge' => $request->input('insta_badge', $request->input('insta_tag', 'Atelier Community')),
+            'tag' => $request->input('insta_badge', $request->input('insta_tag', 'Atelier Community')),
             'title' => $request->input('insta_title', 'Join Our Nail Community'),
             'subtitle' => $request->input('insta_subtitle', 'Follow @recolte_gelpolish for seasonal nail art tutorials, custom press-on launches, and salon-grade transformations.'),
             'handle' => $request->input('insta_handle', '@recolte_gelpolish'),
             'profile_url' => $request->input('insta_profile_url', 'https://www.instagram.com/recolte_gelpolish/'),
             'btn_text' => $request->input('insta_btn_text', 'Follow @recolte_gelpolish'),
-            'img1' => $instaImgs['img1'] ?? '',
-            'img2' => $instaImgs['img2'] ?? '',
-            'img3' => $instaImgs['img3'] ?? '',
+            'posts' => $posts,
         ]);
 
         // 4. Haute VIP Concierge Banner & 3 Showcase Photos

@@ -74,14 +74,29 @@ class PageController extends Controller
         ]);
 
         $instagram = PageContent::getSection('about', 'instagram', [
-            'tag' => 'Atelier Community',
+            'badge' => 'Atelier Community',
             'title' => 'Join Our Nail Community',
+            'subtitle' => 'Follow @recolte_gelpolish for seasonal nail art tutorials, custom press-on launches, and salon-grade transformations.',
             'handle' => '@recolte_gelpolish',
-            'img1' => asset('images/products/recolte-cat-gel-polish.jpg'),
-            'img2' => asset('images/banners/recolte-acrylic-banner.jpg'),
-            'img3' => asset('images/products/recolte-cat-top-coat.jpg'),
-            'img4' => asset('images/products/recolte-cat-painting-gel.jpg'),
-            'img5' => asset('images/products/recolte-cat-nail-kits.jpg'),
+            'profile_url' => 'https://www.instagram.com/recolte_gelpolish/',
+            'btn_text' => 'Follow @recolte_gelpolish',
+            'posts' => [
+                [
+                    'video' => asset('videos/community/community-reel-1.mp4'),
+                    'alt' => 'Récolte Salon Gel Application',
+                    'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                ],
+                [
+                    'video' => asset('videos/community/community-reel-2.mp4'),
+                    'alt' => 'Crimson & Gold Atelier Waves',
+                    'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                ],
+                [
+                    'video' => asset('videos/community/community-reel-3.mp4'),
+                    'alt' => 'Rose Gold Leopard Couture Art',
+                    'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                ],
+            ]
         ]);
 
         $concierge = PageContent::getSection('about', 'concierge', [

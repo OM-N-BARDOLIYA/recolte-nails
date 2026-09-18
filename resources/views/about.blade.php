@@ -243,29 +243,7 @@
     </section>
 
     <!-- ── 4. INSTAGRAM / COMMUNITY GRID (AUTHENTIC RÉCOLTE COMMUNITY POSTS) ── -->
-    @php
-        $rawImgs = [
-            $instagram['img1'] ?? null,
-            $instagram['img2'] ?? null,
-            $instagram['img3'] ?? null,
-            $instagram['img4'] ?? null,
-            $instagram['img5'] ?? null,
-        ];
-        $instaList = [];
-        foreach ($rawImgs as $img) {
-            if (!empty($img) && !str_contains($img, 'recolte-cat-gel-polish.jpg') && !str_contains($img, 'unsplash.com')) {
-                $instaList[] = $img;
-            }
-        }
-        if (empty($instaList)) {
-            $instaList = [
-                asset('images/products/recolte-cat-top-coat.jpg'),
-                asset('images/products/recolte-cat-painting-gel.jpg'),
-                asset('images/products/recolte-cat-nail-kits.jpg'),
-            ];
-        }
-        $gridCols = count($instaList) <= 3 ? 'lg:grid-cols-3' : (count($instaList) == 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-5');
-    @endphp
+    <!-- ── 4. AUTHENTIC RÉCOLTE ATELIER COMMUNITY (3 CONTINUOUS LOOPING VIDEO REELS) ── -->
     <section class="py-20 sm:py-24 bg-[#FAF8F5] border-t border-[#ECE6DE]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
             
@@ -273,46 +251,98 @@
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 border-b border-[#ECE6DE]/80">
                 <div class="space-y-2.5">
                     <div
-                        class="inline-flex items-center gap-2 px-3 py-1 rounded-none bg-[#EFE9E1] text-[#7A7168] text-[11px] font-semibold tracking-[0.16em] uppercase border border-[#ECE6DE]">
+                        class="inline-flex items-center gap-2 px-3 py-1 bg-[#EFE9E1] text-[#7A7168] text-[11px] font-semibold tracking-[0.16em] uppercase border border-[#ECE6DE]">
                         <svg class="w-3.5 h-3.5 fill-current opacity-80" viewBox="0 0 24 24">
                             <path
                                 d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                         </svg>
-                        <span>{{ $instagram['tag'] ?? 'Atelier Community' }}</span>
+                        <span>{{ $instagram['badge'] ?? ($instagram['tag'] ?? 'Atelier Community') }}</span>
                     </div>
                     <h2 class="font-serif text-2xl sm:text-3xl lg:text-[38px] font-normal text-[#171412] tracking-tight leading-[1.18]">
                         {{ $instagram['title'] ?? 'Join Our Nail Community' }}
                     </h2>
                     <p class="text-xs sm:text-sm text-[#6A625A] font-normal max-w-lg leading-relaxed">
-                        Follow <a href="https://www.instagram.com/recolte_gelpolish/" target="_blank" class="font-medium text-[#171412] underline decoration-[#171412]/30 hover:decoration-[#171412] underline-offset-4 transition-all">{{ $instagram['handle'] ?? '@recolte_gelpolish' }}</a> for seasonal nail art tutorials, custom press-on launches, and salon-grade transformations.
+                        {{ $instagram['subtitle'] ?? 'Follow @recolte_gelpolish for seasonal nail art tutorials, custom press-on launches, and salon-grade transformations.' }}
                     </p>
                 </div>
 
                 <div class="shrink-0">
-                    <a href="https://www.instagram.com/recolte_gelpolish/" target="_blank"
-                        class="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs sm:text-[13px] font-bold uppercase tracking-wider shadow-xs hover:shadow-md transition-all duration-300 group">
+                    <a href="{{ $instagram['profile_url'] ?? 'https://www.instagram.com/recolte_gelpolish/' }}" target="_blank"
+                        class="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 bg-[#171412] hover:bg-black text-white text-xs sm:text-[13px] font-bold tracking-[0.16em] uppercase shadow-xs hover:shadow-md transition-all duration-300 group">
                         <svg class="w-4 h-4 fill-current opacity-90 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 24 24">
                             <path
                                 d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                         </svg>
-                        <span>Follow {{ $instagram['handle'] ?? '@recolte_gelpolish' }}</span>
+                        <span>{{ $instagram['btn_text'] ?? 'Follow @recolte_gelpolish' }}</span>
                         <span class="text-xs transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Authentic Récolte Instagram Grid Posts -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 {{ $gridCols }} gap-4 sm:gap-6">
-                @foreach($instaList as $idx => $imgSrc)
-                <a href="https://www.instagram.com/recolte_gelpolish/" target="_blank"
-                    class="group relative rounded-none overflow-hidden aspect-square bg-[#FAF5F0] border border-[#ECE6DE] shadow-2xs">
-                    <img src="{{ $imgSrc }}"
-                        alt="Récolte Community Post {{ $idx + 1 }}"
-                        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108" />
+            <!-- Authentic Récolte Community Grid Video Reels -->
+            @php
+                $instaPosts = $instagram['posts'] ?? [
+                    [
+                        'video' => asset('videos/community/community-reel-1.mp4'),
+                        'alt' => 'Récolte Salon Gel Application',
+                        'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                    ],
+                    [
+                        'video' => asset('videos/community/community-reel-2.mp4'),
+                        'alt' => 'Crimson & Gold Atelier Waves',
+                        'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                    ],
+                    [
+                        'video' => asset('videos/community/community-reel-3.mp4'),
+                        'alt' => 'Rose Gold Leopard Couture Art',
+                        'link' => 'https://www.instagram.com/recolte_gelpolish/'
+                    ],
+                ];
+                $gridCols = count($instaPosts) <= 3 ? 'lg:grid-cols-3' : (count($instaPosts) == 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-5');
+            @endphp
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 {{ $gridCols }} gap-5 sm:gap-6">
+                @foreach($instaPosts as $post)
+                <a href="{{ $post['link'] ?? 'https://www.instagram.com/recolte_gelpolish/' }}" target="_blank"
+                    class="group relative overflow-hidden aspect-[9/14] sm:aspect-square md:aspect-[9/14] lg:aspect-[9/13] bg-[#171412] border border-[#ECE6DE] shadow-xs hover:shadow-lg transition-all duration-500 block">
+                    
+                    @if(!empty($post['video']))
+                    <video 
+                        src="{{ $post['video'] }}"
+                        @if(!empty($post['poster'])) poster="{{ $post['poster'] }}" @endif
+                        autoplay 
+                        loop 
+                        muted 
+                        playsinline 
+                        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    ></video>
+                    @else
+                    <img src="{{ $post['image'] ?? ($post['poster'] ?? '') }}"
+                        alt="{{ $post['alt'] ?? 'Récolte Community Reel' }}"
+                        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+                    @endif
+
+                    <!-- Reel / Community Badge Indicator -->
+                    <div class="absolute top-3 right-3 z-10">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider rounded-none border border-white/20 shadow-xs">
+                            <svg class="w-2.5 h-2.5 fill-[#D4AF37]" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                            <span>Reel</span>
+                        </span>
+                    </div>
+
+                    <!-- Post Title / Alt Caption Gradient -->
+                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/85 via-black/45 to-transparent z-10 pointer-events-none">
+                        <p class="text-xs font-serif font-medium text-white/95 line-clamp-1">{{ $post['alt'] ?? 'Récolte Community Reel' }}</p>
+                        <span class="text-[10px] text-[#C5A880] font-mono tracking-wider">@recolte_gelpolish</span>
+                    </div>
+
+                    <!-- Interactive Hover Action Overlay -->
                     <div
-                        class="absolute inset-0 bg-[#171412]/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center p-3">
-                        <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-none bg-white text-[#171412] text-xs font-bold uppercase tracking-wider shadow-md transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                            <span>View Post</span>
+                        class="absolute inset-0 bg-[#171412]/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center p-3 z-20">
+                        <span class="inline-flex items-center gap-2 px-4 py-2.5 bg-white text-[#171412] text-xs font-bold uppercase tracking-wider shadow-md transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                            <span>Watch Reel</span>
                             <span>↗</span>
                         </span>
                     </div>

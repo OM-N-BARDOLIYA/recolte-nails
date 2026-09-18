@@ -14,11 +14,15 @@
         previewStory1: '{{ $stories[1]['img'] ?? '' }}',
         previewStory2: '{{ $stories[2]['img'] ?? '' }}',
         previewStory3: '{{ $stories[3]['img'] ?? '' }}',
-        previewInsta1: '{{ $instagram['img1'] ?? '' }}',
-        previewInsta2: '{{ $instagram['img2'] ?? '' }}',
-        previewInsta3: '{{ $instagram['img3'] ?? '' }}',
-        previewInsta4: '{{ $instagram['img4'] ?? '' }}',
-        previewInsta5: '{{ $instagram['img5'] ?? '' }}',
+        video0: '{{ $instagram['posts'][0]['video'] ?? asset('videos/community/community-reel-1.mp4') }}',
+        video1: '{{ $instagram['posts'][1]['video'] ?? asset('videos/community/community-reel-2.mp4') }}',
+        video2: '{{ $instagram['posts'][2]['video'] ?? asset('videos/community/community-reel-3.mp4') }}',
+        handleVideoFile(e, key) {
+            const file = e.target.files[0];
+            if (file) {
+                this[key] = URL.createObjectURL(file);
+            }
+        },
         previewConcierge1: '{{ $concierge['img1'] ?? '' }}',
         previewConcierge2: '{{ $concierge['img2'] ?? '' }}',
         previewConcierge3: '{{ $concierge['img3'] ?? '' }}',
@@ -84,7 +88,7 @@
             class="px-4 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all shrink-0 cursor-pointer border"
             :class="activeTab === 'instagram' ? 'bg-[#171412] text-white border-[#171412]' : 'bg-white text-[#6A625A] hover:bg-[#FAF8F5] hover:text-[#171412] border-[#ECE6DE]'"
         >
-            <span>📸</span> 4. Instagram Grid (3 Photos)
+            <span>📸</span> 4. Instagram Video Reels (3 Videos)
         </button>
     </div>
 
@@ -405,69 +409,114 @@
             </div>
         </div>
 
-        <!-- ════════════════ TAB 4: INSTAGRAM GRID ════════════════ -->
+        <!-- ════════════════ TAB 4: INSTAGRAM VIDEO REELS ════════════════ -->
         <div x-show="activeTab === 'instagram'" class="space-y-6">
             <div class="p-6 sm:p-8 rounded-none bg-white border border-[#ECE6DE] space-y-6 shadow-2xs">
                 <div class="border-b border-[#ECE6DE] pb-4">
-                    <h2 class="font-serif text-xl font-medium text-[#171412]">Instagram Community Grid (3 Photos)</h2>
-                    <p class="text-xs text-[#6A625A] mt-1 font-light">Configure the 3 authentic client showcase photos and Instagram handle banner matching the live site.</p>
+                    <h2 class="font-serif text-xl font-medium text-[#171412]">Instagram Community Video Reels</h2>
+                    <p class="text-xs text-[#6A625A] mt-1 font-light">Manage the 3 looping video reels, header typography, and Instagram handle link.</p>
                 </div>
 
+                <!-- Section Typography & Header Fields -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE]">
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Header Tag</label>
-                        <input type="text" name="insta_tag" value="{{ $instagram['tag'] ?? 'Atelier Community' }}" class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs font-bold text-[#171412] outline-none focus:border-[#171412]">
+                    <div class="space-y-1.5">
+                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Badge Tag</label>
+                        <input type="text" name="insta_badge" value="{{ old('insta_badge', $instagram['badge'] ?? ($instagram['tag'] ?? 'Atelier Community')) }}" required class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs font-bold text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white">
                     </div>
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Instagram Handle</label>
-                        <input type="text" name="insta_handle" value="{{ $instagram['handle'] ?? '@recolte_gelpolish' }}" class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs font-bold text-[#A33B47] outline-none focus:border-[#171412]">
+
+                    <div class="space-y-1.5">
+                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Section Title</label>
+                        <input type="text" name="insta_title" value="{{ old('insta_title', $instagram['title'] ?? 'Join Our Nail Community') }}" required class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-sm font-serif font-bold text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white">
                     </div>
-                    <div class="sm:col-span-2 space-y-1">
-                        <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Header Title</label>
-                        <input type="text" name="insta_title" value="{{ $instagram['title'] ?? 'Join Our Nail Community' }}" class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs font-bold font-serif text-[#171412] outline-none focus:border-[#171412]">
+
+                    <div class="space-y-1.5 sm:col-span-2">
+                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Subtitle Paragraph</label>
+                        <textarea name="insta_subtitle" rows="2" class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs leading-relaxed text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white">{{ old('insta_subtitle', $instagram['subtitle'] ?? 'Follow @recolte_gelpolish for seasonal nail art tutorials, custom press-on launches, and salon-grade transformations.') }}</textarea>
                     </div>
-                    <div class="sm:col-span-2 space-y-1">
-                        <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Subtitle Narrative</label>
-                        <textarea name="insta_subtitle" rows="2" class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] leading-relaxed outline-none focus:border-[#171412]">{{ $instagram['subtitle'] ?? 'Follow @recolte_gelpolish for seasonal nail art tutorials, custom press-on launches, and salon-grade transformations.' }}</textarea>
+
+                    <div class="space-y-1.5">
+                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Instagram Handle</label>
+                        <input type="text" name="insta_handle" value="{{ old('insta_handle', $instagram['handle'] ?? '@recolte_gelpolish') }}" class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs font-mono text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white">
                     </div>
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Button Text</label>
-                        <input type="text" name="insta_btn_text" value="{{ $instagram['btn_text'] ?? 'Follow @recolte_gelpolish' }}" class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs font-bold text-[#171412] outline-none focus:border-[#171412]">
+
+                    <div class="space-y-1.5">
+                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Profile Target URL</label>
+                        <input type="text" name="insta_profile_url" value="{{ old('insta_profile_url', $instagram['profile_url'] ?? 'https://www.instagram.com/recolte_gelpolish/') }}" class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs font-mono text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white">
                     </div>
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Profile URL</label>
-                        <input type="text" name="insta_profile_url" value="{{ $instagram['profile_url'] ?? 'https://www.instagram.com/recolte_gelpolish/' }}" class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] font-mono outline-none focus:border-[#171412]">
+
+                    <div class="space-y-1.5 sm:col-span-2">
+                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Follow Button Text</label>
+                        <input type="text" name="insta_btn_text" value="{{ old('insta_btn_text', $instagram['btn_text'] ?? 'Follow @recolte_gelpolish') }}" class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs font-bold text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white">
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    @for($ig = 1; $ig <= 3; $ig++)
-                        <div class="p-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] space-y-3">
-                            <span class="text-xs font-bold uppercase tracking-wider text-[#171412] block">Photo {{ $ig }}</span>
-                            <div class="aspect-square rounded-none overflow-hidden bg-white border border-[#ECE6DE] flex items-center justify-center">
-                                <template x-if="previewInsta{{ $ig }}">
-                                    <img :src="previewInsta{{ $ig }}" class="w-full h-full object-cover">
-                                </template>
-                                <template x-if="!previewInsta{{ $ig }}">
-                                    <span class="text-[10px] text-[#171412]/40 font-medium">No Image</span>
-                                </template>
-                            </div>
-                            <input 
-                                type="file" 
-                                name="insta_img{{ $ig }}_file" 
-                                accept="image/*" 
-                                @change="previewFile($event, 'previewInsta{{ $ig }}')"
-                                class="w-full text-xs file:mr-2 file:py-1 file:px-2 file:rounded-none file:border-0 file:bg-[#171412] file:text-white file:text-[10px] file:font-bold file:uppercase cursor-pointer"
-                            >
-                            <input 
-                                type="text" 
-                                name="insta_img{{ $ig }}" 
-                                x-model="previewInsta{{ $ig }}"
-                                placeholder="Or image URL" 
-                                class="w-full px-3 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] font-mono outline-none focus:border-[#171412]"
-                            >
+                <!-- Community Video Reels (3 Looping Reels) -->
+                @php 
+                    $posts = $instagram['posts'] ?? []; 
+                    $postCount = 3;
+                @endphp
+                <input type="hidden" name="insta_post_count" value="{{ $postCount }}">
+                <div class="pt-4 border-t border-[#ECE6DE] space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <h3 class="font-serif text-base font-medium text-[#171412]">3 Continuous Looping Video Reels</h3>
+                            <p class="text-[11px] text-[#6A625A]">Upload MP4/WebM video clips or provide video URLs. Each reel plays continuously on a muted loop.</p>
                         </div>
-                    @endfor
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAF8F5] border border-[#ECE6DE] text-[10.5px] font-bold text-[#A33B47] uppercase tracking-wider shrink-0">
+                            <span>3 Looping Reels</span>
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        @for($i = 0; $i < 3; $i++)
+                        <div class="p-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] space-y-3.5 flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between border-b border-[#ECE6DE] pb-1.5">
+                                    <span class="font-serif text-xs font-bold text-[#A33B47]">Reel {{ $i + 1 }}</span>
+                                    <span class="text-[9.5px] font-bold uppercase tracking-wider text-[#8C7A6B]">Looping Video</span>
+                                </div>
+
+                                <!-- Live Video Preview -->
+                                <div class="w-full aspect-[9/13] rounded-none overflow-hidden bg-black border border-[#ECE6DE] shadow-2xs relative">
+                                    <video :src="video{{ $i }}" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                                    <div class="absolute top-2 right-2 px-2 py-0.5 bg-black/70 text-white text-[9px] font-bold uppercase tracking-wider border border-white/20">
+                                        ▶ Looping
+                                    </div>
+                                </div>
+
+                                <!-- Video Upload & URL -->
+                                <div class="space-y-1.5 pt-1">
+                                    <label class="text-[10px] font-semibold uppercase tracking-wider text-[#8C7A6B] block">Upload Video File (.mp4 / .webm)</label>
+                                    <input 
+                                        type="file" 
+                                        name="insta_{{ $i }}_video_file" 
+                                        accept="video/mp4,video/webm,video/quicktime" 
+                                        @change="handleVideoFile($event, 'video{{ $i }}')"
+                                        class="w-full text-[10px] text-[#171412] file:mr-2 file:py-1 file:px-2.5 file:rounded-none file:border-0 file:text-[10px] file:font-bold file:uppercase file:bg-[#171412] file:text-white cursor-pointer"
+                                    />
+                                    <input 
+                                        type="text" 
+                                        name="insta_{{ $i }}_video" 
+                                        x-model="video{{ $i }}"
+                                        placeholder="Or video file URL (.mp4)..." 
+                                        class="w-full px-2.5 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-[10px] font-mono text-[#171412] focus:outline-none focus:border-[#171412]"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="space-y-2 pt-2 border-t border-[#ECE6DE]">
+                                <div class="space-y-1">
+                                    <label class="text-[9px] font-semibold uppercase tracking-wider text-[#8C7A6B] block">Reel Caption / Title</label>
+                                    <input type="text" name="insta_{{ $i }}_alt" value="{{ old("insta_{$i}_alt", $posts[$i]['alt'] ?? "Reel " . ($i + 1)) }}" class="w-full px-2.5 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] focus:outline-none focus:border-[#171412]">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[9px] font-semibold uppercase tracking-wider text-[#8C7A6B] block">Instagram Post / Profile Target URL</label>
+                                    <input type="text" name="insta_{{ $i }}_link" value="{{ old("insta_{$i}_link", $posts[$i]['link'] ?? 'https://www.instagram.com/recolte_gelpolish/') }}" class="w-full px-2.5 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-[10px] font-mono text-[#171412] focus:outline-none focus:border-[#171412]">
+                                </div>
+                            </div>
+                        </div>
+                        @endfor
+                    </div>
                 </div>
             </div>
         </div>
