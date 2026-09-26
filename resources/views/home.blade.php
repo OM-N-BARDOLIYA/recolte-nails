@@ -340,10 +340,10 @@
                     class="group flex flex-col items-center text-center transition-all duration-300">
                     
                     <!-- Past Padded Frame Box with Square Image -->
-                    <div class="w-full aspect-square bg-[#FAF7F4] border border-[#ECE6DE] p-2 sm:p-2.5 lg:p-3 transition-all duration-300 flex items-center justify-center">
-                        <div class="w-full h-full overflow-hidden">
+                    <div class="w-full aspect-square bg-white border border-[#ECE6DE] p-2 sm:p-2.5 lg:p-3 transition-all duration-300 flex items-center justify-center shadow-2xs">
+                        <div class="w-full h-full overflow-hidden flex items-center justify-center">
                             <img src="{{ $catImg }}" alt="{{ $catTitle }}"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-103" />
                         </div>
                     </div>
 

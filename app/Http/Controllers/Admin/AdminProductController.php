@@ -57,7 +57,7 @@ class AdminProductController extends Controller
             'slug' => 'nullable|string|max:255|unique:products,slug',
             'category' => 'required|string|max:255',
             'category_id' => 'nullable|exists:categories,id',
-            'price' => 'required|numeric|min:0',
+            'price' => 'nullable|numeric|min:0',
             'original_price' => 'nullable|numeric|min:0',
             'tagline' => 'nullable|string|max:500',
             'badge_text' => 'nullable|string|max:100',
@@ -66,6 +66,9 @@ class AdminProductController extends Controller
             'how_to_use' => 'nullable|string',
             'main_image' => 'nullable|string|max:1000',
             'image_file' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
+            'gallery_files' => 'nullable|array',
+            'gallery_files.*' => 'nullable|file|mimes:jpeg,png,jpg,webp,gif,mp4,webm,mov,ogg|max:51200',
+            'existing_gallery_images' => 'nullable|array',
             'is_bestseller' => 'boolean',
             'is_active' => 'boolean',
             'sort_order' => 'integer',
@@ -78,6 +81,7 @@ class AdminProductController extends Controller
             $slug = "{$originalSlug}-{$counter}";
             $counter++;
         }
+        $validated['price'] = !empty($validated['price']) ? $validated['price'] : 0;
         $validated['slug'] = $slug;
 
         // Image file upload handling
@@ -159,10 +163,12 @@ class AdminProductController extends Controller
             }
         }
 
-        // Add locally uploaded gallery files
+        // Add locally uploaded gallery media files (images & videos)
         if ($request->hasFile('gallery_files')) {
             foreach ($request->file('gallery_files') as $gidx => $gfile) {
-                $gname = 'gallery_' . time() . '_' . $gidx . '_' . Str::slug(pathinfo($gfile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gfile->getClientOriginalExtension();
+                $ext = strtolower($gfile->getClientOriginalExtension());
+                $prefix = in_array($ext, ['mp4', 'webm', 'mov', 'ogg']) ? 'video_' : 'gallery_';
+                $gname = $prefix . time() . '_' . $gidx . '_' . Str::slug(pathinfo($gfile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $ext;
                 $gfile->move(public_path('uploads/products'), $gname);
                 $gallery[] = asset('uploads/products/' . $gname);
             }
@@ -205,7 +211,7 @@ class AdminProductController extends Controller
             'slug' => 'required|string|max:255|unique:products,slug,' . $product->id,
             'category' => 'required|string|max:255',
             'category_id' => 'nullable|exists:categories,id',
-            'price' => 'required|numeric|min:0',
+            'price' => 'nullable|numeric|min:0',
             'original_price' => 'nullable|numeric|min:0',
             'tagline' => 'nullable|string|max:500',
             'badge_text' => 'nullable|string|max:100',
@@ -214,9 +220,13 @@ class AdminProductController extends Controller
             'how_to_use' => 'nullable|string',
             'main_image' => 'nullable|string|max:1000',
             'image_file' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:10240',
+            'gallery_files' => 'nullable|array',
+            'gallery_files.*' => 'nullable|file|mimes:jpeg,png,jpg,webp,gif,mp4,webm,mov,ogg|max:51200',
+            'existing_gallery_images' => 'nullable|array',
             'sort_order' => 'integer',
         ]);
 
+        $validated['price'] = isset($validated['price']) && $validated['price'] !== null ? $validated['price'] : ($product->price ?? 0);
         $validated['slug'] = Str::slug($validated['slug']);
 
         // 1. Main Cover Image Upload
@@ -300,10 +310,12 @@ class AdminProductController extends Controller
             }
         }
 
-        // Add newly uploaded gallery files
+        // Add newly uploaded gallery media files (images & videos)
         if ($request->hasFile('gallery_files')) {
             foreach ($request->file('gallery_files') as $gidx => $gfile) {
-                $gname = 'gallery_' . time() . "_{$gidx}_" . Str::slug(pathinfo($gfile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $gfile->getClientOriginalExtension();
+                $ext = strtolower($gfile->getClientOriginalExtension());
+                $prefix = in_array($ext, ['mp4', 'webm', 'mov', 'ogg']) ? 'video_' : 'gallery_';
+                $gname = $prefix . time() . "_{$gidx}_" . Str::slug(pathinfo($gfile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $ext;
                 $gfile->move(public_path('uploads/products'), $gname);
                 $gallery[] = asset('uploads/products/' . $gname);
             }

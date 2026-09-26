@@ -2,14 +2,24 @@
 
 <div x-data="{ isFavorited: false }" class="group flex flex-col space-y-3 text-left relative">
     <!-- 1. PRODUCT IMAGE CONTAINER WITH TOP-RIGHT WISHLIST HEART -->
-    <div class="relative overflow-hidden rounded-xl bg-[#F5F2EC] aspect-[4/3] w-full select-none">
+    <div class="relative overflow-hidden rounded-xl bg-[#FAF8F5] aspect-square w-full select-none border border-[#ECE6DE]">
 
         <!-- Clickable Link around image -->
         <a href="{{ route('products.show', $product->slug) }}" class="block w-full h-full">
             <img src="{{ $product->main_image }}" alt="{{ $product->title }}"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&q=80'" />
+                class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-95"
+                onerror="this.onerror=null;this.src='{{ asset('images/products/recolte-cat-tips.jpg') }}'" />
         </a>
+
+        @php
+            $hasVideo = !empty($product->images) && collect($product->images)->contains(fn($img) => str_ends_with(strtolower($img), '.mp4') || str_ends_with(strtolower($img), '.mov'));
+        @endphp
+        @if($hasVideo)
+            <div class="absolute top-3.5 left-3.5 z-20 px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-xs text-white text-[10px] font-medium tracking-wider uppercase flex items-center gap-1 select-none pointer-events-none">
+                <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <span>Video</span>
+            </div>
+        @endif
 
         <!-- Wishlist Heart Button (Top Right) -->
         <button type="button" @click.stop.prevent="isFavorited = !isFavorited"
@@ -71,19 +81,6 @@
                 ({{ $product->reviews_count ?? 10 }})
             </span>
         </div>
-
-        <!-- Clean Price Tag -->
-        <div class="flex items-baseline gap-2 pt-0.5">
-            <span class="text-base sm:text-[17px] font-semibold text-[#171412]">
-                ₹{{ number_format($product->price) }}
-            </span>
-            @if(!empty($product->original_price) && $product->original_price > $product->price)
-                <span class="text-xs text-[#8C7A6B]/70 line-through font-light">
-                    ₹{{ number_format($product->original_price) }}
-                </span>
-            @endif
-        </div>
-
     </div>
 
 </div>

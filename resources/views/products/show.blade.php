@@ -5,14 +5,19 @@
     <div class="py-8 sm:py-14 bg-[#FAF8F5] min-h-screen text-[#171412]" x-data="{
             mainImage: '{{ $product->main_image }}',
             activeImageIndex: 0,
-            images: {{ json_encode(!empty($product->images) && count($product->images) > 0 ? array_values($product->images) : [$product->main_image, 'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=800&q=85', 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=800&q=85', 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=85']) }},
+            images: {{ json_encode(!empty($product->images) && count($product->images) > 0 ? array_values($product->images) : [$product->main_image]) }},
             shades: {{ json_encode($product->shades ?? []) }},
             selectedShade: '{{ !empty($product->shades) ? ($product->shades[0]['name'] ?? '') : '' }}',
             selectedSize: '{{ !empty($product->sizes) ? $product->sizes[0] : 'Standard' }}',
             quantity: 1,
-            unitPrice: {{ $product->price }},
-            unitOriginalPrice: {{ $product->original_price ?? $product->price }},
+            unitPrice: {{ $product->price ?? 0 }},
+            unitOriginalPrice: {{ $product->original_price ?? $product->price ?? 0 }},
             isFavorited: false,
+
+            isVideo(url) {
+                if (!url) return false;
+                return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url);
+            },
 
             get subtotal() {
                 return this.unitPrice * this.quantity;
@@ -23,6 +28,7 @@
             },
 
             syncShadeForImage(imgUrl, imgIndex) {
+                if (this.isVideo(imgUrl)) return;
                 // Find if any shade is mapped to this exact image
                 if (this.shades && this.shades.length > 0) {
                     const matchedShade = this.shades.find(s => s.image && s.image.trim() !== '' && s.image === imgUrl);
@@ -39,18 +45,33 @@
                 this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
                 this.mainImage = this.images[this.activeImageIndex];
                 this.syncShadeForImage(this.mainImage, this.activeImageIndex);
+                this.handleMediaChange();
             },
 
             prevImage() {
                 this.activeImageIndex = (this.activeImageIndex - 1 + this.images.length) % this.images.length;
                 this.mainImage = this.images[this.activeImageIndex];
                 this.syncShadeForImage(this.mainImage, this.activeImageIndex);
+                this.handleMediaChange();
             },
 
             setImage(img, index) {
                 this.mainImage = img;
                 this.activeImageIndex = index;
                 this.syncShadeForImage(img, index);
+                this.handleMediaChange();
+            },
+
+            handleMediaChange() {
+                if (this.isVideo(this.mainImage)) {
+                    this.$nextTick(() => {
+                        const vid = this.$refs.mainVideoPlayer;
+                        if (vid) {
+                            vid.currentTime = 0;
+                            vid.play().catch(() => {});
+                        }
+                    });
+                }
             },
 
             selectShade(shadeObj, index) {
@@ -68,6 +89,7 @@
                     this.mainImage = this.images[index];
                     this.activeImageIndex = index;
                 }
+                this.handleMediaChange();
             }
         }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
@@ -84,39 +106,79 @@
             <!-- ── 2. MAIN 2-COLUMN PRODUCT SHOWCASE ── -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
 
-                <!-- LEFT COLUMN: IMAGE GALLERY WITH CAROUSEL & THUMBNAILS -->
+                <!-- LEFT COLUMN: IMAGE & VIDEO GALLERY WITH CAROUSEL & THUMBNAILS -->
                 <div class="lg:col-span-6 space-y-4">
 
-                    <!-- Main Showcase Image Container (Square luxury frame with subtle border) -->
+                    <!-- Main Showcase Media Container (Square luxury frame with subtle border) -->
                     <div
-                        class="relative rounded-none overflow-hidden bg-[#FBF9F6] aspect-[4/5] sm:aspect-square w-full select-none border border-[#ECE6DE] shadow-xs group">
+                        class="relative rounded-none overflow-hidden bg-[#FAF8F5] aspect-square w-full select-none border border-[#ECE6DE] shadow-xs group flex items-center justify-center">
 
-                        <img :src="mainImage" alt="{{ $product->title }}"
-                            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
-                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&q=85'" />
+                        <!-- Photo Viewer -->
+                        <div x-show="!isVideo(mainImage)" class="w-full h-full">
+                            <img :src="mainImage" src="{{ $product->main_image }}" alt="{{ $product->title }}"
+                                class="w-full h-full object-cover transition-all duration-300"
+                                onerror="this.onerror=null;this.src='{{ asset('images/products/recolte-cat-tips.jpg') }}'" />
+                        </div>
+
+                        <!-- Video Reel Player -->
+                        <div x-show="isVideo(mainImage)" class="relative w-full h-full bg-[#110E0D] flex items-center justify-center">
+                            <video 
+                                x-ref="mainVideoPlayer"
+                                :src="mainImage" 
+                                autoplay 
+                                loop 
+                                muted 
+                                playsinline 
+                                controls
+                                class="w-full h-full object-cover"
+                            ></video>
+                            <div class="absolute top-3.5 left-3.5 px-3 py-1 bg-black/75 backdrop-blur-xs text-white text-[9px] font-bold tracking-[0.2em] uppercase rounded-none border border-white/20 pointer-events-none flex items-center gap-1.5 shadow-sm">
+                                <span class="w-2 h-2 rounded-full bg-[#A33B47] animate-pulse"></span>
+                                <span>HD Video Reel</span>
+                            </div>
+                        </div>
 
                         <!-- Left Arrow (Square) -->
                         <button type="button" @click="prevImage()"
-                            class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-none bg-white/90 hover:bg-white text-[#171412] border border-[#ECE6DE] flex items-center justify-center text-sm shadow-sm transition-all z-10 hover:scale-105 backdrop-blur-xs"
-                            aria-label="Previous Image">
+                            class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-none bg-white/90 hover:bg-white text-[#171412] border border-[#ECE6DE] flex items-center justify-center text-xs sm:text-sm shadow-sm transition-all z-10 hover:scale-105 backdrop-blur-xs cursor-pointer"
+                            aria-label="Previous Media">
                             ←
                         </button>
 
                         <!-- Right Arrow (Square) -->
                         <button type="button" @click="nextImage()"
-                            class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-none bg-white/90 hover:bg-white text-[#171412] border border-[#ECE6DE] flex items-center justify-center text-sm shadow-sm transition-all z-10 hover:scale-105 backdrop-blur-xs"
-                            aria-label="Next Image">
+                            class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-none bg-white/90 hover:bg-white text-[#171412] border border-[#ECE6DE] flex items-center justify-center text-xs sm:text-sm shadow-sm transition-all z-10 hover:scale-105 backdrop-blur-xs cursor-pointer"
+                            aria-label="Next Media">
                             →
                         </button>
                     </div>
 
-                    <!-- Thumbnail Row Under Main Image (Square) -->
-                    <div class="flex items-center gap-3 overflow-x-auto scrollbar-none pt-1">
-                        <template x-for="(img, idx) in images" :key="idx">
-                            <button type="button" @click="setImage(img, idx)"
-                                class="relative rounded-none overflow-hidden aspect-square w-20 sm:w-24 shrink-0 border-2 transition-all bg-[#FAF8F5]"
-                                :class="activeImageIndex === idx ? 'border-[#171412] ring-2 ring-[#171412]/15 opacity-100 scale-102 shadow-xs' : 'border-[#ECE6DE] opacity-65 hover:opacity-100 hover:border-[#C5A880]'">
-                                <img :src="img" :alt="'Thumbnail ' + (idx + 1)" class="w-full h-full object-cover" />
+                    <!-- Thumbnail Row Under Main Media (Square) -->
+                    <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto scrollbar-none pt-1 pb-1">
+                        <template x-for="(item, idx) in images" :key="idx">
+                            <button type="button" @click="setImage(item, idx)"
+                                class="relative rounded-none overflow-hidden aspect-square w-16 sm:w-20 lg:w-24 shrink-0 border-2 transition-all bg-[#FAF8F5] cursor-pointer group/thumb"
+                                :class="activeImageIndex === idx ? 'border-[#171412] ring-2 ring-[#171412]/15 opacity-100 shadow-xs' : 'border-[#ECE6DE] opacity-75 hover:opacity-100 hover:border-[#C5A880]'">
+                                
+                                <!-- Photo Thumbnail -->
+                                <template x-if="!isVideo(item)">
+                                    <img :src="item" :alt="'Thumbnail ' + (idx + 1)" class="w-full h-full object-cover" />
+                                </template>
+
+                                <!-- Video Thumbnail with Play Button & Video Badge -->
+                                <template x-if="isVideo(item)">
+                                    <div class="relative w-full h-full bg-[#110E0D] flex items-center justify-center">
+                                        <video :src="item" muted playsinline preload="metadata" class="w-full h-full object-cover pointer-events-none opacity-80 group-hover/thumb:opacity-100"></video>
+                                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center transition-colors group-hover/thumb:bg-black/25">
+                                            <div class="w-7 h-7 rounded-full bg-white/95 text-[#171412] flex items-center justify-center pl-0.5 shadow-md group-hover/thumb:scale-110 transition-transform">
+                                                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                            </div>
+                                        </div>
+                                        <span class="absolute bottom-1 right-1 px-1.5 py-0.5 bg-black/85 text-[8px] font-bold text-white uppercase tracking-wider rounded-none border border-white/20">
+                                            Video
+                                        </span>
+                                    </div>
+                                </template>
                             </button>
                         </template>
                     </div>
@@ -133,14 +195,7 @@
                                 {{ $product->badge_text }}
                             </span>
                         @endif
-                        @if(!empty($product->original_price) && $product->original_price > $product->price)
-                            <span
-                                class="px-3 py-1 rounded-none bg-[#FAF8F5] text-[#A33B47] text-[10px] font-semibold tracking-widest uppercase border border-[#A33B47]/30 shadow-2xs">
-                                🏷️
-                                {{ round((($product->original_price - $product->price) / $product->original_price) * 100) }}%
-                                OFF
-                            </span>
-                        @endif
+
                         <span
                             class="px-3 py-1 rounded-none bg-white text-[#8C7A6B] text-[10px] font-semibold tracking-widest uppercase border border-[#ECE6DE]">
                             {{ $product->category }}
@@ -160,28 +215,14 @@
                         @endif
                     </div>
 
-                    <!-- Price & Rating Row -->
-                    <div class="flex items-center justify-between gap-4 flex-wrap pb-2">
-                        <div class="flex items-baseline gap-3">
-                            <span class="font-serif text-3xl sm:text-4xl font-semibold text-[#171412] tracking-tight">
-                                ₹{{ number_format($product->price) }}
-                            </span>
-                            @if(!empty($product->original_price) && $product->original_price > $product->price)
-                                <span class="font-serif text-lg sm:text-xl text-[#8C7A6B] line-through font-light">
-                                    ₹{{ number_format($product->original_price) }}
-                                </span>
-                            @endif
+                    <!-- 5-Star Rating & Review Count -->
+                    <div class="flex items-center gap-1.5 text-sm pb-1">
+                        <div class="flex items-center text-[#C5A880] text-sm" aria-label="5 out of 5 stars">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                         </div>
-
-                        <!-- 5-Star Rating & Review Count -->
-                        <div class="flex items-center gap-1.5 text-sm">
-                            <div class="flex items-center text-[#C5A880] text-sm" aria-label="5 out of 5 stars">
-                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                            </div>
-                            <span class="font-sans font-light text-[#8C7A6B] text-xs sm:text-sm">
-                                {{ $product->reviews_count ?? 142 }} reviews
-                            </span>
-                        </div>
+                        <span class="font-sans font-light text-[#8C7A6B] text-xs sm:text-sm">
+                            {{ $product->reviews_count ?? 142 }} reviews
+                        </span>
                     </div>
 
                     <!-- Description Paragraph -->
@@ -265,19 +306,7 @@
                         <span>123 in stock & ready to ship</span>
                     </div>
 
-                    <!-- Subtotal Summary Row (Square) -->
-                    <div
-                        class="py-3.5 px-5 rounded-none bg-[#FBF9F6] border border-[#ECE6DE] flex items-center justify-between">
-                        <span class="text-xs sm:text-sm font-light text-[#6A625A]">Estimated Subtotal</span>
-                        <div class="flex items-baseline gap-2.5">
-                            <span class="font-serif text-lg sm:text-xl font-semibold text-[#171412]"
-                                x-text="'₹' + subtotal.toLocaleString('en-IN')"></span>
-                            <template x-if="subtotalOriginal > subtotal">
-                                <span class="font-serif text-xs text-[#8C7A6B] line-through font-light"
-                                    x-text="'₹' + subtotalOriginal.toLocaleString('en-IN')"></span>
-                            </template>
-                        </div>
-                    </div>
+
 
                     <!-- Action Buttons: Add to Cart (Primary) + Buy on WhatsApp (Secondary) - Square Luxury Buttons -->
                     <div class="space-y-3 pt-2">
@@ -288,9 +317,9 @@
                                     id: {{ $product->id }},
                                     title: '{{ addslashes($product->title) }}',
                                     slug: '{{ $product->slug }}',
-                                    price: {{ $product->price }},
-                                    original_price: {{ $product->original_price ?? $product->price }},
-                                    image: mainImage,
+                                    price: {{ $product->price ?? 0 }},
+                                    original_price: {{ $product->original_price ?? $product->price ?? 0 }},
+                                    image: isVideo(mainImage) ? '{{ asset($product->main_image) }}' : mainImage,
                                     shade: selectedShade,
                                     size: selectedSize,
                                     quantity: quantity
@@ -309,16 +338,14 @@
                             <a :href="'https://wa.me/917016266727?text=' + encodeURIComponent(
                                     '✨ *HAUTE NAIL ORDER & INQUIRY | RÉCOLTE NAILS* ✨\n\n' +
                                     'Hello Récolte Nails Studio! 🌸\n' +
-                                    'I would like to place an order for this handcrafted product:\n\n' +
+                                    'I would like to place an order / inquire about this handcrafted product:\n\n' +
                                     '💅 *Product:* {{ $product->title }}\n' +
-                                    '💰 *Unit Price:* ₹{{ number_format($product->price) }}\n' +
                                     '🔢 *Quantity:* ' + quantity + '\n' +
-                                    '💵 *Total Subtotal:* ₹' + subtotal.toLocaleString('en-IN') + '\n' +
                                     (selectedShade ? '🎨 *Selected Shade:* ' + selectedShade + '\n' : '') +
                                     (selectedSize ? '📏 *Selected Size / Volume:* ' + selectedSize + '\n' : '') +
-                                    '🖼️ *Product Image:* ' + mainImage + '\n' +
+                                    '🖼️ *Product Image:* ' + (isVideo(mainImage) ? '{{ asset($product->main_image) }}' : mainImage) + '\n' +
                                     '🔗 *Product Link:* ' + window.location.href + '\n\n' +
-                                    'Please confirm stock and dispatch schedule. Thank you! 💕'
+                                    'Please confirm pricing, stock and dispatch schedule. Thank you! 💕'
                                 )" target="_blank" rel="noopener noreferrer"
                                 class="w-full py-4 px-6 rounded-none bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-[13px] font-bold tracking-[0.16em] uppercase shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2.5 select-none">
                                 <svg class="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24" aria-hidden="true">

@@ -34,15 +34,6 @@
         </div>
     </div>
 
-    @if(session('success'))
-        <div class="p-4 rounded-none bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center justify-between shadow-2xs">
-            <div class="flex items-center gap-2.5">
-                <span class="w-6 h-6 rounded-none bg-emerald-600 text-white flex items-center justify-center text-xs font-bold shrink-0">✓</span>
-                <span class="font-bold text-sm">{{ session('success') }}</span>
-            </div>
-            <button type="button" onclick="this.parentElement.remove()" class="text-emerald-700 hover:text-emerald-900 font-bold text-base cursor-pointer">&times;</button>
-        </div>
-    @endif
 
     @if ($errors->any())
         <div class="p-4 rounded-none bg-rose-50 border border-rose-200 text-[#A33B47] text-xs">
@@ -102,7 +93,7 @@
                 </div>
 
                 <!-- Category -->
-                <div class="space-y-1.5">
+                <div class="space-y-1.5 sm:col-span-2">
                     <label class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#6A625A] block">Category *</label>
                     <select 
                         name="category" 
@@ -115,33 +106,6 @@
                             </option>
                         @endforeach
                     </select>
-                </div>
-
-                <!-- Price -->
-                <div class="space-y-1.5">
-                    <label class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#6A625A] block">Selling Price (₹) *</label>
-                    <input 
-                        type="number" 
-                        step="0.01" 
-                        name="price" 
-                        x-model="price"
-                        required 
-                        class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-sm font-bold focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15"
-                        placeholder="1650.00"
-                    />
-                </div>
-
-                <!-- Original Strikethrough Price -->
-                <div class="space-y-1.5">
-                    <label class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#6A625A] block">Original / Strikethrough Price (₹)</label>
-                    <input 
-                        type="number" 
-                        step="0.01" 
-                        name="original_price" 
-                        x-model="originalPrice"
-                        class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-sm focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15"
-                        placeholder="1950.00 (Optional for discount badge)"
-                    />
                 </div>
 
                 <!-- Short Tagline -->
@@ -185,11 +149,11 @@
             </div>
         </div>
 
-        <!-- ── 2. MAIN COVER & MULTI-IMAGE GALLERY STUDIO ── -->
+        <!-- ── 2. MAIN COVER & MEDIA GALLERY STUDIO (IMAGES & VIDEOS) ── -->
         <div class="p-6 sm:p-8 rounded-none bg-white border border-[#ECE6DE] space-y-6 shadow-2xs">
             <div class="border-b border-[#ECE6DE] pb-3">
-                <h2 class="font-serif text-xl font-bold text-[#171412]">2. Main Cover &amp; Multi-Angle Gallery Studio</h2>
-                <p class="text-[11px] text-[#8C7A6B]">Choose photos from your computer. Any chosen images are instantly added to your gallery list below!</p>
+                <h2 class="font-serif text-xl font-bold text-[#171412]">2. Main Cover &amp; Media Gallery Studio (Images &amp; Videos)</h2>
+                <p class="text-[11px] text-[#8C7A6B]">Choose photos and video reels from your computer. Any chosen media files are instantly added to your gallery list below!</p>
             </div>
 
             <!-- Primary Cover Image Selection -->
@@ -212,37 +176,37 @@
                 <!-- Cover Preview -->
                 <div class="sm:col-span-4 flex flex-col items-center justify-center p-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE]">
                     <span class="text-[10px] font-semibold uppercase tracking-wider text-[#8C7A6B] mb-2">Live Main Cover Preview</span>
-                    <img :src="mainPreview || mainImageUrl || 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=600&q=80'" class="w-32 h-36 rounded-none object-cover border border-[#ECE6DE] shadow-xs bg-white">
+                    <img :src="mainPreview || mainImageUrl || 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=600&q=80'" class="w-32 h-36 rounded-none object-contain border border-[#ECE6DE] shadow-xs bg-white p-1">
                 </div>
             </div>
 
-            <!-- Multi-Image Local Picker & Add to Gallery List -->
+            <!-- Multi-Media Local Picker & Add to Gallery List -->
             <div class="pt-4 border-t border-[#ECE6DE] space-y-5">
                 <div>
                     <label class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#6A625A] block">
-                        Add Additional Photos to Gallery List
+                        Add Additional Photos &amp; Video Reels to Gallery List
                     </label>
-                    <p class="text-[11px] text-[#8C7A6B]">Select photos from your device — they will be instantly appended to your visual gallery list.</p>
+                    <p class="text-[11px] text-[#8C7A6B]">Select photos or video files (.mp4, .webm, .mov) from your device — they will be instantly appended to your visual gallery list.</p>
                 </div>
 
                 <!-- Visual Drop / Select Box -->
                 <div class="p-6 rounded-none bg-[#FAF8F5] border-2 border-dashed border-[#ECE6DE] text-center space-y-4">
                     <div class="w-12 h-12 rounded-none bg-[#FBEFE9] text-[#A33B47] flex items-center justify-center text-xl mx-auto shadow-2xs border border-[#ECE6DE]">
-                        📸
+                        🎬
                     </div>
                     <div>
-                        <div class="font-serif text-base font-bold text-[#171412]">Select Image Files from Your Computer</div>
-                        <div class="text-[11px] text-[#8C7A6B]">Choose 1 or multiple product angle photos to add to your customer carousel.</div>
+                        <div class="font-serif text-base font-bold text-[#171412]">Select Photos &amp; Video Reels from Your Computer</div>
+                        <div class="text-[11px] text-[#8C7A6B]">Choose 1 or multiple product angle photos or video demonstrations to add to your customer carousel.</div>
                     </div>
 
                     <div class="flex items-center justify-center gap-3 flex-wrap">
-                        <!-- Hidden Multi-file input triggered by button -->
+                        <!-- Multi-file input supporting images & videos -->
                         <input 
                             type="file" 
                             id="gallery_files_input"
                             name="gallery_files[]" 
                             multiple 
-                            accept="image/*"
+                            accept="image/*,video/mp4,video/webm,video/quicktime,video/*"
                             @change="addLocalFilesToGallery($event)"
                             class="hidden"
                         />
@@ -252,7 +216,7 @@
                             onclick="document.getElementById('gallery_files_input').click()"
                             class="px-6 py-3 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] shadow-xs hover:shadow-md transition-all flex items-center gap-2 cursor-pointer"
                         >
-                            <span>📁 Choose Local Images &amp; Add to List</span>
+                            <span>📁 Choose Photos &amp; Videos &amp; Add to List</span>
                         </button>
                     </div>
                 </div>
@@ -261,26 +225,40 @@
                 <div class="space-y-3 pt-2">
                     <div class="flex items-center justify-between">
                         <div class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#171412]">
-                            Active Product Gallery List (<span x-text="galleryItems.length"></span> images)
+                            Active Product Gallery List (<span x-text="galleryItems.length"></span> media items)
                         </div>
-                        <div class="text-[10px] text-[#8C7A6B] font-medium">All photos in this list will be shown in the storefront carousel.</div>
+                        <div class="text-[10px] text-[#8C7A6B] font-medium">All photos and videos in this list will be shown in the storefront carousel.</div>
                     </div>
 
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                         <template x-for="(item, gIndex) in galleryItems" :key="gIndex">
                             <div class="relative group rounded-none overflow-hidden border border-[#ECE6DE] bg-white shadow-2xs p-2 flex flex-col items-center justify-between space-y-2">
                                 
-                                <!-- Thumbnail -->
-                                <div class="w-full aspect-square rounded-none overflow-hidden bg-[#FAF8F5] border border-[#ECE6DE] relative">
-                                    <img :src="item.preview || item.url" class="w-full h-full object-cover">
+                                <!-- Thumbnail / Video Preview -->
+                                <div class="w-full aspect-square rounded-none overflow-hidden bg-white border border-[#ECE6DE] relative flex items-center justify-center p-1">
+                                    <template x-if="!item.isVideo">
+                                        <img :src="item.preview || item.url" class="w-full h-full object-contain">
+                                    </template>
+                                    <template x-if="item.isVideo">
+                                        <div class="relative w-full h-full bg-[#171412] flex items-center justify-center">
+                                            <video :src="item.preview || item.url" muted preload="metadata" class="w-full h-full object-contain opacity-85"></video>
+                                            <div class="absolute inset-0 bg-black/35 flex items-center justify-center">
+                                                <div class="w-7 h-7 rounded-full bg-white/95 text-[#171412] flex items-center justify-center pl-0.5 shadow-sm">
+                                                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
                                     
                                     <!-- Badge -->
-                                    <div class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded-none bg-black/70 text-white text-[8px] font-bold uppercase tracking-wider" x-text="item.type === 'existing' ? 'Saved' : 'New Upload'"></div>
+                                    <div class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded-none text-white text-[8px] font-bold uppercase tracking-wider"
+                                        :class="item.isVideo ? 'bg-[#A33B47]' : (item.type === 'existing' ? 'bg-black/75' : 'bg-emerald-700')"
+                                        x-text="item.isVideo ? '▶ Video' : (item.type === 'existing' ? 'Photo' : 'New Photo')"></div>
                                 </div>
 
-                                <!-- Image Tag / Name -->
+                                <!-- Image / Video Tag Name -->
                                 <div class="w-full text-center">
-                                    <div class="text-[10px] font-bold text-[#171412] truncate px-1" x-text="item.name || ('Image #' + (gIndex + 1))"></div>
+                                    <div class="text-[10px] font-bold text-[#171412] truncate px-1" x-text="item.name || (item.isVideo ? ('Video #' + (gIndex + 1)) : ('Photo #' + (gIndex + 1)))"></div>
                                 </div>
 
                                 <!-- Hidden input for existing image URLs -->
@@ -468,21 +446,23 @@
 
 <script>
 function productForm() {
-    // Initial existing gallery items
+    // Initial existing gallery items (images & videos)
     const rawImages = {!! json_encode($isEdit && is_array($product->images) ? array_values(array_slice($product->images, 1)) : []) !!};
-    const initialGallery = rawImages.map((img, i) => ({
-        type: 'existing',
-        url: img,
-        preview: img,
-        name: 'Saved Angle #' + (i + 1),
-        file: null
-    }));
+    const initialGallery = rawImages.map((mediaUrl, i) => {
+        const isVid = /\.(mp4|webm|mov|ogg)(\?.*)?$/i.test(mediaUrl);
+        return {
+            type: 'existing',
+            url: mediaUrl,
+            preview: mediaUrl,
+            name: isVid ? ('Product Video #' + (i + 1)) : ('Saved Photo #' + (i + 1)),
+            file: null,
+            isVideo: isVid
+        };
+    });
 
     return {
         title: {!! json_encode(old('title', $product->title ?? '')) !!},
         slug: {!! json_encode(old('slug', $product->slug ?? '')) !!},
-        price: {!! json_encode(old('price', $product->price ?? '')) !!},
-        originalPrice: {!! json_encode(old('original_price', $product->original_price ?? '')) !!},
         tagline: {!! json_encode(old('tagline', $product->tagline ?? '')) !!},
         badgeText: {!! json_encode(old('badge_text', $product->badge_text ?? 'NEW!')) !!},
         description: {!! json_encode(old('description', $product->description ?? '')) !!},
@@ -525,12 +505,14 @@ function productForm() {
         addLocalFilesToGallery(e) {
             const files = Array.from(e.target.files || []);
             files.forEach(file => {
+                const isVid = file.type.startsWith('video/') || /\.(mp4|webm|mov|ogg)$/i.test(file.name);
                 this.galleryItems.push({
                     type: 'file',
                     url: null,
                     preview: URL.createObjectURL(file),
                     name: file.name,
-                    file: file
+                    file: file,
+                    isVideo: isVid
                 });
             });
             this.syncDataTransfer();

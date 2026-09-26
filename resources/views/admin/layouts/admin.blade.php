@@ -165,26 +165,8 @@
     <!-- ── 2. MAIN CONTENT AREA ── -->
     <div class="flex-grow flex flex-col min-w-0 bg-[#FAF8F5]">
         
-        <!-- Top Flash Alert Messages -->
-        @if(session('success'))
-            <div class="bg-emerald-50/90 backdrop-blur-xs border-b border-emerald-200 text-emerald-800 px-6 py-3.5 text-xs font-semibold flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                    <span class="w-5 h-5 rounded-none bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold shrink-0">✓</span>
-                    <span>{{ session('success') }}</span>
-                </div>
-                <button onclick="this.parentElement.remove()" class="text-emerald-600 hover:text-emerald-900 font-bold cursor-pointer">&times;</button>
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="bg-rose-50/90 backdrop-blur-xs border-b border-rose-200 text-[#A33B47] px-6 py-3.5 text-xs font-semibold flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                    <span class="w-5 h-5 rounded-none bg-[#A33B47] text-white flex items-center justify-center text-[10px] font-bold shrink-0">⚠</span>
-                    <span>{{ session('error') }}</span>
-                </div>
-                <button onclick="this.parentElement.remove()" class="text-[#A33B47] hover:text-[#852C37] font-bold cursor-pointer">&times;</button>
-            </div>
-        @endif
+        <!-- Floating Luxury Atelier CMS Toaster -->
+        @include('admin.components.toaster')
 
         <!-- Main Body Content -->
         <main class="p-6 sm:p-8 lg:p-10 max-w-7xl w-full mx-auto space-y-8 flex-grow">

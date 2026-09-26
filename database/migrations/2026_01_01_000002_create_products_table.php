@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('tagline')->nullable();
             $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->string('category')->default('Press-On Nails');
-            $table->decimal('price', 10, 2);
+            $table->decimal('price', 10, 2)->default(0)->nullable();
             $table->decimal('original_price', 10, 2)->nullable();
             $table->decimal('rating', 3, 2)->default(5.0);
             $table->integer('reviews_count')->default(0);
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->json('benefits')->nullable();
             $table->text('key_ingredients')->nullable();
-            $table->string('how_to_use')->nullable();
+            $table->text('how_to_use')->nullable();
             $table->json('shades')->nullable();
             $table->json('sizes')->nullable();
             $table->timestamps();

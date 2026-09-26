@@ -19,7 +19,7 @@ class ProductController extends Controller
             if ($category) {
                 $query->where(function ($q) use ($category) {
                     $q->where('category_id', $category->id)
-                      ->orWhere('category', $category->name);
+                      ->orWhere('category', 'like', "%{$category->name}%");
                 });
             } else {
                 $query->where('category', 'like', "%{$catSlug}%");

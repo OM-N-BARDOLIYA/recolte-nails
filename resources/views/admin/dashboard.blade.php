@@ -82,7 +82,6 @@
                         <tr class="border-b border-[#ECE6DE] bg-[#FAF8F5] text-[#8C7A6B] uppercase text-[10px] tracking-[0.16em] font-bold">
                             <th class="py-3.5 px-3">Item</th>
                             <th class="py-3.5 px-3">Category</th>
-                            <th class="py-3.5 px-3">Price</th>
                             <th class="py-3.5 px-3">Status</th>
                             <th class="py-3.5 px-3 text-right">Actions</th>
                         </tr>
@@ -98,7 +97,6 @@
                                     </div>
                                 </td>
                                 <td class="py-3.5 px-3 text-[#6A625A] font-medium">{{ $prod->category }}</td>
-                                <td class="py-3.5 px-3 font-bold text-[#171412]">₹{{ number_format($prod->price) }}</td>
                                 <td class="py-3.5 px-3">
                                     @if($prod->is_active)
                                         <span class="px-2.5 py-0.5 rounded-none bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold uppercase tracking-wider">Active</span>

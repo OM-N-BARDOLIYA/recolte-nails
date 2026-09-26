@@ -86,7 +86,6 @@
                     <tr class="bg-[#FAF8F5] border-b border-[#ECE6DE] text-[#8C7A6B] uppercase text-[10px] tracking-[0.16em] font-bold">
                         <th class="py-4 px-5">Product Info</th>
                         <th class="py-4 px-3">Category</th>
-                        <th class="py-4 px-3">Price</th>
                         <th class="py-4 px-3">Shades &amp; Sizing</th>
                         <th class="py-4 px-3">Store Status</th>
                         <th class="py-4 px-3">Bestseller</th>
@@ -100,7 +99,7 @@
                                 <img 
                                     src="{{ $product->main_image }}" 
                                     alt="{{ $product->title }}" 
-                                    class="w-12 h-12 rounded-none object-cover bg-black/5 shrink-0 border border-[#ECE6DE] shadow-2xs"
+                                    class="w-12 h-12 rounded-none object-contain bg-white shrink-0 border border-[#ECE6DE] shadow-2xs p-0.5"
                                     onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=300&q=80'"
                                 />
                                 <div class="min-w-0">
@@ -113,13 +112,6 @@
 
                             <td class="py-4 px-3 text-[#6A625A] font-medium whitespace-nowrap">
                                 {{ $product->category }}
-                            </td>
-
-                            <td class="py-4 px-3 whitespace-nowrap">
-                                <span class="font-bold text-[#171412] text-sm">₹{{ number_format($product->price) }}</span>
-                                @if($product->original_price && $product->original_price > $product->price)
-                                    <span class="text-[10px] text-[#8C7A6B] line-through block">₹{{ number_format($product->original_price) }}</span>
-                                @endif
                             </td>
 
                             <td class="py-4 px-3">
@@ -200,7 +192,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="py-12 text-center text-xs text-[#8C7A6B]">
+                            <td colspan="6" class="py-12 text-center text-xs text-[#8C7A6B]">
                                 No products found matching your filter criteria.
                             </td>
                         </tr>

@@ -115,87 +115,115 @@
                 </div>
             </div>
 
-            <!-- ── 2. MAIN FILTER & SORTING CONTROL CENTER (SQUARE LUXURY) ── -->
-            <div class="bg-white rounded-none border border-[#ECE6DE] shadow-xs p-5 sm:p-7 space-y-6">
+            <!-- ── 2. MAIN FILTER & SORTING CONTROL CENTER ── -->
+            <div class="bg-white rounded-none border border-[#ECE6DE] shadow-xs p-5 sm:p-7 space-y-5">
 
-                <!-- Category Pills Row (Round Filter Pills) -->
-                <div class="flex items-center justify-between gap-4 flex-wrap">
-                    <div class="flex items-center gap-2.5 overflow-x-auto scrollbar-none pb-2 sm:pb-0 w-full lg:w-auto">
-                        @php
-                            $catPills = [
-                                'all' => '✦ All Nails',
-                                'Press-On Nails' => '💅 Press-On Sets',
-                                'Gel Polishes' => '🎨 Gel Polishes',
-                                'Nail Care & Elixirs' => '🌿 Nail Care & Oils',
-                                'Nail Art & Accents' => '💎 Chrome & Art',
-                                'Nail Tools & Kits' => '⚡ Lamps & Kits'
-                            ];
-                        @endphp
-
-                        @foreach($catPills as $key => $label)
-                            <button type="button" @click="applyFilter('{{ $key }}')"
-                                :class="selectedCategory === '{{ $key }}' ? 'bg-[#171412] text-white shadow-sm font-semibold' : 'bg-[#FAF8F5] text-[#171412] border border-[#ECE6DE] hover:border-[#171412] hover:bg-white font-normal'"
-                                class="flex-shrink-0 px-5 py-2.5 rounded-full text-xs uppercase tracking-wider transition-all duration-200">
-                                {{ $label }}
-                            </button>
-                        @endforeach
+                <!-- 2.1 Header: Title, Category Count & Active Filter Indicator -->
+                <div class="flex items-center justify-between gap-4 pb-1 flex-wrap">
+                    <div class="flex items-center gap-2.5">
+                        <span class="text-xs font-bold uppercase tracking-[0.16em] text-[#171412]">
+                            Browse Collections
+                        </span>
+                        <span class="text-[11px] font-semibold text-[#8C7A6B] bg-[#FAF8F5] px-2.5 py-0.5 rounded-full border border-[#ECE6DE]">
+                            {{ $categories->count() }} Categories
+                        </span>
                     </div>
 
-                    <!-- Loading Indicator -->
-                    <div class="flex items-center gap-2 shrink-0">
+                    <!-- Right Controls: Loading Indicator + Reset -->
+                    <div class="flex items-center gap-3">
                         <template x-if="isLoading">
-                            <div class="flex items-center gap-2 text-xs text-[#A33B47] font-semibold animate-pulse">
+                            <div class="flex items-center gap-1.5 text-xs text-[#A33B47] font-semibold animate-pulse">
                                 <span class="w-2 h-2 rounded-full bg-[#A33B47] animate-ping"></span>
-                                <span>Updating...</span>
+                                <span>Updating catalog...</span>
                             </div>
                         </template>
-                    </div>
-                </div>
 
-                <!-- Search Bar & Sorting Dropdown Row -->
-                <div class="pt-5 border-t border-[#ECE6DE] flex flex-col md:flex-row items-center justify-between gap-4">
-
-                    <!-- Search Box (Round) -->
-                    <form @submit.prevent="applyFilter(null, null, searchQuery)" class="w-full md:max-w-md relative">
-                        <input type="text" x-model="searchQuery" @keydown.enter="applyFilter(null, null, searchQuery)"
-                            placeholder="Search press-ons, BIAB, chrome, oils..."
-                            class="w-full pl-11 pr-24 py-3 rounded-full border border-[#ECE6DE] text-xs text-[#171412] bg-[#FAF8F5] focus:bg-white focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15 transition-all font-normal placeholder-[#8C7A6B]/70" />
-                        <div class="absolute left-4 top-1/2 -translate-y-1/2 text-[#8C7A6B]">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </div>
-                        <button type="submit"
-                            class="absolute right-1.5 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-wider rounded-full transition-all shadow-2xs">
-                            Search
-                        </button>
-                    </form>
-
-                    <!-- Sorting & Reset Controls -->
-                    <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
-                        <div class="flex items-center gap-2">
-                            <label for="sort-select"
-                                class="text-xs font-semibold text-[#8C7A6B] shrink-0 uppercase tracking-wider">Sort:</label>
-                            <select id="sort-select" x-model="sortOption" @change="applyFilter(null, sortOption, null)"
-                                class="px-4 py-2 rounded-none border border-[#ECE6DE] bg-[#FAF8F5] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#171412] cursor-pointer hover:bg-white transition-colors">
-                                <option value="featured">Featured</option>
-                                <option value="price_asc">Price: Low to High</option>
-                                <option value="price_desc">Price: High to Low</option>
-                                <option value="rating">Highest Rating (★)</option>
-                                <option value="bestsellers">Bestsellers Only</option>
-                            </select>
-                        </div>
-
-                        <!-- Reset Button -->
                         <button type="button"
                             x-show="selectedCategory !== 'all' || (searchQuery && searchQuery.trim() !== '') || sortOption !== 'featured'"
                             @click="resetAll()"
-                            class="inline-flex items-center gap-1 text-xs font-semibold text-[#A33B47] hover:underline uppercase tracking-wider shrink-0">
-                            ✕ Reset
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-[#A33B47] hover:underline uppercase tracking-wider shrink-0 cursor-pointer">
+                            ✕ Clear All Filters
                         </button>
                     </div>
                 </div>
+
+                <!-- 2.2 Category Pills (Fully Responsive Clean Multi-Row Wrap — No Shift+Roller Needed!) -->
+                <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
+                    <button type="button" @click="applyFilter('all')"
+                        :class="(selectedCategory === 'all' || !selectedCategory) 
+                            ? 'bg-[#171412] text-white shadow-xs font-semibold ring-2 ring-[#171412]/20' 
+                            : 'bg-[#FAF8F5] text-[#2C2420] border border-[#ECE6DE] hover:border-[#171412] hover:bg-white hover:text-black font-normal'"
+                        class="px-3.5 py-2 rounded-full text-xs uppercase tracking-wider transition-all duration-150 cursor-pointer select-none">
+                        ✦ All Products
+                    </button>
+
+                    @foreach($categories as $cat)
+                        <button type="button" @click="applyFilter('{{ $cat->slug }}')"
+                            :class="(selectedCategory === '{{ $cat->slug }}' || selectedCategory === '{{ $cat->name }}') 
+                                ? 'bg-[#171412] text-white shadow-xs font-semibold ring-2 ring-[#171412]/20' 
+                                : 'bg-[#FAF8F5] text-[#2C2420] border border-[#ECE6DE] hover:border-[#171412] hover:bg-white hover:text-black font-normal'"
+                            class="px-3.5 py-2 rounded-full text-xs uppercase tracking-wider transition-all duration-150 cursor-pointer select-none flex items-center gap-1.5">
+                            <span class="text-xs">{{ $cat->icon_emoji ?? '✦' }}</span>
+                            <span>{{ $cat->name }}</span>
+                        </button>
+                    @endforeach
+                </div>
+
+                <!-- 2.3 Search Bar, Category Dropdown & Sorting Row -->
+                <div class="pt-4 border-t border-[#ECE6DE] grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-center">
+
+                    <!-- Search Box -->
+                    <div class="md:col-span-6 relative">
+                        <form @submit.prevent="applyFilter(null, null, searchQuery)" class="relative w-full">
+                            <input type="text" x-model="searchQuery" @keydown.enter="applyFilter(null, null, searchQuery)"
+                                placeholder="Search by name, category, or finish..."
+                                class="w-full pl-10 pr-24 py-2.5 rounded-full border border-[#ECE6DE] text-xs text-[#171412] bg-[#FAF8F5] focus:bg-white focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15 transition-all font-normal placeholder-[#8C7A6B]/70" />
+                            <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8C7A6B]">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                            <button type="submit"
+                                class="absolute right-1 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-wider rounded-full transition-all shadow-2xs cursor-pointer">
+                                Search
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Category Quick Select Dropdown (Synced with Pills!) -->
+                    <div class="md:col-span-3">
+                        <div class="relative">
+                            <select x-model="selectedCategory" @change="applyFilter(selectedCategory)"
+                                class="w-full pl-3.5 pr-8 py-2.5 rounded-full border border-[#ECE6DE] bg-[#FAF8F5] text-xs font-medium text-[#171412] focus:outline-none focus:border-[#171412] cursor-pointer hover:bg-white transition-colors appearance-none">
+                                <option value="all">✦ All Collections ({{ $categories->count() }})</option>
+                                @foreach($categories as $cat)
+                                    <option value="{{ $cat->slug }}">{{ $cat->name }}</option>
+                                @endforeach
+                            </select>
+                            <div class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#8C7A6B] text-[10px]">
+                                ▼
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sort Dropdown -->
+                    <div class="md:col-span-3">
+                        <div class="relative">
+                            <select id="sort-select" x-model="sortOption" @change="applyFilter(null, sortOption, null)"
+                                class="w-full pl-3.5 pr-8 py-2.5 rounded-full border border-[#ECE6DE] bg-[#FAF8F5] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#171412] cursor-pointer hover:bg-white transition-colors appearance-none">
+                                <option value="featured">Sort: Featured</option>
+                                <option value="rating">Sort: Highest Rated (★)</option>
+                                <option value="bestsellers">Sort: Bestsellers Only</option>
+                            </select>
+                            <div class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#8C7A6B] text-[10px]">
+                                ▼
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
 
             <!-- ── 3. DYNAMIC PRODUCTS GRID (SWAPPED SEAMLESSLY VIA DOM PARSER) ── -->

@@ -29,20 +29,17 @@
                 
                 <!-- Product Header Card -->
                 <div class="flex gap-4 items-center pr-6">
-                    <img 
-                        :src="modalProduct.main_image" 
-                        :alt="modalProduct.title" 
-                        class="w-16 h-16 sm:w-20 sm:h-20 rounded-none object-cover border border-rose/20 shadow-sm shrink-0"
-                    />
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-none bg-white border border-[#ECE6DE] shadow-sm shrink-0 p-1 flex items-center justify-center">
+                        <img 
+                            :src="modalProduct.main_image" 
+                            :alt="modalProduct.title" 
+                            class="w-full h-full object-contain"
+                        />
+                    </div>
                     <div class="space-y-0.5 min-w-0">
                         <span class="text-[9px] uppercase font-extrabold text-rose-dark tracking-[0.16em]" x-text="modalProduct.category"></span>
                         <h3 class="font-serif text-base sm:text-lg font-bold text-charcoal leading-snug line-clamp-1" x-text="modalProduct.title"></h3>
-                        <div class="flex items-center gap-2 pt-0.5">
-                            <span class="text-base font-bold text-charcoal font-serif" x-text="'₹' + Number(modalProduct.price).toLocaleString('en-IN')"></span>
-                            <template x-if="modalProduct.original_price && modalProduct.original_price > modalProduct.price">
-                                <span class="text-xs text-charcoal/40 line-through font-medium" x-text="'₹' + Number(modalProduct.original_price).toLocaleString('en-IN')"></span>
-                            </template>
-                        </div>
+
                     </div>
                 </div>
 
@@ -99,7 +96,7 @@
                             'Hello Récolte Nails Studio! 🌸\n' +
                             'I would like to inquire about and place an order for this handcrafted nail product:\n\n' +
                             '💅 *Product:* ' + modalProduct.title + '\n' +
-                            '💰 *Price:* ₹' + Number(modalProduct.price).toLocaleString('en-IN') + '\n' +
+
                             (modalShade ? '🎨 *Selected Shade:* ' + modalShade + '\n' : '') +
                             (modalSize ? '📏 *Selected Size / Volume:* ' + modalSize + '\n' : '') +
                             '🖼️ *Product Image:* ' + modalProduct.main_image + '\n\n' +

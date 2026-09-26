@@ -145,17 +145,16 @@ document.addEventListener('alpine:init', () => {
             message += '────────────────────────\n';
 
             this.items.forEach((item, idx) => {
-                const itemSubtotal = ((item.price || 0) * item.quantity).toLocaleString('en-IN');
                 message += `${idx + 1}️⃣ *${item.title}*\n`;
                 if (item.shade) message += `   • Shade: ${item.shade}\n`;
                 if (item.size) message += `   • Size / Volume: ${item.size}\n`;
-                message += `   • Qty: ${item.quantity} × ₹${Number(item.price).toLocaleString('en-IN')} = ₹${itemSubtotal}\n`;
+                message += `   • Qty: ${item.quantity}\n`;
                 if (item.image) message += `   • Photo: ${item.image}\n`;
                 message += '\n';
             });
 
             message += '────────────────────────\n';
-            message += `💵 *TOTAL ESTIMATED AMOUNT:* ₹${this.subtotal.toLocaleString('en-IN')}\n\n`;
+            message += `📦 *TOTAL ITEMS:* ${this.totalCount}\n\n`;
             message += 'Please confirm order availability, custom sizing, and dispatch timeline. Thank you! 💕';
 
             return 'https://wa.me/917016266727?text=' + encodeURIComponent(message);
