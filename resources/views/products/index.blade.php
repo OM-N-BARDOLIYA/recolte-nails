@@ -5,31 +5,79 @@
     <section class="py-12 sm:py-16 bg-[#FAF8F5] min-h-screen" x-data="{
                 selectedCategory: '{{ $selectedCategory }}',
                 searchQuery: '{{ $searchQuery }}',
-                sortOption: '{{ request('sort', 'featured') }}',
+                sortOption: '{{ $currentSort }}',
                 isLoading: false,
+
+                init() {
+                    // Sync URL query params if restored from session and URL is currently bare
+                    const params = new URLSearchParams(window.location.search);
+                    let shouldReplace = false;
+                    if (this.selectedCategory && this.selectedCategory !== 'all' && !params.has('category')) {
+                        params.set('category', this.selectedCategory);
+                        shouldReplace = true;
+                    }
+                    if (this.sortOption && this.sortOption !== 'featured' && !params.has('sort')) {
+                        params.set('sort', this.sortOption);
+                        shouldReplace = true;
+                    }
+                    if (this.searchQuery && !params.has('search')) {
+                        params.set('search', this.searchQuery);
+                        shouldReplace = true;
+                    }
+                    if (shouldReplace) {
+                        const newUrl = window.location.pathname + '?' + params.toString();
+                        window.history.replaceState({}, '', newUrl);
+                    }
+
+                    // Handle browser Back / Forward buttons seamlessly
+                    window.addEventListener('popstate', () => {
+                        const popParams = new URLSearchParams(window.location.search);
+                        this.selectedCategory = popParams.get('category') || 'all';
+                        this.sortOption = popParams.get('sort') || 'featured';
+                        this.searchQuery = popParams.get('search') || '';
+                        this.fetchCatalogContent(window.location.href, false);
+                    });
+                },
 
                 async applyFilter(newCat = null, newSort = null, newSearch = null) {
                     if (newCat !== null) this.selectedCategory = newCat;
                     if (newSort !== null) this.sortOption = newSort;
                     if (newSearch !== null) this.searchQuery = newSearch;
 
-                    this.isLoading = true;
-
+                    // Always send category & sort so server session updates/clears properly
                     const params = new URLSearchParams();
-                    if (this.selectedCategory && this.selectedCategory !== 'all') {
+                    if (this.selectedCategory) {
                         params.set('category', this.selectedCategory);
                     }
-                    if (this.sortOption && this.sortOption !== 'featured') {
+                    if (this.sortOption) {
                         params.set('sort', this.sortOption);
                     }
                     if (this.searchQuery && this.searchQuery.trim() !== '') {
                         params.set('search', this.searchQuery.trim());
                     }
 
-                    const newUrl = '{{ route('products.index') }}' + (params.toString() ? '?' + params.toString() : '');
+                    // Browser URL bar representation: clean when 'all'
+                    const displayParams = new URLSearchParams();
+                    if (this.selectedCategory && this.selectedCategory !== 'all') {
+                        displayParams.set('category', this.selectedCategory);
+                    }
+                    if (this.sortOption && this.sortOption !== 'featured') {
+                        displayParams.set('sort', this.sortOption);
+                    }
+                    if (this.searchQuery && this.searchQuery.trim() !== '') {
+                        displayParams.set('search', this.searchQuery.trim());
+                    }
 
+                    const fetchUrl = '{{ route('products.index') }}' + (params.toString() ? '?' + params.toString() : '');
+                    const pushUrl = '{{ route('products.index') }}' + (displayParams.toString() ? '?' + displayParams.toString() : '');
+
+                    await this.fetchCatalogContent(fetchUrl, true, pushUrl);
+                },
+
+                async fetchCatalogContent(fetchUrl, updateHistory = true, pushUrl = null) {
+                    this.isLoading = true;
                     try {
-                        const response = await fetch(newUrl, {
+                        const response = await fetch(fetchUrl, {
                             headers: { 'X-Requested-With': 'XMLHttpRequest' }
                         });
                         const html = await response.text();
@@ -44,11 +92,13 @@
                         }
 
                         // Update URL in browser bar smoothly
-                        window.history.pushState({}, '', newUrl);
+                        if (updateHistory) {
+                            window.history.pushState({}, '', pushUrl || fetchUrl);
+                        }
                     } catch (e) {
                         console.error('Filter fetch error:', e);
                         // Fallback to normal navigation if fetch fails
-                        window.location.href = newUrl;
+                        window.location.href = pushUrl || fetchUrl;
                     } finally {
                         this.isLoading = false;
                     }

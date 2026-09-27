@@ -19,6 +19,16 @@
                     return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url);
                 },
 
+                isBuilderGel: {{ $product->slug === 'recolte-sculpting-master-builder-gel' ? 'true' : 'false' }},
+
+                isDriveUncutImage(url) {
+                    if (!url) return false;
+                    if (this.isBuilderGel) return true;
+                    return url.includes('color_book_with_bottle_1_') || 
+                           url.includes('color_book_with_bottle_2_') ||
+                           url.includes('10colors_cat_eye_2_');
+                },
+
                 get subtotal() {
                     return this.unitPrice * this.quantity;
                 },
@@ -98,7 +108,15 @@
             <nav class="flex items-center gap-2 text-xs text-[#8C7A6B] font-light tracking-wide">
                 <a href="{{ route('home') }}" class="hover:text-[#171412] transition-colors">Home</a>
                 <span class="text-[#ECE6DE]">/</span>
-                <a href="{{ route('products.index') }}" class="hover:text-[#171412] transition-colors">Catalog</a>
+                @php
+                    $catalogQuery = array_filter([
+                        'category' => session('catalog_category'),
+                        'sort' => session('catalog_sort'),
+                        'search' => session('catalog_search'),
+                    ]);
+                    $catalogUrl = !empty($catalogQuery) ? route('products.index', $catalogQuery) : route('products.index');
+                @endphp
+                <a href="{{ $catalogUrl }}" class="hover:text-[#171412] transition-colors">Catalog</a>
                 <span class="text-[#ECE6DE]">/</span>
                 <span class="text-[#171412] font-medium truncate">{{ $product->title }}</span>
             </nav>
@@ -117,10 +135,13 @@
                     <div
                         class="relative rounded-none overflow-hidden {{ $isBuilderGel ? 'bg-white' : 'bg-[#FAF8F5]' }} aspect-square w-full select-none border border-[#ECE6DE] shadow-xs group flex items-center justify-center">
 
-                        <!-- Photo Viewer (Uncut and pure white background for Builder Gel) -->
-                        <div x-show="!isVideo(mainImage)" class="w-full h-full {{ $isBuilderGel ? 'flex items-center justify-center bg-white p-2 sm:p-4' : '' }}">
+                        <!-- Photo Viewer (Uncut and properly framed ONLY for the specific Drive images sent by user) -->
+                        <div x-show="!isVideo(mainImage)" 
+                            class="w-full h-full"
+                            :class="isDriveUncutImage(mainImage) ? ('flex items-center justify-center ' + (isBuilderGel ? 'bg-white p-2 sm:p-4' : 'p-2 sm:p-3')) : ''">
                             <img :src="mainImage" src="{{ $product->main_image }}" alt="{{ $product->title }}"
-                                class="w-full h-full {{ $isBuilderGel ? 'object-contain transition-transform duration-300 group-hover:scale-102' : 'object-cover transition-all duration-300' }}"
+                                class="w-full h-full transition-all duration-300"
+                                :class="isDriveUncutImage(mainImage) ? 'object-contain group-hover:scale-102' : 'object-cover'"
                                 onerror="this.onerror=null;this.src='{{ asset('images/products/recolte-cat-tips.jpg') }}'" />
                         </div>
 
@@ -155,12 +176,17 @@
                     <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto scrollbar-none pt-1 pb-1">
                         <template x-for="(item, idx) in images" :key="idx">
                             <button type="button" @click="setImage(item, idx)"
-                                class="relative rounded-none overflow-hidden aspect-square w-16 sm:w-20 lg:w-24 shrink-0 border-2 transition-all {{ $isBuilderGel ? 'bg-white p-1 flex items-center justify-center' : 'bg-[#FAF8F5]' }} cursor-pointer group/thumb"
-                                :class="activeImageIndex === idx ? 'border-[#171412] ring-2 ring-[#171412]/15 opacity-100 shadow-xs' : 'border-[#ECE6DE] opacity-75 hover:opacity-100 hover:border-[#C5A880]'">
+                                class="relative rounded-none overflow-hidden aspect-square w-16 sm:w-20 lg:w-24 shrink-0 border-2 transition-all cursor-pointer group/thumb {{ $isBuilderGel ? 'bg-white' : 'bg-[#FAF8F5]' }}"
+                                :class="[
+                                    activeImageIndex === idx ? 'border-[#171412] ring-2 ring-[#171412]/15 opacity-100 shadow-xs' : 'border-[#ECE6DE] opacity-75 hover:opacity-100 hover:border-[#C5A880]',
+                                    isDriveUncutImage(item) ? 'p-1 flex items-center justify-center' : ''
+                                ]">
 
                                 <!-- Photo Thumbnail -->
                                 <template x-if="!isVideo(item)">
-                                    <img :src="item" :alt="'Thumbnail ' + (idx + 1)" class="w-full h-full {{ $isBuilderGel ? 'object-contain' : 'object-cover' }}" />
+                                    <img :src="item" :alt="'Thumbnail ' + (idx + 1)" 
+                                        class="w-full h-full"
+                                        :class="isDriveUncutImage(item) ? 'object-contain' : 'object-cover'" />
                                 </template>
 
                                 <!-- Video Thumbnail with Play Button & Video Badge -->

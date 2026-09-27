@@ -11,10 +11,63 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
+        // 1. Manage filter persistence in Session
+        if ($request->has('reset') || $request->has('clear')) {
+            session()->forget(['catalog_category', 'catalog_sort', 'catalog_search']);
+            $selectedCategory = 'all';
+            $currentSort = 'featured';
+            $searchQuery = '';
+        } else {
+            // Category filter persistence
+            if ($request->has('category')) {
+                $selectedCategory = $request->get('category');
+                if ($selectedCategory === 'all' || empty($selectedCategory)) {
+                    session()->forget('catalog_category');
+                    $selectedCategory = 'all';
+                } else {
+                    session(['catalog_category' => $selectedCategory]);
+                }
+            } elseif (session()->has('catalog_category') && session('catalog_category') !== 'all') {
+                $selectedCategory = session('catalog_category');
+            } else {
+                $selectedCategory = 'all';
+            }
+
+            // Sort option persistence
+            if ($request->has('sort')) {
+                $currentSort = $request->get('sort');
+                if ($currentSort === 'featured' || empty($currentSort)) {
+                    session()->forget('catalog_sort');
+                    $currentSort = 'featured';
+                } else {
+                    session(['catalog_sort' => $currentSort]);
+                }
+            } elseif (session()->has('catalog_sort')) {
+                $currentSort = session('catalog_sort');
+            } else {
+                $currentSort = 'featured';
+            }
+
+            // Search query persistence
+            if ($request->has('search')) {
+                $searchQuery = $request->get('search', '');
+                if (trim($searchQuery) === '') {
+                    session()->forget('catalog_search');
+                    $searchQuery = '';
+                } else {
+                    session(['catalog_search' => trim($searchQuery)]);
+                }
+            } elseif (session()->has('catalog_search') && !empty(session('catalog_search'))) {
+                $searchQuery = session('catalog_search');
+            } else {
+                $searchQuery = '';
+            }
+        }
+
         $query = Product::where('is_active', true);
 
-        if ($request->filled('category') && $request->category !== 'all') {
-            $catSlug = $request->category;
+        if (!empty($selectedCategory) && $selectedCategory !== 'all') {
+            $catSlug = $selectedCategory;
             $category = Category::where('slug', $catSlug)->orWhere('name', $catSlug)->first();
             if ($category) {
                 $query->where(function ($q) use ($category) {
@@ -26,8 +79,8 @@ class ProductController extends Controller
             }
         }
 
-        if ($request->filled('search')) {
-            $search = $request->search;
+        if (!empty($searchQuery)) {
+            $search = $searchQuery;
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
                   ->orWhere('tagline', 'like', "%{$search}%")
@@ -36,8 +89,7 @@ class ProductController extends Controller
             });
         }
 
-        $sort = $request->get('sort', 'featured');
-        switch ($sort) {
+        switch ($currentSort) {
             case 'price_asc':
                 $query->orderBy('price', 'asc');
                 break;
@@ -57,9 +109,6 @@ class ProductController extends Controller
 
         $products = $query->get();
         $categories = Category::where('is_active', true)->orderBy('sort_order', 'asc')->get();
-        $selectedCategory = $request->get('category', 'all');
-        $searchQuery = $request->get('search', '');
-        $currentSort = $sort;
         $catalog_hero = PageContent::getSection('catalog', 'hero', [
             'badge' => 'HAUTE NAIL COUTURE & CARE ARCHIVES',
             'title_prefix' => 'The Atelier',
