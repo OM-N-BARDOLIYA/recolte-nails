@@ -103,7 +103,7 @@
         class="w-full relative overflow-hidden bg-[#F5E6DE] select-none m-0 p-0 block leading-none group"
     >
         <!-- High-Resolution Photography Background with Proportional Height -->
-        <div class="relative w-full aspect-[21/9] sm:aspect-[21/8] min-h-[340px] sm:min-h-[420px] lg:min-h-[500px] max-h-[560px] flex items-center justify-start overflow-hidden">
+        <div class="relative w-full aspect-[16/10] sm:aspect-[21/9] md:aspect-[21/8] min-h-[280px] sm:min-h-[400px] lg:min-h-[500px] max-h-[560px] flex items-center justify-start overflow-hidden">
 
             @foreach($heroSlides as $index => $slide)
             <!-- Slide {{ $index + 1 }} -->
@@ -119,51 +119,51 @@
                 <img 
                     src="{{ $slideImg . $versionStr }}" 
                     alt="Récolte Nails - {{ $slide['sub_descriptor'] ?? 'Haute Nail Couture & Care' }}"
-                    class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none transition-transform duration-[6500ms] ease-out"
+                    class="absolute inset-0 w-full h-full object-cover object-right sm:object-center pointer-events-none transition-transform duration-[6500ms] ease-out"
                     :class="current === {{ $index }} ? 'scale-100' : 'scale-105'"
                     loading="{{ $index === 0 ? 'eager' : 'lazy' }}" 
                 />
 
                 @if(empty($slide['is_image_banner']))
-                    <!-- Subtle Left Reading Veil for crystal-clear legibility over silk background -->
-                    <div class="absolute inset-0 bg-gradient-to-r from-white/35 via-white/10 to-transparent pointer-events-none"></div>
+                    <!-- Subtle Left Reading Veil for crystal-clear legibility on both mobile and desktop -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/90 via-white/60 to-transparent sm:from-white/40 sm:via-white/15 sm:to-transparent pointer-events-none"></div>
 
                     <!-- Vector Sharp Left-Aligned Typography & Interactive CTA -->
-                    <div class="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:pl-20 sm:pr-8 lg:pl-24 lg:pr-12 flex items-center justify-start">
+                    <div class="relative z-10 w-full max-w-7xl mx-auto px-5 sm:pl-16 sm:pr-8 lg:pl-24 lg:pr-12 flex items-center justify-start">
                         <div 
                             class="text-left max-w-xs sm:max-w-md lg:max-w-xl flex flex-col items-start transition-all duration-700 delay-150 ease-out"
                             :class="current === {{ $index }} ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2.5'"
                         >
 
                             <!-- Company Actual Logo from Navbar -->
-                            <div class="mb-2 sm:mb-3">
+                            <div class="mb-1.5 sm:mb-3">
                                 <img 
                                     src="{{ asset('images/logo.png') }}?v={{ time() }}" 
                                     alt="Récolte Nails Logo" 
-                                    class="h-12 sm:h-16 lg:h-20 w-auto object-contain select-none drop-shadow-xs" 
+                                    class="h-8 sm:h-14 lg:h-18 w-auto object-contain select-none drop-shadow-xs" 
                                 />
                             </div>
 
                             <!-- Brand Sub-Descriptor -->
-                            <p class="text-[9px] sm:text-xs lg:text-[12px] tracking-[0.35em] text-[#333333] font-medium uppercase mb-2 sm:mb-2.5 text-left">
+                            <p class="text-[8px] sm:text-[11px] lg:text-xs tracking-[0.22em] sm:tracking-[0.35em] text-[#444444] font-medium uppercase mb-1 sm:mb-2 text-left">
                                 {{ $slide['sub_descriptor'] ?? 'NAILS • BEAUTY • YOU' }}
                             </p>
 
                             <!-- Script Accent Line -->
-                            <p class="font-['Great_Vibes',cursive] text-2xl sm:text-4xl lg:text-[42px] text-[#111111] font-normal leading-tight mb-2 sm:mb-3 text-left">
+                            <p class="font-['Great_Vibes',cursive] text-2xl sm:text-3xl lg:text-[40px] text-[#111111] font-normal leading-tight mb-1 sm:mb-2 text-left">
                                 {!! $slide['script_line'] ?? 'Create • Express • Shine' !!}
                             </p>
 
                             <!-- Subtitle Tagline -->
-                            <p class="text-xs sm:text-sm lg:text-[15px] font-medium text-[#444444] tracking-wide max-w-xs sm:max-w-md mb-4 sm:mb-6 leading-relaxed text-left">
+                            <p class="text-[11px] sm:text-xs lg:text-[14px] font-medium text-[#555555] tracking-wide line-clamp-2 max-w-[230px] sm:max-w-md mb-3.5 sm:mb-5 leading-snug sm:leading-relaxed text-left">
                                 {{ $slide['subtitle'] ?? 'Premium Nail Products for Professionals & Enthusiasts' }}
                             </p>
 
                             <!-- Solid Black SHOP NOW Button -->
                             <a href="{{ $slide['cta_url'] ?? route('products.index') }}"
-                                class="inline-flex items-center gap-2.5 px-7 sm:px-10 py-2.5 sm:py-3.5 bg-[#111111] hover:bg-black text-white text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase transition-colors duration-200 shadow-md hover:shadow-lg">
+                                class="inline-flex items-center gap-2 px-5 py-2 sm:px-8 sm:py-3.5 bg-[#111111] hover:bg-black active:scale-95 text-white text-[10.5px] sm:text-xs font-bold tracking-[0.16em] uppercase transition-all duration-200 shadow-md hover:shadow-lg select-none">
                                 <span>{{ $slide['cta_text'] ?? 'SHOP NOW' }}</span>
-                                <span class="text-sm">→</span>
+                                <span class="text-xs sm:text-sm">→</span>
                             </a>
 
                         </div>
@@ -177,12 +177,12 @@
             </div>
             @endforeach
 
-            <!-- Slider Arrows (Previous & Next) -->
+            <!-- Slider Arrows (Previous & Next - Hidden on mobile where touch swipe is used) -->
             <button 
                 type="button" 
                 @click="prev(); resetTimer();"
                 aria-label="Previous slide"
-                class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/70 hover:bg-white text-[#111111] backdrop-blur-md border border-white/80 shadow-sm hover:shadow-md flex items-center justify-center transition-all duration-300 opacity-60 group-hover:opacity-100 hover:scale-105 active:scale-95 cursor-pointer"
+                class="hidden sm:flex absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/70 hover:bg-white text-[#111111] backdrop-blur-md border border-white/80 shadow-sm hover:shadow-md items-center justify-center transition-all duration-300 opacity-60 group-hover:opacity-100 hover:scale-105 active:scale-95 cursor-pointer"
             >
                 <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
@@ -193,7 +193,7 @@
                 type="button" 
                 @click="next(); resetTimer();"
                 aria-label="Next slide"
-                class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/70 hover:bg-white text-[#111111] backdrop-blur-md border border-white/80 shadow-sm hover:shadow-md flex items-center justify-center transition-all duration-300 opacity-60 group-hover:opacity-100 hover:scale-105 active:scale-95 cursor-pointer"
+                class="hidden sm:flex absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/70 hover:bg-white text-[#111111] backdrop-blur-md border border-white/80 shadow-sm hover:shadow-md items-center justify-center transition-all duration-300 opacity-60 group-hover:opacity-100 hover:scale-105 active:scale-95 cursor-pointer"
             >
                 <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
@@ -201,14 +201,14 @@
             </button>
 
             <!-- Slider Navigation Indicators (Luxury Pill Progress Dots) -->
-            <div class="absolute bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+            <div class="absolute bottom-2.5 sm:bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 sm:gap-2">
                 @foreach($heroSlides as $idx => $s)
                 <button 
                     type="button" 
                     @click="goTo({{ $idx }})"
                     aria-label="Go to slide {{ $idx + 1 }}"
                     class="h-1.5 sm:h-2 rounded-full transition-all duration-500 cursor-pointer"
-                    :class="current === {{ $idx }} ? 'w-8 sm:w-10 bg-[#111111] shadow-xs' : 'w-2 bg-[#111111]/30 hover:bg-[#111111]/60'"
+                    :class="current === {{ $idx }} ? 'w-6 sm:w-10 bg-[#111111] shadow-xs' : 'w-1.5 sm:w-2 bg-[#111111]/30 hover:bg-[#111111]/60'"
                 ></button>
                 @endforeach
             </div>

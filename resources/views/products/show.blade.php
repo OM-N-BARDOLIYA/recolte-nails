@@ -3,95 +3,95 @@
 @section("content")
 
     <div class="py-8 sm:py-14 bg-[#FAF8F5] min-h-screen text-[#171412]" x-data="{
-            mainImage: '{{ $product->main_image }}',
-            activeImageIndex: 0,
-            images: {{ json_encode(!empty($product->images) && count($product->images) > 0 ? array_values($product->images) : [$product->main_image]) }},
-            shades: {{ json_encode($product->shades ?? []) }},
-            selectedShade: '{{ !empty($product->shades) ? ($product->shades[0]['name'] ?? '') : '' }}',
-            selectedSize: '{{ !empty($product->sizes) ? $product->sizes[0] : 'Standard' }}',
-            quantity: 1,
-            unitPrice: {{ $product->price ?? 0 }},
-            unitOriginalPrice: {{ $product->original_price ?? $product->price ?? 0 }},
-            isFavorited: false,
+                mainImage: '{{ $product->main_image }}',
+                activeImageIndex: 0,
+                images: {{ json_encode(!empty($product->images) && count($product->images) > 0 ? array_values($product->images) : [$product->main_image]) }},
+                shades: {{ json_encode($product->shades ?? []) }},
+                selectedShade: '{{ !empty($product->shades) ? ($product->shades[0]['name'] ?? '') : '' }}',
+                selectedSize: '{{ !empty($product->sizes) ? $product->sizes[0] : 'Standard' }}',
+                quantity: 1,
+                unitPrice: {{ $product->price ?? 0 }},
+                unitOriginalPrice: {{ $product->original_price ?? $product->price ?? 0 }},
+                isFavorited: false,
 
-            isVideo(url) {
-                if (!url) return false;
-                return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url);
-            },
+                isVideo(url) {
+                    if (!url) return false;
+                    return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url);
+                },
 
-            get subtotal() {
-                return this.unitPrice * this.quantity;
-            },
+                get subtotal() {
+                    return this.unitPrice * this.quantity;
+                },
 
-            get subtotalOriginal() {
-                return this.unitOriginalPrice * this.quantity;
-            },
+                get subtotalOriginal() {
+                    return this.unitOriginalPrice * this.quantity;
+                },
 
-            syncShadeForImage(imgUrl, imgIndex) {
-                if (this.isVideo(imgUrl)) return;
-                // Find if any shade is mapped to this exact image
-                if (this.shades && this.shades.length > 0) {
-                    const matchedShade = this.shades.find(s => s.image && s.image.trim() !== '' && s.image === imgUrl);
-                    if (matchedShade) {
-                        this.selectedShade = matchedShade.name;
-                    } else if (this.shades[imgIndex]) {
-                        // Fallback to shade by matching position if no explicit URL match
-                        this.selectedShade = this.shades[imgIndex].name;
-                    }
-                }
-            },
-
-            nextImage() {
-                this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
-                this.mainImage = this.images[this.activeImageIndex];
-                this.syncShadeForImage(this.mainImage, this.activeImageIndex);
-                this.handleMediaChange();
-            },
-
-            prevImage() {
-                this.activeImageIndex = (this.activeImageIndex - 1 + this.images.length) % this.images.length;
-                this.mainImage = this.images[this.activeImageIndex];
-                this.syncShadeForImage(this.mainImage, this.activeImageIndex);
-                this.handleMediaChange();
-            },
-
-            setImage(img, index) {
-                this.mainImage = img;
-                this.activeImageIndex = index;
-                this.syncShadeForImage(img, index);
-                this.handleMediaChange();
-            },
-
-            handleMediaChange() {
-                if (this.isVideo(this.mainImage)) {
-                    this.$nextTick(() => {
-                        const vid = this.$refs.mainVideoPlayer;
-                        if (vid) {
-                            vid.currentTime = 0;
-                            vid.play().catch(() => {});
+                syncShadeForImage(imgUrl, imgIndex) {
+                    if (this.isVideo(imgUrl)) return;
+                    // Find if any shade is mapped to this exact image
+                    if (this.shades && this.shades.length > 0) {
+                        const matchedShade = this.shades.find(s => s.image && s.image.trim() !== '' && s.image === imgUrl);
+                        if (matchedShade) {
+                            this.selectedShade = matchedShade.name;
+                        } else if (this.shades[imgIndex]) {
+                            // Fallback to shade by matching position if no explicit URL match
+                            this.selectedShade = this.shades[imgIndex].name;
                         }
-                    });
-                }
-            },
-
-            selectShade(shadeObj, index) {
-                this.selectedShade = shadeObj.name;
-
-                // 1. If shade has direct assigned image from CMS, switch mainImage to it
-                if (shadeObj.image && shadeObj.image.trim() !== '') {
-                    this.mainImage = shadeObj.image;
-                    const matchIdx = this.images.indexOf(shadeObj.image);
-                    if (matchIdx > -1) {
-                        this.activeImageIndex = matchIdx;
                     }
-                } else if (this.images[index]) {
-                    // 2. Otherwise map to corresponding gallery angle by index
-                    this.mainImage = this.images[index];
+                },
+
+                nextImage() {
+                    this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
+                    this.mainImage = this.images[this.activeImageIndex];
+                    this.syncShadeForImage(this.mainImage, this.activeImageIndex);
+                    this.handleMediaChange();
+                },
+
+                prevImage() {
+                    this.activeImageIndex = (this.activeImageIndex - 1 + this.images.length) % this.images.length;
+                    this.mainImage = this.images[this.activeImageIndex];
+                    this.syncShadeForImage(this.mainImage, this.activeImageIndex);
+                    this.handleMediaChange();
+                },
+
+                setImage(img, index) {
+                    this.mainImage = img;
                     this.activeImageIndex = index;
+                    this.syncShadeForImage(img, index);
+                    this.handleMediaChange();
+                },
+
+                handleMediaChange() {
+                    if (this.isVideo(this.mainImage)) {
+                        this.$nextTick(() => {
+                            const vid = this.$refs.mainVideoPlayer;
+                            if (vid) {
+                                vid.currentTime = 0;
+                                vid.play().catch(() => {});
+                            }
+                        });
+                    }
+                },
+
+                selectShade(shadeObj, index) {
+                    this.selectedShade = shadeObj.name;
+
+                    // 1. If shade has direct assigned image from CMS, switch mainImage to it
+                    if (shadeObj.image && shadeObj.image.trim() !== '') {
+                        this.mainImage = shadeObj.image;
+                        const matchIdx = this.images.indexOf(shadeObj.image);
+                        if (matchIdx > -1) {
+                            this.activeImageIndex = matchIdx;
+                        }
+                    } else if (this.images[index]) {
+                        // 2. Otherwise map to corresponding gallery angle by index
+                        this.mainImage = this.images[index];
+                        this.activeImageIndex = index;
+                    }
+                    this.handleMediaChange();
                 }
-                this.handleMediaChange();
-            }
-        }">
+            }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
 
             <!-- ── 1. BREADCRUMBS ── -->
@@ -109,30 +109,28 @@
                 <!-- LEFT COLUMN: IMAGE & VIDEO GALLERY WITH CAROUSEL & THUMBNAILS -->
                 <div class="lg:col-span-6 space-y-4">
 
-                    <!-- Main Showcase Media Container (Square luxury frame with subtle border) -->
-                    <div
-                        class="relative rounded-none overflow-hidden bg-[#FAF8F5] aspect-square w-full select-none border border-[#ECE6DE] shadow-xs group flex items-center justify-center">
+                    @php
+                        $isBuilderGel = ($product->slug === 'recolte-sculpting-master-builder-gel');
+                    @endphp
 
-                        <!-- Photo Viewer -->
-                        <div x-show="!isVideo(mainImage)" class="w-full h-full">
+                    <!-- Main Showcase Media Container (Square luxury frame) -->
+                    <div
+                        class="relative rounded-none overflow-hidden {{ $isBuilderGel ? 'bg-white' : 'bg-[#FAF8F5]' }} aspect-square w-full select-none border border-[#ECE6DE] shadow-xs group flex items-center justify-center">
+
+                        <!-- Photo Viewer (Uncut and pure white background for Builder Gel) -->
+                        <div x-show="!isVideo(mainImage)" class="w-full h-full {{ $isBuilderGel ? 'flex items-center justify-center bg-white p-2 sm:p-4' : '' }}">
                             <img :src="mainImage" src="{{ $product->main_image }}" alt="{{ $product->title }}"
-                                class="w-full h-full object-cover transition-all duration-300"
+                                class="w-full h-full {{ $isBuilderGel ? 'object-contain transition-transform duration-300 group-hover:scale-102' : 'object-cover transition-all duration-300' }}"
                                 onerror="this.onerror=null;this.src='{{ asset('images/products/recolte-cat-tips.jpg') }}'" />
                         </div>
 
                         <!-- Video Reel Player -->
-                        <div x-show="isVideo(mainImage)" class="relative w-full h-full bg-[#110E0D] flex items-center justify-center">
-                            <video 
-                                x-ref="mainVideoPlayer"
-                                :src="mainImage" 
-                                autoplay 
-                                loop 
-                                muted 
-                                playsinline 
-                                controls
-                                class="w-full h-full object-cover"
-                            ></video>
-                            <div class="absolute top-3.5 left-3.5 px-3 py-1 bg-black/75 backdrop-blur-xs text-white text-[9px] font-bold tracking-[0.2em] uppercase rounded-none border border-white/20 pointer-events-none flex items-center gap-1.5 shadow-sm">
+                        <div x-show="isVideo(mainImage)"
+                            class="relative w-full h-full bg-[#110E0D] flex items-center justify-center">
+                            <video x-ref="mainVideoPlayer" :src="mainImage" autoplay loop muted playsinline controls
+                                class="w-full h-full {{ $isBuilderGel ? 'object-contain' : 'object-cover' }}"></video>
+                            <div
+                                class="absolute top-3.5 left-3.5 px-3 py-1 bg-black/75 backdrop-blur-xs text-white text-[9px] font-bold tracking-[0.2em] uppercase rounded-none border border-white/20 pointer-events-none flex items-center gap-1.5 shadow-sm">
                                 <span class="w-2 h-2 rounded-full bg-[#A33B47] animate-pulse"></span>
                                 <span>HD Video Reel</span>
                             </div>
@@ -140,14 +138,14 @@
 
                         <!-- Left Arrow (Square) -->
                         <button type="button" @click="prevImage()"
-                            class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-none bg-white/90 hover:bg-white text-[#171412] border border-[#ECE6DE] flex items-center justify-center text-xs sm:text-sm shadow-sm transition-all z-10 hover:scale-105 backdrop-blur-xs cursor-pointer"
+                            class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-none bg-white/95 hover:bg-white text-[#171412] border border-[#ECE6DE] flex items-center justify-center text-xs sm:text-sm shadow-sm transition-all z-10 hover:scale-105 backdrop-blur-xs cursor-pointer"
                             aria-label="Previous Media">
                             ←
                         </button>
 
                         <!-- Right Arrow (Square) -->
                         <button type="button" @click="nextImage()"
-                            class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-none bg-white/90 hover:bg-white text-[#171412] border border-[#ECE6DE] flex items-center justify-center text-xs sm:text-sm shadow-sm transition-all z-10 hover:scale-105 backdrop-blur-xs cursor-pointer"
+                            class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-none bg-white/95 hover:bg-white text-[#171412] border border-[#ECE6DE] flex items-center justify-center text-xs sm:text-sm shadow-sm transition-all z-10 hover:scale-105 backdrop-blur-xs cursor-pointer"
                             aria-label="Next Media">
                             →
                         </button>
@@ -157,24 +155,30 @@
                     <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto scrollbar-none pt-1 pb-1">
                         <template x-for="(item, idx) in images" :key="idx">
                             <button type="button" @click="setImage(item, idx)"
-                                class="relative rounded-none overflow-hidden aspect-square w-16 sm:w-20 lg:w-24 shrink-0 border-2 transition-all bg-[#FAF8F5] cursor-pointer group/thumb"
+                                class="relative rounded-none overflow-hidden aspect-square w-16 sm:w-20 lg:w-24 shrink-0 border-2 transition-all {{ $isBuilderGel ? 'bg-white p-1 flex items-center justify-center' : 'bg-[#FAF8F5]' }} cursor-pointer group/thumb"
                                 :class="activeImageIndex === idx ? 'border-[#171412] ring-2 ring-[#171412]/15 opacity-100 shadow-xs' : 'border-[#ECE6DE] opacity-75 hover:opacity-100 hover:border-[#C5A880]'">
-                                
+
                                 <!-- Photo Thumbnail -->
                                 <template x-if="!isVideo(item)">
-                                    <img :src="item" :alt="'Thumbnail ' + (idx + 1)" class="w-full h-full object-cover" />
+                                    <img :src="item" :alt="'Thumbnail ' + (idx + 1)" class="w-full h-full {{ $isBuilderGel ? 'object-contain' : 'object-cover' }}" />
                                 </template>
 
                                 <!-- Video Thumbnail with Play Button & Video Badge -->
                                 <template x-if="isVideo(item)">
                                     <div class="relative w-full h-full bg-[#110E0D] flex items-center justify-center">
-                                        <video :src="item" muted playsinline preload="metadata" class="w-full h-full object-cover pointer-events-none opacity-80 group-hover/thumb:opacity-100"></video>
-                                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center transition-colors group-hover/thumb:bg-black/25">
-                                            <div class="w-7 h-7 rounded-full bg-white/95 text-[#171412] flex items-center justify-center pl-0.5 shadow-md group-hover/thumb:scale-110 transition-transform">
-                                                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                        <video :src="item" muted playsinline preload="metadata"
+                                            class="w-full h-full object-cover pointer-events-none opacity-80 group-hover/thumb:opacity-100"></video>
+                                        <div
+                                            class="absolute inset-0 bg-black/40 flex items-center justify-center transition-colors group-hover/thumb:bg-black/25">
+                                            <div
+                                                class="w-7 h-7 rounded-full bg-white/95 text-[#171412] flex items-center justify-center pl-0.5 shadow-md group-hover/thumb:scale-110 transition-transform">
+                                                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                                                    <path d="M8 5v14l11-7z" />
+                                                </svg>
                                             </div>
                                         </div>
-                                        <span class="absolute bottom-1 right-1 px-1.5 py-0.5 bg-black/85 text-[8px] font-bold text-white uppercase tracking-wider rounded-none border border-white/20">
+                                        <span
+                                            class="absolute bottom-1 right-1 px-1.5 py-0.5 bg-black/85 text-[8px] font-bold text-white uppercase tracking-wider rounded-none border border-white/20">
                                             Video
                                         </span>
                                     </div>
@@ -314,16 +318,16 @@
 
                             <!-- 1. ADD TO CART BUTTON (SQUARE PRIMARY ACTION) -->
                             <button type="button" @click="$store.cart.addItem({
-                                    id: {{ $product->id }},
-                                    title: '{{ addslashes($product->title) }}',
-                                    slug: '{{ $product->slug }}',
-                                    price: {{ $product->price ?? 0 }},
-                                    original_price: {{ $product->original_price ?? $product->price ?? 0 }},
-                                    image: isVideo(mainImage) ? '{{ asset($product->main_image) }}' : mainImage,
-                                    shade: selectedShade,
-                                    size: selectedSize,
-                                    quantity: quantity
-                                })"
+                                        id: {{ $product->id }},
+                                        title: '{{ addslashes($product->title) }}',
+                                        slug: '{{ $product->slug }}',
+                                        price: {{ $product->price ?? 0 }},
+                                        original_price: {{ $product->original_price ?? $product->price ?? 0 }},
+                                        image: isVideo(mainImage) ? '{{ asset($product->main_image) }}' : mainImage,
+                                        shade: selectedShade,
+                                        size: selectedSize,
+                                        quantity: quantity
+                                    })"
                                 class="w-full py-4 px-6 rounded-none bg-[#171412] hover:bg-black text-white text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer select-none"
                                 aria-label="Add {{ $product->title }} to Cart">
                                 <svg class="w-4 h-4 text-[#C5A880] fill-none stroke-current" viewBox="0 0 24 24"
@@ -336,17 +340,17 @@
 
                             <!-- 2. DIRECT WHATSAPP ORDER BUTTON (SQUARE ACTION) -->
                             <a :href="'https://wa.me/917016266727?text=' + encodeURIComponent(
-                                    '✨ *HAUTE NAIL ORDER & INQUIRY | RÉCOLTE NAILS* ✨\n\n' +
-                                    'Hello Récolte Nails Studio! 🌸\n' +
-                                    'I would like to place an order / inquire about this handcrafted product:\n\n' +
-                                    '💅 *Product:* {{ $product->title }}\n' +
-                                    '🔢 *Quantity:* ' + quantity + '\n' +
-                                    (selectedShade ? '🎨 *Selected Shade:* ' + selectedShade + '\n' : '') +
-                                    (selectedSize ? '📏 *Selected Size / Volume:* ' + selectedSize + '\n' : '') +
-                                    '🖼️ *Product Image:* ' + (isVideo(mainImage) ? '{{ asset($product->main_image) }}' : mainImage) + '\n' +
-                                    '🔗 *Product Link:* ' + window.location.href + '\n\n' +
-                                    'Please confirm pricing, stock and dispatch schedule. Thank you! 💕'
-                                )" target="_blank" rel="noopener noreferrer"
+                                        '✨ *HAUTE NAIL ORDER & INQUIRY | RÉCOLTE NAILS* ✨\n\n' +
+                                        'Hello Récolte Nails Studio! 🌸\n' +
+                                        'I would like to place an order / inquire about this handcrafted product:\n\n' +
+                                        '💅 *Product:* {{ $product->title }}\n' +
+                                        '🔢 *Quantity:* ' + quantity + '\n' +
+                                        (selectedShade ? '🎨 *Selected Shade:* ' + selectedShade + '\n' : '') +
+                                        (selectedSize ? '📏 *Selected Size / Volume:* ' + selectedSize + '\n' : '') +
+                                        '🖼️ *Product Image:* ' + (isVideo(mainImage) ? '{{ asset($product->main_image) }}' : mainImage) + '\n' +
+                                        '🔗 *Product Link:* ' + window.location.href + '\n\n' +
+                                        'Please confirm pricing, stock and dispatch schedule. Thank you! 💕'
+                                    )" target="_blank" rel="noopener noreferrer"
                                 class="w-full py-4 px-6 rounded-none bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-[13px] font-bold tracking-[0.16em] uppercase shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2.5 select-none">
                                 <svg class="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24" aria-hidden="true">
                                     <path

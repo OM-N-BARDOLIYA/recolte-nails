@@ -160,7 +160,21 @@ document.addEventListener('alpine:init', () => {
             return 'https://wa.me/917016266727?text=' + encodeURIComponent(message);
         }
     });
+
+    // ── 4. LENIS & BODY SCROLL LOCK FOR CART DRAWER ──
+    // When the cart drawer opens on laptop/desktop, stop Lenis from intercepting scroll events
+    Alpine.effect(() => {
+        const isCartOpen = Alpine.store('cart')?.isOpen;
+        if (isCartOpen) {
+            window.lenis?.stop();
+            document.body.classList.add('overflow-hidden');
+        } else {
+            window.lenis?.start();
+            document.body.classList.remove('overflow-hidden');
+        }
+    });
 });
 
 window.Alpine = Alpine;
 Alpine.start();
+

@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('title');
             $table->string('tagline')->nullable();
+            $table->string('badge_text')->nullable();
             $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->string('category')->default('Press-On Nails');
             $table->decimal('price', 10, 2)->default(0)->nullable();

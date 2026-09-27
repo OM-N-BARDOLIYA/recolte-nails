@@ -3,6 +3,7 @@
     x-data
     x-show="$store.cart.isOpen"
     x-cloak
+    data-lenis-prevent
     class="fixed inset-0 z-50 overflow-hidden"
     style="display: none;"
     aria-labelledby="slide-over-title" 
@@ -22,7 +23,7 @@
         class="fixed inset-0 bg-charcoal/60 backdrop-blur-sm transition-opacity"
     ></div>
 
-    <div class="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
+    <div class="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10" data-lenis-prevent>
         
         <!-- Drawer Panel -->
         <div 
@@ -33,7 +34,8 @@
             x-transition:leave="transform transition ease-in-out duration-300 sm:duration-400"
             x-transition:leave-start="translate-x-0"
             x-transition:leave-end="translate-x-full"
-            class="w-screen max-w-full sm:max-w-md bg-white shadow-2xl flex flex-col justify-between select-none h-full h-[100dvh]"
+            data-lenis-prevent
+            class="w-screen max-w-full sm:max-w-md bg-white shadow-2xl flex flex-col justify-between h-full h-[100dvh]"
         >
             
             <!-- ── DRAWER HEADER ── -->
@@ -75,7 +77,7 @@
             </div>
 
             <!-- ── DRAWER BODY (ITEMS LIST) ── -->
-            <div class="flex-grow overflow-y-auto p-3.5 sm:p-6 space-y-3 sm:space-y-4 min-h-0">
+            <div data-lenis-prevent class="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3.5 sm:p-6 space-y-3 sm:space-y-4 cart-scroll">
                 
                 <!-- EMPTY STATE -->
                 <div x-show="$store.cart.items.length === 0" class="py-14 sm:py-16 text-center space-y-4">
