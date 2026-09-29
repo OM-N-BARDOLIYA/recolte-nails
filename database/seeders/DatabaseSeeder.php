@@ -297,9 +297,15 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_1_.mp4',
                 ],
                 'shades' => [
-                    ['name' => 'Soft Rose Nude', 'hex' => '#E6C5C0'],
-                    ['name' => 'Milky White', 'hex' => '#F7F4F1'],
-                    ['name' => 'Clear Glass', 'hex' => '#ECE5DF'],
+                    ['name' => '01', 'hex' => '#F4EFEB'],
+                    ['name' => '02', 'hex' => '#F2D6D3'],
+                    ['name' => '03', 'hex' => '#E8B4B8'],
+                    ['name' => '04', 'hex' => '#E5C2C0'],
+                    ['name' => '05', 'hex' => '#DEB0A0'],
+                    ['name' => '06', 'hex' => '#E2C2B3'],
+                    ['name' => '07', 'hex' => '#D8A48F'],
+                    ['name' => '08', 'hex' => '#C48B71'],
+                    ['name' => '09', 'hex' => '#B07255'],
                 ],
                 'sizes' => [
                     '15ml Brush-On Bottle',
@@ -369,9 +375,6 @@ class DatabaseSeeder extends Seeder
                 'main_image' => '/uploads/products/catalog/BUILDER_GEL_builder_gel_1_.png',
                 'images' => [
                     '/uploads/products/catalog/BUILDER_GEL_builder_gel_1_.png',
-                    '/uploads/products/catalog/BUILDER_GEL_builder_gel_3_.jpg',
-                    '/uploads/products/catalog/BUILDER_GEL_builder_gel_4_.jpg',
-                    '/uploads/products/catalog/BUILDER_GEL_builder_gel_1_.jpg',
                     '/uploads/products/catalog/BUILDER_GEL_builder_gel_3_.png',
                     '/uploads/products/catalog/BUILDER_GEL_builder_gel_2_.png',
                     '/uploads/products/catalog/BUILDER_GEL_artboard_1.jpg',
@@ -387,13 +390,24 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/BUILDER_GEL_video_showcase.mp4',
                 ],
                 'shades' => [
-                    ['name' => 'Crystal Clear', 'hex' => '#FFFFFF'],
-                    ['name' => 'Cover Pink', 'hex' => '#E8B4B8'],
-                    ['name' => 'Soft White', 'hex' => '#F5F5F0'],
+                    ['name' => '01', 'hex' => '#F4EFEB'],
+                    ['name' => '02', 'hex' => '#F2D6D3'],
+                    ['name' => '03', 'hex' => '#E8B4B8'],
+                    ['name' => '04', 'hex' => '#E5C2C0'],
+                    ['name' => '05', 'hex' => '#DEB0A0'],
+                    ['name' => '06', 'hex' => '#E2C2B3'],
+                    ['name' => '07', 'hex' => '#D8A48F'],
+                    ['name' => '08', 'hex' => '#C48B71'],
+                    ['name' => '09', 'hex' => '#B07255'],
+                    ['name' => '10', 'hex' => '#A05A3A'],
+                    ['name' => '11', 'hex' => '#8D4829'],
+                    ['name' => '12', 'hex' => '#7A381C'],
+                    ['name' => '13', 'hex' => '#652A12'],
                 ],
                 'sizes' => [
-                    '30ml Atelier Jar',
-                    '50ml Master Salon Jar',
+                    '15ml',
+                    '30ml',
+                    '50ml',
                 ],
                 'benefits' => [
                     'Extra High Viscosity',
@@ -404,7 +418,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 27,
             ],
             [
-                'title' => 'Récolte 3D Sculpture Carving Gel',
+                'title' => 'Récolte 3D Carving Gel',
                 'slug' => 'recolte-3d-sculpture-carving-gel',
                 'category' => 'Carving Gel',
                 'category_id' => $catMap['Carving Gel'] ?? null,
@@ -432,13 +446,15 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/CARVING_GEL_3D_Carving_Gel_1_.mp4',
                 ],
                 'shades' => [
-                    ['name' => 'Pure White', 'hex' => '#FFFFFF'],
-                    ['name' => 'Opal Pearl', 'hex' => '#F2EDE4'],
-                    ['name' => 'Noir Velvet', 'hex' => '#1B1817'],
+                    ['name' => '01', 'hex' => '#FFFFFF'],
+                    ['name' => '02', 'hex' => '#F2EDE4'],
+                    ['name' => '03', 'hex' => '#F4EFEB'],
+                    ['name' => '04', 'hex' => '#E8B4B8'],
+                    ['name' => '05', 'hex' => '#DEB0A0'],
+                    ['name' => '06', 'hex' => '#D8A48F'],
                 ],
                 'sizes' => [
-                    '10g Emboss Pot',
-                    '20g Studio Pot',
+                    '5gm',
                 ],
                 'benefits' => [
                     'Kneadable Non-Sticky Texture',
@@ -551,7 +567,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 30,
             ],
             [
-                'title' => 'Récolte 208 Colors Master Salon Gel Polish Suite',
+                'title' => 'Récolte 208 Colors Master Salon Gel Polish',
                 'slug' => 'recolte-208-colors-master-salon-gel-polish-suite',
                 'category' => 'Gel Polishes',
                 'category_id' => $catMap['Gel Polishes'] ?? null,
@@ -590,15 +606,9 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Original_Video.mp4',
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Recolte-208_colors.mp4',
                 ],
-                'shades' => [
-                    ['name' => 'Parisian Red', 'hex' => '#8C1D2F'],
-                    ['name' => 'Haute Nude', 'hex' => '#D7B49E'],
-                    ['name' => 'Atelier Noir', 'hex' => '#141414'],
-                    ['name' => 'Porcelain Pink', 'hex' => '#F8E8E6'],
-                    ['name' => 'Royal Navy', 'hex' => '#1A2A44'],
-                ],
+                'shades' => [],
                 'sizes' => [
-                    '208 Shade Complete Studio Collection (15ml Bottles)',
+                    '15ml',
                 ],
                 'benefits' => [
                     '208 Full Spectrum Designer Colors',
@@ -638,13 +648,10 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/GEL_POLISHES_150_SHADES_KIT_Recolte-150_colors_4_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_150_SHADES_KIT_Recolte-150_colors.mp4',
                 ],
-                'shades' => [
-                    ['name' => 'Crimson Dahlia', 'hex' => '#9B1B30'],
-                    ['name' => 'French Vanilla', 'hex' => '#F5EBE6'],
-                    ['name' => 'Muted Mauve', 'hex' => '#A27082'],
-                ],
+                'shades' => [],
                 'sizes' => [
-                    '150-Piece Master Salon Box (15ml each)',
+                    '8ml',
+                    '15ml',
                 ],
                 'benefits' => [
                     '150 Trend-Forward Shades',
@@ -655,7 +662,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 32,
             ],
             [
-                'title' => 'Récolte 96 Shades Signature Gel Polish Set',
+                'title' => 'Récolte 96 Shades Signature Gel Polish Luxurious Salon Kit',
                 'slug' => 'recolte-96-shades-signature-gel-polish-set',
                 'category' => 'Gel Polishes',
                 'category_id' => $catMap['Gel Polishes'] ?? null,
@@ -678,13 +685,9 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/GEL_POLISHES_96_SHADES_KIT_Recolte-96_colors_4_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_96_SHADES_KIT_Recolte-96_colors.mp4',
                 ],
-                'shades' => [
-                    ['name' => 'Silk Peony', 'hex' => '#D8A47F'],
-                    ['name' => 'Berry Glaze', 'hex' => '#662249'],
-                    ['name' => 'Café Crème', 'hex' => '#B8977E'],
-                ],
+                'shades' => [],
                 'sizes' => [
-                    '96 Shades Collector Trunk (15ml each)',
+                    '15ml',
                 ],
                 'benefits' => [
                     '96 Core Salon Tones',
@@ -722,13 +725,10 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/GEL_POLISHES_R2_60_SHADES_KIT_Recolte-60_colors_4_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_R2_60_SHADES_KIT_video_for_New-60-Colors-Set.mp4',
                 ],
-                'shades' => [
-                    ['name' => 'Matcha Mousse', 'hex' => '#99A882'],
-                    ['name' => 'Terracotta Rose', 'hex' => '#C27D6B'],
-                    ['name' => 'Slate Grey', 'hex' => '#707780'],
-                ],
+                'shades' => [],
                 'sizes' => [
-                    '60 Shades Presentation Box (15ml each)',
+                    '15ml',
+                    '8ml',
                 ],
                 'benefits' => [
                     'Modern Aesthetic Palette',
@@ -759,13 +759,10 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/GEL_POLISHES_R1_60_SHADES_KIT_60-colors-set_2_.jpg',
                     '/videos/products/product-reel-1.mp4',
                 ],
-                'shades' => [
-                    ['name' => 'Classic Nude', 'hex' => '#DEB887'],
-                    ['name' => 'Scarlet Red', 'hex' => '#B22222'],
-                    ['name' => 'Soft Ivory', 'hex' => '#FFFFF0'],
-                ],
+                'shades' => [],
                 'sizes' => [
-                    '60-Piece Essential Set (15ml each)',
+                    '15ml',
+                    '8ml',
                 ],
                 'benefits' => [
                     'Most Requested Salon Shades',
@@ -776,7 +773,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 35,
             ],
             [
-                'title' => 'Récolte Velvet Matte Top Coat',
+                'title' => 'Récolte Matte Top Coat',
                 'slug' => 'recolte-velvet-matte-top-coat',
                 'category' => 'Matte Top Coat',
                 'category_id' => $catMap['Matte Top Coat'] ?? null,
@@ -787,9 +784,9 @@ class DatabaseSeeder extends Seeder
                 'is_bestseller' => false,
                 'is_active' => true,
                 'tagline' => 'Non-wipe cashmere matte finish transforming any glossy gel into sophisticated velvet',
-                'description' => 'Récolte Velvet Matte Top Coat instantly imparts an ultra-chic, cashmere-soft tactile feel with zero glare. Formulated with non-wipe technology and anti-staining polymers to keep light colors pristine without yellowing or scuffing.',
+                'description' => 'Récolte Matte Top Coat instantly imparts an ultra-chic, cashmere-soft tactile feel with zero glare. Formulated with non-wipe technology and anti-staining polymers to keep light colors pristine without yellowing or scuffing.',
                 'key_ingredients' => 'Matte Silica Polyurethane, Anti-Yellowing Resins, Hydrophobic Surface Agents',
-                'how_to_use' => '1. Complete your gel color application. 2. Brush a generous coat of Velvet Matte Top Coat over the nail. 3. Cure for 60 seconds under LED lamp. No wiping required.',
+                'how_to_use' => '1. Complete your gel color application. 2. Brush a generous coat of Matte Top Coat over the nail. 3. Cure for 60 seconds under LED lamp. No wiping required.',
                 'main_image' => '/uploads/products/catalog/MATTE_COAT_matte_top_coat_1_.png',
                 'images' => [
                     '/uploads/products/catalog/MATTE_COAT_matte_top_coat_1_.png',
@@ -800,11 +797,11 @@ class DatabaseSeeder extends Seeder
                     '/videos/products/product-reel-1.mp4',
                 ],
                 'shades' => [
-                    ['name' => 'Velvet Frosted Matte', 'hex' => '#E8E4DF'],
+                    ['name' => 'Regular Top Coat', 'hex' => '#F4EFEB'],
+                    ['name' => 'Russian Top Coat', 'hex' => '#FFFFFF'],
                 ],
                 'sizes' => [
-                    '15ml Studio Bottle',
-                    '30ml Refill',
+                    '15ml',
                 ],
                 'benefits' => [
                     'Soft-Touch Cashmere Matte Feel',
@@ -916,14 +913,9 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/PAINTING_GEL_Nail_Art_6_.jpg',
                     '/uploads/products/catalog/PAINTING_GEL_Video_for_nail_art_gel.mp4',
                 ],
-                'shades' => [
-                    ['name' => 'Pure White Art', 'hex' => '#FFFFFF'],
-                    ['name' => 'Obsidian Black', 'hex' => '#000000'],
-                    ['name' => 'Imperial Crimson', 'hex' => '#8B0000'],
-                ],
+                'shades' => [],
                 'sizes' => [
-                    '12g Artist Jar Set',
-                    'Individual 8g Pots',
+                    '5gm',
                 ],
                 'benefits' => [
                     'Single-Stroke Ultra Pigmentation',
@@ -934,7 +926,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 39,
             ],
             [
-                'title' => 'Récolte Platinum Foil & Glitter Gel',
+                'title' => 'Récolte Platinum Glitter Gel',
                 'slug' => 'recolte-platinum-foil-glitter-gel',
                 'category' => 'Platinum Gel',
                 'category_id' => $catMap['Platinum Gel'] ?? null,
@@ -962,14 +954,9 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/PLATINUM_GEL_Platinum_Nails_Art_Gel_3_.jpg',
                     '/uploads/products/catalog/PLATINUM_GEL_Platinum_Gel_1_.mp4',
                 ],
-                'shades' => [
-                    ['name' => 'Pure Diamond Platinum', 'hex' => '#E0E0E0'],
-                    ['name' => 'Champagne Starlight', 'hex' => '#EAD7A6'],
-                    ['name' => 'Rosé Platinum', 'hex' => '#E5B2B8'],
-                ],
+                'shades' => [],
                 'sizes' => [
-                    '8g Deluxe Diamond Pot',
-                    '15g Studio Pot',
+                    '5gm',
                 ],
                 'benefits' => [
                     'High Concentration Crushed Platinum Foils',

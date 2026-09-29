@@ -118,7 +118,7 @@ class HomeController extends Controller
                 ['title' => 'Shades', 'btn_text' => 'Shop Now', 'link' => '/products?category=Gel+Polishes', 'image' => asset('images/products/recolte-cat-nail-kits.jpg')],
                 ['title' => 'UV Lamps', 'btn_text' => 'Shop Now', 'link' => '/products?category=Nail+Tools+%26+Kits', 'image' => asset('images/products/recolte-cat-uv-lamps.jpg')],
                 ['title' => 'Builder Gel', 'btn_text' => 'Shop Now', 'link' => '/products?category=Builder+Gel', 'image' => asset('images/products/recolte-cat-builder-gel.jpg')],
-                ['title' => 'Tips', 'btn_text' => 'Shop Now', 'link' => '/products?category=Press-On+Sets', 'image' => asset('images/products/recolte-cat-tips.jpg')],
+                ['title' => 'CATE EYES', 'btn_text' => 'Shop Now', 'link' => '/products?category=Cat+Eye+Gels', 'image' => asset('images/products/recolte-cat-tips.jpg')],
             ]
         ]);
 

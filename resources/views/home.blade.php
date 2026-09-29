@@ -323,7 +323,7 @@
                         ['title' => 'Shades', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Gel Polishes']), 'image' => asset('images/products/recolte-cat-nail-kits.jpg')],
                         ['title' => 'UV Lamps', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Nail Tools & Kits']), 'image' => asset('images/products/recolte-cat-uv-lamps.jpg')],
                         ['title' => 'Builder Gel', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Builder Gel']), 'image' => asset('images/products/recolte-cat-builder-gel.jpg')],
-                        ['title' => 'Tips', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Press-On Sets']), 'image' => asset('images/products/recolte-cat-tips.jpg')],
+                        ['title' => 'CATE EYES', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Cat Eye Gels']), 'image' => asset('images/products/recolte-cat-tips.jpg')],
                     ];
                     $cats = $categories_section['categories'] ?? $defaultCats;
                 @endphp

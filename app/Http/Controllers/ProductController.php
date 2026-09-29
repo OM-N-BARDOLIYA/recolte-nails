@@ -149,4 +149,39 @@ class ProductController extends Controller
 
         return view('products.show', compact('product', 'relatedProducts'));
     }
+
+    public function searchApi(Request $request)
+    {
+        $q = trim($request->get('q', ''));
+        
+        $query = Product::where('is_active', true);
+
+        if ($q !== '') {
+            $query->where(function ($w) use ($q) {
+                $w->where('title', 'like', "%{$q}%")
+                  ->orWhere('tagline', 'like', "%{$q}%")
+                  ->orWhere('description', 'like', "%{$q}%")
+                  ->orWhere('category', 'like', "%{$q}%");
+            });
+        }
+
+        $products = $query->orderBy('is_bestseller', 'desc')
+            ->orderBy('sort_order', 'asc')
+            ->take(8)
+            ->get(['id', 'title', 'slug', 'category', 'tagline', 'main_image', 'badge_text']);
+
+        return response()->json([
+            'results' => $products->map(fn($p) => [
+                'title' => $p->title,
+                'slug' => $p->slug,
+                'category' => $p->category,
+                'tagline' => $p->tagline,
+                'image' => $p->main_image,
+                'badge' => $p->badge_text,
+                'url' => route('products.show', $p->slug),
+            ]),
+            'is_suggested' => ($q === ''),
+            'count' => $products->count(),
+        ]);
+    }
 }

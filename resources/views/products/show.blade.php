@@ -26,7 +26,42 @@
                     if (this.isBuilderGel) return true;
                     return url.includes('color_book_with_bottle_1_') || 
                            url.includes('color_book_with_bottle_2_') ||
-                           url.includes('10colors_cat_eye_2_');
+                           url.includes('10colors_cat_eye_2_') ||
+                           url.includes('Solid_Glue_Gel_2_') ||
+                           url.includes('Solid_Glue_Gel_3_') ||
+                           url.includes('6_IN_1_TOP_COAT_02') ||
+                           url.includes('6_IN_1_TOP_COAT_03') ||
+                           url.includes('6_IN_1_TOP_COAT_04') ||
+                           url.includes('6_IN_1_TOP_COAT_05') ||
+                           url.includes('6_IN_1_TOP_COAT_06');
+                },
+
+                isWhiteBackground(url) {
+                    if (!url) return false;
+                    if (this.isBuilderGel) return true;
+                    return url.includes('Solid_Glue_Gel_2_') || 
+                           url.includes('Solid_Glue_Gel_3_');
+                },
+
+                // Interactive Hover Zoom State & Handlers (Amazon / Calyx Nails style)
+                isZoomed: false,
+                zoomX: 50,
+                zoomY: 50,
+
+                handleZoomMove(e) {
+                    if (this.isVideo(this.mainImage)) return;
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+                    const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+                    this.zoomX = x.toFixed(2);
+                    this.zoomY = y.toFixed(2);
+                    this.isZoomed = true;
+                },
+
+                handleZoomLeave() {
+                    this.isZoomed = false;
+                    this.zoomX = 50;
+                    this.zoomY = 50;
                 },
 
                 get subtotal() {
@@ -73,6 +108,9 @@
                 },
 
                 handleMediaChange() {
+                    this.isZoomed = false;
+                    this.zoomX = 50;
+                    this.zoomY = 50;
                     if (this.isVideo(this.mainImage)) {
                         this.$nextTick(() => {
                             const vid = this.$refs.mainVideoPlayer;
@@ -133,16 +171,36 @@
 
                     <!-- Main Showcase Media Container (Square luxury frame) -->
                     <div
-                        class="relative rounded-none overflow-hidden {{ $isBuilderGel ? 'bg-white' : 'bg-[#FAF8F5]' }} aspect-square w-full select-none border border-[#ECE6DE] shadow-xs group flex items-center justify-center">
+                        class="relative rounded-none overflow-hidden aspect-square w-full select-none border border-[#ECE6DE] shadow-xs group flex items-center justify-center transition-colors"
+                        :class="isWhiteBackground(mainImage) ? 'bg-white' : 'bg-[#FAF8F5]'">
 
-                        <!-- Photo Viewer (Uncut and properly framed ONLY for the specific Drive images sent by user) -->
+                        <!-- Photo Viewer (Uncut & framed for specific items, with Amazon/Calyx Nails hover zoom) -->
                         <div x-show="!isVideo(mainImage)" 
-                            class="w-full h-full"
-                            :class="isDriveUncutImage(mainImage) ? ('flex items-center justify-center ' + (isBuilderGel ? 'bg-white p-2 sm:p-4' : 'p-2 sm:p-3')) : ''">
+                            @mousemove="handleZoomMove($event)"
+                            @mouseleave="handleZoomLeave()"
+                            @mouseenter="isZoomed = true"
+                            class="w-full h-full relative overflow-hidden cursor-zoom-in select-none"
+                            :class="isDriveUncutImage(mainImage) ? ('flex items-center justify-center ' + (isWhiteBackground(mainImage) ? 'bg-white p-2 sm:p-4' : 'p-2 sm:p-3')) : ''">
                             <img :src="mainImage" src="{{ $product->main_image }}" alt="{{ $product->title }}"
-                                class="w-full h-full transition-all duration-300"
-                                :class="isDriveUncutImage(mainImage) ? 'object-contain group-hover:scale-102' : 'object-cover'"
+                                class="w-full h-full pointer-events-none will-change-transform"
+                                :class="isDriveUncutImage(mainImage) ? 'object-contain' : 'object-cover'"
+                                :style="isZoomed ? `transform-origin: ${zoomX}% ${zoomY}%; transform: scale(1.7); transition: transform 0.05s ease-out;` : 'transform-origin: 50% 50%; transform: scale(1); transition: transform 0.28s cubic-bezier(0.25, 1, 0.5, 1);'"
                                 onerror="this.onerror=null;this.src='{{ asset('images/products/recolte-cat-tips.jpg') }}'" />
+
+                            <!-- Hover to Zoom Pill Badge -->
+                            <div x-show="!isZoomed"
+                                x-transition:leave="transition ease-in duration-150"
+                                x-transition:leave-start="opacity-100"
+                                x-transition:leave-end="opacity-0"
+                                class="absolute bottom-3 right-3 pointer-events-none z-10 hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-white/90 backdrop-blur-xs text-[#171412] text-[10px] font-medium tracking-wide uppercase border border-[#ECE6DE] shadow-xs">
+                                <svg class="w-3 h-3 text-[#A33B47] stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
+                                    <circle cx="11" cy="11" r="7"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                <span>Hover to zoom</span>
+                            </div>
                         </div>
 
                         <!-- Video Reel Player -->
@@ -160,6 +218,7 @@
                         <!-- Left Arrow (Square) -->
                         <button type="button" @click="prevImage()"
                             class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-none bg-white/95 hover:bg-white text-[#171412] border border-[#ECE6DE] flex items-center justify-center text-xs sm:text-sm shadow-sm transition-all z-10 hover:scale-105 backdrop-blur-xs cursor-pointer"
+                            :class="isZoomed ? 'opacity-20 hover:opacity-100' : 'opacity-90 hover:opacity-100'"
                             aria-label="Previous Media">
                             ←
                         </button>
@@ -167,6 +226,7 @@
                         <!-- Right Arrow (Square) -->
                         <button type="button" @click="nextImage()"
                             class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-none bg-white/95 hover:bg-white text-[#171412] border border-[#ECE6DE] flex items-center justify-center text-xs sm:text-sm shadow-sm transition-all z-10 hover:scale-105 backdrop-blur-xs cursor-pointer"
+                            :class="isZoomed ? 'opacity-20 hover:opacity-100' : 'opacity-90 hover:opacity-100'"
                             aria-label="Next Media">
                             →
                         </button>
@@ -176,9 +236,10 @@
                     <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto scrollbar-none pt-1 pb-1">
                         <template x-for="(item, idx) in images" :key="idx">
                             <button type="button" @click="setImage(item, idx)"
-                                class="relative rounded-none overflow-hidden aspect-square w-16 sm:w-20 lg:w-24 shrink-0 border-2 transition-all cursor-pointer group/thumb {{ $isBuilderGel ? 'bg-white' : 'bg-[#FAF8F5]' }}"
+                                class="relative rounded-none overflow-hidden aspect-square w-16 sm:w-20 lg:w-24 shrink-0 border-2 transition-all cursor-pointer group/thumb"
                                 :class="[
                                     activeImageIndex === idx ? 'border-[#171412] ring-2 ring-[#171412]/15 opacity-100 shadow-xs' : 'border-[#ECE6DE] opacity-75 hover:opacity-100 hover:border-[#C5A880]',
+                                    isWhiteBackground(item) ? 'bg-white' : 'bg-[#FAF8F5]',
                                     isDriveUncutImage(item) ? 'p-1 flex items-center justify-center' : ''
                                 ]">
 
@@ -260,80 +321,130 @@
                         {{ $product->description }}
                     </p>
 
-                    <!-- Shade Swatches Selector (if available) -->
+                    <!-- Shade / Color / Number / Option Selector (if available) -->
                     @if(!empty($product->shades) && count($product->shades) > 0)
-                        <div class="space-y-2.5 pt-1">
-                            <div class="flex items-center gap-2 text-xs">
-                                <span id="shade-label" class="font-medium text-[#171412] uppercase tracking-wider">Select
-                                    Shade:</span>
-                                <span class="font-semibold text-[#A33B47]" x-text="selectedShade"></span>
+                        @php
+                            $shadesList = $product->shades ?? [];
+                            $firstShadeName = trim($shadesList[0]['name'] ?? '');
+                            $isNumberedShades = preg_match('/^\d+$/', $firstShadeName);
+                            $isFinishOption = in_array($firstShadeName, ['Regular Top Coat', 'Russian Top Coat', 'Regular', 'Russian']) || ($product->slug === 'recolte-velvet-matte-top-coat');
+                        @endphp
+
+                        <div class="space-y-3 pt-1">
+                            <div class="text-xs">
+                                @if($isNumberedShades)
+                                    <span class="font-semibold text-[#171412]">Shade — </span>
+                                @elseif($isFinishOption)
+                                    <span class="font-semibold text-[#171412]">Option — </span>
+                                @else
+                                    <span class="font-semibold text-[#171412]">Color — </span>
+                                @endif
+                                <span class="font-normal text-[#171412]" x-text="selectedShade"></span>
                             </div>
-                            <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-labelledby="shade-label">
-                                <template x-for="(sh, idx) in shades" :key="idx">
-                                    <button type="button" role="radio" :aria-checked="selectedShade === sh.name"
-                                        @click="selectShade(sh, idx)"
-                                        :class="selectedShade === sh.name ? 'border-[#171412] bg-[#171412] text-white font-medium shadow-xs' : 'border-[#ECE6DE] bg-white text-[#171412] hover:border-[#171412] font-normal'"
-                                        class="px-3.5 py-2 rounded-none border text-xs flex items-center gap-2 transition-all cursor-pointer">
-                                        <span class="w-3.5 h-3.5 rounded-none border border-black/20 shrink-0"
-                                            :style="'background-color:' + (sh.hex || '#E8B4B8')" aria-hidden="true"></span>
-                                        <span x-text="sh.name"></span>
-                                    </button>
-                                </template>
-                            </div>
+
+                            @if($isNumberedShades)
+                                <!-- Numbered Box Buttons (e.g. 01 to 09, 01 to 13, 01 to 06) -->
+                                <div class="flex flex-wrap gap-2 sm:gap-2.5" role="radiogroup" aria-label="Select Numbered Shade">
+                                    <template x-for="(sh, idx) in shades" :key="idx">
+                                        <button type="button" role="radio" :aria-checked="selectedShade === sh.name"
+                                            @click="selectShade(sh, idx)"
+                                            :class="selectedShade === sh.name 
+                                                ? 'border-black bg-black text-white font-normal' 
+                                                : 'border-[#E5E5E5] bg-white text-[#171412] hover:border-black font-normal'"
+                                            class="min-w-[42px] h-[40px] px-3.5 border text-xs transition-colors flex items-center justify-center cursor-pointer select-none">
+                                            <span x-text="sh.name"></span>
+                                        </button>
+                                    </template>
+                                </div>
+                            @elseif($isFinishOption)
+                                <!-- Finish / Type Buttons (Regular Top Coat / Russian Top Coat) -->
+                                <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Select Top Coat Option">
+                                    <template x-for="(sh, idx) in shades" :key="idx">
+                                        <button type="button" role="radio" :aria-checked="selectedShade === sh.name"
+                                            @click="selectShade(sh, idx)"
+                                            :class="selectedShade === sh.name 
+                                                ? 'border-black bg-black text-white font-normal' 
+                                                : 'border-[#E5E5E5] bg-white text-[#171412] hover:border-black font-normal'"
+                                            class="min-w-[130px] h-[40px] px-4 border text-xs transition-colors flex items-center justify-center cursor-pointer select-none">
+                                            <span x-text="sh.name"></span>
+                                        </button>
+                                    </template>
+                                </div>
+                            @else
+                                <!-- Traditional Color Swatches (if color names/hex exist) -->
+                                <div class="flex items-center gap-3 flex-wrap" role="radiogroup" aria-label="Select Color">
+                                    <template x-for="(sh, idx) in shades" :key="idx">
+                                        <button type="button" role="radio" :aria-checked="selectedShade === sh.name"
+                                            @click="selectShade(sh, idx)"
+                                            :title="sh.name"
+                                            class="rounded-full transition-all duration-150 cursor-pointer focus:outline-none flex items-center justify-center p-0.5 select-none"
+                                            :class="selectedShade === sh.name ? 'ring-1 ring-offset-2 ring-black ring-offset-white' : 'hover:opacity-80'">
+                                            <span class="block w-6 h-6 rounded-full border border-black/15 shadow-2xs"
+                                                :style="'background-color:' + (sh.hex || '#E8B4B8')"></span>
+                                        </button>
+                                    </template>
+                                </div>
+                            @endif
                         </div>
                     @endif
 
-                    <!-- Size & Quantity Controls Row -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-
-                        <!-- Size / Volume Pills (Square) -->
-                        <div class="space-y-2">
-                            <label class="text-xs font-medium text-[#171412] uppercase tracking-wider block">Size /
-                                Volume</label>
-                            <div class="flex flex-wrap gap-2">
-                                @if(!empty($product->sizes) && count($product->sizes) > 0)
-                                    @foreach($product->sizes as $sz)
-                                        <button type="button" @click="selectedSize = '{{ $sz }}'"
-                                            :class="selectedSize === '{{ $sz }}' ? 'border-[#171412] bg-[#171412] text-white font-medium' : 'border-[#ECE6DE] bg-white text-[#171412] hover:border-[#171412] font-normal'"
-                                            class="px-4 py-2 rounded-none border text-xs transition-all shadow-2xs uppercase tracking-wider font-semibold">
-                                            {{ $sz }}
-                                        </button>
-                                    @endforeach
-                                @else
-                                    <button type="button" @click="selectedSize = 'Standard'"
-                                        class="px-4 py-2 rounded-none border border-[#171412] bg-[#171412] text-white font-semibold text-xs shadow-2xs uppercase tracking-wider">
-                                        Standard
-                                    </button>
-                                @endif
-                            </div>
+                    <!-- Size Selector Row with Size Guide -->
+                    <div class="space-y-2.5 pt-1">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="font-semibold text-[#171412]">Size</span>
+                            <button type="button" 
+                                @click="alert('For custom atelier sizing, bespoke fit advice, or salon refills, please contact our concierge via WhatsApp!')"
+                                class="text-[#6A625A] hover:text-black transition-colors font-normal flex items-center gap-1 cursor-pointer">
+                                <span>Size guide</span>
+                                <span>→</span>
+                            </button>
                         </div>
+                        <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Select Size">
+                            @if(!empty($product->sizes) && count($product->sizes) > 0)
+                                @foreach($product->sizes as $sz)
+                                    <button type="button" role="radio" :aria-checked="selectedSize === '{{ $sz }}'"
+                                        @click="selectedSize = '{{ $sz }}'"
+                                        :class="selectedSize === '{{ $sz }}' 
+                                            ? 'border-black bg-black text-white font-normal' 
+                                            : 'border-[#E5E5E5] bg-white text-[#171412] hover:border-black font-normal'"
+                                        class="min-w-[42px] h-[40px] px-3.5 border text-xs transition-colors flex items-center justify-center cursor-pointer select-none">
+                                        {{ $sz }}
+                                    </button>
+                                @endforeach
+                            @else
+                                <button type="button" @click="selectedSize = 'Standard'"
+                                    class="min-w-[42px] h-[40px] px-3.5 border border-black bg-black text-white text-xs font-normal flex items-center justify-center">
+                                    Standard
+                                </button>
+                            @endif
+                        </div>
+                    </div>
 
-                        <!-- Quantity Counter (Square) [ - 1 + ] -->
-                        <div class="space-y-2">
-                            <label
-                                class="text-xs font-medium text-[#171412] uppercase tracking-wider block">Quantity</label>
-                            <div
-                                class="flex items-center justify-between rounded-none border border-[#ECE6DE] px-3 py-1.5 bg-white max-w-[140px]">
+                    <!-- Quantity & Stock Controls -->
+                    <div class="space-y-2.5 pt-1">
+                        <label class="font-semibold text-xs text-[#171412] block">Quantity</label>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <div class="h-[40px] border border-[#E5E5E5] bg-white flex items-center justify-between px-3 w-[120px] select-none">
                                 <button type="button" @click="if (quantity > 1) quantity--"
-                                    class="text-base text-[#8C7A6B] hover:text-[#171412] font-light px-2 py-0.5 transition-colors"
+                                    class="text-base text-[#6A625A] hover:text-black transition-colors px-1 cursor-pointer disabled:opacity-30"
+                                    :disabled="quantity <= 1"
                                     aria-label="Decrease quantity">
                                     −
                                 </button>
-                                <span class="font-sans font-semibold text-sm text-[#171412]" x-text="quantity"></span>
+                                <span class="font-normal text-xs text-[#171412]" x-text="quantity"></span>
                                 <button type="button" @click="quantity++"
-                                    class="text-base text-[#8C7A6B] hover:text-[#171412] font-light px-2 py-0.5 transition-colors"
+                                    class="text-base text-[#6A625A] hover:text-black transition-colors px-1 cursor-pointer"
                                     aria-label="Increase quantity">
                                     +
                                 </button>
                             </div>
+
+                            <!-- Stock Status Indicator -->
+                            <div class="flex items-center gap-1.5 text-xs text-[#2D6A4F] font-normal">
+                                <span>✓</span>
+                                <span>123 in stock & ready to ship</span>
+                            </div>
                         </div>
-
-                    </div>
-
-                    <!-- Stock Status Indicator -->
-                    <div class="flex items-center gap-1.5 text-xs text-[#2D6A4F] font-medium pt-1">
-                        <span>✓</span>
-                        <span>123 in stock & ready to ship</span>
                     </div>
 
 
@@ -386,6 +497,28 @@
                             </a>
 
                         </div>
+
+                        <!-- Atelier Product Note under Add to Cart & WhatsApp Buttons -->
+                        @php
+                            $isFullKitComplimentaryNote = in_array($product->id, [24, 25]) || str_contains($product->slug, '60-shades');
+                            $isPaintingGelNote = ($product->id === 29) || str_contains($product->slug, 'painting-gel');
+                        @endphp
+
+                        @if($isFullKitComplimentaryNote)
+                            <div class="py-2.5 px-3.5 bg-[#FAF8F5] border border-[#ECE6DE] text-xs tracking-wide text-[#171412] flex items-start gap-2 shadow-2xs">
+                                <span class="font-bold text-[#A33B47] uppercase text-[11px] tracking-wider shrink-0 mt-0.5">NOTE:</span>
+                                <span class="font-medium text-[#171412] leading-relaxed uppercase text-[11px] tracking-wide">
+                                    ONLY FULL KIT AVAILABLE WITH TOP COAT BASE COAT AND MATT COAT COMPLEMENTRY
+                                </span>
+                            </div>
+                        @elseif($isPaintingGelNote)
+                            <div class="py-2.5 px-3.5 bg-[#FAF8F5] border border-[#ECE6DE] text-xs tracking-wide text-[#171412] flex items-start gap-2 shadow-2xs">
+                                <span class="font-bold text-[#A33B47] uppercase text-[11px] tracking-wider shrink-0 mt-0.5">NOTE:</span>
+                                <span class="font-medium text-[#171412] leading-relaxed uppercase text-[11px] tracking-wide">
+                                    NON SPREADABLE
+                                </span>
+                            </div>
+                        @endif
 
                         <!-- 3. Sizing / Inquiry Sub-Links -->
                         <div class="flex items-center justify-between text-xs text-[#8C7A6B] pt-1">

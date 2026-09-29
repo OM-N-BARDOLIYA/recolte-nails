@@ -4,13 +4,13 @@ import 'lenis/dist/lenis.css';
 
 // ── 1. LUXURY BUTTERY-SMOOTH INERTIA SCROLLING (LENIS) ──
 const lenis = new Lenis({
-    duration: 1.2,
+    duration: 1.25,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     orientation: 'vertical',
     gestureOrientation: 'vertical',
     smoothWheel: true,
-    wheelMultiplier: 1,
-    touchMultiplier: 1.5,
+    wheelMultiplier: 0.95,
+    touchMultiplier: 1.2,
     infinite: false,
 });
 
@@ -20,6 +20,16 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 window.lenis = lenis;
+
+// Realtime Luxury Scroll Progress Bar Tracker
+lenis.on('scroll', (e) => {
+    const progressBar = document.getElementById('scroll-progress-bar');
+    if (progressBar) {
+        const progress = Math.min(100, Math.max(0, (e.progress || 0) * 100));
+        progressBar.style.width = `${progress}%`;
+        progressBar.style.opacity = progress > 0.5 ? '1' : '0';
+    }
+});
 
 // ── 2. PERFECT SHIFT + MOUSEWHEEL HORIZONTAL SCROLLING ──
 // Allows instant horizontal scrolling when Shift is held over horizontal containers, tabs, tables & carousels
@@ -41,8 +51,21 @@ document.addEventListener('wheel', (e) => {
     }
 }, { passive: false });
 
-// ── 3. GLOBAL ALPINE CART STORE ──
+// ── 3. GLOBAL ALPINE CART & SEARCH STORES ──
 document.addEventListener('alpine:init', () => {
+    Alpine.store('search', {
+        isOpen: false,
+        open() {
+            this.isOpen = true;
+        },
+        close() {
+            this.isOpen = false;
+        },
+        toggle() {
+            this.isOpen = !this.isOpen;
+        }
+    });
+
     Alpine.store('cart', {
         items: JSON.parse(localStorage.getItem('recolte_cart') || '[]'),
         isOpen: false,
@@ -62,9 +85,9 @@ document.addEventListener('alpine:init', () => {
             const shade = product.shade ? String(product.shade).trim() : '';
             const size = product.size ? String(product.size).trim() : '';
 
-            const existingIndex = this.items.findIndex(item => 
-                String(item.id) === String(product.id) && 
-                item.shade === shade && 
+            const existingIndex = this.items.findIndex(item =>
+                String(item.id) === String(product.id) &&
+                item.shade === shade &&
                 item.size === size
             );
 
@@ -138,7 +161,7 @@ document.addEventListener('alpine:init', () => {
 
         getWhatsAppUrl() {
             if (this.items.length === 0) return '#';
-            
+
             let message = '✨ *HAUTE NAIL MULTI-ITEM ORDER | RÉCOLTE NAILS* ✨\n\n';
             message += 'Hello Récolte Nails Studio! 🌸\n';
             message += `I would like to place an order for the following ${this.totalCount} item(s) in my bag:\n\n`;
@@ -161,11 +184,12 @@ document.addEventListener('alpine:init', () => {
         }
     });
 
-    // ── 4. LENIS & BODY SCROLL LOCK FOR CART DRAWER ──
-    // When the cart drawer opens on laptop/desktop, stop Lenis from intercepting scroll events
+    // ── 4. LENIS & BODY SCROLL LOCK FOR CART DRAWER & SEARCH MODAL ──
+    // Stop Lenis from intercepting scroll events when drawer or search modal is open
     Alpine.effect(() => {
         const isCartOpen = Alpine.store('cart')?.isOpen;
-        if (isCartOpen) {
+        const isSearchOpen = Alpine.store('search')?.isOpen;
+        if (isCartOpen || isSearchOpen) {
             window.lenis?.stop();
             document.body.classList.add('overflow-hidden');
         } else {
@@ -173,7 +197,115 @@ document.addEventListener('alpine:init', () => {
             document.body.classList.remove('overflow-hidden');
         }
     });
+
+    // Global keyboard shortcut (Ctrl+K or Cmd+K) to toggle search
+    window.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            Alpine.store('search')?.toggle();
+        }
+    });
 });
+
+// ── 5. INTELLIGENT LUXURY TEXT & ELEMENT SCROLL REVEAL ENGINE ──
+function initScrollAnimations() {
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-revealed');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.08
+    });
+
+    // 1. Observe any manually tagged elements
+    document.querySelectorAll('.scroll-reveal, .scroll-reveal-text, .scroll-reveal-card, .scroll-reveal-left, .scroll-reveal-right').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.9) {
+            el.classList.add('is-revealed');
+        } else {
+            observer.observe(el);
+        }
+    });
+
+    // 2. Automatically discover and animate headings, lead text, product cards, features, and grid items
+    const textSelectors = [
+        'main h1:not(.no-anim)',
+        'main h2:not(.no-anim)',
+        'main h3:not(.no-anim)',
+        'main h4:not(.no-anim)',
+        'main .section-header',
+        'main .section-title',
+        'main .section-subtitle'
+    ];
+
+    document.querySelectorAll(textSelectors.join(', ')).forEach(el => {
+        // Skip hero slider slide titles to avoid interfering with slider transitions
+        if (el.closest('.hero-slider, [x-data*="heroSlides"], header, footer')) return;
+
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.88) {
+            el.classList.add('is-revealed');
+        } else {
+            el.classList.add('scroll-reveal-text');
+            observer.observe(el);
+        }
+    });
+
+    // 3. Automatically animate product cards, trust items, categories, and testimonial cards with cascading stagger
+    const cardContainers = document.querySelectorAll(
+        '.grid, [class*="grid-cols-"], .divide-y, .divide-x'
+    );
+
+    cardContainers.forEach(container => {
+        if (container.closest('.hero-slider, [x-data*="heroSlides"], header')) return;
+
+        const cards = Array.from(container.children).filter(child => {
+            return child.matches('div, a, article') && 
+                   !child.matches('style, script, template') &&
+                   child.offsetWidth > 60 && child.offsetHeight > 40;
+        });
+
+        cards.forEach((card, idx) => {
+            const rect = card.getBoundingClientRect();
+            if (rect.top <= window.innerHeight * 0.88) {
+                card.classList.add('is-revealed');
+            } else {
+                card.classList.add('scroll-reveal-card');
+                // Apply cascading stagger delay up to 6 items per row
+                const delayIndex = (idx % 6) + 1;
+                card.classList.add(`delay-${delayIndex}`);
+                observer.observe(card);
+            }
+        });
+    });
+
+    // 4. Also observe key content sections
+    document.querySelectorAll('main section:not(.hero-section, .no-anim)').forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top > window.innerHeight * 0.9) {
+            if (!sec.classList.contains('scroll-reveal')) {
+                sec.classList.add('scroll-reveal');
+                observer.observe(sec);
+            }
+        } else {
+            sec.classList.add('is-revealed');
+        }
+    });
+}
+
+// Initialize on DOM load and after navigation/tab changes
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollAnimations);
+} else {
+    initScrollAnimations();
+}
+
+window.addEventListener('reinit-scroll-animations', initScrollAnimations);
 
 window.Alpine = Alpine;
 Alpine.start();
