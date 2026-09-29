@@ -1,5 +1,5 @@
 @extends("layouts.app")
-@section("title", "VIP Concierge Lounge | Récolte Nails Paris")
+@section("title", "VIP Concierge Lounge | Recolte Nails Paris")
 @section("content")
 
 @php
@@ -7,12 +7,12 @@
     $contactEmail = !empty($cards['email']) ? $cards['email'] : \App\Models\SiteSetting::get('contact_email', 'concierge@recoltenails.com');
     $contactAddress = !empty($cards['address']) ? $cards['address'] : \App\Models\SiteSetting::get('contact_address', '12 Rue de la Paix, 75001 Paris, France. By appointment only.');
     $defaultTopics = [
-        ['id' => 'sizing', 'label' => 'Sizing & Curve Fit', 'msg' => 'Hello Récolte Nails! I need help finding my perfect nail size and curve measurements.'],
-        ['id' => 'custom', 'label' => 'Custom Press-On Art', 'msg' => 'Hello Récolte Nails! I have custom design inspiration for a handcrafted press-on set.'],
-        ['id' => 'care', 'label' => 'Nail Care & Top Coats', 'msg' => 'Hello Récolte Nails! I have questions about your nourishing nail care and salon finish top coats.'],
-        ['id' => 'shades', 'label' => 'Gel Polish & Colors', 'msg' => 'Hello Récolte Nails! I would like shade recommendations from your color catalog.'],
-        ['id' => 'order', 'label' => 'Order & Delivery', 'msg' => 'Hello Récolte Nails! I have an inquiry regarding my order or express delivery.'],
-        ['id' => 'wholesale', 'label' => 'Wholesale & Salon B2B', 'msg' => 'Hello Récolte Nails! I am interested in wholesale salon orders and professional supply.'],
+        ['id' => 'sizing', 'label' => 'Sizing & Curve Fit', 'msg' => 'Hello Recolte Nails! I need help finding my perfect nail size and curve measurements.'],
+        ['id' => 'custom', 'label' => 'Custom Press-On Art', 'msg' => 'Hello Recolte Nails! I have custom design inspiration for a handcrafted press-on set.'],
+        ['id' => 'care', 'label' => 'Nail Care & Top Coats', 'msg' => 'Hello Recolte Nails! I have questions about your nourishing nail care and salon finish top coats.'],
+        ['id' => 'shades', 'label' => 'Gel Polish & Colors', 'msg' => 'Hello Recolte Nails! I would like shade recommendations from your color catalog.'],
+        ['id' => 'order', 'label' => 'Order & Delivery', 'msg' => 'Hello Recolte Nails! I have an inquiry regarding my order or express delivery.'],
+        ['id' => 'wholesale', 'label' => 'Wholesale & Salon B2B', 'msg' => 'Hello Recolte Nails! I am interested in wholesale salon orders and professional supply.'],
     ];
     $activeTopics = !empty($topics_widget['topics']) ? $topics_widget['topics'] : $defaultTopics;
 @endphp

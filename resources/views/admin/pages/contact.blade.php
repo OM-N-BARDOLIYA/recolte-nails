@@ -5,12 +5,12 @@
 @section('content')
 @php
     $defaultTopics = [
-        ['id' => 'sizing', 'label' => 'Sizing & Curve Fit', 'msg' => 'Hello Récolte Nails! I need help finding my perfect nail size and curve measurements.'],
-        ['id' => 'custom', 'label' => 'Custom Press-On Art', 'msg' => 'Hello Récolte Nails! I have custom design inspiration for a handcrafted press-on set.'],
-        ['id' => 'care', 'label' => 'Nail Care & Top Coats', 'msg' => 'Hello Récolte Nails! I have questions about your nourishing nail care and salon finish top coats.'],
-        ['id' => 'shades', 'label' => 'Gel Polish & Colors', 'msg' => 'Hello Récolte Nails! I would like shade recommendations from your color catalog.'],
-        ['id' => 'order', 'label' => 'Order & Delivery', 'msg' => 'Hello Récolte Nails! I have an inquiry regarding my order or express delivery.'],
-        ['id' => 'wholesale', 'label' => 'Wholesale & Salon B2B', 'msg' => 'Hello Récolte Nails! I am interested in wholesale salon orders and professional supply.'],
+        ['id' => 'sizing', 'label' => 'Sizing & Curve Fit', 'msg' => 'Hello Recolte Nails! I need help finding my perfect nail size and curve measurements.'],
+        ['id' => 'custom', 'label' => 'Custom Press-On Art', 'msg' => 'Hello Recolte Nails! I have custom design inspiration for a handcrafted press-on set.'],
+        ['id' => 'care', 'label' => 'Nail Care & Top Coats', 'msg' => 'Hello Recolte Nails! I have questions about your nourishing nail care and salon finish top coats.'],
+        ['id' => 'shades', 'label' => 'Gel Polish & Colors', 'msg' => 'Hello Recolte Nails! I would like shade recommendations from your color catalog.'],
+        ['id' => 'order', 'label' => 'Order & Delivery', 'msg' => 'Hello Recolte Nails! I have an inquiry regarding my order or express delivery.'],
+        ['id' => 'wholesale', 'label' => 'Wholesale & Salon B2B', 'msg' => 'Hello Recolte Nails! I am interested in wholesale salon orders and professional supply.'],
     ];
     $activeTopics = !empty($topics_widget['topics']) ? $topics_widget['topics'] : $defaultTopics;
 @endphp
@@ -23,7 +23,7 @@
             this.topics.push({
                 id: 'topic_' + Date.now(),
                 label: '',
-                msg: 'Hello Récolte Nails! '
+                msg: 'Hello Recolte Nails! '
             });
         },
         removeTopic(idx) {
@@ -325,7 +325,7 @@
                                 </div>
                                 <div class="sm:col-span-6 space-y-1">
                                     <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Pre-filled WhatsApp Message</label>
-                                    <input type="text" :name="'topics[' + index + '][msg]'" x-model="topic.msg" placeholder="Hello Récolte Nails! ..." required class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] focus:border-[#171412] outline-none">
+                                    <input type="text" :name="'topics[' + index + '][msg]'" x-model="topic.msg" placeholder="Hello Recolte Nails! ..." required class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] focus:border-[#171412] outline-none">
                                 </div>
                                 <div class="sm:col-span-1 flex items-center justify-center pt-2 sm:pt-0">
                                     <button type="button" @click="removeTopic(index)" class="p-2 rounded-none bg-rose-50 hover:bg-rose-100 text-rose-600 hover:text-rose-800 transition-colors text-xs font-bold cursor-pointer" title="Delete Topic">

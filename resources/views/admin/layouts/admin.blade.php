@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Atelier CMS') — Récolte Nails Paris</title>
+    <title>@yield('title', 'Atelier CMS') — Recolte Nails Paris</title>
 
     <!-- Google Fonts: Display Serifs & Refined Sans (100% matched to Storefront) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,9 +34,9 @@
             <!-- Brand Logo & Header (Aligned with Storefront Navbar) -->
             <div class="p-5 border-b border-[#ECE6DE] flex items-center justify-between bg-white">
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 group">
-                    <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Récolte Logo" class="h-9 w-auto object-contain select-none transition-transform group-hover:scale-105">
+                    <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Recolte Logo" class="h-9 w-auto object-contain select-none transition-transform group-hover:scale-105">
                     <div>
-                        <div class="font-serif text-[15px] font-bold text-[#171412] tracking-wide leading-tight">Récolte Nails</div>
+                        <div class="font-serif text-[15px] font-bold text-[#171412] tracking-wide leading-tight">Recolte Nails</div>
                         <div class="text-[9px] font-semibold tracking-[0.22em] text-[#8C7A6B] uppercase">Atelier Studio CMS</div>
                     </div>
                 </a>
@@ -178,7 +178,7 @@
             <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[#D4CDC5]/80">
                 <div class="flex items-center gap-2">
                     <span class="text-[#A33B47]">✦</span>
-                    <span class="font-serif tracking-wider text-[#FAF8F5]">Récolte Nails Paris</span>
+                    <span class="font-serif tracking-wider text-[#FAF8F5]">Recolte Nails Paris</span>
                     <span class="text-[10px] uppercase tracking-[0.2em] text-[#8C7A6B]">Atelier CMS</span>
                 </div>
                 <div class="text-[11px] text-[#A89F97]">

@@ -1,5 +1,5 @@
 @extends("layouts.app")
-@section("title", "Haute Nail Catalog | Récolte Nails Paris")
+@section("title", "Haute Nail Catalog | Recolte Nails Paris")
 @section("content")
 
     <section class="py-12 sm:py-16 bg-[#FAF8F5] min-h-screen" x-data="{
@@ -149,7 +149,7 @@
                         <p class="text-xs text-[#A89F97] font-light leading-relaxed">
                             {{ $catalog_consultation['description'] ?? 'Send a quick photo of your natural nail bed for custom fit recommendations from our artists.' }}
                         </p>
-                        <a href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text={{ urlencode($catalog_consultation['whatsapp_msg'] ?? 'Hello Récolte Nails! I need help measuring my nail sizes for press-ons.') }}"
+                        <a href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text={{ urlencode($catalog_consultation['whatsapp_msg'] ?? 'Hello Recolte Nails! I need help measuring my nail sizes for press-ons.') }}"
                             target="_blank" rel="noopener noreferrer"
                             class="w-full py-3 px-5 rounded-none bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-xs flex items-center justify-center gap-2 group">
                             <svg class="w-4 h-4 fill-current transition-transform group-hover:scale-110"

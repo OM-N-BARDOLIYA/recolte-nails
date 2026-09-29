@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Atelier CMS Sign In — Récolte Nails Paris</title>
+    <title>Atelier CMS Sign In — Recolte Nails Paris</title>
     
     <!-- Google Fonts: Display Serifs & Refined Sans (100% matched to Storefront) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,10 +24,10 @@
         
         <div class="text-center space-y-3">
             <div class="inline-flex px-4 py-2 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] shadow-2xs">
-                <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Récolte Logo" class="h-10 w-auto object-contain select-none">
+                <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Recolte Logo" class="h-10 w-auto object-contain select-none">
             </div>
             <div>
-                <h1 class="font-serif text-2xl font-bold text-[#171412] tracking-wide">Récolte Nails Paris</h1>
+                <h1 class="font-serif text-2xl font-bold text-[#171412] tracking-wide">Recolte Nails Paris</h1>
                 <p class="text-[10px] text-[#8C7A6B] font-semibold tracking-[0.22em] uppercase">ATELIER CMS STUDIO LOGIN</p>
             </div>
         </div>

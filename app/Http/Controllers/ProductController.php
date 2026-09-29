@@ -122,7 +122,7 @@ class ProductController extends Controller
             'icon' => '📏',
             'description' => 'Send a quick photo of your natural nail bed for custom fit recommendations from our artists.',
             'btn_text' => 'Sizing Advice on WhatsApp',
-            'whatsapp_msg' => 'Hello Récolte Nails! I need help measuring my nail sizes for press-ons.',
+            'whatsapp_msg' => 'Hello Recolte Nails! I need help measuring my nail sizes for press-ons.',
         ]);
 
         return view('products.index', compact('products', 'categories', 'selectedCategory', 'searchQuery', 'currentSort', 'catalog_hero', 'catalog_consultation'));

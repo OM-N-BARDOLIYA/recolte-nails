@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Récolte Nails Paris | Handcrafted Luxury Press-On Nails & Nail Care')
+@section('title', 'Recolte Nails Paris | Handcrafted Luxury Press-On Nails & Nail Care')
 
 @section('content')
 
@@ -118,7 +118,7 @@
                 @endphp
                 <img 
                     src="{{ $slideImg . $versionStr }}" 
-                    alt="Récolte Nails - {{ $slide['sub_descriptor'] ?? 'Haute Nail Couture & Care' }}"
+                    alt="Recolte Nails - {{ $slide['sub_descriptor'] ?? 'Haute Nail Couture & Care' }}"
                     class="absolute inset-0 w-full h-full object-cover object-right sm:object-center pointer-events-none transition-transform duration-[6500ms] ease-out"
                     :class="current === {{ $index }} ? 'scale-100' : 'scale-105'"
                     loading="{{ $index === 0 ? 'eager' : 'lazy' }}" 
@@ -139,7 +139,7 @@
                             <div class="mb-1.5 sm:mb-3">
                                 <img 
                                     src="{{ asset('images/logo.png') }}?v={{ time() }}" 
-                                    alt="Récolte Nails Logo" 
+                                    alt="Recolte Nails Logo" 
                                     class="h-8 sm:h-14 lg:h-18 w-auto object-contain select-none drop-shadow-xs" 
                                 />
                             </div>
@@ -398,7 +398,7 @@
                 </div>
             </div>
 
-            <!-- Right Side (Part 2): Récolte Professional Color Swatches & Gel Polish Bottles (Full Right-Half Fill) -->
+            <!-- Right Side (Part 2): Recolte Professional Color Swatches & Gel Polish Bottles (Full Right-Half Fill) -->
             <div class="w-full md:w-1/2 relative flex items-center justify-center overflow-hidden min-h-[380px] sm:min-h-[460px] md:min-h-full h-full pointer-events-none">
                 @php
                     $showcaseImgUrl = !empty($showcase['image']) ? $showcase['image'] : asset('images/banners/recolte-colors-showcase.jpg');
@@ -408,7 +408,7 @@
                 @endphp
                 <img 
                     src="{{ $showcaseFinalUrl }}" 
-                    alt="Colors that cultivate confidence - Récolte Professional Gel Polish" 
+                    alt="Colors that cultivate confidence - Recolte Professional Gel Polish" 
                     class="h-full w-full object-cover object-bottom"
                     style="object-position: center bottom;"
                     loading="lazy"
@@ -456,14 +456,14 @@
                     </div>
                 </div>
 
-                <!-- Authentic Récolte Community Grid Video Reels -->
+                <!-- Authentic Recolte Community Grid Video Reels -->
                 @php
                     $instaPosts = $instagram['posts'] ?? [
                         [
                             'video' => asset('videos/community/community-reel-1.mp4'),
                             'poster' => asset('videos/community/community-reel-1-poster.jpg'),
                             'image' => asset('videos/community/community-reel-1-poster.jpg'),
-                            'alt' => 'Récolte Salon Gel Application',
+                            'alt' => 'Recolte Salon Gel Application',
                             'link' => 'https://www.instagram.com/recolte_gelpolish/'
                         ],
                         [
@@ -501,7 +501,7 @@
                         ></video>
                         @else
                         <img src="{{ $post['image'] ?? ($post['poster'] ?? '') }}"
-                            alt="{{ $post['alt'] ?? 'Récolte Community Reel' }}"
+                            alt="{{ $post['alt'] ?? 'Recolte Community Reel' }}"
                             class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
                         @endif
 
@@ -517,7 +517,7 @@
 
                         <!-- Post Title / Alt Caption Gradient -->
                         <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/85 via-black/45 to-transparent z-10 pointer-events-none">
-                            <p class="text-xs font-serif font-medium text-white/95 line-clamp-1">{{ $post['alt'] ?? 'Récolte Community Reel' }}</p>
+                            <p class="text-xs font-serif font-medium text-white/95 line-clamp-1">{{ $post['alt'] ?? 'Recolte Community Reel' }}</p>
                             <span class="text-[10px] text-[#C5A880] font-mono tracking-wider">@recolte_gelpolish</span>
                         </div>
 

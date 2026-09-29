@@ -13,7 +13,7 @@
                 <span>Live Studio Overview</span>
             </div>
             <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">Atelier CMS Dashboard</h1>
-            <p class="text-xs sm:text-sm text-[#6A625A] font-light">Dynamically manage Récolte Nails collections, page copy, and studio concierge.</p>
+            <p class="text-xs sm:text-sm text-[#6A625A] font-light">Dynamically manage Recolte Nails collections, page copy, and studio concierge.</p>
         </div>
 
         <div class="flex items-center gap-3">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Franchise & Studio Partnerships | Récolte Nails')
+@section('title', 'Franchise & Studio Partnerships | Recolte Nails')
 
 @section('content')
 <div class="space-y-16 pb-20">
@@ -10,14 +10,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span class="inline-block text-xs font-bold uppercase tracking-[0.25em] text-[#A33B47] mb-3">Partner With Us</span>
             <h1 class="font-serif text-3xl sm:text-5xl font-bold text-[#111111] max-w-2xl mx-auto leading-tight">
-                Grow With Récolte <span class="italic font-normal text-[#A33B47]">Haute Nail Couture</span>
+                Grow With Recolte <span class="italic font-normal text-[#A33B47]">Haute Nail Couture</span>
             </h1>
             <p class="text-sm sm:text-base text-gray-600 max-w-xl mx-auto mt-4 leading-relaxed font-light">
                 Bring premium Japanese salon gel systems, luxury handmade press-ons, and bespoke nail aesthetics to your salon or studio.
             </p>
             <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <a 
-                    href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text=Hello%20R%C3%A9colte%20Nails!%20I%20am%20interested%20in%20a%20Franchise%20/%20Studio%20Partnership." 
+                    href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text=Hello%20Recolte%20Nails!%20I%20am%20interested%20in%20a%20Franchise%20/%20Studio%20Partnership." 
                     target="_blank"
                     rel="noopener noreferrer"
                     class="px-8 py-3.5 bg-[#111111] hover:bg-black text-white text-xs font-bold tracking-wider uppercase rounded-none shadow-md transition-colors duration-200 inline-flex items-center gap-2"

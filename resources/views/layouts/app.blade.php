@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Récolte Nails - Handcrafted luxury press-on nails, salon gel polishes, and 24K gold cuticle elixirs.">
-    <title>@yield('title', 'Récolte Nails | Haute Nail Couture & Organic Care')</title>
+        content="Recolte Nails - Handcrafted luxury press-on nails, salon gel polishes, and 24K gold cuticle elixirs.">
+    <title>@yield('title', 'Recolte Nails | Haute Nail Couture & Organic Care')</title>
 
     <!-- Google Fonts: Display Serifs & Calligraphy -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +30,7 @@
 
                 <!-- ── 1. RECOLTE BRAND LOGO (LEFT) ── -->
                 <a href="{{ route('home') }}" class="flex items-center group shrink-0 select-none py-1">
-                    <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Récolte Nails Logo"
+                    <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Recolte Nails Logo"
                         class="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
                 </a>
 
@@ -174,13 +174,13 @@
                     <a href="{{ route('home') }}" class="inline-flex items-center gap-3.5 group">
                         <div
                             class="px-3.5 py-1.5 rounded-none bg-white border border-white/20 shadow-xs transition-all duration-300 group-hover:scale-105">
-                            <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Récolte Nails Logo"
+                            <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Recolte Nails Logo"
                                 class="h-8 sm:h-9 w-auto object-contain select-none" />
                         </div>
                         <div class="space-y-0.5">
                             <div
                                 class="font-serif text-lg font-bold text-[#FAF8F5] uppercase tracking-wider group-hover:text-[#C5A880] transition-colors">
-                                Récolte Nails</div>
+                                Recolte Nails</div>
                             <div class="text-[11px] text-[#C5A880] font-medium tracking-wide">Paris • Haute Nail Couture
                                 &amp; Care</div>
                         </div>
@@ -237,7 +237,7 @@
             <!-- Bottom Copyright & Social -->
             <div
                 class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#7D756D] font-light">
-                <div>Copyright © {{ date('Y') }} Récolte Nails. All rights reserved.</div>
+                <div>Copyright © {{ date('Y') }} Recolte Nails. All rights reserved.</div>
                 <div class="flex items-center gap-4">
                     <a href="https://www.instagram.com/recolte_gelpolish/" target="_blank" rel="noopener noreferrer"
                         class="text-[#C5A880] hover:text-white font-medium inline-flex items-center gap-2 transition-colors">

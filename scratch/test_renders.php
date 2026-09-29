@@ -14,7 +14,8 @@ $slugs = [
     'recolte-60-shades-essential-gel-polish-kit-r1-series',
     'recolte-velvet-matte-top-coat',
     'recolte-fine-art-nail-painting-gel',
-    'recolte-platinum-foil-glitter-gel'
+    'recolte-platinum-foil-glitter-gel',
+    'recolte-excellent-base-coat',
 ];
 
 foreach ($slugs as $slug) {

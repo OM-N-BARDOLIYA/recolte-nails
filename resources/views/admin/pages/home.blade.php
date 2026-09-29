@@ -120,7 +120,7 @@
                         <div class="sm:col-span-4 flex items-center gap-3 p-3 bg-white border border-[#ECE6DE] shadow-2xs">
                             <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Logo Preview" class="h-8 w-auto object-contain">
                             <div>
-                                <p class="text-xs font-serif font-bold text-[#171412]">Récolte Atelier</p>
+                                <p class="text-xs font-serif font-bold text-[#171412]">Recolte Atelier</p>
                                 <p class="text-[10px] text-[#8C7A6B]">Official Brand Mark</p>
                             </div>
                         </div>

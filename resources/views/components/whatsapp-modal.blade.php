@@ -92,8 +92,8 @@
                 <div class="pt-2">
                     <a 
                         :href="'https://wa.me/917016266727?text=' + encodeURIComponent(
-                            '✨ *HAUTE NAIL ORDER & INQUIRY | RÉCOLTE NAILS* ✨\n\n' +
-                            'Hello Récolte Nails Studio! 🌸\n' +
+                            '✨ *HAUTE NAIL ORDER & INQUIRY | RECOLTE NAILS* ✨\n\n' +
+                            'Hello Recolte Nails Studio! 🌸\n' +
                             'I would like to inquire about and place an order for this handcrafted nail product:\n\n' +
                             '💅 *Product:* ' + modalProduct.title + '\n' +
 

@@ -143,7 +143,7 @@ class HomeController extends Controller
                     'video' => asset('videos/community/community-reel-1.mp4'),
                     'poster' => asset('videos/community/community-reel-1-poster.jpg'),
                     'image' => asset('videos/community/community-reel-1-poster.jpg'),
-                    'alt' => 'Récolte Salon Gel Application',
+                    'alt' => 'Recolte Salon Gel Application',
                     'link' => 'https://www.instagram.com/recolte_gelpolish/'
                 ],
                 [

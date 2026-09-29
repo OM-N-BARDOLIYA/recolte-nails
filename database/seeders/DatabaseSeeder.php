@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'admin@recoltenails.com'],
             [
-                'name' => 'Récolte Atelier Admin',
+                'name' => 'Recolte Atelier Admin',
                 'password' => Hash::make('RecolteAdmin2026!'),
                 'is_admin' => true,
             ]
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
 
         // ── 2. SITE SETTINGS ──
         $settings = [
-            'site_name' => 'Récolte Nails Paris',
+            'site_name' => 'Recolte Nails Paris',
             'tagline' => 'Paris • Haute Nail Couture & Organic Care',
             'whatsapp_number' => '917016266727',
             'phone' => '+91 7016266727',
@@ -38,8 +38,8 @@ class DatabaseSeeder extends Seeder
             'instagram_handle' => '@recolte_gelpolish',
             'tiktok_url' => 'https://tiktok.com/@recoltenails',
             'pinterest_url' => 'https://pinterest.com/recoltenails',
-            'footer_bio' => 'Récolte Nails is a Parisian haute nail couture house specializing in salon-grade Japanese gel polishes, builder gels, and professional nail art systems for salon luxury at home.',
-            'copyright' => '© 2026 Récolte Nails Paris. All rights reserved. Handcrafted with Japanese salon gels.'
+            'footer_bio' => 'Recolte Nails is a Parisian haute nail couture house specializing in salon-grade Japanese gel polishes, builder gels, and professional nail art systems for salon luxury at home.',
+            'copyright' => '© 2026 Recolte Nails Paris. All rights reserved. Handcrafted with Japanese salon gels.'
         ];
 
         foreach ($settings as $key => $val) {
@@ -230,7 +230,7 @@ class DatabaseSeeder extends Seeder
         // ── 4. PRODUCTS (MATCHING DRIVE FILTER FOLDERS & MEDIA) ──
         $products = [
             [
-                'title' => 'Récolte Excellent Base Coat',
+                'title' => 'Recolte Excellent Base Coat',
                 'slug' => 'recolte-excellent-base-coat',
                 'category' => 'Base Coat',
                 'category_id' => $catMap['Base Coat'] ?? null,
@@ -241,9 +241,9 @@ class DatabaseSeeder extends Seeder
                 'is_bestseller' => true,
                 'is_active' => true,
                 'tagline' => '60 Days+ Strong Adhesion Natural Resin Base Coat with Keratin Protection',
-                'description' => 'Engineered with high-purity natural tree resins and a purified water-clarified formula, Récolte Excellent Base Coat provides up to 60+ days of unwavering adhesion without chipping or lifting. The acid-free, odorless formulation forms a protective barrier over the natural nail keratin while auto-leveling seamlessly. Easy soak-off in 5–8 minutes with zero natural nail damage.',
+                'description' => 'Engineered with high-purity natural tree resins and a purified water-clarified formula, Recolte Excellent Base Coat provides up to 60+ days of unwavering adhesion without chipping or lifting. The acid-free, odorless formulation forms a protective barrier over the natural nail keratin while auto-leveling seamlessly. Easy soak-off in 5–8 minutes with zero natural nail damage.',
                 'key_ingredients' => 'Extracted Natural Tree Resin, Purified Deionized Base, Medical-Grade Polyurethane Acrylate, HEMA-Free Photo-Initiators, Keratin Vitamin Shield',
-                'how_to_use' => '1. Cleanse and dehydrate natural nail with Récolte Primer. 2. Apply a thin, uniform coat of Excellent Base Coat capping the free edge. 3. Cure for 60 seconds under UV/LED lamp. 4. Follow with your chosen Récolte gel polish.',
+                'how_to_use' => '1. Cleanse and dehydrate natural nail with Recolte Primer. 2. Apply a thin, uniform coat of Excellent Base Coat capping the free edge. 3. Cure for 60 seconds under UV/LED lamp. 4. Follow with your chosen Recolte gel polish.',
                 'main_image' => '/uploads/products/catalog/BASE_COAT_base.png',
                 'images' => [
                     '/uploads/products/catalog/BASE_COAT_base.png',
@@ -254,9 +254,7 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/BASE_COAT_white_bottle_2_.JPG',
                     '/uploads/products/catalog/BASE_COAT_base_coat.mp4',
                 ],
-                'shades' => [
-                    ['name' => 'Crystal Clear Base', 'hex' => '#F4EFEB'],
-                ],
+                'shades' => [],
                 'sizes' => [
                     '15ml Precision Atelier Bottle',
                     '30ml Salon Refill',
@@ -272,7 +270,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 1,
             ],
             [
-                'title' => 'Récolte BIAB Liquid Builder Gel',
+                'title' => 'Recolte BIAB Liquid Builder Gel',
                 'slug' => 'recolte-biab-liquid-builder-gel',
                 'category' => 'BIAB',
                 'category_id' => $catMap['BIAB'] ?? null,
@@ -283,9 +281,9 @@ class DatabaseSeeder extends Seeder
                 'is_bestseller' => true,
                 'is_active' => true,
                 'tagline' => 'Self-leveling liquid builder in a bottle for natural nail overlays & apex strength',
-                'description' => 'Récolte BIAB (Builder in a Bottle) offers the ideal balance of brush-on convenience and structural sculpting strength. Its self-leveling formula fills natural ridges, reinforces delicate nails, and allows effortless apex architecture without heat spikes.',
+                'description' => 'Recolte BIAB (Builder in a Bottle) offers the ideal balance of brush-on convenience and structural sculpting strength. Its self-leveling formula fills natural ridges, reinforces delicate nails, and allows effortless apex architecture without heat spikes.',
                 'key_ingredients' => 'Japanese Oligomer Resin, Micro-Fiber Reinforcing Matrix, Optical Stabilizers',
-                'how_to_use' => '1. Apply Récolte Base Coat and cure 60s. 2. Apply a thin slip layer of BIAB, then place a bead near the cuticle and gently guide it towards the free edge to build the apex. 3. Flash cure 10s, then full cure 60s.',
+                'how_to_use' => '1. Apply Recolte Base Coat and cure 60s. 2. Apply a thin slip layer of BIAB, then place a bead near the cuticle and gently guide it towards the free edge to build the apex. 3. Flash cure 10s, then full cure 60s.',
                 'main_image' => '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_1_.jpg',
                 'images' => [
                     '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_1_.jpg',
@@ -320,7 +318,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 25,
             ],
             [
-                'title' => 'Récolte Fast-Spread Blooming Gel',
+                'title' => 'Recolte Fast-Spread Blooming Gel',
                 'slug' => 'recolte-fast-spread-blooming-gel',
                 'category' => 'Blooming Gel',
                 'category_id' => $catMap['Blooming Gel'] ?? null,
@@ -331,7 +329,7 @@ class DatabaseSeeder extends Seeder
                 'is_bestseller' => true,
                 'is_active' => true,
                 'tagline' => 'Instant blooming gel for artistic marble, watercolor bloom & blossom effects',
-                'description' => 'Unlock effortless Parisian nail artistry with Récolte Fast-Spread Blooming Gel. Applied wet over cured color, it gently diffuses drops of gel polish into fluid watercolor petals, organic marble veins, and smoke clouds before curing.',
+                'description' => 'Unlock effortless Parisian nail artistry with Recolte Fast-Spread Blooming Gel. Applied wet over cured color, it gently diffuses drops of gel polish into fluid watercolor petals, organic marble veins, and smoke clouds before curing.',
                 'key_ingredients' => 'Low Surface-Tension Acrylic Monomers, Optical Diffusion Fluid, UV Curatives',
                 'how_to_use' => '1. Apply background color and cure. 2. Apply a thin, uncured layer of Blooming Gel. 3. Dot or line your desired gel polish into the wet surface and watch it bloom into shape. 4. Cure 60s once desired bloom is achieved, then seal with Top Coat.',
                 'main_image' => '/uploads/products/catalog/BLOOMING_GEL_Blooming_gel_fast_1_.jpg',
@@ -358,7 +356,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 26,
             ],
             [
-                'title' => 'Récolte Sculpting Master Builder Gel',
+                'title' => 'Recolte Sculpting Master Builder Gel',
                 'slug' => 'recolte-sculpting-master-builder-gel',
                 'category' => 'Builder Gel',
                 'category_id' => $catMap['Builder Gel'] ?? null,
@@ -369,7 +367,7 @@ class DatabaseSeeder extends Seeder
                 'is_bestseller' => true,
                 'is_active' => true,
                 'tagline' => 'High-viscosity professional builder gel for long extensions, forms & tip overlays',
-                'description' => 'Formulated for salon master nail technicians, Récolte Master Builder Gel features exceptional architectural viscosity that holds its shape without running into lateral sidewalls. Yields glass-clear transparency and extreme impact resistance.',
+                'description' => 'Formulated for salon master nail technicians, Recolte Master Builder Gel features exceptional architectural viscosity that holds its shape without running into lateral sidewalls. Yields glass-clear transparency and extreme impact resistance.',
                 'key_ingredients' => 'High-Density Urethane Dimethacrylate, Non-Yellowing Optical Clarifiers, Photo-Curing Resins',
                 'how_to_use' => '1. Prep natural nails and apply primer & base coat. 2. Position nail form or tip. 3. Sculpt apex and length with a gel brush. 4. Cure 60-90s under UV/LED. 5. Wipe dispersion layer, file to shape, and seal.',
                 'main_image' => '/uploads/products/catalog/BUILDER_GEL_builder_gel_1_.png',
@@ -418,7 +416,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 27,
             ],
             [
-                'title' => 'Récolte 3D Carving Gel',
+                'title' => 'Recolte 3D Carving Gel',
                 'slug' => 'recolte-3d-sculpture-carving-gel',
                 'category' => 'Carving Gel',
                 'category_id' => $catMap['Carving Gel'] ?? null,
@@ -429,7 +427,7 @@ class DatabaseSeeder extends Seeder
                 'is_bestseller' => true,
                 'is_active' => true,
                 'tagline' => 'Non-sticky moldable 3D carving gel for sculpted florals, lace & relief nail art',
-                'description' => 'Récolte 3D Carving Gel provides a sculptable clay-like texture that can be rolled, pressed, and shaped with silicone tools or fingers without sticking. Allows unlimited working time to craft ornate floral petals, lace textures, and modern 3D emboss designs.',
+                'description' => 'Recolte 3D Carving Gel provides a sculptable clay-like texture that can be rolled, pressed, and shaped with silicone tools or fingers without sticking. Allows unlimited working time to craft ornate floral petals, lace textures, and modern 3D emboss designs.',
                 'key_ingredients' => 'Solid Sculpting Oligomers, Silica Micro-Spheres, Fine Cosmetic Pigments',
                 'how_to_use' => '1. Take a small bead with a spatula or silicone tool. 2. Roll into desired shape and press onto cured gel manicure. 3. Sculpt petals or relief patterns. 4. Cure for 60 seconds.',
                 'main_image' => '/uploads/products/catalog/CARVING_GEL_3D_Carving_Gel_1_.jpg',
@@ -465,7 +463,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 28,
             ],
             [
-                'title' => 'Récolte 24 Shades Cat Eye Gel Polish Kit (A-Series)',
+                'title' => 'Recolte 24 Shades Cat Eye Gel Polish Kit (A-Series)',
                 'slug' => 'recolte-24-shades-cat-eye-gel-polish-kit-a-series',
                 'category' => 'Cat Eye Gels',
                 'category_id' => $catMap['Cat Eye Gels'] ?? null,
@@ -478,7 +476,7 @@ class DatabaseSeeder extends Seeder
                 'tagline' => '24-shade magnetic velvet cat eye gel polish collection with deep galaxy refraction',
                 'description' => 'The A-Series collection encompasses 24 bewitching magnetic jewel tones saturated with rare-earth magnetic micro-prisms. Using the included dual-ended stylus magnet, create velvet glow lines, cosmic halos, and cat-eye light bars in seconds.',
                 'key_ingredients' => 'Japanese Acrylate Gel, Micronized Rare-Earth Magnetic Particles, Cosmetic Mica, UV Blockers',
-                'how_to_use' => '1. Apply base coat and cure. 2. Apply 1 coat of Récolte Cat Eye gel. 3. Hover magnet 2mm over the wet gel for 5-10 seconds to create desired pattern. 4. Immediately cure 60s. 5. Seal with Top Coat.',
+                'how_to_use' => '1. Apply base coat and cure. 2. Apply 1 coat of Recolte Cat Eye gel. 3. Hover magnet 2mm over the wet gel for 5-10 seconds to create desired pattern. 4. Immediately cure 60s. 5. Seal with Top Coat.',
                 'main_image' => '/uploads/products/catalog/CATEYES_A_SERIES_24_SHADES_KIT_Recolte-24_Cat_Eye_4_.jpg',
                 'images' => [
                     '/uploads/products/catalog/CATEYES_A_SERIES_24_SHADES_KIT_Recolte-24_Cat_Eye_4_.jpg',
@@ -507,7 +505,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 29,
             ],
             [
-                'title' => 'Récolte 10 Shades Cat Eye Gel Polish Kit (E-Series)',
+                'title' => 'Recolte 10 Shades Cat Eye Gel Polish Kit (E-Series)',
                 'slug' => 'recolte-10-shades-cat-eye-gel-polish-kit-e-series',
                 'category' => 'Cat Eye Gels',
                 'category_id' => $catMap['Cat Eye Gels'] ?? null,
@@ -567,7 +565,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 30,
             ],
             [
-                'title' => 'Récolte 208 Colors Master Salon Gel Polish',
+                'title' => 'Recolte 208 Colors Master Salon Gel Polish',
                 'slug' => 'recolte-208-colors-master-salon-gel-polish-suite',
                 'category' => 'Gel Polishes',
                 'category_id' => $catMap['Gel Polishes'] ?? null,
@@ -578,9 +576,9 @@ class DatabaseSeeder extends Seeder
                 'is_bestseller' => true,
                 'is_active' => true,
                 'tagline' => 'Complete salon master suite of 208 luxury shades with comprehensive color book & display charts',
-                'description' => 'The magnum opus of Récolte Nails Paris. 208 opulent shades spanning runway nudes, sultry bordeaux, energetic neons, sophisticated pastels, and timeless crèmes. Comes complete with a hardcover collector swatch book and studio color charts.',
+                'description' => 'The magnum opus of Recolte Nails Paris. 208 opulent shades spanning runway nudes, sultry bordeaux, energetic neons, sophisticated pastels, and timeless crèmes. Comes complete with a hardcover collector swatch book and studio color charts.',
                 'key_ingredients' => '100% Japanese Resin Base, Cosmetic Grade Optical Pigments, Non-Yellowing Stabilizers',
-                'how_to_use' => '1. Prep natural nail and apply base coat; cure 60s. 2. Apply 1-2 thin coats of color; cure 60s per coat. 3. Seal with Récolte Top Coat; cure 60s.',
+                'how_to_use' => '1. Prep natural nail and apply base coat; cure 60s. 2. Apply 1-2 thin coats of color; cure 60s per coat. 3. Seal with Recolte Top Coat; cure 60s.',
                 'main_image' => '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Recolte-208_colors.jpg',
                 'images' => [
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Recolte-208_colors.jpg',
@@ -619,7 +617,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 31,
             ],
             [
-                'title' => 'Récolte 150 Shades Classic Gel Polish Luxury Collection',
+                'title' => 'Recolte 150 Shades Classic Gel Polish Luxury Collection',
                 'slug' => 'recolte-150-shades-classic-gel-polish-luxury-collection',
                 'category' => 'Gel Polishes',
                 'category_id' => $catMap['Gel Polishes'] ?? null,
@@ -662,7 +660,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 32,
             ],
             [
-                'title' => 'Récolte 96 Shades Signature Gel Polish Luxurious Salon Kit',
+                'title' => 'Recolte 96 Shades Signature Gel Polish Luxurious Salon Kit',
                 'slug' => 'recolte-96-shades-signature-gel-polish-set',
                 'category' => 'Gel Polishes',
                 'category_id' => $catMap['Gel Polishes'] ?? null,
@@ -673,7 +671,7 @@ class DatabaseSeeder extends Seeder
                 'is_bestseller' => false,
                 'is_active' => true,
                 'tagline' => '96 runway-inspired signature shades engineered for salon artists and bespoke manicures',
-                'description' => 'The quintessential Récolte signature collection. 96 indispensable shades engineered for high pigment density, self-leveling performance, and seamless blending. Packaged in our iconic gold-accented salon box.',
+                'description' => 'The quintessential Recolte signature collection. 96 indispensable shades engineered for high pigment density, self-leveling performance, and seamless blending. Packaged in our iconic gold-accented salon box.',
                 'key_ingredients' => 'Pure Japanese Resin, Concentrated Mineral Pigments, Anti-Fading Stabilizers',
                 'how_to_use' => '1. Apply base coat and cure. 2. Apply 1-2 coats of Signature 96 gel polish. 3. Cure 60s. 4. Seal with diamond top coat.',
                 'main_image' => '/uploads/products/catalog/GEL_POLISHES_96_SHADES_KIT_Recolte-96_colors.jpg',
@@ -698,7 +696,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 33,
             ],
             [
-                'title' => 'Récolte 60 Shades Prestige Gel Polish Kit (R2 Series)',
+                'title' => 'Recolte 60 Shades Prestige Gel Polish Kit (R2 Series)',
                 'slug' => 'recolte-60-shades-prestige-gel-polish-kit-r2-series',
                 'category' => 'Gel Polishes',
                 'category_id' => $catMap['Gel Polishes'] ?? null,
@@ -739,7 +737,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 34,
             ],
             [
-                'title' => 'Récolte 60 Shades Essential Gel Polish Kit (R1 Series)',
+                'title' => 'Recolte 60 Shades Essential Gel Polish Kit (R1 Series)',
                 'slug' => 'recolte-60-shades-essential-gel-polish-kit-r1-series',
                 'category' => 'Gel Polishes',
                 'category_id' => $catMap['Gel Polishes'] ?? null,
@@ -773,7 +771,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 35,
             ],
             [
-                'title' => 'Récolte Matte Top Coat',
+                'title' => 'Recolte Matte Top Coat',
                 'slug' => 'recolte-velvet-matte-top-coat',
                 'category' => 'Matte Top Coat',
                 'category_id' => $catMap['Matte Top Coat'] ?? null,
@@ -784,7 +782,7 @@ class DatabaseSeeder extends Seeder
                 'is_bestseller' => false,
                 'is_active' => true,
                 'tagline' => 'Non-wipe cashmere matte finish transforming any glossy gel into sophisticated velvet',
-                'description' => 'Récolte Matte Top Coat instantly imparts an ultra-chic, cashmere-soft tactile feel with zero glare. Formulated with non-wipe technology and anti-staining polymers to keep light colors pristine without yellowing or scuffing.',
+                'description' => 'Recolte Matte Top Coat instantly imparts an ultra-chic, cashmere-soft tactile feel with zero glare. Formulated with non-wipe technology and anti-staining polymers to keep light colors pristine without yellowing or scuffing.',
                 'key_ingredients' => 'Matte Silica Polyurethane, Anti-Yellowing Resins, Hydrophobic Surface Agents',
                 'how_to_use' => '1. Complete your gel color application. 2. Brush a generous coat of Matte Top Coat over the nail. 3. Cure for 60 seconds under LED lamp. No wiping required.',
                 'main_image' => '/uploads/products/catalog/MATTE_COAT_matte_top_coat_1_.png',
@@ -812,7 +810,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 36,
             ],
             [
-                'title' => 'Récolte Molten Mirror Metallic Gel',
+                'title' => 'Recolte Molten Mirror Metallic Gel',
                 'slug' => 'recolte-molten-mirror-metallic-gel',
                 'category' => 'Metallic Gel',
                 'category_id' => $catMap['Metallic Gel'] ?? null,
@@ -853,7 +851,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 37,
             ],
             [
-                'title' => 'Récolte Clear Blending & Mixing Gel',
+                'title' => 'Recolte Clear Blending & Mixing Gel',
                 'slug' => 'recolte-clear-blending-mixing-gel',
                 'category' => 'Mixing Gel',
                 'category_id' => $catMap['Mixing Gel'] ?? null,
@@ -890,7 +888,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 38,
             ],
             [
-                'title' => 'Récolte Fine Art Nail Painting Gel',
+                'title' => 'Recolte Fine Art Nail Painting Gel',
                 'slug' => 'recolte-fine-art-nail-painting-gel',
                 'category' => 'Painting Gel',
                 'category_id' => $catMap['Painting Gel'] ?? null,
@@ -926,7 +924,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 39,
             ],
             [
-                'title' => 'Récolte Platinum Glitter Gel',
+                'title' => 'Recolte Platinum Glitter Gel',
                 'slug' => 'recolte-platinum-foil-glitter-gel',
                 'category' => 'Platinum Gel',
                 'category_id' => $catMap['Platinum Gel'] ?? null,
@@ -967,7 +965,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 40,
             ],
             [
-                'title' => 'Récolte Acryl-Gel Hybrid Polygel',
+                'title' => 'Recolte Acryl-Gel Hybrid Polygel',
                 'slug' => 'recolte-acryl-gel-hybrid-polygel',
                 'category' => 'Polygel',
                 'category_id' => $catMap['Polygel'] ?? null,
@@ -1006,7 +1004,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 41,
             ],
             [
-                'title' => 'Récolte Acid-Free Dehydrating Bond Primer',
+                'title' => 'Recolte Acid-Free Dehydrating Bond Primer',
                 'slug' => 'recolte-acid-free-dehydrating-bond-primer',
                 'category' => 'Primer',
                 'category_id' => $catMap['Primer'] ?? null,
@@ -1040,7 +1038,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 42,
             ],
             [
-                'title' => 'Récolte 24 Flash Reflective Glitter Gel Polish',
+                'title' => 'Recolte 24 Flash Reflective Glitter Gel Polish',
                 'slug' => 'recolte-24-flash-reflective-glitter-gel-polish',
                 'category' => 'Reflective Polish',
                 'category_id' => $catMap['Reflective Polish'] ?? null,
@@ -1053,7 +1051,7 @@ class DatabaseSeeder extends Seeder
                 'tagline' => 'Hypnotic light-activated diamond flash disco gel polish bursting with brilliant luminescence',
                 'description' => 'Featuring advanced retroreflective crystal beads that capture and bounce direct light. Appears as a classy subtle micro-shimmer under normal daytime ambient lighting, and explodes into blinding diamond sparkle under camera flashes and club lights.',
                 'key_ingredients' => 'Reflective Glass Micro-Prisms, Highly Purified Gel Resin, Anti-Settling Suspension Fluid',
-                'how_to_use' => '1. Apply base coat & cure. 2. Apply 1-2 coats of Flash Reflective Polish. 3. Cure 60s per coat. 4. Seal with Récolte Diamond Top Coat.',
+                'how_to_use' => '1. Apply base coat & cure. 2. Apply 1-2 coats of Flash Reflective Polish. 3. Cure 60s per coat. 4. Seal with Recolte Diamond Top Coat.',
                 'main_image' => '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_1_.jpg',
                 'images' => [
                     '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_1_.jpg',
@@ -1083,7 +1081,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 43,
             ],
             [
-                'title' => 'Récolte No-Wipe Precision Rhinestone Gel',
+                'title' => 'Recolte No-Wipe Precision Rhinestone Gel',
                 'slug' => 'recolte-no-wipe-precision-rhinestone-gel',
                 'category' => 'Rhinestone Gel',
                 'category_id' => $catMap['Rhinestone Gel'] ?? null,
@@ -1126,7 +1124,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 44,
             ],
             [
-                'title' => 'Récolte 5-in-1 Fortifying Rubber Base Coat',
+                'title' => 'Recolte 5-in-1 Fortifying Rubber Base Coat',
                 'slug' => 'recolte-5-in-1-fortifying-rubber-base-coat',
                 'category' => 'Rubber Base',
                 'category_id' => $catMap['Rubber Base'] ?? null,
@@ -1166,7 +1164,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 45,
             ],
             [
-                'title' => 'Récolte Solid Glue Gel for Full Cover Tips',
+                'title' => 'Recolte Solid Glue Gel for Full Cover Tips',
                 'slug' => 'recolte-solid-glue-gel-for-full-cover-tips',
                 'category' => 'Solid Glue Gel',
                 'category_id' => $catMap['Solid Glue Gel'] ?? null,
@@ -1203,7 +1201,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 46,
             ],
             [
-                'title' => 'Récolte Matrix Elastic Line Spider Gel',
+                'title' => 'Recolte Matrix Elastic Line Spider Gel',
                 'slug' => 'recolte-matrix-elastic-line-spider-gel',
                 'category' => 'Spider Gel',
                 'category_id' => $catMap['Spider Gel'] ?? null,
@@ -1214,7 +1212,7 @@ class DatabaseSeeder extends Seeder
                 'is_bestseller' => false,
                 'is_active' => true,
                 'tagline' => 'Super-elastic matrix gel that stretches into razor-thin straight lines and geometric nail art',
-                'description' => 'With extreme tensile elasticity, Récolte Spider Gel pulls out of the pot like a spider web and drapes across the nail in impossibly straight geometric lines, french edges, and abstract cage designs without snapping.',
+                'description' => 'With extreme tensile elasticity, Recolte Spider Gel pulls out of the pot like a spider web and drapes across the nail in impossibly straight geometric lines, french edges, and abstract cage designs without snapping.',
                 'key_ingredients' => 'Elastic Polyurethane Matrix, High Viscosity Stabilizers, Concentrated Carbon/Titanium Pigments',
                 'how_to_use' => '1. Dip a dotting tool or fine brush into the gel and lift upwards to draw an elastic thread. 2. Lay the thread across the nail in your desired pattern. 3. Clean sidewalls and cure 60s. 4. Seal with Top Coat.',
                 'main_image' => '/uploads/products/catalog/SPIDER_GEL_Spider_Gel_1_.jpg',
@@ -1243,7 +1241,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 47,
             ],
             [
-                'title' => 'Récolte Long Wear No Wipe Top Coat',
+                'title' => 'Recolte Long Wear No Wipe Top Coat',
                 'slug' => 'recolte-long-wear-no-wipe-top-coat',
                 'category' => 'Top Coats',
                 'category_id' => $catMap['Top Coats'] ?? null,
@@ -1283,7 +1281,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 48,
             ],
             [
-                'title' => 'Récolte 6-in-1 Diamond Hard Top Coat',
+                'title' => 'Recolte 6-in-1 Diamond Hard Top Coat',
                 'slug' => 'recolte-6-in-1-diamond-hard-top-coat',
                 'category' => '6-in-1 Top Coat',
                 'category_id' => $catMap['6-in-1 Top Coat'] ?? null,
@@ -1352,7 +1350,7 @@ class DatabaseSeeder extends Seeder
         PageContent::setSection('home', 'hero', $homeHero);
 
         $homePillars = [
-            'badge' => 'Nails by Récolte • Paris',
+            'badge' => 'Nails by Recolte • Paris',
             'title' => 'Unlock Your Best Nails: Trusted by Nail Enthusiasts',
             'card1_num' => '01 / ATELIER FORMULATION',
             'card1_title' => 'Japanese Gel Craftsmanship',
@@ -1401,7 +1399,7 @@ class DatabaseSeeder extends Seeder
         $homeInstagram = [
             'badge' => 'PARISIAN NAIL COMMUNITY',
             'title' => 'Join Our Global Atelier Gallery',
-            'subtitle' => 'Tag @recolte_gelpolish on Instagram with your Récolte manicures to be featured.',
+            'subtitle' => 'Tag @recolte_gelpolish on Instagram with your Recolte manicures to be featured.',
             'btn_text' => 'Follow @recolte_gelpolish on Instagram ↗',
             'btn_url' => 'https://www.instagram.com/recolte_gelpolish/',
         ];
@@ -1412,7 +1410,7 @@ class DatabaseSeeder extends Seeder
             'badge' => 'OUR ATELIER HERITAGE & VISION',
             'title' => 'Where Parisian Haute Couture Meets Organic Nail Science',
             'paragraphs' => [
-                'Founded in Paris, Récolte Nails was born from a singular atelier obsession: creating salon-grade gel systems and organic nail formulations that enhance your elegance without ever compromising the health of your natural nail bed.',
+                'Founded in Paris, Recolte Nails was born from a singular atelier obsession: creating salon-grade gel systems and organic nail formulations that enhance your elegance without ever compromising the health of your natural nail bed.',
                 'Every product in our archives is meticulously engineered using Japanese salon gels, optical chrome pigments, and self-leveling polymers to guarantee 4+ weeks of chip-free, luminous wear.',
                 'Our philosophy bridges the world of runway aesthetics with pure botanical care. From our revolutionary HEMA-free Japanese salon gels to tempered top coats, we ensure that salon glamour and natural nail wellness coexist seamlessly.'
             ],
@@ -1446,16 +1444,16 @@ class DatabaseSeeder extends Seeder
         $aboutSteps = [
             'step1_num' => '01',
             'step1_title' => 'Precision Nail Preparation',
-            'step1_desc' => 'Cleanse and dehydrate with Récolte Acid-Free Primer to create an optimal bonding anchor.',
+            'step1_desc' => 'Cleanse and dehydrate with Recolte Acid-Free Primer to create an optimal bonding anchor.',
             'step2_num' => '02',
             'step2_title' => 'Base & Apex Architecture',
-            'step2_desc' => 'Apply Récolte Professional Base Coat or BIAB Liquid Builder to reinforce structure and curvature.',
+            'step2_desc' => 'Apply Recolte Professional Base Coat or BIAB Liquid Builder to reinforce structure and curvature.',
             'step3_num' => '03',
             'step3_title' => 'Pure Pigment Infusion',
             'step3_desc' => 'Apply high-density Japanese gel polishes, magnetic cat-eye glazes, or fine art painting gels.',
             'step4_num' => '04',
             'step4_title' => 'Tempered Diamond Armor',
-            'step4_desc' => 'Seal under Récolte High Gloss Tempered Top Coat or Velvet Matte for 35+ days of mirror protection.',
+            'step4_desc' => 'Seal under Recolte High Gloss Tempered Top Coat or Velvet Matte for 35+ days of mirror protection.',
         ];
         PageContent::setSection('about', 'steps', $aboutSteps);
     }

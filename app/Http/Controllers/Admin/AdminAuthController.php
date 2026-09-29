@@ -27,7 +27,7 @@ class AdminAuthController extends Controller
             if (Auth::user()->is_admin) {
                 $request->session()->regenerate();
                 return redirect()->intended(route('admin.dashboard'))
-                    ->with('success', 'Welcome back to Récolte Nails Atelier CMS!');
+                    ->with('success', 'Welcome back to Recolte Nails Atelier CMS!');
             }
 
             Auth::logout();

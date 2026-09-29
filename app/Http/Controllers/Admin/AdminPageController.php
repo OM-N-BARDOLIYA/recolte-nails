@@ -105,7 +105,7 @@ class AdminPageController extends Controller
                     'video' => asset('videos/community/community-reel-1.mp4'),
                     'poster' => asset('videos/community/community-reel-1-poster.jpg'),
                     'image' => asset('videos/community/community-reel-1-poster.jpg'),
-                    'alt' => 'Récolte Salon Gel Application',
+                    'alt' => 'Recolte Salon Gel Application',
                     'link' => 'https://www.instagram.com/recolte_gelpolish/'
                 ],
                 [
@@ -324,7 +324,7 @@ class AdminPageController extends Controller
                     'video' => $postVideo,
                     'poster' => '',
                     'image' => $postVideo,
-                    'alt' => $request->input("insta_{$i}_alt", "Récolte Community Reel " . ($i + 1)),
+                    'alt' => $request->input("insta_{$i}_alt", "Recolte Community Reel " . ($i + 1)),
                     'link' => $request->input("insta_{$i}_link", 'https://www.instagram.com/recolte_gelpolish/'),
                 ];
             }
@@ -350,14 +350,14 @@ class AdminPageController extends Controller
                 [
                     'badge' => '✦ HAUTE NAIL ATELIER & CRAFTSMANSHIP',
                     'title' => 'Crafted for Beauty. <br /><span class="font-serif italic font-normal text-[#A33B47]">Engineered for Nail Health.</span>',
-                    'p1' => 'Born from a passion for runway aesthetics and damage-free natural nail care, <strong>Récolte Nails</strong> redefines modern manicures. We bridge the gap between instant, reusable luxury press-on art and professional-grade Japanese salon gel therapy.',
+                    'p1' => 'Born from a passion for runway aesthetics and damage-free natural nail care, <strong>Recolte Nails</strong> redefines modern manicures. We bridge the gap between instant, reusable luxury press-on art and professional-grade Japanese salon gel therapy.',
                     'p2' => 'Every press-on set in our atelier is meticulously built with 7 layers of premium Japanese salon gel, hand-buffed with genuine pearl chrome, and shaped to your exact millimeter nail curve for a seamless 4-week wear that looks 100% salon-sculpted.',
                     'img' => asset('images/banners/recolte-colors-showcase.jpg'),
                 ],
                 [
                     'badge' => '✦ 7-LAYER GEL ARCHITECTURE',
                     'title' => 'Seven Optical Layers. <br /><span class="font-serif italic font-normal text-[#A33B47]">Zero salon waiting time.</span>',
-                    'p1' => 'Unlike cheap factory plastics that snap and pop off, Récolte nail suites are built with the same multi-stage UV gel curing process used in Tokyo and Parisian high-end nail salons.',
+                    'p1' => 'Unlike cheap factory plastics that snap and pop off, Recolte nail suites are built with the same multi-stage UV gel curing process used in Tokyo and Parisian high-end nail salons.',
                     'p2' => 'The result is a glass-smooth apex with ultra-thin, flexible cuticle borders that mold invisibly against your nail bed with zero pinching or lifting.',
                     'img' => asset('images/banners/recolte-acrylic-banner.jpg'),
                 ],
@@ -388,7 +388,7 @@ class AdminPageController extends Controller
         $steps = PageContent::getSection('about', 'steps', [
             'header_tag' => 'FROM PARISIAN SKETCH TO YOUR DOORSTEP',
             'header_title' => 'The 4-Step Atelier Creation Journey',
-            'header_desc' => 'Every suite of Récolte Nails press-on couture is individually handcrafted and quality-inspected by certified salon artists before leaving our studio.',
+            'header_desc' => 'Every suite of Recolte Nails press-on couture is individually handcrafted and quality-inspected by certified salon artists before leaving our studio.',
             'step1_num' => '01',
             'step1_tag' => 'CONSULTATION',
             'step1_title' => 'WhatsApp Sizing & Curve Mapping',
@@ -418,7 +418,7 @@ class AdminPageController extends Controller
             'posts' => [
                 [
                     'video' => asset('videos/community/community-reel-1.mp4'),
-                    'alt' => 'Récolte Salon Gel Application',
+                    'alt' => 'Recolte Salon Gel Application',
                     'link' => 'https://www.instagram.com/recolte_gelpolish/'
                 ],
                 [
@@ -445,7 +445,7 @@ class AdminPageController extends Controller
             'f3_title' => '📦 Haute Box',
             'f3_desc' => 'Full prep & glue kit',
             'btn1_text' => 'Order Bespoke Nails on WhatsApp',
-            'btn1_url' => 'https://wa.me/917016266727?text=Hello%20R%C3%A9colte%20Nails!%20I%20would%20like%20to%20order%20a%20bespoke%20nail%20set.',
+            'btn1_url' => 'https://wa.me/917016266727?text=Hello%20Recolte%20Nails!%20I%20would%20like%20to%20order%20a%20bespoke%20nail%20set.',
             'btn2_text' => 'Explore Ready-to-Wear Catalog',
             'btn2_url' => '/products',
             'img1' => asset('images/products/recolte-cat-gel-polish.jpg'),
@@ -533,7 +533,7 @@ class AdminPageController extends Controller
                     'video' => $postVideo,
                     'poster' => '',
                     'image' => $postVideo,
-                    'alt' => $request->input("insta_{$i}_alt", "Récolte Community Reel " . ($i + 1)),
+                    'alt' => $request->input("insta_{$i}_alt", "Recolte Community Reel " . ($i + 1)),
                     'link' => $request->input("insta_{$i}_link", 'https://www.instagram.com/recolte_gelpolish/'),
                 ];
             }
@@ -615,12 +615,12 @@ class AdminPageController extends Controller
         ]);
 
         $defaultTopics = [
-            ['id' => 'sizing', 'label' => 'Sizing & Curve Fit', 'msg' => 'Hello Récolte Nails! I need help finding my perfect nail size and curve measurements.'],
-            ['id' => 'custom', 'label' => 'Custom Press-On Art', 'msg' => 'Hello Récolte Nails! I have custom design inspiration for a handcrafted press-on set.'],
-            ['id' => 'care', 'label' => 'Nail Care & Top Coats', 'msg' => 'Hello Récolte Nails! I have questions about your nourishing nail care and salon finish top coats.'],
-            ['id' => 'shades', 'label' => 'Gel Polish & Colors', 'msg' => 'Hello Récolte Nails! I would like shade recommendations from your color catalog.'],
-            ['id' => 'order', 'label' => 'Order & Delivery', 'msg' => 'Hello Récolte Nails! I have an inquiry regarding my order or express delivery.'],
-            ['id' => 'wholesale', 'label' => 'Wholesale & Salon B2B', 'msg' => 'Hello Récolte Nails! I am interested in wholesale salon orders and professional supply.'],
+            ['id' => 'sizing', 'label' => 'Sizing & Curve Fit', 'msg' => 'Hello Recolte Nails! I need help finding my perfect nail size and curve measurements.'],
+            ['id' => 'custom', 'label' => 'Custom Press-On Art', 'msg' => 'Hello Recolte Nails! I have custom design inspiration for a handcrafted press-on set.'],
+            ['id' => 'care', 'label' => 'Nail Care & Top Coats', 'msg' => 'Hello Recolte Nails! I have questions about your nourishing nail care and salon finish top coats.'],
+            ['id' => 'shades', 'label' => 'Gel Polish & Colors', 'msg' => 'Hello Recolte Nails! I would like shade recommendations from your color catalog.'],
+            ['id' => 'order', 'label' => 'Order & Delivery', 'msg' => 'Hello Recolte Nails! I have an inquiry regarding my order or express delivery.'],
+            ['id' => 'wholesale', 'label' => 'Wholesale & Salon B2B', 'msg' => 'Hello Recolte Nails! I am interested in wholesale salon orders and professional supply.'],
         ];
 
         $topics_widget = PageContent::getSection('contact', 'topics_widget', [
@@ -683,12 +683,12 @@ class AdminPageController extends Controller
         }
         if (empty($topics)) {
             $topics = [
-                ['id' => 'sizing', 'label' => 'Sizing & Curve Fit', 'msg' => 'Hello Récolte Nails! I need help finding my perfect nail size and curve measurements.'],
-                ['id' => 'custom', 'label' => 'Custom Press-On Art', 'msg' => 'Hello Récolte Nails! I have custom design inspiration for a handcrafted press-on set.'],
-                ['id' => 'care', 'label' => 'Nail Care & Top Coats', 'msg' => 'Hello Récolte Nails! I have questions about your nourishing nail care and salon finish top coats.'],
-                ['id' => 'shades', 'label' => 'Gel Polish & Colors', 'msg' => 'Hello Récolte Nails! I would like shade recommendations from your color catalog.'],
-                ['id' => 'order', 'label' => 'Order & Delivery', 'msg' => 'Hello Récolte Nails! I have an inquiry regarding my order or express delivery.'],
-                ['id' => 'wholesale', 'label' => 'Wholesale & Salon B2B', 'msg' => 'Hello Récolte Nails! I am interested in wholesale salon orders and professional supply.'],
+                ['id' => 'sizing', 'label' => 'Sizing & Curve Fit', 'msg' => 'Hello Recolte Nails! I need help finding my perfect nail size and curve measurements.'],
+                ['id' => 'custom', 'label' => 'Custom Press-On Art', 'msg' => 'Hello Recolte Nails! I have custom design inspiration for a handcrafted press-on set.'],
+                ['id' => 'care', 'label' => 'Nail Care & Top Coats', 'msg' => 'Hello Recolte Nails! I have questions about your nourishing nail care and salon finish top coats.'],
+                ['id' => 'shades', 'label' => 'Gel Polish & Colors', 'msg' => 'Hello Recolte Nails! I would like shade recommendations from your color catalog.'],
+                ['id' => 'order', 'label' => 'Order & Delivery', 'msg' => 'Hello Recolte Nails! I have an inquiry regarding my order or express delivery.'],
+                ['id' => 'wholesale', 'label' => 'Wholesale & Salon B2B', 'msg' => 'Hello Recolte Nails! I am interested in wholesale salon orders and professional supply.'],
             ];
         }
 
@@ -722,7 +722,7 @@ class AdminPageController extends Controller
             'icon' => '📏',
             'description' => 'Send a quick photo of your natural nail bed for custom fit recommendations from our artists.',
             'btn_text' => 'Sizing Advice on WhatsApp',
-            'whatsapp_msg' => 'Hello Récolte Nails! I need help measuring my nail sizes for press-ons.',
+            'whatsapp_msg' => 'Hello Recolte Nails! I need help measuring my nail sizes for press-ons.',
         ]);
 
         return view('admin.pages.catalog', compact('hero', 'consultation'));
@@ -743,7 +743,7 @@ class AdminPageController extends Controller
             'icon' => $request->input('consultation_icon', '📏'),
             'description' => $request->input('consultation_description', ''),
             'btn_text' => $request->input('consultation_btn_text', 'Sizing Advice on WhatsApp'),
-            'whatsapp_msg' => $request->input('consultation_whatsapp_msg', 'Hello Récolte Nails! I need help measuring my nail sizes for press-ons.'),
+            'whatsapp_msg' => $request->input('consultation_whatsapp_msg', 'Hello Recolte Nails! I need help measuring my nail sizes for press-ons.'),
         ]);
 
         return back()->with('success', 'Catalog page header & consultation card updated successfully!');

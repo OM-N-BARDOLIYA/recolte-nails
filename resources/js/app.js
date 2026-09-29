@@ -162,8 +162,8 @@ document.addEventListener('alpine:init', () => {
         getWhatsAppUrl() {
             if (this.items.length === 0) return '#';
 
-            let message = '✨ *HAUTE NAIL MULTI-ITEM ORDER | RÉCOLTE NAILS* ✨\n\n';
-            message += 'Hello Récolte Nails Studio! 🌸\n';
+            let message = '✨ *HAUTE NAIL MULTI-ITEM ORDER | RECOLTE NAILS* ✨\n\n';
+            message += 'Hello Recolte Nails Studio! 🌸\n';
             message += `I would like to place an order for the following ${this.totalCount} item(s) in my bag:\n\n`;
             message += '────────────────────────\n';
 

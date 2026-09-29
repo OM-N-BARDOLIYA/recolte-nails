@@ -1,5 +1,5 @@
 @extends("layouts.app")
-@section("title", "About Récolte Nails | Haute Nail Couture & Salon Craftsmanship")
+@section("title", "About Recolte Nails | Haute Nail Couture & Salon Craftsmanship")
 @section("content")
 
     <!-- ── 1. HERO: ATELIER STORY & ARTISTRY (100% CMS DYNAMIC 7S ROTATION) ── -->
@@ -81,7 +81,7 @@
                     <div class="relative rounded-none overflow-hidden aspect-[4/5] bg-white p-3 border border-[#ECE6DE] shadow-xs group">
                         <div class="rounded-none overflow-hidden w-full h-full relative bg-[#FAF8F5]">
                             <template x-for="(story, idx) in stories" :key="idx">
-                                <img :src="story.img" alt="Récolte Nails Atelier Craftsmanship"
+                                <img :src="story.img" alt="Recolte Nails Atelier Craftsmanship"
                                     class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out"
                                     :class="currentStory === idx ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'" />
                             </template>
@@ -126,7 +126,7 @@
                 </h2>
                 
                 <p class="text-xs sm:text-sm text-[#736B63] font-light leading-relaxed max-w-xl mx-auto">
-                    {{ $steps['header_desc'] ?? 'Every suite of Récolte Nails press-on couture is individually handcrafted and quality-inspected by certified salon artists before leaving our studio.' }}
+                    {{ $steps['header_desc'] ?? 'Every suite of Recolte Nails press-on couture is individually handcrafted and quality-inspected by certified salon artists before leaving our studio.' }}
                 </p>
             </div>
 
@@ -242,8 +242,8 @@
         </div>
     </section>
 
-    <!-- ── 4. INSTAGRAM / COMMUNITY GRID (AUTHENTIC RÉCOLTE COMMUNITY POSTS) ── -->
-    <!-- ── 4. AUTHENTIC RÉCOLTE ATELIER COMMUNITY (3 CONTINUOUS LOOPING VIDEO REELS) ── -->
+    <!-- ── 4. INSTAGRAM / COMMUNITY GRID (AUTHENTIC RECOLTE COMMUNITY POSTS) ── -->
+    <!-- ── 4. AUTHENTIC RECOLTE ATELIER COMMUNITY (3 CONTINUOUS LOOPING VIDEO REELS) ── -->
     <section class="py-20 sm:py-24 bg-[#FAF8F5] border-t border-[#ECE6DE]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
             
@@ -279,12 +279,12 @@
                 </div>
             </div>
 
-            <!-- Authentic Récolte Community Grid Video Reels -->
+            <!-- Authentic Recolte Community Grid Video Reels -->
             @php
                 $instaPosts = $instagram['posts'] ?? [
                     [
                         'video' => asset('videos/community/community-reel-1.mp4'),
-                        'alt' => 'Récolte Salon Gel Application',
+                        'alt' => 'Recolte Salon Gel Application',
                         'link' => 'https://www.instagram.com/recolte_gelpolish/'
                     ],
                     [
@@ -318,7 +318,7 @@
                     ></video>
                     @else
                     <img src="{{ $post['image'] ?? ($post['poster'] ?? '') }}"
-                        alt="{{ $post['alt'] ?? 'Récolte Community Reel' }}"
+                        alt="{{ $post['alt'] ?? 'Recolte Community Reel' }}"
                         class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
                     @endif
 
@@ -334,7 +334,7 @@
 
                     <!-- Post Title / Alt Caption Gradient -->
                     <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/85 via-black/45 to-transparent z-10 pointer-events-none">
-                        <p class="text-xs font-serif font-medium text-white/95 line-clamp-1">{{ $post['alt'] ?? 'Récolte Community Reel' }}</p>
+                        <p class="text-xs font-serif font-medium text-white/95 line-clamp-1">{{ $post['alt'] ?? 'Recolte Community Reel' }}</p>
                         <span class="text-[10px] text-[#C5A880] font-mono tracking-wider">@recolte_gelpolish</span>
                     </div>
 
@@ -412,20 +412,20 @@
                     </div>
                 </div>
 
-                <!-- Right Atelier Visual Bento Collage (Authentic Récolte Atelier Photography) -->
+                <!-- Right Atelier Visual Bento Collage (Authentic Recolte Atelier Photography) -->
                 <div class="lg:col-span-5 grid grid-cols-2 gap-4">
                     <div class="rounded-none overflow-hidden aspect-[4/5] bg-white border border-[#ECE6DE] shadow-xs col-span-2 sm:col-span-1 group">
                         <img src="{{ !empty($concierge['img1']) ? (str_starts_with($concierge['img1'], 'http') || str_starts_with($concierge['img1'], '/') ? $concierge['img1'] : asset($concierge['img1'])) : asset('images/products/recolte-cat-gel-polish.jpg') }}"
-                            alt="Récolte Gel Polish Atelier" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                            alt="Recolte Gel Polish Atelier" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                     </div>
                     <div class="space-y-4 col-span-2 sm:col-span-1">
                         <div class="rounded-none overflow-hidden aspect-square bg-white border border-[#ECE6DE] shadow-xs group">
                             <img src="{{ !empty($concierge['img2']) ? (str_starts_with($concierge['img2'], 'http') || str_starts_with($concierge['img2'], '/') ? $concierge['img2'] : asset($concierge['img2'])) : asset('images/products/recolte-cat-top-coat.jpg') }}"
-                                alt="Récolte Top Coat Finish" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                                alt="Recolte Top Coat Finish" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         </div>
                         <div class="rounded-none overflow-hidden aspect-square bg-white border border-[#ECE6DE] shadow-xs group">
                             <img src="{{ !empty($concierge['img3']) ? (str_starts_with($concierge['img3'], 'http') || str_starts_with($concierge['img3'], '/') ? $concierge['img3'] : asset($concierge['img3'])) : asset('images/products/recolte-cat-painting-gel.jpg') }}"
-                                alt="Récolte Painting Gel Art" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                                alt="Recolte Painting Gel Art" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         </div>
                     </div>
                 </div>

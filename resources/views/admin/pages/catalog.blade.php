@@ -14,7 +14,7 @@
         cardIcon: '{{ addslashes($consultation['icon'] ?? '📏') }}',
         cardDesc: '{{ addslashes($consultation['description'] ?? 'Send a quick photo of your natural nail bed for custom fit recommendations from our artists.') }}',
         cardBtn: '{{ addslashes($consultation['btn_text'] ?? 'Sizing Advice on WhatsApp') }}',
-        cardMsg: '{{ addslashes($consultation['whatsapp_msg'] ?? 'Hello Récolte Nails! I need help measuring my nail sizes for press-ons.') }}'
+        cardMsg: '{{ addslashes($consultation['whatsapp_msg'] ?? 'Hello Recolte Nails! I need help measuring my nail sizes for press-ons.') }}'
     }">
     
     <!-- Top Header -->
@@ -220,7 +220,7 @@
                         type="text" 
                         name="consultation_whatsapp_msg" 
                         x-model="cardMsg" 
-                        placeholder="e.g. Hello Récolte Nails! I need help measuring my nail sizes for press-ons." 
+                        placeholder="e.g. Hello Recolte Nails! I need help measuring my nail sizes for press-ons." 
                         class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs text-[#171412] outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15"
                     >
                     <span class="text-[10px] text-[#8C7A6B]">This message is automatically pre-typed when the customer opens WhatsApp.</span>

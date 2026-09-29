@@ -1,5 +1,5 @@
 @extends("layouts.app")
-@section("title", $product->title . " | Récolte Nails Paris")
+@section("title", $product->title . " | Recolte Nails Paris")
 @section("content")
 
     <div class="py-8 sm:py-14 bg-[#FAF8F5] min-h-screen text-[#171412]" x-data="{
@@ -72,38 +72,21 @@
                     return this.unitOriginalPrice * this.quantity;
                 },
 
-                syncShadeForImage(imgUrl, imgIndex) {
-                    if (this.isVideo(imgUrl)) return;
-                    // Find if any shade is mapped to this exact image
-                    if (this.shades && this.shades.length > 0) {
-                        const matchedShade = this.shades.find(s => s.image && s.image.trim() !== '' && s.image === imgUrl);
-                        if (matchedShade) {
-                            this.selectedShade = matchedShade.name;
-                        } else if (this.shades[imgIndex]) {
-                            // Fallback to shade by matching position if no explicit URL match
-                            this.selectedShade = this.shades[imgIndex].name;
-                        }
-                    }
-                },
-
                 nextImage() {
                     this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
                     this.mainImage = this.images[this.activeImageIndex];
-                    this.syncShadeForImage(this.mainImage, this.activeImageIndex);
                     this.handleMediaChange();
                 },
 
                 prevImage() {
                     this.activeImageIndex = (this.activeImageIndex - 1 + this.images.length) % this.images.length;
                     this.mainImage = this.images[this.activeImageIndex];
-                    this.syncShadeForImage(this.mainImage, this.activeImageIndex);
                     this.handleMediaChange();
                 },
 
                 setImage(img, index) {
                     this.mainImage = img;
                     this.activeImageIndex = index;
-                    this.syncShadeForImage(img, index);
                     this.handleMediaChange();
                 },
 
@@ -122,22 +105,9 @@
                     }
                 },
 
-                selectShade(shadeObj, index) {
+                selectShade(shadeObj) {
                     this.selectedShade = shadeObj.name;
-
-                    // 1. If shade has direct assigned image from CMS, switch mainImage to it
-                    if (shadeObj.image && shadeObj.image.trim() !== '') {
-                        this.mainImage = shadeObj.image;
-                        const matchIdx = this.images.indexOf(shadeObj.image);
-                        if (matchIdx > -1) {
-                            this.activeImageIndex = matchIdx;
-                        }
-                    } else if (this.images[index]) {
-                        // 2. Otherwise map to corresponding gallery angle by index
-                        this.mainImage = this.images[index];
-                        this.activeImageIndex = index;
-                    }
-                    this.handleMediaChange();
+                    // Images do not change according to filters; images only change when manually clicking another image.
                 }
             }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
@@ -477,8 +447,8 @@
 
                             <!-- 2. DIRECT WHATSAPP ORDER BUTTON (SQUARE ACTION) -->
                             <a :href="'https://wa.me/917016266727?text=' + encodeURIComponent(
-                                        '✨ *HAUTE NAIL ORDER & INQUIRY | RÉCOLTE NAILS* ✨\n\n' +
-                                        'Hello Récolte Nails Studio! 🌸\n' +
+                                        '✨ *HAUTE NAIL ORDER & INQUIRY | RECOLTE NAILS* ✨\n\n' +
+                                        'Hello Recolte Nails Studio! 🌸\n' +
                                         'I would like to place an order / inquire about this handcrafted product:\n\n' +
                                         '💅 *Product:* {{ $product->title }}\n' +
                                         '🔢 *Quantity:* ' + quantity + '\n' +
@@ -522,13 +492,13 @@
 
                         <!-- 3. Sizing / Inquiry Sub-Links -->
                         <div class="flex items-center justify-between text-xs text-[#8C7A6B] pt-1">
-                            <a href="https://wa.me/917016266727?text=Hello%20R%C3%A9colte%20Nails!%20I%20need%20custom%20sizing%20help%20for%20{{ urlencode($product->title) }}."
+                            <a href="https://wa.me/917016266727?text=Hello%20Recolte%20Nails!%20I%20need%20custom%20sizing%20help%20for%20{{ urlencode($product->title) }}."
                                 target="_blank" rel="noopener noreferrer"
                                 class="hover:text-[#A33B47] transition-colors flex items-center gap-1.5 font-light">
                                 <span>📏 Custom Sizing Consultation</span>
                             </a>
 
-                            <a href="https://wa.me/917016266727?text=Hello%20R%C3%A9colte%20Nails!%20I%20have%20an%20inquiry%20about%20{{ urlencode($product->title) }}."
+                            <a href="https://wa.me/917016266727?text=Hello%20Recolte%20Nails!%20I%20have%20an%20inquiry%20about%20{{ urlencode($product->title) }}."
                                 target="_blank"
                                 class="hover:text-[#A33B47] transition-colors flex items-center gap-1.5 font-light">
                                 <span>💬 Ask an Artist</span>
