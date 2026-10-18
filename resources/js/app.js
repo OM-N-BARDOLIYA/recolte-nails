@@ -162,23 +162,17 @@ document.addEventListener('alpine:init', () => {
         getWhatsAppUrl() {
             if (this.items.length === 0) return '#';
 
-            let message = '✨ *HAUTE NAIL MULTI-ITEM ORDER | RECOLTE NAILS* ✨\n\n';
-            message += 'Hello Recolte Nails Studio! 🌸\n';
-            message += `I would like to place an order for the following ${this.totalCount} item(s) in my bag:\n\n`;
-            message += '────────────────────────\n';
+            let message = `Hello Recolte Nails, I would like to place an order for the following ${this.totalCount} item(s):\n\n`;
 
             this.items.forEach((item, idx) => {
-                message += `${idx + 1}️⃣ *${item.title}*\n`;
-                if (item.shade) message += `   • Shade: ${item.shade}\n`;
-                if (item.size) message += `   • Size / Volume: ${item.size}\n`;
-                message += `   • Qty: ${item.quantity}\n`;
-                if (item.image) message += `   • Photo: ${item.image}\n`;
-                message += '\n';
+                const details = [];
+                if (item.shade) details.push(`Shade: ${item.shade}`);
+                if (item.size) details.push(`Size: ${item.size}`);
+                details.push(`Qty: ${item.quantity}`);
+                message += `${idx + 1}. ${item.title} (${details.join(', ')})\n`;
             });
 
-            message += '────────────────────────\n';
-            message += `📦 *TOTAL ITEMS:* ${this.totalCount}\n\n`;
-            message += 'Please confirm order availability, custom sizing, and dispatch timeline. Thank you! 💕';
+            message += `\nTotal Items: ${this.totalCount}\nPlease confirm availability and payment details.`;
 
             return 'https://wa.me/917016266727?text=' + encodeURIComponent(message);
         }

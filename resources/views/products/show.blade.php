@@ -447,16 +447,13 @@
 
                             <!-- 2. DIRECT WHATSAPP ORDER BUTTON (SQUARE ACTION) -->
                             <a :href="'https://wa.me/917016266727?text=' + encodeURIComponent(
-                                        '✨ *HAUTE NAIL ORDER & INQUIRY | RECOLTE NAILS* ✨\n\n' +
-                                        'Hello Recolte Nails Studio! 🌸\n' +
-                                        'I would like to place an order / inquire about this handcrafted product:\n\n' +
-                                        '💅 *Product:* {{ $product->title }}\n' +
-                                        '🔢 *Quantity:* ' + quantity + '\n' +
-                                        (selectedShade ? '🎨 *Selected Shade:* ' + selectedShade + '\n' : '') +
-                                        (selectedSize ? '📏 *Selected Size / Volume:* ' + selectedSize + '\n' : '') +
-                                        '🖼️ *Product Image:* ' + (isVideo(mainImage) ? '{{ asset($product->main_image) }}' : mainImage) + '\n' +
-                                        '🔗 *Product Link:* ' + window.location.href + '\n\n' +
-                                        'Please confirm pricing, stock and dispatch schedule. Thank you! 💕'
+                                        'Hello Recolte Nails, I would like to order:\n\n' +
+                                        '• Product: {{ $product->title }}\n' +
+                                        (selectedShade ? '• Shade: ' + selectedShade + '\n' : '') +
+                                        (selectedSize ? '• Size: ' + selectedSize + '\n' : '') +
+                                        '• Quantity: ' + quantity + '\n' +
+                                        '• Link: ' + window.location.href + '\n\n' +
+                                        'Please confirm availability.'
                                     )" target="_blank" rel="noopener noreferrer"
                                 class="w-full py-4 px-6 rounded-none bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-[13px] font-bold tracking-[0.16em] uppercase shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2.5 select-none">
                                 <svg class="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24" aria-hidden="true">
@@ -492,13 +489,13 @@
 
                         <!-- 3. Sizing / Inquiry Sub-Links -->
                         <div class="flex items-center justify-between text-xs text-[#8C7A6B] pt-1">
-                            <a href="https://wa.me/917016266727?text=Hello%20Recolte%20Nails!%20I%20need%20custom%20sizing%20help%20for%20{{ urlencode($product->title) }}."
+                            <a href="https://wa.me/917016266727?text=Hello%20Recolte%20Nails,%20I%20have%20a%20sizing%20question%20regarding%20{{ urlencode($product->title) }}."
                                 target="_blank" rel="noopener noreferrer"
                                 class="hover:text-[#A33B47] transition-colors flex items-center gap-1.5 font-light">
                                 <span>📏 Custom Sizing Consultation</span>
                             </a>
 
-                            <a href="https://wa.me/917016266727?text=Hello%20Recolte%20Nails!%20I%20have%20an%20inquiry%20about%20{{ urlencode($product->title) }}."
+                            <a href="https://wa.me/917016266727?text=Hello%20Recolte%20Nails,%20I%20have%20an%20inquiry%20regarding%20{{ urlencode($product->title) }}."
                                 target="_blank"
                                 class="hover:text-[#A33B47] transition-colors flex items-center gap-1.5 font-light">
                                 <span>💬 Ask an Artist</span>

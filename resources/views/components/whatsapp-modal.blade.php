@@ -92,15 +92,11 @@
                 <div class="pt-2">
                     <a 
                         :href="'https://wa.me/917016266727?text=' + encodeURIComponent(
-                            '✨ *HAUTE NAIL ORDER & INQUIRY | RECOLTE NAILS* ✨\n\n' +
-                            'Hello Recolte Nails Studio! 🌸\n' +
-                            'I would like to inquire about and place an order for this handcrafted nail product:\n\n' +
-                            '💅 *Product:* ' + modalProduct.title + '\n' +
-
-                            (modalShade ? '🎨 *Selected Shade:* ' + modalShade + '\n' : '') +
-                            (modalSize ? '📏 *Selected Size / Volume:* ' + modalSize + '\n' : '') +
-                            '🖼️ *Product Image:* ' + modalProduct.main_image + '\n\n' +
-                            'Please confirm stock availability and custom sizing delivery timelines. Thank you! 💕'
+                            'Hello Recolte Nails, I would like to order:\n\n' +
+                            '• Product: ' + modalProduct.title + '\n' +
+                            (modalShade ? '• Shade: ' + modalShade + '\n' : '') +
+                            (modalSize ? '• Size: ' + modalSize + '\n' : '') +
+                            '\nPlease confirm availability.'
                         )" 
                         target="_blank" 
                         class="w-full py-3.5 bg-[#A33B47] hover:bg-[#78232D] text-white rounded-none font-bold text-xs uppercase tracking-wider shadow-md flex items-center justify-center gap-2.5 transition-colors duration-200"

@@ -17,7 +17,7 @@
             </p>
             <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <a 
-                    href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text=Hello%20Recolte%20Nails!%20I%20am%20interested%20in%20a%20Franchise%20/%20Studio%20Partnership." 
+                    href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text=Hello%20Recolte%20Nails,%20I%20am%20interested%20in%20a%20franchise%20partnership." 
                     target="_blank"
                     rel="noopener noreferrer"
                     class="px-8 py-3.5 bg-[#111111] hover:bg-black text-white text-xs font-bold tracking-wider uppercase rounded-none shadow-md transition-colors duration-200 inline-flex items-center gap-2"

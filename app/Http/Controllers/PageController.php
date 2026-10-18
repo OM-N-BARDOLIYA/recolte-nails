@@ -110,7 +110,7 @@ class PageController extends Controller
             'f3_title' => '📦 Haute Box',
             'f3_desc' => 'Full prep & glue kit',
             'btn1_text' => 'Order Bespoke Nails on WhatsApp',
-            'btn1_url' => 'https://wa.me/917016266727?text=Hello%20Recolte%20Nails!%20I%20would%20like%20to%20order%20a%20bespoke%20nail%20set.',
+            'btn1_url' => 'https://wa.me/917016266727?text=Hello%20Recolte%20Nails,%20I%20would%20like%20to%20inquire%20about%20a%20custom%20order.',
             'btn2_text' => 'Explore Ready-to-Wear Catalog',
             'btn2_url' => '/products',
             'img1' => asset('images/products/recolte-cat-gel-polish.jpg'),
@@ -153,12 +153,12 @@ class PageController extends Controller
         ]);
 
         $defaultTopics = [
-            ['id' => 'sizing', 'label' => 'Sizing & Curve Fit', 'msg' => 'Hello Recolte Nails! I need help finding my perfect nail size and curve measurements.'],
-            ['id' => 'custom', 'label' => 'Custom Press-On Art', 'msg' => 'Hello Recolte Nails! I have custom design inspiration for a handcrafted press-on set.'],
-            ['id' => 'care', 'label' => 'Nail Care & Top Coats', 'msg' => 'Hello Recolte Nails! I have questions about your nourishing nail care and salon finish top coats.'],
-            ['id' => 'shades', 'label' => 'Gel Polish & Colors', 'msg' => 'Hello Recolte Nails! I would like shade recommendations from your color catalog.'],
-            ['id' => 'order', 'label' => 'Order & Delivery', 'msg' => 'Hello Recolte Nails! I have an inquiry regarding my order or express delivery.'],
-            ['id' => 'wholesale', 'label' => 'Wholesale & Salon B2B', 'msg' => 'Hello Recolte Nails! I am interested in wholesale salon orders and professional supply.'],
+            ['id' => 'sizing', 'label' => 'Sizing & Curve Fit', 'msg' => 'Hello Recolte Nails, I need assistance with nail sizing.'],
+            ['id' => 'custom', 'label' => 'Custom Press-On Art', 'msg' => 'Hello Recolte Nails, I would like to discuss a custom nail design.'],
+            ['id' => 'care', 'label' => 'Nail Care & Top Coats', 'msg' => 'Hello Recolte Nails, I have a query regarding nail care and top coats.'],
+            ['id' => 'shades', 'label' => 'Gel Polish & Colors', 'msg' => 'Hello Recolte Nails, I would like shade recommendations from your catalog.'],
+            ['id' => 'order', 'label' => 'Order & Delivery', 'msg' => 'Hello Recolte Nails, I have an inquiry regarding my order status.'],
+            ['id' => 'wholesale', 'label' => 'Wholesale & Salon B2B', 'msg' => 'Hello Recolte Nails, I am interested in wholesale / salon orders.'],
         ];
 
         $topics_widget = PageContent::getSection('contact', 'topics_widget', [

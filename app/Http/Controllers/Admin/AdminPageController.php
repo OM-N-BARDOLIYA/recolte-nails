@@ -445,7 +445,7 @@ class AdminPageController extends Controller
             'f3_title' => '📦 Haute Box',
             'f3_desc' => 'Full prep & glue kit',
             'btn1_text' => 'Order Bespoke Nails on WhatsApp',
-            'btn1_url' => 'https://wa.me/917016266727?text=Hello%20Recolte%20Nails!%20I%20would%20like%20to%20order%20a%20bespoke%20nail%20set.',
+            'btn1_url' => 'https://wa.me/917016266727?text=Hello%20Recolte%20Nails,%20I%20would%20like%20to%20inquire%20about%20a%20custom%20order.',
             'btn2_text' => 'Explore Ready-to-Wear Catalog',
             'btn2_url' => '/products',
             'img1' => asset('images/products/recolte-cat-gel-polish.jpg'),
