@@ -248,11 +248,10 @@ class DatabaseSeeder extends Seeder
                 'images' => [
                     '/uploads/products/catalog/BASE_COAT_base.png',
                     '/uploads/products/catalog/BASE_COAT_base_top.png',
+                    '/uploads/products/catalog/BASE_COAT_base_coat.mp4',
                     '/uploads/products/catalog/BASE_COAT_base_coat.png',
                     '/uploads/products/catalog/BASE_COAT_base_and_top.png',
                     '/uploads/products/catalog/BASE_COAT_white_bottle_1_.JPG',
-                    '/uploads/products/catalog/BASE_COAT_white_bottle_2_.JPG',
-                    '/uploads/products/catalog/BASE_COAT_base_coat.mp4',
                 ],
                 'shades' => [],
                 'sizes' => [
@@ -286,13 +285,13 @@ class DatabaseSeeder extends Seeder
                 'how_to_use' => '1. Apply Recolte Base Coat and cure 60s. 2. Apply a thin slip layer of BIAB, then place a bead near the cuticle and gently guide it towards the free edge to build the apex. 3. Flash cure 10s, then full cure 60s.',
                 'main_image' => '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_1_.jpg',
                 'images' => [
-                    '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_1_.jpg',
-                    '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_2_.jpg',
-                    '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_3_.jpg',
-                    '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_4_.jpg',
-                    '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_5_.jpg',
                     '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_6_.jpg',
+                    '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_2_.jpg',
                     '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_1_.mp4',
+                    '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_5_.jpg',
+                    '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_4_.jpg',
+                    '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_1_.jpg',
+                    '/uploads/products/catalog/BIAB_Liquid_Builder_Gel_3_.jpg',
                 ],
                 'shades' => [
                     ['name' => '01', 'hex' => '#F4EFEB'],
@@ -336,10 +335,10 @@ class DatabaseSeeder extends Seeder
                 'images' => [
                     '/uploads/products/catalog/BLOOMING_GEL_Blooming_gel_fast_1_.jpg',
                     '/uploads/products/catalog/BLOOMING_GEL_Blooming_gel_fast_2_.jpg',
+                    '/uploads/products/catalog/BLOOMING_GEL_Blooming_gel_fast_.mp4',
                     '/uploads/products/catalog/BLOOMING_GEL_Blooming_gel_fast_3_.jpg',
                     '/uploads/products/catalog/BLOOMING_GEL_Blooming_gel_fast_4_.jpg',
                     '/uploads/products/catalog/BLOOMING_GEL_Blooming_gel_fast_5_.jpg',
-                    '/uploads/products/catalog/BLOOMING_GEL_Blooming_gel_fast_.mp4',
                 ],
                 'shades' => [
                     ['name' => 'Clear Bloom Base', 'hex' => '#FFFFFF'],
@@ -374,8 +373,10 @@ class DatabaseSeeder extends Seeder
                 'images' => [
                     '/uploads/products/catalog/BUILDER_GEL_builder_gel_1_.png',
                     '/uploads/products/catalog/BUILDER_GEL_builder_gel_3_.png',
+                    '/uploads/products/catalog/BUILDER_GEL_builder_gel_1_.mp4',
                     '/uploads/products/catalog/BUILDER_GEL_builder_gel_2_.png',
                     '/uploads/products/catalog/BUILDER_GEL_artboard_1.jpg',
+                    '/uploads/products/catalog/BUILDER_GEL_video_showcase.mp4',
                     '/uploads/products/catalog/BUILDER_GEL_artboard_2.jpg',
                     '/uploads/products/catalog/BUILDER_GEL_artboard_3.jpg',
                     '/uploads/products/catalog/BUILDER_GEL_artboard_4.jpg',
@@ -384,8 +385,6 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/BUILDER_GEL_builder_gel_5_.jpg',
                     '/uploads/products/catalog/BUILDER_GEL_builder_gel_6_.png',
                     '/uploads/products/catalog/BUILDER_GEL_builder_gel_7_.png',
-                    '/uploads/products/catalog/BUILDER_GEL_builder_gel_1_.mp4',
-                    '/uploads/products/catalog/BUILDER_GEL_video_showcase.mp4',
                 ],
                 'shades' => [
                     ['name' => '01', 'hex' => '#F4EFEB'],
@@ -435,13 +434,13 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/CARVING_GEL_3D_Carving_Gel_1_.jpg',
                     '/uploads/products/catalog/CARVING_GEL_3D_Carving_Gel_2_.jpg',
                     '/uploads/products/catalog/CARVING_GEL_3D_Carving_Gel_3_.jpg',
+                    '/uploads/products/catalog/CARVING_GEL_3D_Carving_Gel_1_.mp4',
                     '/uploads/products/catalog/CARVING_GEL_3D_Carving_Gel_4_.jpg',
                     '/uploads/products/catalog/CARVING_GEL_3D_Carving_Gel_5_.jpg',
                     '/uploads/products/catalog/CARVING_GEL_3D_Carving_Gel_6_.jpg',
                     '/uploads/products/catalog/CARVING_GEL_3D_Carving_Gel_7_.jpg',
                     '/uploads/products/catalog/CARVING_GEL_3D_Carving_Gel_8_.jpg',
                     '/uploads/products/catalog/CARVING_GEL_3D_Carving_Gel_9_.jpg',
-                    '/uploads/products/catalog/CARVING_GEL_3D_Carving_Gel_1_.mp4',
                 ],
                 'shades' => [
                     ['name' => '01', 'hex' => '#FFFFFF'],
@@ -480,11 +479,11 @@ class DatabaseSeeder extends Seeder
                 'main_image' => '/uploads/products/catalog/CATEYES_A_SERIES_24_SHADES_KIT_Recolte-24_Cat_Eye_4_.jpg',
                 'images' => [
                     '/uploads/products/catalog/CATEYES_A_SERIES_24_SHADES_KIT_Recolte-24_Cat_Eye_4_.jpg',
+                    '/uploads/products/catalog/CATEYES_A_SERIES_24_SHADES_KIT_Recolte-24_Cat_Eye.mp4',
                     '/uploads/products/catalog/CATEYES_A_SERIES_24_SHADES_KIT_Recolte-24_Cat_Eye_5_.jpg',
                     '/uploads/products/catalog/CATEYES_A_SERIES_24_SHADES_KIT_Recolte-24_Cat_Eye_6_.jpg',
                     '/uploads/products/catalog/CATEYES_A_SERIES_24_SHADES_KIT_Recolte-24_Cat_Eye_7_.jpg',
                     '/uploads/products/catalog/CATEYES_A_SERIES_24_SHADES_KIT_bottle_2_.jpg',
-                    '/uploads/products/catalog/CATEYES_A_SERIES_24_SHADES_KIT_Recolte-24_Cat_Eye.mp4',
                 ],
                 'shades' => [
                     ['name' => 'Cosmic Emerald', 'hex' => '#184D3B'],
@@ -521,32 +520,21 @@ class DatabaseSeeder extends Seeder
                 'how_to_use' => '1. Apply base coat or black base for maximum contrast and cure. 2. Brush on E-Series Cat Eye. 3. Manipulate magnetic shimmer with styling wand. 4. Cure 60 seconds.',
                 'main_image' => '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_1_.jpg',
                 'images' => [
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_1_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_10_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_11_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_12_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_13_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_14_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_15_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_16_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_17_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_18_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_19_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_20_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_21_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_22_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_23_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_24_.jpg',
                     '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_2_.jpg',
+                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_bottle_2_.jpg',
+                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_1_.jpg',
                     '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_3_.jpg',
+                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_Video.mp4',
                     '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_4_.jpg',
                     '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_5_.jpg',
                     '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_6_.jpg',
                     '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_7_.jpg',
                     '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_8_.jpg',
                     '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_9_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_bottle_2_.jpg',
-                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_Video.mp4',
+                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_10_.jpg',
+                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_11_.jpg',
+                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_12_.jpg',
+                    '/uploads/products/catalog/CATEYES_E_SERIES_10_SHADES_KIT_10colors_cat_eye_13_.jpg',
                 ],
                 'shades' => [
                     ['name' => 'Moonstone Shimmer', 'hex' => '#CFD8DC'],
@@ -583,14 +571,14 @@ class DatabaseSeeder extends Seeder
                 'images' => [
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Recolte-208_colors.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Recolte-208_colors_1_.jpg',
+                    '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Original_Video.mp4',
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Recolte-208_colors_2_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Recolte-208_colors_3_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Recolte-208_colors_4_.jpg',
+                    '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Recolte-208_colors.mp4',
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Recolte-208_colors_5_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Recolte-208_colors_6_.jpg',
-                    '/uploads/products/catalog/GEL_POLISHES_208_colors_set_color_book_with_bottle_1_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_color_book_with_bottle_1_.png',
-                    '/uploads/products/catalog/GEL_POLISHES_208_colors_set_color_book_with_bottle_2_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_color_book_with_bottle_2_.png',
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_color_chart_1_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_color_chart_2_.jpg',
@@ -601,8 +589,6 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_effect_picture_3_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_effect_picture_4_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_208_colors_set_effect_picture_5_.jpg',
-                    '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Original_Video.mp4',
-                    '/uploads/products/catalog/GEL_POLISHES_208_colors_set_Recolte-208_colors.mp4',
                 ],
                 'shades' => [],
                 'sizes' => [
@@ -636,6 +622,7 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/GEL_POLISHES_150_SHADES_KIT_Recolte-150_colors.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_150_SHADES_KIT_150-colors-set_1_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_150_SHADES_KIT_150-colors-set_2_.jpg',
+                    '/uploads/products/catalog/GEL_POLISHES_150_SHADES_KIT_Recolte-150_colors.mp4',
                     '/uploads/products/catalog/GEL_POLISHES_150_SHADES_KIT_150-colors-set_3_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_150_SHADES_KIT_150-colors-set_4_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_150_SHADES_KIT_150-colors-set_5_.jpg',
@@ -644,7 +631,6 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/GEL_POLISHES_150_SHADES_KIT_Recolte-150_colors_2_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_150_SHADES_KIT_Recolte-150_colors_3_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_150_SHADES_KIT_Recolte-150_colors_4_.jpg',
-                    '/uploads/products/catalog/GEL_POLISHES_150_SHADES_KIT_Recolte-150_colors.mp4',
                 ],
                 'shades' => [],
                 'sizes' => [
@@ -678,10 +664,10 @@ class DatabaseSeeder extends Seeder
                 'images' => [
                     '/uploads/products/catalog/GEL_POLISHES_96_SHADES_KIT_Recolte-96_colors.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_96_SHADES_KIT_Recolte-96_colors_1_.jpg',
+                    '/uploads/products/catalog/GEL_POLISHES_96_SHADES_KIT_Recolte-96_colors.mp4',
                     '/uploads/products/catalog/GEL_POLISHES_96_SHADES_KIT_Recolte-96_colors_2_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_96_SHADES_KIT_Recolte-96_colors_3_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_96_SHADES_KIT_Recolte-96_colors_4_.jpg',
-                    '/uploads/products/catalog/GEL_POLISHES_96_SHADES_KIT_Recolte-96_colors.mp4',
                 ],
                 'shades' => [],
                 'sizes' => [
@@ -713,6 +699,7 @@ class DatabaseSeeder extends Seeder
                 'main_image' => '/uploads/products/catalog/GEL_POLISHES_R2_60_SHADES_KIT_Recolte-60_colors.jpg',
                 'images' => [
                     '/uploads/products/catalog/GEL_POLISHES_R2_60_SHADES_KIT_Recolte-60_colors.jpg',
+                    '/uploads/products/catalog/GEL_POLISHES_R2_60_SHADES_KIT_video_for_New-60-Colors-Set.mp4',
                     '/uploads/products/catalog/GEL_POLISHES_R2_60_SHADES_KIT_New_60-Colors-Set_1_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_R2_60_SHADES_KIT_New_60-Colors-Set_2_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_R2_60_SHADES_KIT_New_60-Colors-Set_3_.jpg',
@@ -721,7 +708,6 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/GEL_POLISHES_R2_60_SHADES_KIT_Recolte-60_colors_2_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_R2_60_SHADES_KIT_Recolte-60_colors_3_.jpg',
                     '/uploads/products/catalog/GEL_POLISHES_R2_60_SHADES_KIT_Recolte-60_colors_4_.jpg',
-                    '/uploads/products/catalog/GEL_POLISHES_R2_60_SHADES_KIT_video_for_New-60-Colors-Set.mp4',
                 ],
                 'shades' => [],
                 'sizes' => [
@@ -754,8 +740,8 @@ class DatabaseSeeder extends Seeder
                 'main_image' => '/uploads/products/catalog/GEL_POLISHES_R1_60_SHADES_KIT_60-colors-set_1_.jpg',
                 'images' => [
                     '/uploads/products/catalog/GEL_POLISHES_R1_60_SHADES_KIT_60-colors-set_1_.jpg',
-                    '/uploads/products/catalog/GEL_POLISHES_R1_60_SHADES_KIT_60-colors-set_2_.jpg',
                     '/videos/products/product-reel-1.mp4',
+                    '/uploads/products/catalog/GEL_POLISHES_R1_60_SHADES_KIT_60-colors-set_2_.jpg',
                 ],
                 'shades' => [],
                 'sizes' => [
@@ -790,9 +776,9 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/MATTE_COAT_matte_top_coat_1_.png',
                     '/uploads/products/catalog/MATTE_COAT_matte_top_coat_2_.png',
                     '/uploads/products/catalog/MATTE_COAT_matte_top_coat_3_.png',
+                    '/videos/products/product-reel-1.mp4',
                     '/uploads/products/catalog/MATTE_COAT_matte_top_coat_4_.png',
                     '/uploads/products/catalog/MATTE_COAT_white_bottle_1_.JPG',
-                    '/videos/products/product-reel-1.mp4',
                 ],
                 'shades' => [
                     ['name' => 'Regular Top Coat', 'hex' => '#F4EFEB'],
@@ -828,10 +814,10 @@ class DatabaseSeeder extends Seeder
                 'images' => [
                     '/uploads/products/catalog/METALLIC_GEL_Metallic_Gel_1_.jpg',
                     '/uploads/products/catalog/METALLIC_GEL_Metallic_Gel_2_.jpg',
+                    '/videos/products/product-reel-1.mp4',
                     '/uploads/products/catalog/METALLIC_GEL_Metallic_Gel_3_.jpg',
                     '/uploads/products/catalog/METALLIC_GEL_Metallic_Gel_4_.jpg',
                     '/uploads/products/catalog/METALLIC_GEL_Metallic_Gel_5_.jpg',
-                    '/videos/products/product-reel-1.mp4',
                 ],
                 'shades' => [],
                 'sizes' => [
@@ -864,9 +850,9 @@ class DatabaseSeeder extends Seeder
                 'main_image' => '/uploads/products/catalog/MIXING_GEL_mixing_gel_1_.jpg',
                 'images' => [
                     '/uploads/products/catalog/MIXING_GEL_mixing_gel_1_.jpg',
+                    '/uploads/products/catalog/MIXING_GEL_mixing_gel_1_.mp4',
                     '/uploads/products/catalog/MIXING_GEL_mixing_gel_2_.jpg',
                     '/uploads/products/catalog/MIXING_GEL_mixing_gel_3_.jpg',
-                    '/uploads/products/catalog/MIXING_GEL_mixing_gel_1_.mp4',
                 ],
                 'shades' => [
                     ['name' => 'Crystal Clear Diluter', 'hex' => '#FFFFFF'],
@@ -902,9 +888,9 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/PAINTING_GEL_Nail_Art_1_.jpg',
                     '/uploads/products/catalog/PAINTING_GEL_Nail_Art_3_.jpg',
                     '/uploads/products/catalog/PAINTING_GEL_Nail_Art_4_.jpg',
+                    '/uploads/products/catalog/PAINTING_GEL_Video_for_nail_art_gel.mp4',
                     '/uploads/products/catalog/PAINTING_GEL_Nail_Art_5_.jpg',
                     '/uploads/products/catalog/PAINTING_GEL_Nail_Art_6_.jpg',
-                    '/uploads/products/catalog/PAINTING_GEL_Video_for_nail_art_gel.mp4',
                 ],
                 'shades' => [],
                 'sizes' => [
@@ -937,6 +923,7 @@ class DatabaseSeeder extends Seeder
                 'images' => [
                     '/uploads/products/catalog/PLATINUM_GEL_Platinum_Gel_1_.jpg',
                     '/uploads/products/catalog/PLATINUM_GEL_Platinum_Gel_3_.jpg',
+                    '/uploads/products/catalog/PLATINUM_GEL_Platinum_Gel_1_.mp4',
                     '/uploads/products/catalog/PLATINUM_GEL_Platinum_Gel_4_.jpg',
                     '/uploads/products/catalog/PLATINUM_GEL_Platinum_Gel_5_.jpg',
                     '/uploads/products/catalog/PLATINUM_GEL_Platinum_Gel_6_.jpg',
@@ -945,7 +932,6 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/PLATINUM_GEL_Platinum_Nails_Art_Gel_1_.jpg',
                     '/uploads/products/catalog/PLATINUM_GEL_Platinum_Nails_Art_Gel_2_.jpg',
                     '/uploads/products/catalog/PLATINUM_GEL_Platinum_Nails_Art_Gel_3_.jpg',
-                    '/uploads/products/catalog/PLATINUM_GEL_Platinum_Gel_1_.mp4',
                 ],
                 'shades' => [],
                 'sizes' => [
@@ -1012,7 +998,6 @@ class DatabaseSeeder extends Seeder
                 'main_image' => '/uploads/products/catalog/PRIMER_primer.jpg',
                 'images' => [
                     '/uploads/products/catalog/PRIMER_primer.jpg',
-                    '/videos/products/product-reel-1.mp4',
                 ],
                 'shades' => [
                     ['name' => 'Clear Prep Bond', 'hex' => '#F7F5F0'],
@@ -1046,13 +1031,12 @@ class DatabaseSeeder extends Seeder
                 'main_image' => '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_3_.jpg',
                 'images' => [
                     '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_3_.jpg',
-                    '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_1_.jpg',
                     '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_4_.jpg',
+                    '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash.mp4',
                     '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_5_.jpg',
                     '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_6_.jpg',
                     '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_7_.jpg',
                     '/uploads/products/catalog/REFLECTIVE_POLISH_bottle_2_.jpg',
-                    '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash.mp4',
                 ],
                 'shades' => [],
                 'sizes' => [
@@ -1127,9 +1111,9 @@ class DatabaseSeeder extends Seeder
                 'images' => [
                     '/uploads/products/catalog/RUBBER_BASE_5-in-1_Rubber_Base_1_.jpg',
                     '/uploads/products/catalog/RUBBER_BASE_5-in-1_Rubber_Base_2_.jpg',
+                    '/uploads/products/catalog/RUBBER_BASE_5in1_rubber_base.mp4',
                     '/uploads/products/catalog/RUBBER_BASE_5-in-1_Rubber_Base_3_.jpg',
                     '/uploads/products/catalog/RUBBER_BASE_5in1_rubber_base.jpg',
-                    '/uploads/products/catalog/RUBBER_BASE_5in1_rubber_base.mp4',
                 ],
                 'shades' => [
                     ['name' => 'Clear', 'hex' => '#ECE5DF'],
@@ -1166,9 +1150,9 @@ class DatabaseSeeder extends Seeder
                 'main_image' => '/uploads/products/catalog/SOLID_GLUE_GEL_Solid_Glue_Gel_1_.jpg',
                 'images' => [
                     '/uploads/products/catalog/SOLID_GLUE_GEL_Solid_Glue_Gel_1_.jpg',
+                    '/videos/products/product-reel-1.mp4',
                     '/uploads/products/catalog/SOLID_GLUE_GEL_Solid_Glue_Gel_2_.jpg',
                     '/uploads/products/catalog/SOLID_GLUE_GEL_Solid_Glue_Gel_3_.jpg',
-                    '/videos/products/product-reel-1.mp4',
                 ],
                 'shades' => [
                     ['name' => 'Crystal Clear Solid Glue', 'hex' => '#FFFFFF'],
@@ -1204,9 +1188,9 @@ class DatabaseSeeder extends Seeder
                 'images' => [
                     '/uploads/products/catalog/SPIDER_GEL_Spider_Gel_1_.jpg',
                     '/uploads/products/catalog/SPIDER_GEL_Spider_Gel_3_.jpg',
+                    '/uploads/products/catalog/SPIDER_GEL_Spider_Gel_1_.mp4',
                     '/uploads/products/catalog/SPIDER_GEL_Spider_Gel_4_.jpg',
                     '/uploads/products/catalog/SPIDER_GEL_Spider_Gel_5_.jpg',
-                    '/uploads/products/catalog/SPIDER_GEL_Spider_Gel_1_.mp4',
                 ],
                 'shades' => [
                     ['name' => 'White', 'hex' => '#FFFFFF'],
@@ -1244,10 +1228,9 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/TOP_COATS_top.png',
                     '/uploads/products/catalog/TOP_COATS_top_coat_1_.png',
                     '/uploads/products/catalog/TOP_COATS_top_coat_2_.png',
+                    '/uploads/products/catalog/TOP_COATS_top_coat.mp4',
                     '/uploads/products/catalog/TOP_COATS_top..png',
                     '/uploads/products/catalog/TOP_COATS_white_bottle_1_.JPG',
-                    '/uploads/products/catalog/TOP_COATS_white_bottle_2_.JPG',
-                    '/uploads/products/catalog/TOP_COATS_top_coat.mp4',
                 ],
                 'shades' => [
                     ['name' => 'Tempered Crystal Gloss', 'hex' => '#FFFFFF'],
@@ -1284,6 +1267,7 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/6_IN_1_TOP_COAT_6-in-1_Top_Coat.jpg',
                     '/uploads/products/catalog/6_IN_1_TOP_COAT_02.jpg',
                     '/uploads/products/catalog/6_IN_1_TOP_COAT_03.jpg',
+                    '/uploads/products/catalog/6_IN_1_TOP_COAT_6-in-1_Top_Coat_video_demonstration.mp4',
                     '/uploads/products/catalog/6_IN_1_TOP_COAT_04.jpg',
                     '/uploads/products/catalog/6_IN_1_TOP_COAT_05-1.jpg',
                     '/uploads/products/catalog/6_IN_1_TOP_COAT_05.jpg',
@@ -1291,7 +1275,6 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/6_IN_1_TOP_COAT_07.jpg',
                     '/uploads/products/catalog/6_IN_1_TOP_COAT_08.jpg',
                     '/uploads/products/catalog/6_IN_1_TOP_COAT_09.jpg',
-                    '/uploads/products/catalog/6_IN_1_TOP_COAT_6-in-1_Top_Coat_video_demonstration.mp4',
                 ],
                 'shades' => [
                     ['name' => 'Clear', 'hex' => '#FFFFFF'],
