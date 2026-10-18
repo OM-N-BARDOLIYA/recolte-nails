@@ -810,7 +810,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 36,
             ],
             [
-                'title' => 'Recolte Molten Mirror Metallic Gel',
+                'title' => 'Recolte Metallic Gel',
                 'slug' => 'recolte-molten-mirror-metallic-gel',
                 'category' => 'Metallic Gel',
                 'category_id' => $catMap['Metallic Gel'] ?? null,
@@ -833,11 +833,7 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/METALLIC_GEL_Metallic_Gel_5_.jpg',
                     '/videos/products/product-reel-1.mp4',
                 ],
-                'shades' => [
-                    ['name' => 'Liquid Silver Chrome', 'hex' => '#D9D9D9'],
-                    ['name' => 'Molten Gold', 'hex' => '#E5B869'],
-                    ['name' => 'Rose Gold Bronze', 'hex' => '#C98D7B'],
-                ],
+                'shades' => [],
                 'sizes' => [
                     '8g Precision Pot',
                     '15g Studio Pot',
@@ -876,8 +872,7 @@ class DatabaseSeeder extends Seeder
                     ['name' => 'Crystal Clear Diluter', 'hex' => '#FFFFFF'],
                 ],
                 'sizes' => [
-                    '15ml Bottle',
-                    '30ml Artist Jar',
+                    '15ml',
                 ],
                 'benefits' => [
                     'Seamlessly Blends Glitters & Pigments',
@@ -965,7 +960,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 40,
             ],
             [
-                'title' => 'Recolte Acryl-Gel Hybrid Polygel',
+                'title' => 'Recolte Polygel',
                 'slug' => 'recolte-acryl-gel-hybrid-polygel',
                 'category' => 'Polygel',
                 'category_id' => $catMap['Polygel'] ?? null,
@@ -982,9 +977,6 @@ class DatabaseSeeder extends Seeder
                 'main_image' => '/uploads/products/catalog/POLYGEL_poly_gel_1_.jpg',
                 'images' => [
                     '/uploads/products/catalog/POLYGEL_poly_gel_1_.jpg',
-                    '/uploads/products/catalog/POLYGEL_poly_gel_1_.png',
-                    '/uploads/products/catalog/POLYGEL_poly_gel_2_.jpg',
-                    '/videos/products/product-reel-1.mp4',
                 ],
                 'shades' => [
                     ['name' => 'Clear Glass', 'hex' => '#F2F2F2'],
@@ -992,8 +984,7 @@ class DatabaseSeeder extends Seeder
                     ['name' => 'Milky White', 'hex' => '#FAF5F2'],
                 ],
                 'sizes' => [
-                    '60g Squeeze Tube',
-                    '30g Starter Tube',
+                    '30gm',
                 ],
                 'benefits' => [
                     'Lighter Than Acrylics, Stronger Than Hard Gels',
@@ -1052,10 +1043,10 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Featuring advanced retroreflective crystal beads that capture and bounce direct light. Appears as a classy subtle micro-shimmer under normal daytime ambient lighting, and explodes into blinding diamond sparkle under camera flashes and club lights.',
                 'key_ingredients' => 'Reflective Glass Micro-Prisms, Highly Purified Gel Resin, Anti-Settling Suspension Fluid',
                 'how_to_use' => '1. Apply base coat & cure. 2. Apply 1-2 coats of Flash Reflective Polish. 3. Cure 60s per coat. 4. Seal with Recolte Diamond Top Coat.',
-                'main_image' => '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_1_.jpg',
+                'main_image' => '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_3_.jpg',
                 'images' => [
-                    '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_1_.jpg',
                     '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_3_.jpg',
+                    '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_1_.jpg',
                     '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_4_.jpg',
                     '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_5_.jpg',
                     '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash_6_.jpg',
@@ -1063,14 +1054,9 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/REFLECTIVE_POLISH_bottle_2_.jpg',
                     '/uploads/products/catalog/REFLECTIVE_POLISH_Recolte-24_Flash.mp4',
                 ],
-                'shades' => [
-                    ['name' => 'Flash Diamond Silver', 'hex' => '#E8E8E8'],
-                    ['name' => 'Flash Ruby Noir', 'hex' => '#8C1D40'],
-                    ['name' => 'Flash Midnight Spark', 'hex' => '#1E2340'],
-                ],
+                'shades' => [],
                 'sizes' => [
-                    '24 Shades Luxury Suite (15ml each)',
-                    'Single 15ml Bottle',
+                    '8ml',
                 ],
                 'benefits' => [
                     'Reflects Direct Flash with Intense Diamond Glow',
@@ -1081,7 +1067,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 43,
             ],
             [
-                'title' => 'Recolte No-Wipe Precision Rhinestone Gel',
+                'title' => 'Recolte No-Wipe Precision Gel',
                 'slug' => 'recolte-no-wipe-precision-rhinestone-gel',
                 'category' => 'Rhinestone Gel',
                 'category_id' => $catMap['Rhinestone Gel'] ?? null,
@@ -1098,6 +1084,7 @@ class DatabaseSeeder extends Seeder
                 'main_image' => '/uploads/products/catalog/RHINESTONE_GEL_Rhinestone_Gel-No_Wipe.jpg',
                 'images' => [
                     '/uploads/products/catalog/RHINESTONE_GEL_Rhinestone_Gel-No_Wipe.jpg',
+                    '/uploads/products/catalog/RHINESTONE_GEL_Rhinestone_Gel-No_Wipe_1_.mp4',
                     '/uploads/products/catalog/RHINESTONE_GEL_Rhinestone_Gel-No_Wipe_2_.jpg',
                     '/uploads/products/catalog/RHINESTONE_GEL_Rhinestone_Gel-No_Wipe_3_.jpg',
                     '/uploads/products/catalog/RHINESTONE_GEL_Rhinestone_Gel-No_Wipe_4_.jpg',
@@ -1106,14 +1093,12 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/RHINESTONE_GEL_Rhinestone_Gel-No_Wipe_7_.jpg',
                     '/uploads/products/catalog/RHINESTONE_GEL_Rhinestone_Gel-No_Wipe_8_.jpg',
                     '/uploads/products/catalog/RHINESTONE_GEL_soft_tube_rhinestone_gel.jpg',
-                    '/uploads/products/catalog/RHINESTONE_GEL_Rhinestone_Gel-No_Wipe_1_.mp4',
                 ],
                 'shades' => [
                     ['name' => 'Crystal Clear Cement', 'hex' => '#FFFFFF'],
                 ],
                 'sizes' => [
-                    '15ml Needle-Tip Precision Tube',
-                    '20g Studio Jar',
+                    '15gm',
                 ],
                 'benefits' => [
                     'No-Wipe Tack-Free Formula',
@@ -1124,7 +1109,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 44,
             ],
             [
-                'title' => 'Recolte 5-in-1 Fortifying Rubber Base Coat',
+                'title' => 'Recolte 5-in-1 Rubber Base Coat',
                 'slug' => 'recolte-5-in-1-fortifying-rubber-base-coat',
                 'category' => 'Rubber Base',
                 'category_id' => $catMap['Rubber Base'] ?? null,
@@ -1147,13 +1132,13 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/RUBBER_BASE_5in1_rubber_base.mp4',
                 ],
                 'shades' => [
-                    ['name' => 'Sheer Nude Rose', 'hex' => '#E7BCB6'],
-                    ['name' => 'Milky Base', 'hex' => '#F8F4F0'],
-                    ['name' => 'Clear Elastic', 'hex' => '#ECE5DF'],
+                    ['name' => 'Clear', 'hex' => '#ECE5DF'],
+                    ['name' => 'Milky White', 'hex' => '#F8F4F0'],
+                    ['name' => 'Peach', 'hex' => '#F5C2A5'],
+                    ['name' => 'Pink', 'hex' => '#F0B2BA'],
                 ],
                 'sizes' => [
-                    '15ml Salon Bottle',
-                    '30ml Pro Refill',
+                    '15ml',
                 ],
                 'benefits' => [
                     '5-in-1: Base, Builder, Apex Leveler, Strengthener & Color',
@@ -1224,13 +1209,12 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/SPIDER_GEL_Spider_Gel_1_.mp4',
                 ],
                 'shades' => [
-                    ['name' => 'Matrix White', 'hex' => '#FFFFFF'],
-                    ['name' => 'Matrix Black', 'hex' => '#111111'],
-                    ['name' => 'Matrix Gold', 'hex' => '#D4AF37'],
+                    ['name' => 'White', 'hex' => '#FFFFFF'],
+                    ['name' => 'Black', 'hex' => '#111111'],
+                    ['name' => 'Clear', 'hex' => '#F4EFEB'],
                 ],
                 'sizes' => [
-                    '6g Precision Pot Duo (Black & White)',
-                    'Individual 6g Pots',
+                    '5g',
                 ],
                 'benefits' => [
                     'Ultra-Elastic High Viscosity Spider Formula',
@@ -1281,7 +1265,7 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 48,
             ],
             [
-                'title' => 'Recolte 6-in-1 Diamond Hard Top Coat',
+                'title' => 'Recolte 6-in-1 No Wipe Top Coat',
                 'slug' => 'recolte-6-in-1-diamond-hard-top-coat',
                 'category' => '6-in-1 Top Coat',
                 'category_id' => $catMap['6-in-1 Top Coat'] ?? null,
@@ -1310,11 +1294,10 @@ class DatabaseSeeder extends Seeder
                     '/uploads/products/catalog/6_IN_1_TOP_COAT_6-in-1_Top_Coat_video_demonstration.mp4',
                 ],
                 'shades' => [
-                    ['name' => 'Reinforced Diamond Glaze', 'hex' => '#FFFFFF'],
+                    ['name' => 'Clear', 'hex' => '#FFFFFF'],
                 ],
                 'sizes' => [
-                    '15ml Precision Bottle',
-                    '30ml Salon Refill',
+                    '50gm',
                 ],
                 'benefits' => [
                     '6-in-1: Hard Top, Chrome Base, Apex Seal, Encapsulation, Scratch Armor & High Gloss',
