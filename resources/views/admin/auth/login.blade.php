@@ -41,8 +41,8 @@
     <div class="w-full max-w-md bg-white border border-[#ECE6DE] rounded-none p-8 sm:p-10 shadow-xs relative z-10 space-y-6">
         
         <div class="text-center space-y-3">
-            <div class="inline-flex px-4 py-2 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] shadow-2xs">
-                <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Recolte Logo" class="h-10 w-auto object-contain select-none">
+            <div class="flex justify-center">
+                <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Recolte Logo" class="h-11 w-auto object-contain select-none">
             </div>
             <div>
                 <h1 class="font-serif text-2xl font-bold text-[#171412] tracking-wide">Recolte Nails Paris</h1>
