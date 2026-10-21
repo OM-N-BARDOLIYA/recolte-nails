@@ -177,7 +177,7 @@
             <div class="p-4 sm:p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div class="space-y-1">
                     <div class="text-xs font-bold text-[#171412]">Add More Media to Product Studio</div>
-                    <div class="text-[11px] text-[#8C7A6B]">Upload photos (.jpg, .png, .webp) or video demonstration clips (.mp4, .mov, .webm).</div>
+                    <div class="text-[11px] text-[#8C7A6B]">Choose individual files or import an entire folder (.jpg, .png, .webp, .mp4, .mov).</div>
                 </div>
 
                 <div class="flex items-center gap-2.5 flex-wrap">
@@ -192,13 +192,35 @@
                         class="hidden"
                     />
 
+                    <!-- Hidden Folder Import input -->
+                    <input 
+                        type="file" 
+                        id="gallery_folder_input"
+                        webkitdirectory 
+                        directory 
+                        multiple 
+                        @change="addLocalFolderToGallery($event)"
+                        class="hidden"
+                    />
+
                     <!-- Choose Local Files Button -->
                     <button 
                         type="button" 
                         onclick="document.getElementById('gallery_files_input').click()"
                         class="px-4 py-2.5 rounded-none bg-[#171412] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-xs hover:shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                        title="Select multiple individual photos and videos"
                     >
-                        <span>📁 Choose Photos &amp; Videos from Computer</span>
+                        <span>📁 Choose Files</span>
+                    </button>
+
+                    <!-- Import Entire Folder Button -->
+                    <button 
+                        type="button" 
+                        onclick="document.getElementById('gallery_folder_input').click()"
+                        class="px-4 py-2.5 rounded-none bg-stone-800 hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-xs hover:shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                        title="Select an entire folder from your computer to import all photos & videos inside it"
+                    >
+                        <span>📂 Import Folder</span>
                     </button>
 
                     <!-- Add via URL Button -->
@@ -325,11 +347,34 @@
                     </template>
                 </div>
 
-                <!-- Empty State -->
-                <div x-show="galleryItems.length === 0" class="p-8 rounded-none bg-[#FAF8F5] border border-dashed border-[#ECE6DE] text-center space-y-2">
-                    <div class="text-2xl">📸</div>
+                <!-- Empty State / Dropzone -->
+                <div 
+                    x-show="galleryItems.length === 0" 
+                    @dragover.prevent=""
+                    @drop.prevent="handleExternalDrop($event)"
+                    class="p-8 sm:p-10 rounded-none bg-[#FAF8F5] border border-dashed border-[#ECE6DE] text-center space-y-3"
+                >
+                    <div class="text-3xl">📸</div>
                     <div class="text-xs font-bold text-[#171412]">No media added yet</div>
-                    <div class="text-[11px] text-[#8C7A6B]">Click "📁 Choose Photos &amp; Videos from Computer" above to add product angle photos and demo video reels.</div>
+                    <div class="text-[11px] text-[#8C7A6B] max-w-md mx-auto">
+                        Choose individual files, import an entire folder from your computer, or drag &amp; drop files directly into this area.
+                    </div>
+                    <div class="flex justify-center items-center gap-2.5 pt-2 flex-wrap">
+                        <button 
+                            type="button" 
+                            onclick="document.getElementById('gallery_files_input').click()"
+                            class="px-4 py-2 bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-xs"
+                        >
+                            📁 Choose Files
+                        </button>
+                        <button 
+                            type="button" 
+                            onclick="document.getElementById('gallery_folder_input').click()"
+                            class="px-4 py-2 bg-stone-800 hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-xs"
+                        >
+                            📂 Import Folder
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -689,7 +734,15 @@ function productForm() {
 
         onDrop(e, targetIndex) {
             e.preventDefault();
-            if (this.draggedIndex === null || this.draggedIndex === targetIndex) {
+            // Handle dropping external files/folders from desktop onto a card
+            if (this.draggedIndex === null) {
+                if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                    this.processFiles(e.dataTransfer.files);
+                }
+                this.dragOverIndex = null;
+                return;
+            }
+            if (this.draggedIndex === targetIndex) {
                 this.draggedIndex = null;
                 this.dragOverIndex = null;
                 return;
@@ -735,23 +788,51 @@ function productForm() {
             }
         },
 
-        addLocalFilesToGallery(e) {
-            const files = Array.from(e.target.files || []);
-            files.forEach((file, fidx) => {
+        processFiles(files) {
+            const rawFiles = Array.from(files || []);
+            // Sort files naturally so numeric sequence (e.g. 01, 02... or img1, img2...) is preserved
+            rawFiles.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
+
+            let addedCount = 0;
+            rawFiles.forEach((file, fidx) => {
                 const isVid = file.type.startsWith('video/') || /\.(mp4|webm|mov|ogg)$/i.test(file.name);
-                this.galleryItems.push({
-                    id: 'file_' + Date.now() + '_' + fidx,
-                    type: 'file',
-                    url: null,
-                    preview: URL.createObjectURL(file),
-                    name: file.name,
-                    file: file,
-                    uploadId: null,
-                    isVideo: isVid
-                });
+                const isImg = file.type.startsWith('image/') || /\.(jpg|jpeg|png|webp|gif|avif)$/i.test(file.name);
+
+                if (isImg || isVid) {
+                    this.galleryItems.push({
+                        id: 'file_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5) + '_' + fidx,
+                        type: 'file',
+                        url: null,
+                        preview: URL.createObjectURL(file),
+                        name: file.name,
+                        file: file,
+                        uploadId: null,
+                        isVideo: isVid
+                    });
+                    addedCount++;
+                }
             });
-            this.syncDataTransfer();
-            this.syncMainCover();
+
+            if (addedCount > 0) {
+                this.syncDataTransfer();
+                this.syncMainCover();
+            }
+        },
+
+        addLocalFilesToGallery(e) {
+            this.processFiles(e.target.files);
+            e.target.value = '';
+        },
+
+        addLocalFolderToGallery(e) {
+            this.processFiles(e.target.files);
+            e.target.value = '';
+        },
+
+        handleExternalDrop(e) {
+            if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                this.processFiles(e.dataTransfer.files);
+            }
         },
 
         addMediaUrl() {
