@@ -68,6 +68,7 @@
                             <form method="POST" action="{{ route('admin.categories.update', $cat->id) }}" class="space-y-4">
                                 @csrf
                                 @method('PUT')
+                                <input type="hidden" name="is_active" value="1">
 
                                 <div class="flex items-center justify-between border-b border-[#ECE6DE] pb-3">
                                     <div class="flex items-center gap-2">

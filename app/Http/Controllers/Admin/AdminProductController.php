@@ -24,7 +24,17 @@ class AdminProductController extends Controller
         }
 
         if ($request->filled('category')) {
-            $query->where('category', $request->category);
+            $catVal = $request->category;
+            $catModel = Category::where('name', $catVal)->orWhere('slug', $catVal)->first();
+            if ($catModel) {
+                $query->where(function ($q) use ($catModel, $catVal) {
+                    $q->where('category_id', $catModel->id)
+                      ->orWhere('category', $catVal)
+                      ->orWhere('category', 'like', "%{$catModel->name}%");
+                });
+            } else {
+                $query->where('category', 'like', "%{$catVal}%");
+            }
         }
 
         if ($request->filled('status')) {

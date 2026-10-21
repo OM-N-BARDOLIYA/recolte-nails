@@ -29,7 +29,7 @@
                 'script_line' => 'Pure Salon Comfort',
                 'subtitle' => 'High-Powered Turbo Ventilation & Micro-Filtration for a Clean, Dust-Free Atelier Environment',
                 'cta_text' => 'DISCOVER EQUIPMENT',
-                'cta_url' => '/products?category=Nail+Tools+%26+Kits',
+                'cta_url' => '/products',
             ],
             [
                 'bg_image' => asset('images/banners/hero-slide-uv-led-lamp.png'),
@@ -37,7 +37,7 @@
                 'script_line' => 'Fast & Flawless Curing',
                 'subtitle' => 'Salon-Grade Smart Timing & 120s Sensor Curing for Mirror-Shine Durability and Zero Heat Spikes',
                 'cta_text' => 'SHOP UV/LED LAMPS',
-                'cta_url' => '/products?category=Nail+Tools+%26+Kits',
+                'cta_url' => '/products',
             ],
             [
                 'bg_image' => asset('images/banners/hero-slide-cat-eye-60.png'),
@@ -45,7 +45,7 @@
                 'script_line' => 'Chameleon Magnetic Depth',
                 'subtitle' => '60 Dimensional Cat-Eye Magnetic Gels with Pearlescent Beams & Multi-Angle Velvet Reflections',
                 'cta_text' => 'SHOP CAT EYE GELS',
-                'cta_url' => '/products?category=Nail+Art+%26+Accents',
+                'cta_url' => '/products?category=Cat+Eye+Gels',
             ],
         ];
     @endphp
@@ -321,7 +321,7 @@
                 @php
                     $defaultCats = [
                         ['title' => 'Shades', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Gel Polishes']), 'image' => asset('images/products/recolte-cat-nail-kits.jpg')],
-                        ['title' => 'UV Lamps', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Nail Tools & Kits']), 'image' => asset('images/products/recolte-cat-uv-lamps.jpg')],
+                        ['title' => 'UV Lamps', 'btn_text' => 'Shop Now', 'link' => route('products.index'), 'image' => asset('images/products/recolte-cat-uv-lamps.jpg')],
                         ['title' => 'Builder Gel', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Builder Gel']), 'image' => asset('images/products/recolte-cat-builder-gel.jpg')],
                         ['title' => 'CATE EYES', 'btn_text' => 'Shop Now', 'link' => route('products.index', ['category' => 'Cat Eye Gels']), 'image' => asset('images/products/recolte-cat-tips.jpg')],
                     ];

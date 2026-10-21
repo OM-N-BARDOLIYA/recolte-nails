@@ -18,7 +18,7 @@ class ProductController extends Controller
             $currentSort = 'featured';
             $searchQuery = '';
         } else {
-            // Category filter persistence
+            // Category filter persistence: only filter if explicitly requested in URL query
             if ($request->has('category')) {
                 $selectedCategory = $request->get('category');
                 if ($selectedCategory === 'all' || empty($selectedCategory)) {
@@ -27,9 +27,9 @@ class ProductController extends Controller
                 } else {
                     session(['catalog_category' => $selectedCategory]);
                 }
-            } elseif (session()->has('catalog_category') && session('catalog_category') !== 'all') {
-                $selectedCategory = session('catalog_category');
             } else {
+                // Direct visit to /products always shows all products cleanly
+                session()->forget('catalog_category');
                 $selectedCategory = 'all';
             }
 

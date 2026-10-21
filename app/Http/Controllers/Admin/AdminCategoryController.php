@@ -44,7 +44,7 @@ class AdminCategoryController extends Controller
         ]);
 
         $validated['slug'] = Str::slug($validated['slug']);
-        $validated['is_active'] = $request->has('is_active');
+        $validated['is_active'] = $request->has('is_active') ? true : ($category->is_active ?? true);
         $validated['sort_order'] = $request->input('sort_order', 0);
 
         $category->update($validated);
