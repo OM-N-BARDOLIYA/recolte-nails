@@ -173,79 +173,62 @@
                 </div>
             </div>
 
-            <!-- Upload & Action Bar -->
-            <div class="p-4 sm:p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div class="space-y-1">
-                    <div class="text-xs font-bold text-[#171412]">Add More Media to Product Studio</div>
-                    <div class="text-[11px] text-[#8C7A6B]">Choose individual files or import an entire folder (.jpg, .png, .webp, .mp4, .mov).</div>
-                </div>
-
-                <div class="flex items-center gap-2.5 flex-wrap">
-                    <!-- Hidden Multi-file input supporting images & videos -->
-                    <input 
-                        type="file" 
-                        id="gallery_files_input"
-                        name="gallery_files[]" 
-                        multiple 
-                        accept="image/*,video/mp4,video/webm,video/quicktime,video/*"
-                        @change="addLocalFilesToGallery($event)"
-                        class="hidden"
-                    />
-
-                    <!-- Hidden Folder Import input -->
-                    <input 
-                        type="file" 
-                        id="gallery_folder_input"
-                        webkitdirectory 
-                        directory 
-                        multiple 
-                        @change="addLocalFolderToGallery($event)"
-                        class="hidden"
-                    />
-
-                    <!-- Choose Local Files Button -->
-                    <button 
-                        type="button" 
-                        onclick="document.getElementById('gallery_files_input').click()"
-                        class="px-4 py-2.5 rounded-none bg-[#171412] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-xs hover:shadow-md transition-all flex items-center gap-2 cursor-pointer"
-                        title="Select multiple individual photos and videos"
-                    >
-                        <span>📁 Choose Files</span>
-                    </button>
-
-                    <!-- Import Entire Folder Button -->
-                    <button 
-                        type="button" 
-                        onclick="document.getElementById('gallery_folder_input').click()"
-                        class="px-4 py-2.5 rounded-none bg-stone-800 hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-xs hover:shadow-md transition-all flex items-center gap-2 cursor-pointer"
-                        title="Select an entire folder from your computer to import all photos & videos inside it"
-                    >
-                        <span>📂 Import Folder</span>
-                    </button>
-
-                    <!-- Add via URL Button -->
-                    <button 
-                        type="button" 
-                        @click="addMediaUrl()"
-                        class="px-3.5 py-2.5 rounded-none bg-white hover:bg-[#FBEFE9] text-[#171412] hover:text-[#A33B47] border border-[#ECE6DE] text-[11px] font-semibold tracking-wide transition-all flex items-center gap-1.5 cursor-pointer"
-                    >
-                        <span>🔗 Add via URL</span>
-                    </button>
-                </div>
-            </div>
+            <!-- Hidden Multi-file & Folder inputs -->
+            <input 
+                type="file" 
+                id="gallery_files_input"
+                name="gallery_files[]" 
+                multiple 
+                accept="image/*,video/mp4,video/webm,video/quicktime,video/*"
+                @change="addLocalFilesToGallery($event)"
+                class="hidden"
+            />
+            <input 
+                type="file" 
+                id="gallery_folder_input"
+                webkitdirectory 
+                directory 
+                multiple 
+                @change="addLocalFolderToGallery($event)"
+                class="hidden"
+            />
 
             <!-- Hidden input for main_image fallback -->
             <input type="hidden" name="main_image" :value="mainImageUrl || ''">
 
             <!-- ── INTERACTIVE DRAG & DROP MEDIA GRID ── -->
             <div class="space-y-3">
-                <div class="flex items-center justify-between text-[11px]">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-1">
                     <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-[#8C7A6B]">
                         Visual Order (Drag &amp; drop cards to reorder index):
                     </span>
-                    <span class="text-[10px] text-[#A33B47] font-medium hidden sm:inline">
-                        💡 Tip: Click and drag any photo or video to reposition it
-                    </span>
+
+                    <!-- Action buttons shown when items exist in gallery -->
+                    <div x-show="galleryItems.length > 0" class="flex items-center gap-2 flex-wrap">
+                        <button 
+                            type="button" 
+                            onclick="document.getElementById('gallery_files_input').click()"
+                            class="px-3.5 py-1.5 rounded-none bg-[#171412] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                        >
+                            <span>📁</span> Choose Files
+                        </button>
+
+                        <button 
+                            type="button" 
+                            onclick="document.getElementById('gallery_folder_input').click()"
+                            class="px-3.5 py-1.5 rounded-none bg-stone-800 hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                        >
+                            <span>📂</span> Import Folder
+                        </button>
+
+                        <button 
+                            type="button" 
+                            @click="addMediaUrl()"
+                            class="px-3 py-1.5 rounded-none bg-white hover:bg-[#FAF8F5] text-[#171412] border border-[#ECE6DE] text-[11px] font-semibold transition-all flex items-center gap-1 cursor-pointer"
+                        >
+                            <span>🔗</span> Add URL
+                        </button>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5">
@@ -363,16 +346,23 @@
                         <button 
                             type="button" 
                             onclick="document.getElementById('gallery_files_input').click()"
-                            class="px-4 py-2 bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-xs"
+                            class="px-4 py-2 bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
                         >
-                            📁 Choose Files
+                            <span>📁</span> Choose Files
                         </button>
                         <button 
                             type="button" 
                             onclick="document.getElementById('gallery_folder_input').click()"
-                            class="px-4 py-2 bg-stone-800 hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-xs"
+                            class="px-4 py-2 bg-stone-800 hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
                         >
-                            📂 Import Folder
+                            <span>📂</span> Import Folder
+                        </button>
+                        <button 
+                            type="button" 
+                            @click="addMediaUrl()"
+                            class="px-3.5 py-2 bg-white hover:bg-stone-50 border border-[#ECE6DE] text-[#171412] text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5"
+                        >
+                            <span>🔗</span> Add via URL
                         </button>
                     </div>
                 </div>
