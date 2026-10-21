@@ -219,10 +219,10 @@
             <div class="space-y-3">
                 <div class="flex items-center justify-between text-[11px]">
                     <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-[#8C7A6B]">
-                        Visual Order (Drag card or use arrows to change index):
+                        Visual Order (Drag &amp; drop cards to reorder index):
                     </span>
                     <span class="text-[10px] text-[#A33B47] font-medium hidden sm:inline">
-                        💡 Tip: Click and drag any card to reorder instantly
+                        💡 Tip: Click and drag any photo or video to reposition it
                     </span>
                 </div>
 
@@ -305,40 +305,15 @@
                                 <!-- Name / Label -->
                                 <div class="text-[10px] font-semibold text-[#171412] truncate text-center" x-text="item.name || (item.isVideo ? ('Video #' + (gIndex + 1)) : ('Photo #' + (gIndex + 1)))"></div>
 
-                                <!-- Compact Controls: [←] [Remove] [→] -->
-                                <div class="flex items-center gap-1 pt-1.5 border-t border-[#ECE6DE]">
-                                    <!-- Move Left Arrow -->
-                                    <button 
-                                        type="button" 
-                                        @click="moveItem(gIndex, -1)" 
-                                        :disabled="gIndex === 0"
-                                        :class="gIndex === 0 ? 'opacity-25 cursor-not-allowed bg-stone-100 text-stone-400' : 'hover:bg-[#171412] hover:text-white bg-[#FAF8F5] text-[#171412] cursor-pointer'"
-                                        class="w-6 h-6 shrink-0 flex items-center justify-center border border-[#ECE6DE] text-[11px] font-bold transition-colors"
-                                        title="Move earlier (Index - 1)"
-                                    >
-                                        ←
-                                    </button>
-
-                                    <!-- Remove Button -->
+                                <!-- Remove Button (Full Width & Clean) -->
+                                <div class="pt-1.5 border-t border-[#ECE6DE]">
                                     <button 
                                         type="button" 
                                         @click="removeGalleryItem(gIndex)"
-                                        class="flex-1 h-6 flex items-center justify-center bg-rose-50 hover:bg-[#A33B47] text-[#A33B47] hover:text-white border border-rose-200 text-[9px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                                        class="w-full h-6.5 flex items-center justify-center bg-rose-50 hover:bg-[#A33B47] text-[#A33B47] hover:text-white border border-rose-200 text-[9.5px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
                                         title="Remove this item"
                                     >
                                         ✕ Remove
-                                    </button>
-
-                                    <!-- Move Right Arrow -->
-                                    <button 
-                                        type="button" 
-                                        @click="moveItem(gIndex, 1)" 
-                                        :disabled="gIndex === galleryItems.length - 1"
-                                        :class="gIndex === galleryItems.length - 1 ? 'opacity-25 cursor-not-allowed bg-stone-100 text-stone-400' : 'hover:bg-[#171412] hover:text-white bg-[#FAF8F5] text-[#171412] cursor-pointer'"
-                                        class="w-6 h-6 shrink-0 flex items-center justify-center border border-[#ECE6DE] text-[11px] font-bold transition-colors"
-                                        title="Move later (Index + 1)"
-                                    >
-                                        →
                                     </button>
                                 </div>
                             </div>
