@@ -349,28 +349,32 @@ class AdminPageController extends Controller
             'stories' => [
                 [
                     'badge' => '✦ HAUTE NAIL ATELIER & CRAFTSMANSHIP',
-                    'title' => 'Crafted for Beauty. <br /><span class="font-serif italic font-normal text-[#A33B47]">Engineered for Nail Health.</span>',
+                    'title' => 'Crafted for Beauty.',
+                    'title_highlight' => 'Engineered for Nail Health.',
                     'p1' => 'Born from a passion for runway aesthetics and damage-free natural nail care, <strong>Recolte Nails</strong> redefines modern manicures. We bridge the gap between instant, reusable luxury press-on art and professional-grade Japanese salon gel therapy.',
                     'p2' => 'Every press-on set in our atelier is meticulously built with 7 layers of premium Japanese salon gel, hand-buffed with genuine pearl chrome, and shaped to your exact millimeter nail curve for a seamless 4-week wear that looks 100% salon-sculpted.',
                     'img' => asset('images/banners/recolte-colors-showcase.jpg'),
                 ],
                 [
                     'badge' => '✦ 7-LAYER GEL ARCHITECTURE',
-                    'title' => 'Seven Optical Layers. <br /><span class="font-serif italic font-normal text-[#A33B47]">Zero salon waiting time.</span>',
+                    'title' => 'Seven Optical Layers.',
+                    'title_highlight' => 'Zero salon waiting time.',
                     'p1' => 'Unlike cheap factory plastics that snap and pop off, Recolte nail suites are built with the same multi-stage UV gel curing process used in Tokyo and Parisian high-end nail salons.',
                     'p2' => 'The result is a glass-smooth apex with ultra-thin, flexible cuticle borders that mold invisibly against your nail bed with zero pinching or lifting.',
                     'img' => asset('images/banners/recolte-acrylic-banner.jpg'),
                 ],
                 [
                     'badge' => '✦ 24K BOTANICAL NOURISHMENT',
-                    'title' => 'Pure Damask Rose. <br /><span class="font-serif italic font-normal text-[#A33B47]">Infused with 24K Gold.</span>',
+                    'title' => 'Pure Damask Rose.',
+                    'title_highlight' => 'Infused with 24K Gold.',
                     'p1' => 'We believe cuticle care is skincare. Our signature elixirs are cold-pressed in small batches, infusing pure Moroccan Argan and Damask Rose essential oils with suspended 24K cosmetic gold flakes.',
                     'p2' => 'Deeply hydrates nail matrices, heals cracked skin, and stimulates rapid natural nail growth without greasy residue.',
                     'img' => asset('images/products/recolte-cat-top-coat.jpg'),
                 ],
                 [
                     'badge' => '✦ BESPOKE SIZING CONCIERGE',
-                    'title' => '100% Guaranteed Fit. <br /><span class="font-serif italic font-normal text-[#A33B47]">Or we remake it free.</span>',
+                    'title' => '100% Guaranteed Fit.',
+                    'title_highlight' => 'Or we remake it free.',
                     'p1' => 'Finding your size should never be stressful. Send a quick photo of your hand next to a coin over WhatsApp, and our studio artists map your exact millimeter measurements in 2 minutes.',
                     'p2' => 'Every order includes our salon prep suite: dual-grit etched buffer, medical adhesive tabs, liquid salon resin, and prep wipes in a keepsake velvet presentation box.',
                     'img' => asset('images/products/recolte-cat-nail-kits.jpg'),
@@ -470,9 +474,26 @@ class AdminPageController extends Controller
                 $storyImg = asset('uploads/pages/' . $fn);
             }
 
+            $rawTitle = trim($request->input("story_{$i}_title", ''));
+            $rawHighlight = trim($request->input("story_{$i}_title_highlight", ''));
+
+            // Auto-clean any HTML tags if entered or pasted
+            if (empty($rawHighlight) && str_contains($rawTitle, '<')) {
+                if (preg_match('/^(.*?)\s*<br\s*\/?>\s*<span[^>]*>(.*?)<\/span>/is', $rawTitle, $m)) {
+                    $rawTitle = strip_tags(trim($m[1]));
+                    $rawHighlight = strip_tags(trim($m[2]));
+                } else {
+                    $rawTitle = strip_tags($rawTitle);
+                }
+            } else {
+                $rawTitle = strip_tags($rawTitle);
+                $rawHighlight = strip_tags($rawHighlight);
+            }
+
             $stories[] = [
-                'badge' => $request->input("story_{$i}_badge", '✦ HAUTE NAIL ATELIER & CRAFTSMANSHIP'),
-                'title' => $request->input("story_{$i}_title", 'Crafted for Beauty.'),
+                'badge' => strip_tags($request->input("story_{$i}_badge", '✦ HAUTE NAIL ATELIER & CRAFTSMANSHIP')),
+                'title' => $rawTitle !== '' ? $rawTitle : 'Crafted for Beauty.',
+                'title_highlight' => $rawHighlight,
                 'p1' => $request->input("story_{$i}_p1", ''),
                 'p2' => $request->input("story_{$i}_p2", ''),
                 'img' => $storyImg,

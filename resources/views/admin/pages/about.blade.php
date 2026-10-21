@@ -120,9 +120,31 @@
                                     <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Badge Tag</label>
                                     <input type="text" name="story_{{ $i }}_badge" value="{{ $s['badge'] ?? '' }}" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-semibold text-[#171412] outline-none focus:border-[#171412]">
                                 </div>
-                                <div class="space-y-1 sm:col-span-2">
-                                    <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Headline (HTML supported)</label>
-                                    <input type="text" name="story_{{ $i }}_title" value="{{ $s['title'] ?? '' }}" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-bold font-serif text-[#171412] outline-none focus:border-[#171412]">
+                                @php
+                                    $sTitle = $s['title'] ?? '';
+                                    $sHighlight = $s['title_highlight'] ?? '';
+                                    if (empty($sHighlight) && str_contains($sTitle, '<')) {
+                                        if (preg_match('/^(.*?)\s*<br\s*\/?>\s*<span[^>]*>(.*?)<\/span>/is', $sTitle, $m)) {
+                                            $sTitle = strip_tags(trim($m[1]));
+                                            $sHighlight = strip_tags(trim($m[2]));
+                                        } else {
+                                            $sTitle = strip_tags($sTitle);
+                                        }
+                                    }
+                                @endphp
+                                <div class="space-y-1 sm:col-span-1">
+                                    <label class="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#171412] block">
+                                        Headline Title <span class="text-[#8C7A6B] font-normal lowercase">(main sentence)</span>
+                                    </label>
+                                    <input type="text" name="story_{{ $i }}_title" value="{{ $sTitle }}" placeholder="e.g. Seven Optical Layers." class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-semibold text-[#171412] outline-none focus:border-[#171412]">
+                                    <span class="text-[10px] text-[#8C7A6B] block">Write simple words (no HTML tags)</span>
+                                </div>
+                                <div class="space-y-1 sm:col-span-1">
+                                    <label class="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#A33B47] block">
+                                        Italic Accent Line <span class="text-[#8C7A6B] font-normal lowercase">(automatic italic styling)</span>
+                                    </label>
+                                    <input type="text" name="story_{{ $i }}_title_highlight" value="{{ $sHighlight }}" placeholder="e.g. Zero salon waiting time." class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#A33B47]/30 text-xs font-semibold italic text-[#A33B47] outline-none focus:border-[#A33B47]">
+                                    <span class="text-[10px] text-[#8C7A6B] block">Automatically styled in italic accent on the live page</span>
                                 </div>
                                 <div class="space-y-1 sm:col-span-2">
                                     <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Paragraph 1</label>

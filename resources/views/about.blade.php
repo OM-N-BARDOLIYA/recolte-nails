@@ -39,8 +39,17 @@
                                     x-html="story.badge">
                                 </div>
 
-                                <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#171412] leading-[1.15] tracking-tight"
-                                    x-html="story.title">
+                                <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#171412] leading-[1.15] tracking-tight">
+                                    <template x-if="story.title_highlight">
+                                        <span>
+                                            <span x-text="story.title"></span>
+                                            <br />
+                                            <span class="font-serif italic font-normal text-[#A33B47]" x-text="story.title_highlight"></span>
+                                        </span>
+                                    </template>
+                                    <template x-if="!story.title_highlight">
+                                        <span x-html="story.title"></span>
+                                    </template>
                                 </h1>
 
                                 <p class="text-xs sm:text-sm text-[#6A625A] font-light leading-relaxed max-w-2xl"
