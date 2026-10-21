@@ -34,7 +34,7 @@
         <!-- All Products -->
         <a 
             href="{{ route('admin.products.index', array_merge(request()->except(['status', 'page']))) }}"
-            class="p-4 bg-white border transition-all duration-200 block shadow-2xs hover:shadow-xs {{ !request('status') ? 'border-[#171412] ring-1 ring-[#171412]' : 'border-[#ECE6DE] hover:border-[#171412]/40' }}"
+            class="p-4 bg-white border transition-all duration-200 block shadow-2xs hover:shadow-xs {{ !request('status') ? 'border-[#171412]/70 bg-[#FAF8F5]/50' : 'border-[#ECE6DE] hover:border-[#171412]/50' }}"
         >
             <div class="flex items-center justify-between">
                 <span class="text-[11px] font-bold uppercase tracking-wider text-[#736B63]">All Products</span>
@@ -49,7 +49,7 @@
         <!-- Active Only -->
         <a 
             href="{{ route('admin.products.index', array_merge(request()->except(['status', 'page']), ['status' => 'active'])) }}"
-            class="p-4 bg-white border transition-all duration-200 block shadow-2xs hover:shadow-xs {{ request('status') === 'active' ? 'border-emerald-600 ring-1 ring-emerald-600' : 'border-[#ECE6DE] hover:border-emerald-500/40' }}"
+            class="p-4 bg-white border transition-all duration-200 block shadow-2xs hover:shadow-xs {{ request('status') === 'active' ? 'border-emerald-600/70 bg-emerald-50/20' : 'border-[#ECE6DE] hover:border-emerald-500/50' }}"
         >
             <div class="flex items-center justify-between">
                 <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-800">Active Live</span>
@@ -64,7 +64,7 @@
         <!-- Bestsellers -->
         <a 
             href="{{ route('admin.products.index', array_merge(request()->except(['status', 'page']), ['status' => 'bestseller'])) }}"
-            class="p-4 bg-white border transition-all duration-200 block shadow-2xs hover:shadow-xs {{ request('status') === 'bestseller' ? 'border-[#C5A880] ring-1 ring-[#C5A880]' : 'border-[#ECE6DE] hover:border-[#C5A880]/50' }}"
+            class="p-4 bg-white border transition-all duration-200 block shadow-2xs hover:shadow-xs {{ request('status') === 'bestseller' ? 'border-[#C5A880] bg-[#FDF8EE]/30' : 'border-[#ECE6DE] hover:border-[#C5A880]/60' }}"
         >
             <div class="flex items-center justify-between">
                 <span class="text-[11px] font-bold uppercase tracking-wider text-[#8A6A32]">★ Bestsellers</span>
@@ -79,7 +79,7 @@
         <!-- Hidden / Drafts -->
         <a 
             href="{{ route('admin.products.index', array_merge(request()->except(['status', 'page']), ['status' => 'inactive'])) }}"
-            class="p-4 bg-white border transition-all duration-200 block shadow-2xs hover:shadow-xs {{ request('status') === 'inactive' ? 'border-zinc-500 ring-1 ring-zinc-500' : 'border-[#ECE6DE] hover:border-zinc-400' }}"
+            class="p-4 bg-white border transition-all duration-200 block shadow-2xs hover:shadow-xs {{ request('status') === 'inactive' ? 'border-zinc-400/80 bg-zinc-50/40' : 'border-[#ECE6DE] hover:border-zinc-400' }}"
         >
             <div class="flex items-center justify-between">
                 <span class="text-[11px] font-bold uppercase tracking-wider text-zinc-600">Hidden / Drafts</span>
