@@ -93,6 +93,31 @@ class AdminPageController extends Controller
             'image' => asset('images/banners/recolte-colors-showcase.jpg'),
         ]);
 
+        $aboutInsta = PageContent::getSection('about', 'instagram', []);
+        $defaultReels = !empty($aboutInsta['posts']) ? $aboutInsta['posts'] : [
+            [
+                'video' => asset('uploads/pages/about_insta_video_0_1789736475.mp4'),
+                'poster' => '',
+                'image' => asset('uploads/pages/about_insta_video_0_1789736475.mp4'),
+                'alt' => 'Recolte Salon Gel Application',
+                'link' => 'https://www.instagram.com/recolte_gelpolish/'
+            ],
+            [
+                'video' => asset('uploads/pages/about_insta_video_1_1789736475.mp4'),
+                'poster' => '',
+                'image' => asset('uploads/pages/about_insta_video_1_1789736475.mp4'),
+                'alt' => 'Crimson & Gold Atelier Waves',
+                'link' => 'https://www.instagram.com/recolte_gelpolish/'
+            ],
+            [
+                'video' => asset('uploads/pages/about_insta_video_2_1789736475.mp4'),
+                'poster' => '',
+                'image' => asset('uploads/pages/about_insta_video_2_1789736475.mp4'),
+                'alt' => 'Rose Gold Leopard Couture Art',
+                'link' => 'https://www.instagram.com/recolte_gelpolish/'
+            ],
+        ];
+
         $instagram = PageContent::getSection('home', 'instagram', [
             'badge' => 'Atelier Community',
             'title' => 'Join Our Nail Community',
@@ -100,30 +125,11 @@ class AdminPageController extends Controller
             'handle' => '@recolte_gelpolish',
             'profile_url' => 'https://www.instagram.com/recolte_gelpolish/',
             'btn_text' => 'Follow @recolte_gelpolish',
-            'posts' => [
-                [
-                    'video' => asset('videos/community/community-reel-1.mp4'),
-                    'poster' => asset('videos/community/community-reel-1-poster.jpg'),
-                    'image' => asset('videos/community/community-reel-1-poster.jpg'),
-                    'alt' => 'Recolte Salon Gel Application',
-                    'link' => 'https://www.instagram.com/recolte_gelpolish/'
-                ],
-                [
-                    'video' => asset('videos/community/community-reel-2.mp4'),
-                    'poster' => asset('videos/community/community-reel-2-poster.jpg'),
-                    'image' => asset('videos/community/community-reel-2-poster.jpg'),
-                    'alt' => 'Crimson & Gold Atelier Waves',
-                    'link' => 'https://www.instagram.com/recolte_gelpolish/'
-                ],
-                [
-                    'video' => asset('videos/community/community-reel-3.mp4'),
-                    'poster' => asset('videos/community/community-reel-3-poster.jpg'),
-                    'image' => asset('videos/community/community-reel-3-poster.jpg'),
-                    'alt' => 'Rose Gold Leopard Couture Art',
-                    'link' => 'https://www.instagram.com/recolte_gelpolish/'
-                ],
-            ]
+            'posts' => $defaultReels
         ]);
+        if (empty($instagram['posts'])) {
+            $instagram['posts'] = $defaultReels;
+        }
 
         return view('admin.pages.home', compact('hero', 'trust_strip', 'categories_section', 'showcase', 'instagram'));
     }

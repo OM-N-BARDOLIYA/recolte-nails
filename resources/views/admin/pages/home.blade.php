@@ -17,9 +17,9 @@
     cat2: '{{ $categories_section['categories'][2]['image'] ?? asset('images/products/recolte-cat-builder-gel.jpg') }}',
     cat3: '{{ $categories_section['categories'][3]['image'] ?? asset('images/products/recolte-cat-tips.jpg') }}',
     showcaseImg: '{{ $showcase['image'] ?? asset('images/banners/recolte-colors-showcase.jpg') }}?v={{ file_exists(public_path('images/banners/recolte-colors-showcase.jpg')) ? filemtime(public_path('images/banners/recolte-colors-showcase.jpg')) : time() }}',
-    video0: '{{ $instagram['posts'][0]['video'] ?? asset('videos/community/community-reel-1.mp4') }}',
-    video1: '{{ $instagram['posts'][1]['video'] ?? asset('videos/community/community-reel-2.mp4') }}',
-    video2: '{{ $instagram['posts'][2]['video'] ?? asset('videos/community/community-reel-3.mp4') }}',
+    video0: '{{ $instagram['posts'][0]['video'] ?? asset('uploads/pages/about_insta_video_0_1789736475.mp4') }}',
+    video1: '{{ $instagram['posts'][1]['video'] ?? asset('uploads/pages/about_insta_video_1_1789736475.mp4') }}',
+    video2: '{{ $instagram['posts'][2]['video'] ?? asset('uploads/pages/about_insta_video_2_1789736475.mp4') }}',
     handleFile(e, key) {
         const file = e.target.files[0];
         if (file) {

@@ -460,23 +460,23 @@
                 @php
                     $instaPosts = $instagram['posts'] ?? [
                         [
-                            'video' => asset('videos/community/community-reel-1.mp4'),
-                            'poster' => asset('videos/community/community-reel-1-poster.jpg'),
-                            'image' => asset('videos/community/community-reel-1-poster.jpg'),
+                            'video' => asset('uploads/pages/about_insta_video_0_1789736475.mp4'),
+                            'poster' => '',
+                            'image' => asset('uploads/pages/about_insta_video_0_1789736475.mp4'),
                             'alt' => 'Recolte Salon Gel Application',
                             'link' => 'https://www.instagram.com/recolte_gelpolish/'
                         ],
                         [
-                            'video' => asset('videos/community/community-reel-2.mp4'),
-                            'poster' => asset('videos/community/community-reel-2-poster.jpg'),
-                            'image' => asset('videos/community/community-reel-2-poster.jpg'),
+                            'video' => asset('uploads/pages/about_insta_video_1_1789736475.mp4'),
+                            'poster' => '',
+                            'image' => asset('uploads/pages/about_insta_video_1_1789736475.mp4'),
                             'alt' => 'Crimson & Gold Atelier Waves',
                             'link' => 'https://www.instagram.com/recolte_gelpolish/'
                         ],
                         [
-                            'video' => asset('videos/community/community-reel-3.mp4'),
-                            'poster' => asset('videos/community/community-reel-3-poster.jpg'),
-                            'image' => asset('videos/community/community-reel-3-poster.jpg'),
+                            'video' => asset('uploads/pages/about_insta_video_2_1789736475.mp4'),
+                            'poster' => '',
+                            'image' => asset('uploads/pages/about_insta_video_2_1789736475.mp4'),
                             'alt' => 'Rose Gold Leopard Couture Art',
                             'link' => 'https://www.instagram.com/recolte_gelpolish/'
                         ],
