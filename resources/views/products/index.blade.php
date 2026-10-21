@@ -9,26 +9,6 @@
                 isLoading: false,
 
                 init() {
-                    // Sync URL query params if restored from session and URL is currently bare
-                    const params = new URLSearchParams(window.location.search);
-                    let shouldReplace = false;
-                    if (this.selectedCategory && this.selectedCategory !== 'all' && !params.has('category')) {
-                        params.set('category', this.selectedCategory);
-                        shouldReplace = true;
-                    }
-                    if (this.sortOption && this.sortOption !== 'featured' && !params.has('sort')) {
-                        params.set('sort', this.sortOption);
-                        shouldReplace = true;
-                    }
-                    if (this.searchQuery && !params.has('search')) {
-                        params.set('search', this.searchQuery);
-                        shouldReplace = true;
-                    }
-                    if (shouldReplace) {
-                        const newUrl = window.location.pathname + '?' + params.toString();
-                        window.history.replaceState({}, '', newUrl);
-                    }
-
                     // Handle browser Back / Forward buttons seamlessly
                     window.addEventListener('popstate', () => {
                         const popParams = new URLSearchParams(window.location.search);
@@ -40,38 +20,29 @@
                 },
 
                 async applyFilter(newCat = null, newSort = null, newSearch = null) {
-                    if (newCat !== null) this.selectedCategory = newCat;
+                    if (newCat !== null) {
+                        this.selectedCategory = newCat;
+                        if (newCat === 'all') {
+                            this.searchQuery = '';
+                        }
+                    }
                     if (newSort !== null) this.sortOption = newSort;
                     if (newSearch !== null) this.searchQuery = newSearch;
 
-                    // Always send category & sort so server session updates/clears properly
+                    // Clean URL params: only include active non-default filters
                     const params = new URLSearchParams();
-                    if (this.selectedCategory) {
+                    if (this.selectedCategory && this.selectedCategory !== 'all') {
                         params.set('category', this.selectedCategory);
                     }
-                    if (this.sortOption) {
+                    if (this.sortOption && this.sortOption !== 'featured') {
                         params.set('sort', this.sortOption);
                     }
                     if (this.searchQuery && this.searchQuery.trim() !== '') {
                         params.set('search', this.searchQuery.trim());
                     }
 
-                    // Browser URL bar representation: clean when 'all'
-                    const displayParams = new URLSearchParams();
-                    if (this.selectedCategory && this.selectedCategory !== 'all') {
-                        displayParams.set('category', this.selectedCategory);
-                    }
-                    if (this.sortOption && this.sortOption !== 'featured') {
-                        displayParams.set('sort', this.sortOption);
-                    }
-                    if (this.searchQuery && this.searchQuery.trim() !== '') {
-                        displayParams.set('search', this.searchQuery.trim());
-                    }
-
-                    const fetchUrl = '{{ route('products.index') }}' + (params.toString() ? '?' + params.toString() : '');
-                    const pushUrl = '{{ route('products.index') }}' + (displayParams.toString() ? '?' + displayParams.toString() : '');
-
-                    await this.fetchCatalogContent(fetchUrl, true, pushUrl);
+                    const targetUrl = '{{ route('products.index') }}' + (params.toString() ? '?' + params.toString() : '');
+                    await this.fetchCatalogContent(targetUrl, true, targetUrl);
                 },
 
                 async fetchCatalogContent(fetchUrl, updateHistory = true, pushUrl = null) {
@@ -199,7 +170,7 @@
 
                 <!-- 2.2 Category Pills (Fully Responsive Clean Multi-Row Wrap — No Shift+Roller Needed!) -->
                 <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
-                    <button type="button" @click="applyFilter('all')"
+                    <button type="button" @click="applyFilter('all', 'featured', '')"
                         :class="(selectedCategory === 'all' || !selectedCategory) 
                             ? 'bg-[#171412] text-white shadow-xs font-semibold ring-2 ring-[#171412]/20' 
                             : 'bg-[#FAF8F5] text-[#2C2420] border border-[#ECE6DE] hover:border-[#171412] hover:bg-white hover:text-black font-normal'"

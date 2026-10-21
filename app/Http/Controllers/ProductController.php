@@ -11,57 +11,27 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        // 1. Manage filter persistence in Session
+        // 1. Clean URL-driven parameters (Zero phantom session trapping)
         if ($request->has('reset') || $request->has('clear')) {
             session()->forget(['catalog_category', 'catalog_sort', 'catalog_search']);
             $selectedCategory = 'all';
             $currentSort = 'featured';
             $searchQuery = '';
         } else {
-            // Category filter persistence: only filter if explicitly requested in URL query
-            if ($request->has('category')) {
-                $selectedCategory = $request->get('category');
-                if ($selectedCategory === 'all' || empty($selectedCategory)) {
-                    session()->forget('catalog_category');
-                    $selectedCategory = 'all';
-                } else {
-                    session(['catalog_category' => $selectedCategory]);
-                }
-            } else {
-                // Direct visit to /products always shows all products cleanly
-                session()->forget('catalog_category');
+            // Category: purely URL driven. If absent or 'all', show ALL products.
+            $selectedCategory = $request->get('category', 'all');
+            if (empty($selectedCategory)) {
                 $selectedCategory = 'all';
             }
 
-            // Sort option persistence
-            if ($request->has('sort')) {
-                $currentSort = $request->get('sort');
-                if ($currentSort === 'featured' || empty($currentSort)) {
-                    session()->forget('catalog_sort');
-                    $currentSort = 'featured';
-                } else {
-                    session(['catalog_sort' => $currentSort]);
-                }
-            } elseif (session()->has('catalog_sort')) {
-                $currentSort = session('catalog_sort');
-            } else {
-                $currentSort = 'featured';
-            }
+            // Search: purely URL driven. If absent, search is empty.
+            $searchQuery = trim($request->get('search', ''));
 
-            // Search query persistence
-            if ($request->has('search')) {
-                $searchQuery = $request->get('search', '');
-                if (trim($searchQuery) === '') {
-                    session()->forget('catalog_search');
-                    $searchQuery = '';
-                } else {
-                    session(['catalog_search' => trim($searchQuery)]);
-                }
-            } elseif (session()->has('catalog_search') && !empty(session('catalog_search'))) {
-                $searchQuery = session('catalog_search');
-            } else {
-                $searchQuery = '';
-            }
+            // Sort: purely URL driven. If absent, sort is featured.
+            $currentSort = $request->get('sort', 'featured');
+
+            // Purge any lingering legacy session keys so user is never trapped
+            session()->forget(['catalog_category', 'catalog_sort', 'catalog_search']);
         }
 
         $query = Product::where('is_active', true);
@@ -72,7 +42,7 @@ class ProductController extends Controller
             if ($category) {
                 $query->where(function ($q) use ($category) {
                     $q->where('category_id', $category->id)
-                      ->orWhere('category', 'like', "%{$category->name}%");
+                        ->orWhere('category', 'like', "%{$category->name}%");
                 });
             } else {
                 $query->where('category', 'like', "%{$catSlug}%");
@@ -83,9 +53,9 @@ class ProductController extends Controller
             $search = $searchQuery;
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('tagline', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%")
-                  ->orWhere('category', 'like', "%{$search}%");
+                    ->orWhere('tagline', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('category', 'like', "%{$search}%");
             });
         }
 
@@ -135,7 +105,7 @@ class ProductController extends Controller
             ->where('id', '!=', $product->id)
             ->where(function ($q) use ($product) {
                 $q->where('category', $product->category)
-                  ->orWhere('category_id', $product->category_id);
+                    ->orWhere('category_id', $product->category_id);
             })
             ->take(3)
             ->get();
@@ -153,15 +123,15 @@ class ProductController extends Controller
     public function searchApi(Request $request)
     {
         $q = trim($request->get('q', ''));
-        
+
         $query = Product::where('is_active', true);
 
         if ($q !== '') {
             $query->where(function ($w) use ($q) {
                 $w->where('title', 'like', "%{$q}%")
-                  ->orWhere('tagline', 'like', "%{$q}%")
-                  ->orWhere('description', 'like', "%{$q}%")
-                  ->orWhere('category', 'like', "%{$q}%");
+                    ->orWhere('tagline', 'like', "%{$q}%")
+                    ->orWhere('description', 'like', "%{$q}%")
+                    ->orWhere('category', 'like', "%{$q}%");
             });
         }
 
