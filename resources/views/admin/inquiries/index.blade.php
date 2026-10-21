@@ -88,7 +88,7 @@
 
         @if($inquiries->hasPages())
             <div class="p-4 border-t border-[#ECE6DE] bg-[#FAF8F5]">
-                {{ $inquiries->links() }}
+                {{ $inquiries->links('admin.components.pagination') }}
             </div>
         @endif
     </div>

@@ -391,13 +391,8 @@
 
         <!-- ── 5. PAGINATION FOOTER ── -->
         @if($products->hasPages())
-            <div class="p-4 sm:p-5 border-t border-[#ECE6DE] bg-[#FAF8F5] flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div class="text-xs text-[#736B63]">
-                    Showing <span class="font-semibold text-[#171412]">{{ $products->firstItem() }}</span> to <span class="font-semibold text-[#171412]">{{ $products->lastItem() }}</span> of <span class="font-semibold text-[#171412]">{{ $products->total() }}</span> results
-                </div>
-                <div class="pagination-clean">
-                    {{ $products->links() }}
-                </div>
+            <div class="p-4 sm:p-5 border-t border-[#ECE6DE] bg-[#FAF8F5]">
+                {{ $products->links('admin.components.pagination') }}
             </div>
         @endif
     </div>
