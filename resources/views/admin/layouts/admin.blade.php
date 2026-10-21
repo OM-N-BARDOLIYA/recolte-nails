@@ -155,14 +155,22 @@
                     <span>Catalog</span>
                 </a>
 
-                <div class="pt-5 pb-1.5 px-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B]">System &amp; Concierge</div>
+                <div class="pt-5 pb-1.5 px-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B]">System &amp; Settings</div>
 
                 <a 
-                    href="{{ route('admin.settings.index') }}" 
-                    class="{{ $navLinkClass(request()->routeIs('admin.settings.*')) }}"
+                    href="{{ route('admin.settings.index', ['tab' => 'studio']) }}" 
+                    class="{{ $navLinkClass(request()->routeIs('admin.settings.*') && request('tab') !== 'security') }}"
                 >
                     <span class="text-sm">⚙️</span>
-                    <span>WhatsApp &amp; Studio Info</span>
+                    <span>Studio &amp; WhatsApp</span>
+                </a>
+
+                <a 
+                    href="{{ route('admin.settings.security') }}" 
+                    class="{{ $navLinkClass(request()->routeIs('admin.settings.security') || (request()->routeIs('admin.settings.*') && request('tab') === 'security')) }}"
+                >
+                    <span class="text-sm">🔐</span>
+                    <span>Admin Access &amp; Password</span>
                 </a>
 
                 <a 

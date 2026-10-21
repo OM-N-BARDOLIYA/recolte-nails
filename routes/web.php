@@ -53,6 +53,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Studio & WhatsApp Settings
         Route::get('settings', [AdminSettingController::class, 'index'])->name('settings.index');
         Route::post('settings', [AdminSettingController::class, 'update'])->name('settings.update');
+        Route::get('settings/security', [AdminSettingController::class, 'security'])->name('settings.security');
+        Route::post('settings/security', [AdminSettingController::class, 'updateSecurity'])->name('settings.security.update');
 
         // Customer Inquiries
         Route::get('inquiries', [AdminInquiryController::class, 'index'])->name('inquiries.index');

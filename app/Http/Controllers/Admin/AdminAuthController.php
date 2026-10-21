@@ -18,12 +18,35 @@ class AdminAuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        $request->validate([
+            'login' => ['nullable', 'string'],
+            'email' => ['nullable', 'string'],
+            'password' => ['required', 'string'],
         ]);
 
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
+        $loginInput = trim($request->input('login') ?? $request->input('email') ?? '');
+
+        if (empty($loginInput)) {
+            return back()->withErrors(['login' => 'Please enter your username or email address.'])->withInput();
+        }
+
+        $remember = $request->filled('remember');
+        $isEmail = filter_var($loginInput, FILTER_VALIDATE_EMAIL);
+
+        $attempt = false;
+        if ($isEmail) {
+            $attempt = Auth::attempt(['email' => $loginInput, 'password' => $request->password], $remember);
+        } else {
+            $attempt = Auth::attempt(['username' => $loginInput, 'password' => $request->password], $remember);
+            if (!$attempt) {
+                $attempt = Auth::attempt(['name' => $loginInput, 'password' => $request->password], $remember);
+            }
+            if (!$attempt) {
+                $attempt = Auth::attempt(['email' => $loginInput, 'password' => $request->password], $remember);
+            }
+        }
+
+        if ($attempt) {
             if (Auth::user()->is_admin) {
                 $request->session()->regenerate();
                 return redirect()->intended(route('admin.dashboard'))
@@ -31,12 +54,12 @@ class AdminAuthController extends Controller
             }
 
             Auth::logout();
-            return back()->withErrors(['email' => 'Access denied. You do not have administrator permissions.']);
+            return back()->withErrors(['login' => 'Access denied. You do not have administrator permissions.']);
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+            'login' => 'The provided credentials do not match our records.',
+        ])->withInput($request->only('login', 'email'));
     }
 
     public function logout(Request $request)

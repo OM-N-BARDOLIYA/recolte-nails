@@ -66,16 +66,16 @@
             @csrf
 
             <div class="space-y-1.5">
-                <label for="email" class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#6A625A] block">Admin Email Address</label>
+                <label for="login" class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#6A625A] block">Username or Email Address</label>
                 <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    value="{{ old('email', 'admin@recoltenails.com') }}" 
+                    type="text" 
+                    id="login" 
+                    name="login" 
+                    value="{{ old('login', old('email', 'admin')) }}" 
                     required 
                     autofocus
                     class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs sm:text-sm font-medium focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 transition-all"
-                    placeholder="admin@recoltenails.com"
+                    placeholder="e.g. admin or admin@recoltenails.com"
                 />
             </div>
 
