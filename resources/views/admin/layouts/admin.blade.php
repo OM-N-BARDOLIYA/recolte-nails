@@ -185,7 +185,7 @@
         </div>
 
         <!-- User Profile & Website Shortcut -->
-        <div class="p-4 border-t border-[#ECE6DE] bg-[#FAF8F5]/80 space-y-2">
+        <div class="p-4 border-t border-[#ECE6DE] bg-[#FAF8F5]/80 space-y-2.5">
             <a 
                 href="{{ route('home') }}" 
                 target="_blank" 
@@ -198,21 +198,26 @@
                 <span class="text-xs text-[#A33B47] group-hover:translate-x-0.5 transition-transform">↗</span>
             </a>
 
-            <div class="flex items-center justify-between px-3.5 py-2.5 bg-white rounded-none border border-[#ECE6DE] shadow-2xs">
+            <!-- Admin Profile Box -->
+            <div class="p-3 bg-white rounded-none border border-[#ECE6DE] shadow-2xs space-y-2.5">
                 <div class="flex items-center gap-2.5 min-w-0">
-                    <div class="w-7 h-7 rounded-none bg-[#171412] text-white text-xs font-bold flex items-center justify-center shrink-0">
+                    <div class="w-8 h-8 rounded-none bg-[#171412] text-white text-xs font-bold flex items-center justify-center shrink-0">
                         {{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}
                     </div>
-                    <div class="truncate">
+                    <div class="min-w-0 flex-1">
                         <div class="text-xs font-semibold text-[#171412] truncate">{{ Auth::user()->name ?? 'Admin' }}</div>
-                        <div class="text-[10px] text-[#8C7A6B] truncate">{{ Auth::user()->email ?? '' }}</div>
+                        <div class="text-[10px] text-[#8C7A6B] truncate">{{ Auth::user()->username ? '@' . Auth::user()->username : (Auth::user()->email ?? '') }}</div>
                     </div>
                 </div>
 
-                <form method="POST" action="{{ route('admin.logout') }}">
+                <!-- Prominent Logout Button -->
+                <form method="POST" action="{{ route('admin.logout') }}" class="w-full pt-2 border-t border-[#ECE6DE]">
                     @csrf
-                    <button type="submit" class="text-xs text-[#8C7A6B] hover:text-[#A33B47] p-1.5 transition-colors cursor-pointer" title="Sign Out">
-                        🚪
+                    <button type="submit" class="w-full flex items-center justify-center gap-2 py-1.5 px-3 rounded-none bg-[#FAF8F5] hover:bg-red-50 text-[#736B63] hover:text-red-700 border border-[#E5DFD7] hover:border-red-200 text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer">
+                        <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        <span>Logout</span>
                     </button>
                 </form>
             </div>
@@ -223,6 +228,31 @@
     <!-- ── 2. MAIN CONTENT AREA ── -->
     <div class="flex-grow flex flex-col min-w-0 bg-[#FAF8F5]">
         
+        <!-- Top Admin Header Bar with Quick Logout -->
+        <header class="bg-white border-b border-[#ECE6DE] px-6 sm:px-8 py-3 flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-2 text-xs text-[#8C7A6B]">
+                <span class="font-medium text-[#171412]">Recolte Admin</span>
+                <span>/</span>
+                <span class="capitalize text-[#171412] font-semibold">{{ request()->segment(2) ?? 'Dashboard' }}</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="{{ route('home') }}" target="_blank" class="hidden sm:inline-flex items-center gap-1 text-xs text-[#8C7A6B] hover:text-[#171412] transition-colors">
+                    <span>Storefront</span>
+                    <span>↗</span>
+                </a>
+                <span class="hidden sm:inline text-[#ECE6DE]">|</span>
+                <form method="POST" action="{{ route('admin.logout') }}" class="inline">
+                    @csrf
+                    <button type="submit" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#8C7A6B] hover:text-red-700 transition-colors cursor-pointer py-1 px-2.5 rounded-none hover:bg-red-50 border border-transparent hover:border-red-200" title="Sign Out">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        <span>Logout</span>
+                    </button>
+                </form>
+            </div>
+        </header>
+
         <!-- Floating Luxury Atelier CMS Toaster -->
         @include('admin.components.toaster')
 
