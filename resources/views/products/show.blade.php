@@ -503,18 +503,6 @@
                         </div>
                     </div>
 
-                    <!-- Product Specifications Meta Table -->
-                    <div class="pt-4 border-t border-[#ECE6DE] space-y-1.5 text-xs text-[#8C7A6B]">
-                        <div class="flex gap-4"><span
-                                class="w-20 font-medium text-[#171412]">SKU:</span><span>RN-{{ str_pad($product->id, 4, '0', STR_PAD_LEFT) }}</span>
-                        </div>
-                        <div class="flex gap-4"><span
-                                class="w-20 font-medium text-[#171412]">Category:</span><span>{{ $product->category }}</span>
-                        </div>
-                        <div class="flex gap-4"><span class="w-20 font-medium text-[#171412]">Finish:</span><span>7-Layer
-                                Japanese Salon Gel</span></div>
-                    </div>
-
                 </div>
 
             </div>
