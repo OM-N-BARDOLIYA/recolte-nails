@@ -69,6 +69,8 @@ class AdminProductController extends Controller
             'gallery_files' => 'nullable|array',
             'gallery_files.*' => 'nullable|file|mimes:jpeg,png,jpg,webp,gif,mp4,webm,mov,ogg|max:51200',
             'existing_gallery_images' => 'nullable|array',
+            'media_order' => 'nullable|array',
+            'media_order.*' => 'nullable|string',
             'is_bestseller' => 'boolean',
             'is_active' => 'boolean',
             'sort_order' => 'integer',
@@ -148,40 +150,79 @@ class AdminProductController extends Controller
         }
         $validated['benefits'] = $benefits;
 
-                // Process Multi-Image Gallery
-        $gallery = [];
-        if (!empty($validated['main_image'])) {
-            $gallery[] = $validated['main_image'];
-        }
-
-        // Retain existing gallery images kept in the list
-        if ($request->has('existing_gallery_images') && is_array($request->existing_gallery_images)) {
-            foreach ($request->existing_gallery_images as $gurl) {
-                if (!empty($gurl) && !in_array(trim($gurl), $gallery)) {
-                    $gallery[] = trim($gurl);
+                // Process Multi-Image Gallery & Explicit Manual Ordering (Drag & Drop)
+        $uploadedMediaUrls = [];
+        if ($request->hasFile('gallery_files')) {
+            foreach ($request->file('gallery_files') as $gidx => $gfile) {
+                if ($gfile && $gfile->isValid()) {
+                    $ext = strtolower($gfile->getClientOriginalExtension());
+                    $prefix = in_array($ext, ['mp4', 'webm', 'mov', 'ogg']) ? 'video_' : 'gallery_';
+                    $gname = $prefix . time() . '_' . $gidx . '_' . Str::slug(pathinfo($gfile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $ext;
+                    $gfile->move(public_path('uploads/products'), $gname);
+                    $uploadedMediaUrls[$gidx] = asset('uploads/products/' . $gname);
                 }
             }
         }
 
-        // Add locally uploaded gallery media files (images & videos)
-        if ($request->hasFile('gallery_files')) {
-            foreach ($request->file('gallery_files') as $gidx => $gfile) {
-                $ext = strtolower($gfile->getClientOriginalExtension());
-                $prefix = in_array($ext, ['mp4', 'webm', 'mov', 'ogg']) ? 'video_' : 'gallery_';
-                $gname = $prefix . time() . '_' . $gidx . '_' . Str::slug(pathinfo($gfile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $ext;
-                $gfile->move(public_path('uploads/products'), $gname);
-                $gallery[] = asset('uploads/products/' . $gname);
+        $orderedGallery = [];
+
+        // Priority A: Build gallery strictly following manual drag-and-drop media_order
+        if ($request->has('media_order') && is_array($request->media_order)) {
+            foreach ($request->media_order as $orderItem) {
+                if (str_starts_with($orderItem, 'existing:')) {
+                    $url = trim(substr($orderItem, 9));
+                    if (!empty($url) && !in_array($url, $orderedGallery)) {
+                        $orderedGallery[] = $url;
+                    }
+                } elseif (str_starts_with($orderItem, 'upload:')) {
+                    $uploadIdx = (int) substr($orderItem, 7);
+                    if (isset($uploadedMediaUrls[$uploadIdx]) && !in_array($uploadedMediaUrls[$uploadIdx], $orderedGallery)) {
+                        $orderedGallery[] = $uploadedMediaUrls[$uploadIdx];
+                    }
+                }
             }
         }
 
-        // Also ensure shade images are added to the gallery if not already present
+        // Priority B: Include any newly uploaded files that weren't in media_order
+        foreach ($uploadedMediaUrls as $uUrl) {
+            if (!in_array($uUrl, $orderedGallery)) {
+                $orderedGallery[] = $uUrl;
+            }
+        }
+
+        // Priority C: Legacy fallback if media_order is absent
+        if (empty($orderedGallery)) {
+            if (!empty($validated['main_image'])) {
+                $orderedGallery[] = $validated['main_image'];
+            }
+            if ($request->has('existing_gallery_images') && is_array($request->existing_gallery_images)) {
+                foreach ($request->existing_gallery_images as $gurl) {
+                    if (!empty($gurl) && !in_array(trim($gurl), $orderedGallery)) {
+                        $orderedGallery[] = trim($gurl);
+                    }
+                }
+            }
+        }
+
+        // Priority D: If any shade image is missing from gallery, append it
         foreach ($shades as $sh) {
-            if (!empty($sh['image']) && !in_array($sh['image'], $gallery)) {
-                $gallery[] = $sh['image'];
+            if (!empty($sh['image']) && !in_array($sh['image'], $orderedGallery)) {
+                $orderedGallery[] = $sh['image'];
             }
         }
 
-        $validated['images'] = array_values(array_unique($gallery));
+        $validated['images'] = array_values(array_unique($orderedGallery));
+
+        // Determine cover photo (for cards & checkout): first image in gallery
+        $firstPhoto = null;
+        foreach ($validated['images'] as $mediaItem) {
+            $isVid = preg_match('/\.(mp4|webm|mov|ogg)(\?.*)?$/i', $mediaItem);
+            if (!$isVid) {
+                $firstPhoto = $mediaItem;
+                break;
+            }
+        }
+        $validated['main_image'] = $firstPhoto ?: ($validated['images'][0] ?? ($validated['main_image'] ?? ''));
 
         $validated['is_bestseller'] = $request->has('is_bestseller');
         $validated['is_active'] = $request->has('is_active');
@@ -223,6 +264,8 @@ class AdminProductController extends Controller
             'gallery_files' => 'nullable|array',
             'gallery_files.*' => 'nullable|file|mimes:jpeg,png,jpg,webp,gif,mp4,webm,mov,ogg|max:51200',
             'existing_gallery_images' => 'nullable|array',
+            'media_order' => 'nullable|array',
+            'media_order.*' => 'nullable|string',
             'sort_order' => 'integer',
         ]);
 
@@ -295,40 +338,79 @@ class AdminProductController extends Controller
         }
         $validated['benefits'] = $benefits;
 
-        // 5. Process Multi-Image Gallery
-        $gallery = [];
-        if (!empty($validated['main_image'])) {
-            $gallery[] = $validated['main_image'];
-        }
-
-        // Retain existing gallery images kept in the list
-        if ($request->has('existing_gallery_images') && is_array($request->existing_gallery_images)) {
-            foreach ($request->existing_gallery_images as $gurl) {
-                if (!empty($gurl) && !in_array(trim($gurl), $gallery)) {
-                    $gallery[] = trim($gurl);
+        // 5. Process Multi-Image Gallery & Explicit Manual Ordering (Drag & Drop)
+        $uploadedMediaUrls = [];
+        if ($request->hasFile('gallery_files')) {
+            foreach ($request->file('gallery_files') as $gidx => $gfile) {
+                if ($gfile && $gfile->isValid()) {
+                    $ext = strtolower($gfile->getClientOriginalExtension());
+                    $prefix = in_array($ext, ['mp4', 'webm', 'mov', 'ogg']) ? 'video_' : 'gallery_';
+                    $gname = $prefix . time() . "_{$gidx}_" . Str::slug(pathinfo($gfile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $ext;
+                    $gfile->move(public_path('uploads/products'), $gname);
+                    $uploadedMediaUrls[$gidx] = asset('uploads/products/' . $gname);
                 }
             }
         }
 
-        // Add newly uploaded gallery media files (images & videos)
-        if ($request->hasFile('gallery_files')) {
-            foreach ($request->file('gallery_files') as $gidx => $gfile) {
-                $ext = strtolower($gfile->getClientOriginalExtension());
-                $prefix = in_array($ext, ['mp4', 'webm', 'mov', 'ogg']) ? 'video_' : 'gallery_';
-                $gname = $prefix . time() . "_{$gidx}_" . Str::slug(pathinfo($gfile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $ext;
-                $gfile->move(public_path('uploads/products'), $gname);
-                $gallery[] = asset('uploads/products/' . $gname);
+        $orderedGallery = [];
+
+        // Priority A: Build gallery strictly following manual drag-and-drop media_order
+        if ($request->has('media_order') && is_array($request->media_order)) {
+            foreach ($request->media_order as $orderItem) {
+                if (str_starts_with($orderItem, 'existing:')) {
+                    $url = trim(substr($orderItem, 9));
+                    if (!empty($url) && !in_array($url, $orderedGallery)) {
+                        $orderedGallery[] = $url;
+                    }
+                } elseif (str_starts_with($orderItem, 'upload:')) {
+                    $uploadIdx = (int) substr($orderItem, 7);
+                    if (isset($uploadedMediaUrls[$uploadIdx]) && !in_array($uploadedMediaUrls[$uploadIdx], $orderedGallery)) {
+                        $orderedGallery[] = $uploadedMediaUrls[$uploadIdx];
+                    }
+                }
             }
         }
 
-        // Add any assigned shade images to gallery if not present
+        // Priority B: Include any newly uploaded files that weren't in media_order
+        foreach ($uploadedMediaUrls as $uUrl) {
+            if (!in_array($uUrl, $orderedGallery)) {
+                $orderedGallery[] = $uUrl;
+            }
+        }
+
+        // Priority C: Legacy fallback if media_order is absent
+        if (empty($orderedGallery)) {
+            if (!empty($validated['main_image'])) {
+                $orderedGallery[] = $validated['main_image'];
+            }
+            if ($request->has('existing_gallery_images') && is_array($request->existing_gallery_images)) {
+                foreach ($request->existing_gallery_images as $gurl) {
+                    if (!empty($gurl) && !in_array(trim($gurl), $orderedGallery)) {
+                        $orderedGallery[] = trim($gurl);
+                    }
+                }
+            }
+        }
+
+        // Priority D: If any shade image is missing from gallery, append it
         foreach ($shades as $sh) {
-            if (!empty($sh['image']) && !in_array($sh['image'], $gallery)) {
-                $gallery[] = $sh['image'];
+            if (!empty($sh['image']) && !in_array($sh['image'], $orderedGallery)) {
+                $orderedGallery[] = $sh['image'];
             }
         }
 
-        $validated['images'] = array_values(array_unique($gallery));
+        $validated['images'] = array_values(array_unique($orderedGallery));
+
+        // Determine cover photo (for cards & checkout): first image in gallery
+        $firstPhoto = null;
+        foreach ($validated['images'] as $mediaItem) {
+            $isVid = preg_match('/\.(mp4|webm|mov|ogg)(\?.*)?$/i', $mediaItem);
+            if (!$isVid) {
+                $firstPhoto = $mediaItem;
+                break;
+            }
+        }
+        $validated['main_image'] = $firstPhoto ?: ($validated['images'][0] ?? $product->main_image);
 
         $validated['is_bestseller'] = $request->has('is_bestseller');
         $validated['is_active'] = $request->has('is_active');

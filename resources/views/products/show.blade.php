@@ -3,7 +3,7 @@
 @section("content")
 
     <div class="py-8 sm:py-14 bg-[#FAF8F5] min-h-screen text-[#171412]" x-data="{
-                mainImage: '{{ $product->main_image }}',
+                mainImage: '{{ !empty($product->images[0]) ? $product->images[0] : $product->main_image }}',
                 activeImageIndex: 0,
                 images: {{ json_encode(!empty($product->images) && count($product->images) > 0 ? array_values($product->images) : [$product->main_image]) }},
                 shades: {{ json_encode($product->shades ?? []) }},

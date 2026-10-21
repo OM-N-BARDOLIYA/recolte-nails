@@ -146,140 +146,217 @@
                         placeholder="Enter full luxury description..."
                     ></textarea>
                 </div>
-            </div>
-        </div>
-
-        <!-- ── 2. MAIN COVER & MEDIA GALLERY STUDIO (IMAGES & VIDEOS) ── -->
+            </div>        <!-- ── 2. VISUAL MEDIA STUDIO: IMAGES & VIDEOS (MANUAL DRAG & DROP REORDERING) ── -->
         <div class="p-6 sm:p-8 rounded-none bg-white border border-[#ECE6DE] space-y-6 shadow-2xs">
-            <div class="border-b border-[#ECE6DE] pb-3">
-                <h2 class="font-serif text-xl font-bold text-[#171412]">2. Main Cover &amp; Media Gallery Studio (Images &amp; Videos)</h2>
-                <p class="text-[11px] text-[#8C7A6B]">Choose photos and video reels from your computer. Any chosen media files are instantly added to your gallery list below!</p>
-            </div>
-
-            <!-- Primary Cover Image Selection -->
-            <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-start">
-                <div class="sm:col-span-8 space-y-3">
-                    <label class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#6A625A] block">Main Cover Image *</label>
-                    
-                    <div class="p-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] space-y-2">
-                        <div class="text-[10px] font-semibold uppercase tracking-wider text-[#8C7A6B]">Choose Main Cover Photo from Device</div>
-                        <input 
-                            type="file" 
-                            name="image_file" 
-                            accept="image/*"
-                            @change="previewMain($event)"
-                            class="w-full px-3 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] file:mr-3 file:py-1.5 file:px-4 file:rounded-none file:border-0 file:text-[10px] file:font-bold file:uppercase file:tracking-wider file:bg-[#171412] file:text-white cursor-pointer"
-                        />
-                    </div>
-                </div>
-
-                <!-- Cover Preview -->
-                <div class="sm:col-span-4 flex flex-col items-center justify-center p-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE]">
-                    <span class="text-[10px] font-semibold uppercase tracking-wider text-[#8C7A6B] mb-2">Live Main Cover Preview</span>
-                    <img :src="mainPreview || mainImageUrl || 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=600&q=80'" class="w-32 h-36 rounded-none object-contain border border-[#ECE6DE] shadow-xs bg-white p-1">
-                </div>
-            </div>
-
-            <!-- Multi-Media Local Picker & Add to Gallery List -->
-            <div class="pt-4 border-t border-[#ECE6DE] space-y-5">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-[#ECE6DE] pb-4">
                 <div>
-                    <label class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#6A625A] block">
-                        Add Additional Photos &amp; Video Reels to Gallery List
-                    </label>
-                    <p class="text-[11px] text-[#8C7A6B]">Select photos or video files (.mp4, .webm, .mov) from your device — they will be instantly appended to your visual gallery list.</p>
+                    <div class="flex items-center gap-2.5">
+                        <h2 class="font-serif text-xl font-bold text-[#171412]">2. Visual Media Studio (Images &amp; Videos)</h2>
+                        <span class="px-2 py-0.5 rounded-none bg-[#FBEFE9] text-[#A33B47] text-[10px] font-bold uppercase tracking-wider border border-[#ECE6DE]">
+                            Drag &amp; Drop Enabled
+                        </span>
+                    </div>
+                    <p class="text-[11px] text-[#8C7A6B] mt-1">
+                        Drag and drop any photo or video card to change its index manually. Card <span class="font-bold text-[#171412]">#1</span> is the storefront primary cover!
+                    </p>
                 </div>
 
-                <!-- Visual Drop / Select Box -->
-                <div class="p-6 rounded-none bg-[#FAF8F5] border-2 border-dashed border-[#ECE6DE] text-center space-y-4">
-                    <div class="w-12 h-12 rounded-none bg-[#FBEFE9] text-[#A33B47] flex items-center justify-center text-xl mx-auto shadow-2xs border border-[#ECE6DE]">
-                        🎬
+                <!-- Live Media Counter Badge -->
+                <div class="flex items-center gap-2 self-start sm:self-auto">
+                    <div class="px-3 py-1.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[11px] text-[#171412] font-semibold flex items-center gap-2">
+                        <span>Total Media: <strong class="text-[#A33B47]" x-text="galleryItems.length"></strong></span>
+                        <span class="text-[#ECE6DE]">|</span>
+                        <span class="text-[#8C7A6B] text-[10.5px]"><span x-text="galleryItems.filter(i => !i.isVideo).length"></span> Photos</span>
+                        <span class="text-[#ECE6DE]">|</span>
+                        <span class="text-[#8C7A6B] text-[10.5px]"><span x-text="galleryItems.filter(i => i.isVideo).length"></span> Videos</span>
                     </div>
-                    <div>
-                        <div class="font-serif text-base font-bold text-[#171412]">Select Photos &amp; Video Reels from Your Computer</div>
-                        <div class="text-[11px] text-[#8C7A6B]">Choose 1 or multiple product angle photos or video demonstrations to add to your customer carousel.</div>
-                    </div>
+                </div>
+            </div>
 
-                    <div class="flex items-center justify-center gap-3 flex-wrap">
-                        <!-- Multi-file input supporting images & videos -->
-                        <input 
-                            type="file" 
-                            id="gallery_files_input"
-                            name="gallery_files[]" 
-                            multiple 
-                            accept="image/*,video/mp4,video/webm,video/quicktime,video/*"
-                            @change="addLocalFilesToGallery($event)"
-                            class="hidden"
-                        />
+            <!-- Upload & Action Bar -->
+            <div class="p-4 sm:p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="space-y-1">
+                    <div class="text-xs font-bold text-[#171412]">Add More Media to Product Studio</div>
+                    <div class="text-[11px] text-[#8C7A6B]">Upload photos (.jpg, .png, .webp) or video demonstration clips (.mp4, .mov, .webm).</div>
+                </div>
 
-                        <button 
-                            type="button" 
-                            onclick="document.getElementById('gallery_files_input').click()"
-                            class="px-6 py-3 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] shadow-xs hover:shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                <div class="flex items-center gap-2.5 flex-wrap">
+                    <!-- Hidden Multi-file input supporting images & videos -->
+                    <input 
+                        type="file" 
+                        id="gallery_files_input"
+                        name="gallery_files[]" 
+                        multiple 
+                        accept="image/*,video/mp4,video/webm,video/quicktime,video/*"
+                        @change="addLocalFilesToGallery($event)"
+                        class="hidden"
+                    />
+
+                    <!-- Choose Local Files Button -->
+                    <button 
+                        type="button" 
+                        onclick="document.getElementById('gallery_files_input').click()"
+                        class="px-4 py-2.5 rounded-none bg-[#171412] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-xs hover:shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                    >
+                        <span>📁 Choose Photos &amp; Videos from Computer</span>
+                    </button>
+
+                    <!-- Add via URL Button -->
+                    <button 
+                        type="button" 
+                        @click="addMediaUrl()"
+                        class="px-3.5 py-2.5 rounded-none bg-white hover:bg-[#FBEFE9] text-[#171412] hover:text-[#A33B47] border border-[#ECE6DE] text-[11px] font-semibold tracking-wide transition-all flex items-center gap-1.5 cursor-pointer"
+                    >
+                        <span>🔗 Add via URL</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hidden input for main_image fallback -->
+            <input type="hidden" name="main_image" :value="mainImageUrl || ''">
+
+            <!-- ── INTERACTIVE DRAG & DROP MEDIA GRID ── -->
+            <div class="space-y-3">
+                <div class="flex items-center justify-between text-[11px]">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-[#8C7A6B]">
+                        Visual Order (Drag card or use arrows to change index):
+                    </span>
+                    <span class="text-[10px] text-[#A33B47] font-medium hidden sm:inline">
+                        💡 Tip: Click and drag any card to reorder instantly
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5">
+                    <template x-for="(item, gIndex) in galleryItems" :key="item.id || (item.url ? item.url : (item.name + '_' + gIndex))">
+                        <div 
+                            draggable="true"
+                            @dragstart="onDragStart($event, gIndex)"
+                            @dragover.prevent="onDragOver($event, gIndex)"
+                            @dragleave="onDragLeave($event, gIndex)"
+                            @drop="onDrop($event, gIndex)"
+                            @dragend="onDragEnd($event)"
+                            class="relative group rounded-none border bg-white p-2.5 flex flex-col justify-between transition-all select-none"
+                            :class="{
+                                'opacity-40 ring-2 ring-[#A33B47] ring-offset-2 scale-95': draggedIndex === gIndex,
+                                'ring-2 ring-emerald-600 scale-[1.03] shadow-md border-emerald-500': dragOverIndex === gIndex && draggedIndex !== gIndex,
+                                'border-[#ECE6DE] hover:border-[#C48B71] shadow-2xs': draggedIndex !== gIndex && dragOverIndex !== gIndex,
+                                'ring-1 ring-[#A33B47]/30': gIndex === 0
+                            }"
                         >
-                            <span>📁 Choose Photos &amp; Videos &amp; Add to List</span>
-                        </button>
-                    </div>
-                </div>
+                            <!-- Top Bar: Drag Handle + Index Badge -->
+                            <div class="flex items-center justify-between gap-1 pb-2 border-b border-[#ECE6DE]/70 mb-2">
+                                <div class="flex items-center gap-1.5 text-[#8C7A6B] cursor-grab active:cursor-grabbing text-xs py-0.5" title="Drag to reorder">
+                                    <span class="text-sm font-mono leading-none select-none">⠿</span>
+                                    <span class="text-[9px] font-bold uppercase tracking-wider text-[#8C7A6B]">Drag</span>
+                                </div>
 
-                <!-- ── ACTIVE GALLERY LIST ── -->
-                <div class="space-y-3 pt-2">
-                    <div class="flex items-center justify-between">
-                        <div class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#171412]">
-                            Active Product Gallery List (<span x-text="galleryItems.length"></span> media items)
-                        </div>
-                        <div class="text-[10px] text-[#8C7A6B] font-medium">All photos and videos in this list will be shown in the storefront carousel.</div>
-                    </div>
-
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                        <template x-for="(item, gIndex) in galleryItems" :key="gIndex">
-                            <div class="relative group rounded-none overflow-hidden border border-[#ECE6DE] bg-white shadow-2xs p-2 flex flex-col items-center justify-between space-y-2">
-                                
-                                <!-- Thumbnail / Video Preview -->
-                                <div class="w-full aspect-square rounded-none overflow-hidden bg-white border border-[#ECE6DE] relative flex items-center justify-center p-1">
-                                    <template x-if="!item.isVideo">
-                                        <img :src="item.preview || item.url" class="w-full h-full object-contain">
+                                <!-- Index Badge -->
+                                <div class="shrink-0">
+                                    <template x-if="gIndex === 0">
+                                        <span class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-[#A33B47] text-white text-[8.5px] font-bold uppercase tracking-wider">
+                                            <span>★</span> #1 Cover
+                                        </span>
                                     </template>
-                                    <template x-if="item.isVideo">
-                                        <div class="relative w-full h-full bg-[#171412] flex items-center justify-center">
-                                            <video :src="item.preview || item.url" muted preload="metadata" class="w-full h-full object-contain opacity-85"></video>
-                                            <div class="absolute inset-0 bg-black/35 flex items-center justify-center">
-                                                <div class="w-7 h-7 rounded-full bg-white/95 text-[#171412] flex items-center justify-center pl-0.5 shadow-sm">
-                                                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                                </div>
+                                    <template x-if="gIndex > 0">
+                                        <span class="inline-flex items-center px-1.5 py-0.5 bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-[9px] font-bold">
+                                            #<span x-text="gIndex + 1"></span>
+                                        </span>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <!-- Thumbnail / Video Preview -->
+                            <div class="w-full aspect-square rounded-none overflow-hidden bg-white border border-[#ECE6DE] relative flex items-center justify-center p-1 group/thumb">
+                                <!-- Image Preview -->
+                                <template x-if="!item.isVideo">
+                                    <img :src="item.preview || item.url" class="w-full h-full object-contain pointer-events-none">
+                                </template>
+
+                                <!-- Video Preview -->
+                                <template x-if="item.isVideo">
+                                    <div class="relative w-full h-full bg-[#171412] flex items-center justify-center">
+                                        <video :src="item.preview || item.url" muted preload="metadata" class="w-full h-full object-contain opacity-85 pointer-events-none"></video>
+                                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                            <div class="w-7 h-7 rounded-full bg-white text-[#171412] flex items-center justify-center pl-0.5 shadow-sm">
+                                                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                             </div>
                                         </div>
-                                    </template>
-                                    
-                                    <!-- Badge -->
-                                    <div class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded-none text-white text-[8px] font-bold uppercase tracking-wider"
-                                        :class="item.isVideo ? 'bg-[#A33B47]' : (item.type === 'existing' ? 'bg-black/75' : 'bg-emerald-700')"
-                                        x-text="item.isVideo ? '▶ Video' : (item.type === 'existing' ? 'Photo' : 'New Photo')"></div>
+                                    </div>
+                                </template>
+
+                                <!-- Media Type Pill -->
+                                <div class="absolute bottom-1 left-1 px-1.5 py-0.5 text-white text-[8px] font-bold uppercase tracking-wider"
+                                    :class="item.isVideo ? 'bg-[#A33B47]' : (item.type === 'existing' ? 'bg-black/75' : 'bg-emerald-700')"
+                                    x-text="item.isVideo ? '▶ Video' : (item.type === 'existing' ? 'Photo' : 'New Photo')">
                                 </div>
 
-                                <!-- Image / Video Tag Name -->
-                                <div class="w-full text-center">
-                                    <div class="text-[10px] font-bold text-[#171412] truncate px-1" x-text="item.name || (item.isVideo ? ('Video #' + (gIndex + 1)) : ('Photo #' + (gIndex + 1)))"></div>
-                                </div>
+                                <!-- Set as Cover Quick Button (for non-cover items) -->
+                                <template x-if="gIndex > 0 && !item.isVideo">
+                                    <button 
+                                        type="button" 
+                                        @click="makeCover(gIndex)"
+                                        class="absolute top-1 right-1 opacity-0 group-hover/thumb:opacity-100 bg-white/95 hover:bg-[#A33B47] text-[#171412] hover:text-white border border-[#ECE6DE] text-[8px] font-bold px-1.5 py-0.5 uppercase tracking-wider transition-all shadow-xs cursor-pointer"
+                                        title="Move this photo to #1 Cover"
+                                    >
+                                        ★ Set Cover
+                                    </button>
+                                </template>
+                            </div>
 
-                                <!-- Hidden input for existing image URLs -->
-                                <input type="hidden" name="existing_gallery_images[]" :value="item.url || ''">
+                            <!-- Name / Label -->
+                            <div class="py-1.5 text-center">
+                                <div class="text-[9.5px] font-bold text-[#171412] truncate" x-text="item.name || (item.isVideo ? ('Video #' + (gIndex + 1)) : ('Photo #' + (gIndex + 1)))"></div>
+                            </div>
+
+                            <!-- Reorder Arrows & Remove Actions -->
+                            <div class="pt-1.5 border-t border-[#ECE6DE]/70 flex items-center justify-between gap-1">
+                                <!-- Move Left Arrow -->
+                                <button 
+                                    type="button" 
+                                    @click="moveItem(gIndex, -1)" 
+                                    :disabled="gIndex === 0"
+                                    :class="gIndex === 0 ? 'opacity-25 cursor-not-allowed bg-stone-100 text-stone-400' : 'hover:bg-[#171412] hover:text-white bg-[#FAF8F5] text-[#171412] cursor-pointer'"
+                                    class="w-7 h-6 flex items-center justify-center border border-[#ECE6DE] text-xs font-bold transition-colors"
+                                    title="Move earlier (Index - 1)"
+                                >
+                                    ←
+                                </button>
 
                                 <!-- Remove Button -->
                                 <button 
                                     type="button" 
                                     @click="removeGalleryItem(gIndex)"
-                                    class="w-full py-1.5 rounded-none bg-rose-50 hover:bg-[#A33B47] hover:text-white text-[#A33B47] border border-rose-200 text-[10px] font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-1 cursor-pointer"
+                                    class="px-2 h-6 flex-1 flex items-center justify-center bg-rose-50 hover:bg-[#A33B47] text-[#A33B47] hover:text-white border border-rose-200 text-[9px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                                    title="Remove this item"
                                 >
-                                    <span>✕</span>
-                                    <span>Remove</span>
+                                    ✕ Remove
+                                </button>
+
+                                <!-- Move Right Arrow -->
+                                <button 
+                                    type="button" 
+                                    @click="moveItem(gIndex, 1)" 
+                                    :disabled="gIndex === galleryItems.length - 1"
+                                    :class="gIndex === galleryItems.length - 1 ? 'opacity-25 cursor-not-allowed bg-stone-100 text-stone-400' : 'hover:bg-[#171412] hover:text-white bg-[#FAF8F5] text-[#171412] cursor-pointer'"
+                                    class="w-7 h-6 flex items-center justify-center border border-[#ECE6DE] text-xs font-bold transition-colors"
+                                    title="Move later (Index + 1)"
+                                >
+                                    →
                                 </button>
                             </div>
-                        </template>
-                    </div>
 
-                    <div x-show="galleryItems.length === 0" class="p-8 rounded-none bg-[#FAF8F5] border border-dashed border-[#ECE6DE] text-center text-xs text-[#8C7A6B]">
-                        No additional gallery images in list. Click "📁 Choose Local Images &amp; Add to List" above to add photos!
-                    </div>
+                            <!-- Hidden inputs maintaining exact order -->
+                            <input type="hidden" name="media_order[]" :value="item.type === 'existing' ? ('existing:' + item.url) : ('upload:' + (item.uploadId ?? 0))">
+                            <input type="hidden" name="existing_gallery_images[]" :value="item.url || ''">
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Empty State -->
+                <div x-show="galleryItems.length === 0" class="p-8 rounded-none bg-[#FAF8F5] border border-dashed border-[#ECE6DE] text-center space-y-2">
+                    <div class="text-2xl">📸</div>
+                    <div class="text-xs font-bold text-[#171412]">No media added yet</div>
+                    <div class="text-[11px] text-[#8C7A6B]">Click "📁 Choose Photos &amp; Videos from Computer" above to add product angle photos and demo video reels.</div>
                 </div>
             </div>
         </div>
@@ -446,16 +523,27 @@
 
 <script>
 function productForm() {
-    // Initial existing gallery items (images & videos)
-    const rawImages = {!! json_encode($isEdit && is_array($product->images) ? array_values(array_slice($product->images, 1)) : []) !!};
+    @php
+        $existingMedia = [];
+        if ($isEdit) {
+            if (!empty($product->images) && is_array($product->images) && count($product->images) > 0) {
+                $existingMedia = array_values($product->images);
+            } elseif (!empty($product->main_image)) {
+                $existingMedia = [$product->main_image];
+            }
+        }
+    @endphp
+    const rawImages = {!! json_encode($existingMedia) !!};
     const initialGallery = rawImages.map((mediaUrl, i) => {
         const isVid = /\.(mp4|webm|mov|ogg)(\?.*)?$/i.test(mediaUrl);
         return {
+            id: 'existing_' + i + '_' + Date.now(),
             type: 'existing',
             url: mediaUrl,
             preview: mediaUrl,
-            name: isVid ? ('Product Video #' + (i + 1)) : ('Saved Photo #' + (i + 1)),
+            name: isVid ? ('Video Reel #' + (i + 1)) : ('Photo #' + (i + 1)),
             file: null,
+            uploadId: null,
             isVideo: isVid
         };
     });
@@ -471,6 +559,8 @@ function productForm() {
         mainPreview: null,
         
         galleryItems: initialGallery,
+        draggedIndex: null,
+        dragOverIndex: null,
         
         shades: {!! json_encode(old('shades', $isEdit && is_array($product->shades) ? array_map(function($s) {
             return [
@@ -502,33 +592,128 @@ function productForm() {
             }
         },
 
+        // HTML5 Drag and Drop Handlers
+        onDragStart(e, index) {
+            this.draggedIndex = index;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', index);
+        },
+
+        onDragOver(e, index) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            if (this.dragOverIndex !== index) {
+                this.dragOverIndex = index;
+            }
+        },
+
+        onDragLeave(e, index) {
+            if (this.dragOverIndex === index) {
+                this.dragOverIndex = null;
+            }
+        },
+
+        onDrop(e, targetIndex) {
+            e.preventDefault();
+            if (this.draggedIndex === null || this.draggedIndex === targetIndex) {
+                this.draggedIndex = null;
+                this.dragOverIndex = null;
+                return;
+            }
+            const moved = this.galleryItems.splice(this.draggedIndex, 1)[0];
+            this.galleryItems.splice(targetIndex, 0, moved);
+            this.draggedIndex = null;
+            this.dragOverIndex = null;
+            this.syncDataTransfer();
+            this.syncMainCover();
+        },
+
+        onDragEnd() {
+            this.draggedIndex = null;
+            this.dragOverIndex = null;
+        },
+
+        // Manual Arrow Reordering
+        moveItem(index, direction) {
+            const target = index + direction;
+            if (target < 0 || target >= this.galleryItems.length) return;
+            const moved = this.galleryItems.splice(index, 1)[0];
+            this.galleryItems.splice(target, 0, moved);
+            this.syncDataTransfer();
+            this.syncMainCover();
+        },
+
+        // Set specific item to #1 Cover
+        makeCover(index) {
+            if (index <= 0 || index >= this.galleryItems.length) return;
+            const moved = this.galleryItems.splice(index, 1)[0];
+            this.galleryItems.unshift(moved);
+            this.syncDataTransfer();
+            this.syncMainCover();
+        },
+
+        syncMainCover() {
+            const firstPhoto = this.galleryItems.find(it => !it.isVideo);
+            if (firstPhoto) {
+                this.mainImageUrl = firstPhoto.url || firstPhoto.preview || '';
+            } else if (this.galleryItems.length > 0) {
+                this.mainImageUrl = this.galleryItems[0].url || this.galleryItems[0].preview || '';
+            }
+        },
+
         addLocalFilesToGallery(e) {
             const files = Array.from(e.target.files || []);
-            files.forEach(file => {
+            files.forEach((file, fidx) => {
                 const isVid = file.type.startsWith('video/') || /\.(mp4|webm|mov|ogg)$/i.test(file.name);
                 this.galleryItems.push({
+                    id: 'file_' + Date.now() + '_' + fidx,
                     type: 'file',
                     url: null,
                     preview: URL.createObjectURL(file),
                     name: file.name,
                     file: file,
+                    uploadId: null,
                     isVideo: isVid
                 });
             });
             this.syncDataTransfer();
+            this.syncMainCover();
+        },
+
+        addMediaUrl() {
+            const url = prompt('Enter Image or Video URL (e.g. https://... or /uploads/...):');
+            if (url && url.trim()) {
+                const clean = url.trim();
+                const isVid = /\.(mp4|webm|mov|ogg)(\?.*)?$/i.test(clean);
+                this.galleryItems.push({
+                    id: 'url_' + Date.now(),
+                    type: 'existing',
+                    url: clean,
+                    preview: clean,
+                    name: isVid ? 'Custom Video URL' : 'Custom Image URL',
+                    file: null,
+                    uploadId: null,
+                    isVideo: isVid
+                });
+                this.syncMainCover();
+            }
         },
 
         removeGalleryItem(index) {
             this.galleryItems.splice(index, 1);
             this.syncDataTransfer();
+            this.syncMainCover();
         },
 
         syncDataTransfer() {
             try {
                 const dt = new DataTransfer();
+                let uploadCount = 0;
                 this.galleryItems.forEach(item => {
                     if (item.type === 'file' && item.file) {
+                        item.uploadId = uploadCount;
                         dt.items.add(item.file);
+                        uploadCount++;
                     }
                 });
                 const fileInput = document.getElementById('gallery_files_input');
