@@ -28,7 +28,7 @@
 
     <!-- STATS CARDS GRID -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div class="p-6 rounded-none bg-white border border-[#ECE6DE] space-y-2 shadow-2xs transition-all hover:border-[#171412]">
+        <div class="p-6 rounded-none bg-white border border-[#ECE6DE] space-y-2 shadow-2xs">
             <div class="flex items-center justify-between text-[11px] text-[#8C7A6B] font-semibold uppercase tracking-wider">
                 <span>Total Catalog Items</span>
                 <span class="text-lg">💅</span>
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="p-6 rounded-none bg-white border border-[#ECE6DE] space-y-2 shadow-2xs transition-all hover:border-[#171412]">
+        <div class="p-6 rounded-none bg-white border border-[#ECE6DE] space-y-2 shadow-2xs">
             <div class="flex items-center justify-between text-[11px] text-[#8C7A6B] font-semibold uppercase tracking-wider">
                 <span>Featured Bestsellers</span>
                 <span class="text-lg">✨</span>
@@ -49,7 +49,7 @@
             <div class="text-[11px] text-[#A33B47] font-semibold">Featured on Home Page</div>
         </div>
 
-        <div class="p-6 rounded-none bg-white border border-[#ECE6DE] space-y-2 shadow-2xs transition-all hover:border-[#171412]">
+        <div class="p-6 rounded-none bg-white border border-[#ECE6DE] space-y-2 shadow-2xs">
             <div class="flex items-center justify-between text-[11px] text-[#8C7A6B] font-semibold uppercase tracking-wider">
                 <span>Active Categories</span>
                 <span class="text-lg">🎨</span>
@@ -58,7 +58,7 @@
             <div class="text-[11px] text-[#8C7A6B]">Press-Ons, BIAB, Care &amp; Kits</div>
         </div>
 
-        <div class="p-6 rounded-none bg-white border border-[#ECE6DE] space-y-2 shadow-2xs transition-all hover:border-[#171412]">
+        <div class="p-6 rounded-none bg-white border border-[#ECE6DE] space-y-2 shadow-2xs">
             <div class="flex items-center justify-between text-[11px] text-[#8C7A6B] font-semibold uppercase tracking-wider">
                 <span>Client Inquiries</span>
                 <span class="text-lg">💬</span>
