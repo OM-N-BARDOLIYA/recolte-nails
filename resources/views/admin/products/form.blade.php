@@ -334,98 +334,188 @@
             </div>
         </div>
 
-        <!-- ── 3. SHADES BUILDER WITH LOCAL FILE UPLOAD & PREVIEWS ── -->
+        <!-- ── 3. PRODUCT VARIATIONS: COLOR SHADES OR NUMBER FILTERS ── -->
         <div class="p-6 sm:p-8 rounded-none bg-white border border-[#ECE6DE] space-y-6 shadow-2xs">
-            <div class="flex items-center justify-between border-b border-[#ECE6DE] pb-3">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#ECE6DE] pb-4">
                 <div>
-                    <h2 class="font-serif text-xl font-bold text-[#171412]">3. Color Swatches &amp; Shade-Specific Images</h2>
-                    <p class="text-[11px] text-[#8C7A6B]">Upload local photos or paste URLs for each shade. When a customer clicks the shade swatch, this image will display!</p>
+                    <h2 class="font-serif text-xl font-bold text-[#171412]">3. Product Variations</h2>
+                    <p class="text-[11px] text-[#8C7A6B]">Choose whether this product uses Color Shades (e.g. Pearl Glaze), Number Filters (e.g. 01 to 09 for BIAB Builder Gel), or No Variations.</p>
                 </div>
 
-                <button 
-                    type="button" 
-                    @click="addShade()" 
-                    class="px-5 py-2.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all shadow-xs cursor-pointer"
-                >
-                    + Add Color Shade
-                </button>
+                <!-- Mode Switcher Tabs -->
+                <div class="inline-flex p-1 bg-[#FAF8F5] border border-[#ECE6DE] rounded-none">
+                    <button 
+                        type="button" 
+                        @click="setFilterType('color')" 
+                        :class="filterType === 'color' ? 'bg-[#171412] text-white shadow-xs' : 'text-[#8C7A6B] hover:text-[#171412]'"
+                        class="px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5"
+                    >
+                        <span>🎨</span> Color Shades
+                    </button>
+                    <button 
+                        type="button" 
+                        @click="setFilterType('numbers')" 
+                        :class="filterType === 'numbers' ? 'bg-[#171412] text-white shadow-xs' : 'text-[#8C7A6B] hover:text-[#171412]'"
+                        class="px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5"
+                    >
+                        <span>🔢</span> Number Filters
+                    </button>
+                    <button 
+                        type="button" 
+                        @click="setFilterType('none')" 
+                        :class="filterType === 'none' ? 'bg-[#171412] text-white shadow-xs' : 'text-[#8C7A6B] hover:text-[#171412]'"
+                        class="px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5"
+                    >
+                        <span>⚪</span> None
+                    </button>
+                </div>
             </div>
 
-            <!-- Shades List -->
-            <div class="space-y-4">
-                <template x-for="(shade, index) in shades" :key="index">
-                    <div class="p-4 sm:p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] space-y-4">
-                        <div class="flex items-center justify-between gap-3 flex-wrap border-b border-[#ECE6DE] pb-2">
-                            <div class="flex items-center gap-2">
-                                <span class="text-xs font-bold text-[#171412]" x-text="'Shade #' + (index + 1)"></span>
-                                <span class="w-4 h-4 rounded-full border border-black/20" :style="'background-color:' + shade.hex"></span>
-                                <span class="text-xs font-semibold text-[#171412]" x-text="shade.name ? '— ' + shade.name : ''"></span>
+            <!-- Hidden input to submit the selected filter mode -->
+            <input type="hidden" name="filter_type" :value="filterType">
+
+            <!-- ── OPTION A: COLOR SHADES ── -->
+            <div x-show="filterType === 'color'" class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#171412]">Color Swatches List</span>
+                    <button 
+                        type="button" 
+                        @click="addShade()" 
+                        class="px-4 py-2 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all shadow-xs cursor-pointer"
+                    >
+                        + Add Color Shade
+                    </button>
+                </div>
+
+                <div class="space-y-3">
+                    <template x-for="(shade, index) in shades" :key="index">
+                        <div class="flex items-center gap-3 p-3.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE]">
+                            <!-- Color Picker -->
+                            <div class="flex items-center gap-2 shrink-0">
+                                <input 
+                                    type="color" 
+                                    name="shades_hex[]" 
+                                    x-model="shade.hex" 
+                                    title="Choose color hex"
+                                    class="w-9 h-9 rounded-none cursor-pointer border border-[#ECE6DE] bg-white p-0.5" 
+                                />
+                                <span class="text-[10px] font-mono text-[#8C7A6B] uppercase" x-text="shade.hex"></span>
                             </div>
+
+                            <!-- Color Name Input -->
+                            <div class="flex-grow">
+                                <input 
+                                    type="text" 
+                                    name="shades_names[]" 
+                                    x-model="shade.name" 
+                                    placeholder="e.g. Pearl Glaze, Milky White, Rose Bloom" 
+                                    class="w-full px-3 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs font-bold text-[#171412] focus:border-[#171412] focus:ring-0" 
+                                />
+                            </div>
+
+                            <!-- Remove Button -->
                             <button 
                                 type="button" 
                                 @click="removeShade(index)" 
-                                class="text-xs font-bold uppercase tracking-wider text-[#A33B47] hover:underline cursor-pointer"
+                                class="px-2.5 py-1.5 text-xs font-bold text-[#A33B47] hover:bg-red-50 transition-colors cursor-pointer shrink-0"
+                                title="Remove Shade"
                             >
-                                ✕ Remove Shade
+                                ✕
                             </button>
                         </div>
+                    </template>
 
-                        <!-- Existing image hidden field so it is NEVER lost -->
-                        <input type="hidden" name="shades_existing_images[]" :value="shade.image || ''">
-
-                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-start">
-                            <!-- Color Picker & Name -->
-                            <div class="sm:col-span-4 space-y-2">
-                                <label class="text-[10px] font-semibold uppercase tracking-wider text-[#8C7A6B] block">Color &amp; Name</label>
-                                <div class="flex items-center gap-2">
-                                    <input 
-                                        type="color" 
-                                        name="shades_hex[]" 
-                                        x-model="shade.hex" 
-                                        class="w-10 h-10 rounded-none cursor-pointer border border-[#ECE6DE] bg-white p-0.5 shrink-0" 
-                                    />
-                                    <input 
-                                        type="text" 
-                                        name="shades_names[]" 
-                                        x-model="shade.name" 
-                                        placeholder="e.g. Pearl Glaze" 
-                                        class="w-full px-3 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs font-bold text-[#171412]" 
-                                    />
-                                </div>
-                            </div>
-
-                            <!-- Shade Local File Upload & URL -->
-                            <div class="sm:col-span-6 space-y-2">
-                                <label class="text-[10px] font-semibold uppercase tracking-wider text-[#8C7A6B] block">Choose Local Photo for this Shade</label>
-                                
-                                <input 
-                                    type="file" 
-                                    :name="'shades_image_files[' + index + ']'" 
-                                    accept="image/*"
-                                    @change="previewShadeFile($event, index)"
-                                    class="w-full px-3 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] file:mr-2 file:py-1 file:px-3 file:rounded-none file:border-0 file:text-[10px] file:font-bold file:uppercase file:bg-[#171412] file:text-white cursor-pointer"
-                                />
-
-                                <input 
-                                    type="text" 
-                                    name="shades_images[]" 
-                                    x-model="shade.image" 
-                                    placeholder="Or paste Shade Image URL (https://...)" 
-                                    class="w-full px-3 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412]" 
-                                />
-                            </div>
-
-                            <!-- Live Preview Thumbnail -->
-                            <div class="sm:col-span-2 flex flex-col items-center justify-center p-2 rounded-none bg-white border border-[#ECE6DE]">
-                                <span class="text-[9px] font-semibold uppercase tracking-wider text-[#8C7A6B] mb-1">Preview</span>
-                                <img :src="shade.preview || shade.image || mainImageUrl || 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=600&q=80'" class="w-14 h-14 rounded-none object-cover border border-[#ECE6DE] bg-stone-50">
-                            </div>
-                        </div>
+                    <div x-show="shades.length === 0" class="text-xs text-[#8C7A6B] py-6 text-center border-2 border-dashed border-[#ECE6DE] rounded-none">
+                        No color shades defined. Click "+ Add Color Shade" above to create swatches.
                     </div>
-                </template>
+                </div>
+            </div>
 
-                <div x-show="shades.length === 0" class="text-xs text-[#8C7A6B] py-4 text-center border-2 border-dashed border-[#ECE6DE] rounded-none">
-                    No shades defined. Click "+ Add Color Shade" to add variations.
+            <!-- ── OPTION B: NUMBER FILTERS (e.g. 01 to 09 for BIAB Builder Gel) ── -->
+            <div x-show="filterType === 'numbers'" class="space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#FAF8F5] p-3.5 border border-[#ECE6DE]">
+                    <div class="space-y-0.5">
+                        <span class="text-xs font-bold uppercase tracking-wider text-[#171412]">Quick Presets for Number Filters</span>
+                        <p class="text-[11px] text-[#8C7A6B]">Generates numbered buttons (e.g. 01 to 09) displayed on the product page.</p>
+                    </div>
+
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <button 
+                            type="button" 
+                            @click="generateNumbers(1, 9)" 
+                            class="px-3 py-1.5 bg-white hover:bg-stone-100 border border-[#ECE6DE] text-[11px] font-bold text-[#171412] transition-colors cursor-pointer"
+                        >
+                            01 to 09 (BIAB)
+                        </button>
+                        <button 
+                            type="button" 
+                            @click="generateNumbers(1, 13)" 
+                            class="px-3 py-1.5 bg-white hover:bg-stone-100 border border-[#ECE6DE] text-[11px] font-bold text-[#171412] transition-colors cursor-pointer"
+                        >
+                            01 to 13
+                        </button>
+                        <button 
+                            type="button" 
+                            @click="generateNumbers(1, 24)" 
+                            class="px-3 py-1.5 bg-white hover:bg-stone-100 border border-[#ECE6DE] text-[11px] font-bold text-[#171412] transition-colors cursor-pointer"
+                        >
+                            01 to 24
+                        </button>
+                        <button 
+                            type="button" 
+                            @click="addSingleNumber()" 
+                            class="px-3 py-1.5 bg-[#171412] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                        >
+                            + Add Number
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Number Buttons Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-2.5">
+                    <template x-for="(shade, index) in shades" :key="index">
+                        <div class="relative group p-2.5 bg-[#FAF8F5] border border-[#ECE6DE] flex flex-col items-center justify-center text-center space-y-1">
+                            <span class="text-[10px] font-bold text-[#8C7A6B]">#<span x-text="index + 1"></span></span>
+                            <input 
+                                type="text" 
+                                name="shades_names[]" 
+                                x-model="shade.name" 
+                                class="w-full text-center py-1 bg-white border border-[#ECE6DE] text-xs font-mono font-bold text-[#171412] focus:border-[#171412] focus:ring-0" 
+                                placeholder="01"
+                            />
+                            <!-- Hidden hex field to keep structure standard -->
+                            <input type="hidden" name="shades_hex[]" :value="shade.hex || '#171412'">
+
+                            <!-- Delete button -->
+                            <button 
+                                type="button" 
+                                @click="removeShade(index)" 
+                                class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-[#A33B47] text-white rounded-full text-[10px] font-bold flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity cursor-pointer shadow-xs"
+                                title="Remove Number"
+                            >
+                                ✕
+                            </button>
+                        </div>
+                    </template>
+                </div>
+
+                <div x-show="shades.length === 0" class="text-xs text-[#8C7A6B] py-6 text-center border-2 border-dashed border-[#ECE6DE] rounded-none">
+                    No numbers added yet. Click one of the quick presets above (e.g. "01 to 09") or "+ Add Number".
+                </div>
+            </div>
+
+            <!-- ── OPTION C: NONE ── -->
+            <div x-show="filterType === 'none'" class="p-6 rounded-none bg-[#FAF8F5] border border-dashed border-[#ECE6DE] text-center space-y-2">
+                <div class="text-2xl">⚪</div>
+                <div class="text-xs font-bold text-[#171412]">Single Variant Product (No Color / Number Variations)</div>
+                <p class="text-[11px] text-[#8C7A6B] max-w-md mx-auto">This product does not have shade or number variations. Customers will purchase it directly as a single item.</p>
+                <div class="flex justify-center gap-2 pt-2">
+                    <button type="button" @click="setFilterType('color')" class="px-3 py-1.5 bg-white border border-[#ECE6DE] text-xs font-bold text-[#171412] hover:bg-stone-50 cursor-pointer">
+                        Enable Color Shades
+                    </button>
+                    <button type="button" @click="setFilterType('numbers')" class="px-3 py-1.5 bg-white border border-[#ECE6DE] text-xs font-bold text-[#171412] hover:bg-stone-50 cursor-pointer">
+                        Enable Number Filters
+                    </button>
                 </div>
             </div>
         </div>
@@ -521,6 +611,27 @@ function productForm() {
         };
     });
 
+    const rawShades = {!! json_encode(old('shades', ($isEdit && is_array($product->shades)) ? array_map(function($s) {
+        return [
+            'name' => (string)($s['name'] ?? ''),
+            'hex' => $s['hex'] ?? '#E8B4B8',
+        ];
+    }, $product->shades) : ($isEdit ? [] : [
+        ['name' => 'Pearl Glaze', 'hex' => '#F4E8E1'],
+        ['name' => 'Blush Aura', 'hex' => '#E8B4B8'],
+        ['name' => 'Golden Champagne', 'hex' => '#D4AF37']
+    ]))) !!};
+
+    let initialFilterType = {!! json_encode(old('filter_type', null)) !!};
+    if (!initialFilterType) {
+        if (!rawShades || rawShades.length === 0) {
+            initialFilterType = {!! $isEdit ? "'none'" : "'color'" !!};
+        } else {
+            const allNumbers = rawShades.every(s => /^\d+$/.test(String(s.name || '').trim()));
+            initialFilterType = allNumbers ? 'numbers' : 'color';
+        }
+    }
+
     return {
         title: {!! json_encode(old('title', $product->title ?? '')) !!},
         slug: {!! json_encode(old('slug', $product->slug ?? '')) !!},
@@ -535,18 +646,8 @@ function productForm() {
         draggedIndex: null,
         dragOverIndex: null,
         
-        shades: {!! json_encode(old('shades', $isEdit && is_array($product->shades) ? array_map(function($s) {
-            return [
-                'name' => $s['name'] ?? '',
-                'hex' => $s['hex'] ?? '#E8B4B8',
-                'image' => $s['image'] ?? '',
-                'preview' => null,
-            ];
-        }, $product->shades) : [
-            ['name' => 'Pearl Glaze', 'hex' => '#F4E8E1', 'image' => '', 'preview' => null],
-            ['name' => 'Blush Aura', 'hex' => '#E8B4B8', 'image' => '', 'preview' => null],
-            ['name' => 'Golden Champagne', 'hex' => '#D4AF37', 'image' => '', 'preview' => null]
-        ])) !!},
+        filterType: initialFilterType,
+        shades: rawShades,
         
         sizes: {!! json_encode(old('sizes', $isEdit && is_array($product->sizes) ? $product->sizes : [
             'XS (Petite)', 'S (Natural)', 'M (Standard)', 'L (Wide)', 'Custom Sizing Kit'
@@ -698,15 +799,49 @@ function productForm() {
             }
         },
 
-        previewShadeFile(e, index) {
-            const f = e.target.files[0];
-            if (f && this.shades[index]) {
-                this.shades[index].preview = URL.createObjectURL(f);
+        setFilterType(type) {
+            this.filterType = type;
+            if (type === 'numbers') {
+                const isAlreadyNumbers = this.shades.length > 0 && this.shades.every(s => /^\d+$/.test(String(s.name || '').trim()));
+                if (!isAlreadyNumbers) {
+                    this.generateNumbers(1, 9);
+                }
+            } else if (type === 'color') {
+                const isNumbers = this.shades.length > 0 && this.shades.every(s => /^\d+$/.test(String(s.name || '').trim()));
+                if (isNumbers || this.shades.length === 0) {
+                    this.shades = [
+                        { name: 'Pearl Glaze', hex: '#F4E8E1' },
+                        { name: 'Blush Aura', hex: '#E8B4B8' },
+                        { name: 'Golden Champagne', hex: '#D4AF37' }
+                    ];
+                }
+            } else if (type === 'none') {
+                this.shades = [];
             }
         },
 
+        generateNumbers(start, end) {
+            this.shades = [];
+            for (let i = start; i <= end; i++) {
+                const numStr = i < 10 ? '0' + i : '' + i;
+                this.shades.push({
+                    name: numStr,
+                    hex: '#171412'
+                });
+            }
+        },
+
+        addSingleNumber() {
+            let nextNum = this.shades.length + 1;
+            const numStr = nextNum < 10 ? '0' + nextNum : '' + nextNum;
+            this.shades.push({
+                name: numStr,
+                hex: '#171412'
+            });
+        },
+
         addShade() {
-            this.shades.push({ name: '', hex: '#E8B4B8', image: '', preview: null });
+            this.shades.push({ name: '', hex: '#E8B4B8' });
         },
 
         removeShade(index) {

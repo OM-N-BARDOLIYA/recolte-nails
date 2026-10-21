@@ -96,43 +96,20 @@ class AdminProductController extends Controller
             $validated['main_image'] = 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=1200&q=85';
         }
 
-                                        // 2. Process Shades with Shade-Specific Image Files, URLs and Fallbacks
-        $existingShades = isset($product) && is_array($product->shades) ? $product->shades : [];
+        // 2. Process Color Shades or Number Filters
         $shades = [];
-        if ($request->has('shades_names') && is_array($request->shades_names)) {
+        if ($request->input('filter_type') === 'none') {
+            $shades = [];
+        } elseif ($request->has('shades_names') && is_array($request->shades_names)) {
             foreach ($request->shades_names as $i => $name) {
-                if (!empty(trim($name))) {
-                    $shadeImg = '';
-
-                    // Priority 1: New local file uploaded for this shade
-                    if ($request->hasFile("shades_image_files.{$i}")) {
-                        $sFile = $request->file("shades_image_files.{$i}");
-                        $sName = 'shade_' . time() . "_{$i}_" . Str::slug(pathinfo($sFile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $sFile->getClientOriginalExtension();
-                        $sFile->move(public_path('uploads/products'), $sName);
-                        $shadeImg = asset('uploads/products/' . $sName);
-                    }
-                    // Priority 2: New image URL typed in
-                    elseif (!empty($request->shades_images[$i]) && trim($request->shades_images[$i]) !== '') {
-                        $shadeImg = trim($request->shades_images[$i]);
-                    }
-                    // Priority 3: Retain existing shade image from form
-                    elseif (!empty($request->shades_existing_images[$i])) {
-                        $shadeImg = $request->shades_existing_images[$i];
-                    }
-                    // Priority 4: Retain existing shade image from database
-                    elseif (isset($existingShades[$i]['image']) && !empty($existingShades[$i]['image'])) {
-                        $shadeImg = $existingShades[$i]['image'];
-                    }
-
+                $trimmed = trim($name);
+                if (!empty($trimmed)) {
                     $shades[] = [
-                        'name' => trim($name),
+                        'name' => $trimmed,
                         'hex' => $request->shades_hex[$i] ?? '#E8B4B8',
-                        'image' => $shadeImg,
                     ];
                 }
             }
-        } elseif (!empty($existingShades)) {
-            $shades = $existingShades;
         }
         $validated['shades'] = $shades;
 
@@ -201,13 +178,6 @@ class AdminProductController extends Controller
                         $orderedGallery[] = trim($gurl);
                     }
                 }
-            }
-        }
-
-        // Priority D: If any shade image is missing from gallery, append it
-        foreach ($shades as $sh) {
-            if (!empty($sh['image']) && !in_array($sh['image'], $orderedGallery)) {
-                $orderedGallery[] = $sh['image'];
             }
         }
 
@@ -284,43 +254,20 @@ class AdminProductController extends Controller
             $validated['main_image'] = $product->main_image;
         }
 
-                // 2. Process Shades with Shade-Specific Image Files, URLs and Fallbacks
-        $existingShades = isset($product) && is_array($product->shades) ? $product->shades : [];
+        // 2. Process Color Shades or Number Filters
         $shades = [];
-        if ($request->has('shades_names') && is_array($request->shades_names)) {
+        if ($request->input('filter_type') === 'none') {
+            $shades = [];
+        } elseif ($request->has('shades_names') && is_array($request->shades_names)) {
             foreach ($request->shades_names as $i => $name) {
-                if (!empty(trim($name))) {
-                    $shadeImg = '';
-
-                    // Priority 1: New local file uploaded for this shade
-                    if ($request->hasFile("shades_image_files.{$i}")) {
-                        $sFile = $request->file("shades_image_files.{$i}");
-                        $sName = 'shade_' . time() . "_{$i}_" . Str::slug(pathinfo($sFile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $sFile->getClientOriginalExtension();
-                        $sFile->move(public_path('uploads/products'), $sName);
-                        $shadeImg = asset('uploads/products/' . $sName);
-                    }
-                    // Priority 2: New image URL typed in
-                    elseif (!empty($request->shades_images[$i]) && trim($request->shades_images[$i]) !== '') {
-                        $shadeImg = trim($request->shades_images[$i]);
-                    }
-                    // Priority 3: Retain existing shade image from form
-                    elseif (!empty($request->shades_existing_images[$i])) {
-                        $shadeImg = $request->shades_existing_images[$i];
-                    }
-                    // Priority 4: Retain existing shade image from database
-                    elseif (isset($existingShades[$i]['image']) && !empty($existingShades[$i]['image'])) {
-                        $shadeImg = $existingShades[$i]['image'];
-                    }
-
+                $trimmed = trim($name);
+                if (!empty($trimmed)) {
                     $shades[] = [
-                        'name' => trim($name),
+                        'name' => $trimmed,
                         'hex' => $request->shades_hex[$i] ?? '#E8B4B8',
-                        'image' => $shadeImg,
                     ];
                 }
             }
-        } elseif (!empty($existingShades)) {
-            $shades = $existingShades;
         }
         $validated['shades'] = $shades;
 
@@ -389,13 +336,6 @@ class AdminProductController extends Controller
                         $orderedGallery[] = trim($gurl);
                     }
                 }
-            }
-        }
-
-        // Priority D: If any shade image is missing from gallery, append it
-        foreach ($shades as $sh) {
-            if (!empty($sh['image']) && !in_array($sh['image'], $orderedGallery)) {
-                $orderedGallery[] = $sh['image'];
             }
         }
 
