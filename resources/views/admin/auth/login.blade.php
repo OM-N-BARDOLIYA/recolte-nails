@@ -111,10 +111,12 @@
 
             <button 
                 type="submit" 
-                class="w-full py-3.5 px-6 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] shadow-xs hover:shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer pt-2"
+                class="w-full h-12 px-6 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] transition-colors flex items-center justify-center gap-2 cursor-pointer select-none"
             >
                 <span>Enter Atelier CMS Studio</span>
-                <span>→</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
             </button>
         </form>
 
