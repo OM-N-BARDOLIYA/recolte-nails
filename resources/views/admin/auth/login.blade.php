@@ -14,13 +14,20 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        body, input, button {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-            letter-spacing: -0.01em;
+        :root {
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-serif: 'Plus Jakarta Sans', 'Inter', sans-serif;
         }
-        .font-serif, h1 {
+        body, input, button, p, span, div, label, .font-sans {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+            letter-spacing: -0.011em;
+        }
+        .font-serif, h1, h2, h3, .font-display {
             font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
             letter-spacing: -0.025em;
+        }
+        .tracking-\[0\.22em\], .tracking-\[0\.18em\], .tracking-\[0\.16em\], .tracking-widest {
+            letter-spacing: 0.06em !important;
         }
     </style>
 </head>

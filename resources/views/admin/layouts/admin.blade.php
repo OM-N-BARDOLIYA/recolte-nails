@@ -17,14 +17,20 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        /* Global Clean Admin Typography Stack */
-        body, input, textarea, select, button, table, td, th {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
-            letter-spacing: -0.01em;
+        /* Force CSS variables for Tailwind utility classes within Admin */
+        :root {
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-serif: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        /* Modern Crisp Display Headers instead of hard-to-read serifs */
-        .font-serif, h1, h2, h3 {
+        /* Global Clean Admin Typography Stack */
+        body, input, textarea, select, button, table, td, th, p, span, div, label, li, a, .font-sans {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+            letter-spacing: -0.011em;
+        }
+
+        /* Modern Crisp Display Headers (Plus Jakarta Sans) */
+        h1, h2, h3, h4, h5, h6, .font-serif, .font-display {
             font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
             letter-spacing: -0.025em;
         }
@@ -37,7 +43,7 @@
 
         /* Improved legibility for small uppercase labels */
         .tracking-\[0\.22em\], .tracking-\[0\.18em\], .tracking-\[0\.16em\], .tracking-widest {
-            letter-spacing: 0.08em !important;
+            letter-spacing: 0.06em !important;
         }
 
         /* Clean and comfortable inputs for data management */
