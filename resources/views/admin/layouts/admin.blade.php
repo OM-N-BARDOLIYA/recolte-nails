@@ -8,13 +8,57 @@
 
     <title>@yield('title', 'Atelier CMS') — Recolte Nails Paris</title>
 
-    <!-- Google Fonts: Display Serifs & Refined Sans (100% matched to Storefront) -->
+    <!-- Clean, Highly Legible & Professional Admin Typography: Inter & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}?v={{ time() }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        /* Global Clean Admin Typography Stack */
+        body, input, textarea, select, button, table, td, th {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+            letter-spacing: -0.01em;
+        }
+
+        /* Modern Crisp Display Headers instead of hard-to-read serifs */
+        .font-serif, h1, h2, h3 {
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            letter-spacing: -0.025em;
+        }
+
+        /* Clean Monospace for SKUs, slugs, and tech codes */
+        .font-mono, code, pre {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+            letter-spacing: -0.02em;
+        }
+
+        /* Improved legibility for small uppercase labels */
+        .tracking-\[0\.22em\], .tracking-\[0\.18em\], .tracking-\[0\.16em\], .tracking-widest {
+            letter-spacing: 0.08em !important;
+        }
+
+        /* Clean and comfortable inputs for data management */
+        input[type="text"], input[type="number"], input[type="password"], input[type="email"], textarea, select {
+            font-size: 13.5px !important;
+            line-height: 1.5 !important;
+            color: #171412 !important;
+        }
+
+        /* High clarity tabular numbers for data & stats */
+        .tabular-nums, table td {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Smooth crisp text rendering */
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+    </style>
 </head>
 
 <body class="min-h-screen text-[#171412] font-sans antialiased bg-[#FAF8F5] flex flex-col md:flex-row selection:bg-[#FBEFE9] selection:text-[#A33B47]">

@@ -5,13 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Atelier CMS Sign In — Recolte Nails Paris</title>
     
-    <!-- Google Fonts: Display Serifs & Refined Sans (100% matched to Storefront) -->
+    <!-- Clean, Highly Legible & Professional Admin Typography: Inter & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}?v={{ time() }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        body, input, button {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+            letter-spacing: -0.01em;
+        }
+        .font-serif, h1 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+            letter-spacing: -0.025em;
+        }
+    </style>
 </head>
 
 <body class="h-full text-[#171412] font-sans antialiased bg-[#FAF8F5] flex items-center justify-center p-4 relative overflow-hidden selection:bg-[#FBEFE9] selection:text-[#A33B47]">
