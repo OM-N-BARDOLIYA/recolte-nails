@@ -18,6 +18,12 @@
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             --font-serif: 'Plus Jakarta Sans', 'Inter', sans-serif;
         }
+        html, body {
+            min-height: 100vh !important;
+            min-height: 100dvh !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
         body, input, button, p, span, div, label, .font-sans {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
             letter-spacing: -0.011em;
@@ -32,13 +38,13 @@
     </style>
 </head>
 
-<body class="h-full text-[#171412] font-sans antialiased bg-[#FAF8F5] flex items-center justify-center p-4 relative overflow-hidden selection:bg-[#FBEFE9] selection:text-[#A33B47]">
+<body class="min-h-screen min-h-[100dvh] w-full text-[#171412] font-sans antialiased bg-[#FAF8F5] flex flex-col items-center justify-center p-4 py-10 relative selection:bg-[#FBEFE9] selection:text-[#A33B47]">
     
     <!-- Atmospheric Luxury Gradients -->
     <div class="absolute -top-32 -right-32 w-96 h-96 bg-[#C5A880]/10 rounded-full blur-3xl pointer-events-none"></div>
     <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-[#A33B47]/5 rounded-full blur-3xl pointer-events-none"></div>
 
-    <div class="w-full max-w-md bg-white border border-[#ECE6DE] rounded-none p-8 sm:p-10 shadow-xs relative z-10 space-y-6">
+    <div class="w-full max-w-md my-auto bg-white border border-[#ECE6DE] rounded-none p-8 sm:p-10 shadow-xs relative z-10 space-y-6">
         
         <div class="text-center space-y-3">
             <div class="flex justify-center">
