@@ -18,23 +18,13 @@ class AdminProductController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('tagline', 'like', "%{$search}%")
-                  ->orWhere('category', 'like', "%{$search}%");
+                    ->orWhere('tagline', 'like', "%{$search}%")
+                    ->orWhere('category', 'like', "%{$search}%");
             });
         }
 
         if ($request->filled('category')) {
-            $catVal = $request->category;
-            $catModel = Category::where('name', $catVal)->orWhere('slug', $catVal)->first();
-            if ($catModel) {
-                $query->where(function ($q) use ($catModel, $catVal) {
-                    $q->where('category_id', $catModel->id)
-                      ->orWhere('category', $catVal)
-                      ->orWhere('category', 'like', "%{$catModel->name}%");
-                });
-            } else {
-                $query->where('category', 'like', "%{$catVal}%");
-            }
+            $query->where('category', $request->category);
         }
 
         if ($request->filled('status')) {
@@ -144,7 +134,7 @@ class AdminProductController extends Controller
         }
         $validated['benefits'] = $benefits;
 
-                // Process Multi-Image Gallery & Explicit Manual Ordering (Drag & Drop)
+        // Process Multi-Image Gallery & Explicit Manual Ordering (Drag & Drop)
         $uploadedMediaUrls = [];
         if ($request->hasFile('gallery_files')) {
             foreach ($request->file('gallery_files') as $gidx => $gfile) {
@@ -220,7 +210,7 @@ class AdminProductController extends Controller
         return redirect()->route('admin.products.edit', $product)->with('success', 'Product "' . $product->title . '" created and saved successfully!');
     }
 
-    
+
     public function show(Product $product)
     {
         return redirect()->route('admin.products.edit', $product);
@@ -232,7 +222,7 @@ class AdminProductController extends Controller
         return view('admin.products.form', compact('categories', 'product'));
     }
 
-        public function update(Request $request, Product $product)
+    public function update(Request $request, Product $product)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',

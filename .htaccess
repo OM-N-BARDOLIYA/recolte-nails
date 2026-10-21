@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block sensitive files
+    RewriteRule ^\.env - [F,L,NC]
+    RewriteRule ^\.git - [F,L,NC]
+
+    # Redirect to public directory if document root cannot be changed to /public
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
