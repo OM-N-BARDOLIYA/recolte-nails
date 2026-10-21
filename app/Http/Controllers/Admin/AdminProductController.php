@@ -37,10 +37,17 @@ class AdminProductController extends Controller
             }
         }
 
-        $products = $query->orderBy('sort_order', 'asc')->latest()->paginate(12)->withQueryString();
+        $products = $query->orderBy('sort_order', 'asc')->latest()->paginate(15)->withQueryString();
         $categories = Category::all();
 
-        return view('admin.products.index', compact('products', 'categories'));
+        $stats = [
+            'total' => Product::count(),
+            'active' => Product::where('is_active', true)->count(),
+            'hidden' => Product::where('is_active', false)->count(),
+            'bestseller' => Product::where('is_bestseller', true)->count(),
+        ];
+
+        return view('admin.products.index', compact('products', 'categories', 'stats'));
     }
 
     public function create()
