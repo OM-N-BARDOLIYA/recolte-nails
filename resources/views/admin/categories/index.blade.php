@@ -20,45 +20,148 @@
 
             <div class="space-y-3">
                 @foreach($categories as $cat)
-                    <div class="p-4 sm:p-5 rounded-none bg-white border border-[#ECE6DE] flex items-center justify-between gap-4 shadow-2xs transition-all hover:border-[#171412]" x-data="{ editing: false }">
-                        <div class="flex items-center gap-3.5 min-w-0" x-show="!editing">
-                            <span class="text-2xl p-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE]">{{ $cat->icon_emoji ?? '💅' }}</span>
-                            <div class="min-w-0">
-                                <div class="font-serif text-base font-bold text-[#171412] truncate">{{ $cat->name }}</div>
-                                <div class="text-[11px] text-[#8C7A6B] truncate font-light">{{ $cat->description }}</div>
+                    <div class="rounded-none bg-white border border-[#ECE6DE] shadow-2xs transition-colors hover:border-[#D8D1C7] overflow-hidden" x-data="{ editing: false }">
+                        {{-- Normal View Row --}}
+                        <div class="p-4 sm:p-5 flex items-center justify-between gap-4" x-show="!editing">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <span class="text-xl p-2 sm:p-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] shrink-0 leading-none flex items-center justify-center min-w-[42px] min-h-[42px]">
+                                    {{ $cat->icon_emoji ?? '💅' }}
+                                </span>
+                                <div class="min-w-0">
+                                    <div class="font-serif text-base font-bold text-[#171412] truncate">{{ $cat->name }}</div>
+                                    <div class="text-[11px] text-[#8C7A6B] truncate font-light flex items-center gap-2 mt-0.5">
+                                        <span class="font-mono text-[10.5px] text-[#A89F91]">/{{ $cat->slug }}</span>
+                                        @if($cat->description)
+                                            <span class="text-[#ECE6DE]">•</span>
+                                            <span class="truncate">{{ $cat->description }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-2.5 shrink-0">
+                                <span class="px-2.5 py-1 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[10.5px] text-[#6A625A] font-semibold tracking-wide">
+                                    {{ $cat->products_count }} {{ Str::plural('item', $cat->products_count) }}
+                                </span>
+
+                                <button 
+                                    type="button" 
+                                    @click="editing = true" 
+                                    class="px-3 py-1.5 text-xs text-[#171412] hover:text-[#A33B47] hover:bg-[#FAF8F5] border border-[#ECE6DE] font-semibold uppercase tracking-wider transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                                >
+                                    <svg class="w-3 h-3 text-[#8C7A6B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                                    <span>Edit</span>
+                                </button>
+
+                                <form method="POST" action="{{ route('admin.categories.destroy', $cat->id) }}" onsubmit="return confirm('Delete this category? Products will be unlinked.');" class="inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="p-1.5 text-xs text-[#A33B47] hover:text-white hover:bg-[#A33B47] border border-transparent hover:border-[#A33B47] transition-all cursor-pointer leading-none flex items-center justify-center" title="Delete category">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                    </button>
+                                </form>
                             </div>
                         </div>
 
-                        <form 
-                            method="POST" 
-                            action="{{ route('admin.categories.update', $cat->id) }}" 
-                            x-show="editing" 
-                            class="flex-grow flex items-center gap-2"
-                        >
-                            @csrf
-                            @method('PUT')
-                            <input type="text" name="icon_emoji" value="{{ $cat->icon_emoji }}" class="w-10 px-2 py-1.5 bg-[#FAF8F5] border border-[#ECE6DE] rounded-none text-sm text-center text-[#171412]">
-                            <input type="text" name="name" value="{{ $cat->name }}" class="flex-grow px-3 py-1.5 bg-[#FAF8F5] border border-[#ECE6DE] rounded-none text-xs text-[#171412] font-bold">
-                            <input type="text" name="slug" value="{{ $cat->slug }}" class="w-28 px-2 py-1.5 bg-[#FAF8F5] border border-[#ECE6DE] rounded-none text-[10px] font-mono text-[#8C7A6B]">
-                            <button type="submit" class="px-3.5 py-1.5 bg-[#171412] text-white text-xs font-bold uppercase tracking-wider rounded-none cursor-pointer">Save</button>
-                            <button type="button" @click="editing = false" class="px-2 py-1.5 text-xs text-[#8C7A6B] font-medium cursor-pointer">Cancel</button>
-                        </form>
-
-                        <div class="flex items-center gap-3 shrink-0" x-show="!editing">
-                            <span class="px-3 py-1 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[10px] text-[#171412] font-semibold uppercase tracking-wider">
-                                {{ $cat->products_count }} items
-                            </span>
-
-                            <button type="button" @click="editing = true" class="text-xs text-[#8C7A6B] hover:text-[#A33B47] font-bold uppercase tracking-wider transition-colors cursor-pointer">
-                                Edit
-                            </button>
-
-                            <form method="POST" action="{{ route('admin.categories.destroy', $cat->id) }}" onsubmit="return confirm('Delete this category? Products will be unlinked.');">
+                        {{-- Expanded Edit Form --}}
+                        <div x-show="editing" x-cloak class="p-5 sm:p-6 bg-[#FCFBF9] border-t-2 border-[#171412]">
+                            <form method="POST" action="{{ route('admin.categories.update', $cat->id) }}" class="space-y-4">
                                 @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-xs text-[#A33B47] hover:text-[#852C37] font-bold p-1 cursor-pointer">
-                                    &times;
-                                </button>
+                                @method('PUT')
+
+                                <div class="flex items-center justify-between border-b border-[#ECE6DE] pb-3">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#171412]"></span>
+                                        <span class="text-[11px] font-bold uppercase tracking-[0.16em] text-[#171412]">Editing Category</span>
+                                        <span class="text-xs text-[#8C7A6B] font-serif font-normal italic">({{ $cat->name }})</span>
+                                    </div>
+                                    <button 
+                                        type="button" 
+                                        @click="editing = false" 
+                                        class="text-[11px] text-[#8C7A6B] hover:text-[#171412] font-semibold uppercase tracking-wider transition-colors cursor-pointer flex items-center gap-1"
+                                    >
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                                        <span>Close</span>
+                                    </button>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3.5">
+                                    <!-- Emoji Icon -->
+                                    <div class="sm:col-span-2 space-y-1">
+                                        <label class="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6A625A] block">Emoji</label>
+                                        <input 
+                                            type="text" 
+                                            name="icon_emoji" 
+                                            value="{{ $cat->icon_emoji }}" 
+                                            placeholder="💅"
+                                            class="w-full px-3 py-2 bg-white border border-[#ECE6DE] rounded-none text-center text-lg text-[#171412] focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15"
+                                        >
+                                    </div>
+
+                                    <!-- Category Name -->
+                                    <div class="sm:col-span-5 space-y-1">
+                                        <label class="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6A625A] block">Category Name *</label>
+                                        <input 
+                                            type="text" 
+                                            name="name" 
+                                            value="{{ $cat->name }}" 
+                                            required 
+                                            class="w-full px-3.5 py-2 bg-white border border-[#ECE6DE] rounded-none text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15"
+                                        >
+                                    </div>
+
+                                    <!-- URL Slug -->
+                                    <div class="sm:col-span-5 space-y-1">
+                                        <label class="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6A625A] block">Slug (URL Key) *</label>
+                                        <input 
+                                            type="text" 
+                                            name="slug" 
+                                            value="{{ $cat->slug }}" 
+                                            required 
+                                            class="w-full px-3.5 py-2 bg-white border border-[#ECE6DE] rounded-none text-xs font-mono text-[#171412] focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15"
+                                        >
+                                    </div>
+
+                                    <!-- Description -->
+                                    <div class="sm:col-span-9 space-y-1">
+                                        <label class="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6A625A] block">Description</label>
+                                        <input 
+                                            type="text" 
+                                            name="description" 
+                                            value="{{ $cat->description }}" 
+                                            placeholder="Brief summary of items in this category..."
+                                            class="w-full px-3.5 py-2 bg-white border border-[#ECE6DE] rounded-none text-xs text-[#171412] focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15"
+                                        >
+                                    </div>
+
+                                    <!-- Display Order -->
+                                    <div class="sm:col-span-3 space-y-1">
+                                        <label class="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6A625A] block">Display Order</label>
+                                        <input 
+                                            type="number" 
+                                            name="sort_order" 
+                                            value="{{ $cat->sort_order ?? 0 }}" 
+                                            class="w-full px-3.5 py-2 bg-white border border-[#ECE6DE] rounded-none text-xs text-[#171412] focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15"
+                                        >
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#ECE6DE]">
+                                    <button 
+                                        type="button" 
+                                        @click="editing = false" 
+                                        class="px-4 py-2 bg-white hover:bg-[#FAF8F5] border border-[#ECE6DE] text-xs font-semibold text-[#6A625A] hover:text-[#171412] transition-colors cursor-pointer"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button 
+                                        type="submit" 
+                                        class="px-5 py-2 bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.14em] shadow-xs hover:shadow-sm transition-all cursor-pointer flex items-center gap-1.5"
+                                    >
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                        <span>Save Changes</span>
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </div>
