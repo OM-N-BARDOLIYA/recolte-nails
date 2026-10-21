@@ -80,11 +80,12 @@
                     type="text" 
                     id="login" 
                     name="login" 
-                    value="{{ old('login', old('email', 'admin')) }}" 
+                    value="{{ old('login') }}" 
                     required 
                     autofocus
+                    autocomplete="username"
                     class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs sm:text-sm font-medium focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 transition-all"
-                    placeholder="e.g. admin or admin@recoltenails.com"
+                    placeholder="Enter your username or email"
                 />
             </div>
 
@@ -94,8 +95,8 @@
                     type="password" 
                     id="password" 
                     name="password" 
-                    value="RecolteAdmin2026!"
                     required 
+                    autocomplete="current-password"
                     class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs sm:text-sm font-medium focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 transition-all"
                     placeholder="••••••••••••"
                 />

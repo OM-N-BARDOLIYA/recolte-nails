@@ -20,12 +20,12 @@ Route::get('/api/products/search', [ProductController::class, 'searchApi'])->nam
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/franchise', [PageController::class, 'franchise'])->name('franchise');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
-Route::post('/contact', [PageController::class, 'submitInquiry'])->name('contact.submit');
+Route::post('/contact', [PageController::class, 'submitInquiry'])->name('contact.submit')->middleware('throttle:6,1');
 
 // ── ADMIN CMS AUTHENTICATION ROUTES ──
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('login');
-    Route::post('/login', [AdminAuthController::class, 'login'])->name('login.submit');
+    Route::post('/login', [AdminAuthController::class, 'login'])->name('login.submit')->middleware('throttle:5,1');
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
     // ── PROTECTED ADMIN CMS DASHBOARD & MODULES ──
