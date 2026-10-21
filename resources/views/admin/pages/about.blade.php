@@ -345,86 +345,98 @@
                         <p class="text-xs text-[#6A625A] mt-1 font-light">Upload or provide URLs for the 3 authentic atelier images displayed on the right-hand collage card.</p>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-stretch">
                         <!-- Photo 1 -->
-                        <div class="p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] space-y-3">
-                            <span class="text-xs font-bold uppercase tracking-wider text-[#171412] block">Photo 1 (Tall Left Card)</span>
-                            <div class="aspect-[4/5] rounded-none overflow-hidden bg-white border border-[#ECE6DE] flex items-center justify-center">
-                                <template x-if="previewConcierge1">
-                                    <img :src="previewConcierge1" class="w-full h-full object-cover">
-                                </template>
-                                <template x-if="!previewConcierge1">
-                                    <span class="text-[10px] text-[#171412]/40 font-medium">No Image</span>
-                                </template>
+                        <div class="p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] flex flex-col justify-between h-full space-y-4">
+                            <div class="space-y-3">
+                                <span class="text-xs font-bold uppercase tracking-wider text-[#171412] block truncate">Photo 1 (Tall Left Card)</span>
+                                <div class="aspect-square rounded-none overflow-hidden bg-white border border-[#ECE6DE] flex items-center justify-center">
+                                    <template x-if="previewConcierge1">
+                                        <img :src="previewConcierge1" class="w-full h-full object-cover">
+                                    </template>
+                                    <template x-if="!previewConcierge1">
+                                        <span class="text-[10px] text-[#171412]/40 font-medium">No Image</span>
+                                    </template>
+                                </div>
                             </div>
-                            <input 
-                                type="file" 
-                                name="concierge_img1_file" 
-                                accept="image/*" 
-                                @change="previewFile($event, 'previewConcierge1')"
-                                class="w-full text-xs file:mr-2 file:py-1.5 file:px-3 file:rounded-none file:border-0 file:bg-[#171412] file:text-white file:text-xs file:font-bold file:uppercase cursor-pointer"
-                            >
-                            <input 
-                                type="text" 
-                                name="concierge_img1" 
-                                x-model="previewConcierge1"
-                                placeholder="Or image URL" 
-                                class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] font-mono outline-none focus:border-[#171412]"
-                            >
+                            <div class="space-y-2.5 pt-1 mt-auto">
+                                <input 
+                                    type="file" 
+                                    name="concierge_img1_file" 
+                                    accept="image/*" 
+                                    @change="previewFile($event, 'previewConcierge1')"
+                                    class="w-full text-xs file:mr-2 file:py-1.5 file:px-3 file:rounded-none file:border-0 file:bg-[#171412] file:text-white file:text-xs file:font-bold file:uppercase cursor-pointer"
+                                >
+                                <input 
+                                    type="text" 
+                                    name="concierge_img1" 
+                                    x-model="previewConcierge1"
+                                    placeholder="Or image URL" 
+                                    class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] font-mono outline-none focus:border-[#171412]"
+                                >
+                            </div>
                         </div>
 
                         <!-- Photo 2 -->
-                        <div class="p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] space-y-3">
-                            <span class="text-xs font-bold uppercase tracking-wider text-[#171412] block">Photo 2 (Top Right Card)</span>
-                            <div class="aspect-square rounded-none overflow-hidden bg-white border border-[#ECE6DE] flex items-center justify-center">
-                                <template x-if="previewConcierge2">
-                                    <img :src="previewConcierge2" class="w-full h-full object-cover">
-                                </template>
-                                <template x-if="!previewConcierge2">
-                                    <span class="text-[10px] text-[#171412]/40 font-medium">No Image</span>
-                                </template>
+                        <div class="p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] flex flex-col justify-between h-full space-y-4">
+                            <div class="space-y-3">
+                                <span class="text-xs font-bold uppercase tracking-wider text-[#171412] block truncate">Photo 2 (Top Right Card)</span>
+                                <div class="aspect-square rounded-none overflow-hidden bg-white border border-[#ECE6DE] flex items-center justify-center">
+                                    <template x-if="previewConcierge2">
+                                        <img :src="previewConcierge2" class="w-full h-full object-cover">
+                                    </template>
+                                    <template x-if="!previewConcierge2">
+                                        <span class="text-[10px] text-[#171412]/40 font-medium">No Image</span>
+                                    </template>
+                                </div>
                             </div>
-                            <input 
-                                type="file" 
-                                name="concierge_img2_file" 
-                                accept="image/*" 
-                                @change="previewFile($event, 'previewConcierge2')"
-                                class="w-full text-xs file:mr-2 file:py-1.5 file:px-3 file:rounded-none file:border-0 file:bg-[#171412] file:text-white file:text-xs file:font-bold file:uppercase cursor-pointer"
-                            >
-                            <input 
-                                type="text" 
-                                name="concierge_img2" 
-                                x-model="previewConcierge2"
-                                placeholder="Or image URL" 
-                                class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] font-mono outline-none focus:border-[#171412]"
-                            >
+                            <div class="space-y-2.5 pt-1 mt-auto">
+                                <input 
+                                    type="file" 
+                                    name="concierge_img2_file" 
+                                    accept="image/*" 
+                                    @change="previewFile($event, 'previewConcierge2')"
+                                    class="w-full text-xs file:mr-2 file:py-1.5 file:px-3 file:rounded-none file:border-0 file:bg-[#171412] file:text-white file:text-xs file:font-bold file:uppercase cursor-pointer"
+                                >
+                                <input 
+                                    type="text" 
+                                    name="concierge_img2" 
+                                    x-model="previewConcierge2"
+                                    placeholder="Or image URL" 
+                                    class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] font-mono outline-none focus:border-[#171412]"
+                                >
+                            </div>
                         </div>
 
                         <!-- Photo 3 -->
-                        <div class="p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] space-y-3">
-                            <span class="text-xs font-bold uppercase tracking-wider text-[#171412] block">Photo 3 (Bottom Right Card)</span>
-                            <div class="aspect-square rounded-none overflow-hidden bg-white border border-[#ECE6DE] flex items-center justify-center">
-                                <template x-if="previewConcierge3">
-                                    <img :src="previewConcierge3" class="w-full h-full object-cover">
-                                </template>
-                                <template x-if="!previewConcierge3">
-                                    <span class="text-[10px] text-[#171412]/40 font-medium">No Image</span>
-                                </template>
+                        <div class="p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] flex flex-col justify-between h-full space-y-4">
+                            <div class="space-y-3">
+                                <span class="text-xs font-bold uppercase tracking-wider text-[#171412] block truncate">Photo 3 (Bottom Right Card)</span>
+                                <div class="aspect-square rounded-none overflow-hidden bg-white border border-[#ECE6DE] flex items-center justify-center">
+                                    <template x-if="previewConcierge3">
+                                        <img :src="previewConcierge3" class="w-full h-full object-cover">
+                                    </template>
+                                    <template x-if="!previewConcierge3">
+                                        <span class="text-[10px] text-[#171412]/40 font-medium">No Image</span>
+                                    </template>
+                                </div>
                             </div>
-                            <input 
-                                type="file" 
-                                name="concierge_img3_file" 
-                                accept="image/*" 
-                                @change="previewFile($event, 'previewConcierge3')"
-                                class="w-full text-xs file:mr-2 file:py-1.5 file:px-3 file:rounded-none file:border-0 file:bg-[#171412] file:text-white file:text-xs file:font-bold file:uppercase cursor-pointer"
-                            >
-                            <input 
-                                type="text" 
-                                name="concierge_img3" 
-                                x-model="previewConcierge3"
-                                placeholder="Or image URL" 
-                                class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] font-mono outline-none focus:border-[#171412]"
-                            >
+                            <div class="space-y-2.5 pt-1 mt-auto">
+                                <input 
+                                    type="file" 
+                                    name="concierge_img3_file" 
+                                    accept="image/*" 
+                                    @change="previewFile($event, 'previewConcierge3')"
+                                    class="w-full text-xs file:mr-2 file:py-1.5 file:px-3 file:rounded-none file:border-0 file:bg-[#171412] file:text-white file:text-xs file:font-bold file:uppercase cursor-pointer"
+                                >
+                                <input 
+                                    type="text" 
+                                    name="concierge_img3" 
+                                    x-model="previewConcierge3"
+                                    placeholder="Or image URL" 
+                                    class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] font-mono outline-none focus:border-[#171412]"
+                                >
+                            </div>
                         </div>
                     </div>
                 </div>
