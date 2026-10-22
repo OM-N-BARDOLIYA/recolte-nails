@@ -22,12 +22,13 @@ class AdminCategoryController extends Controller
             'slug' => 'nullable|string|max:255|unique:categories,slug',
             'icon_emoji' => 'nullable|string|max:10',
             'description' => 'nullable|string',
-            'sort_order' => 'integer',
+            'sort_order' => 'nullable|integer',
+            'is_active' => 'nullable|boolean',
         ]);
 
         $validated['slug'] = $validated['slug'] ? Str::slug($validated['slug']) : Str::slug($validated['name']);
-        $validated['is_active'] = $request->has('is_active');
-        $validated['sort_order'] = $request->input('sort_order', 0);
+        $validated['is_active'] = $request->boolean('is_active', true);
+        $validated['sort_order'] = (int) $request->input('sort_order', 0);
 
         Category::create($validated);
         return back()->with('success', 'Category added successfully!');
@@ -40,12 +41,13 @@ class AdminCategoryController extends Controller
             'slug' => 'required|string|max:255|unique:categories,slug,' . $category->id,
             'icon_emoji' => 'nullable|string|max:10',
             'description' => 'nullable|string',
-            'sort_order' => 'integer',
+            'sort_order' => 'nullable|integer',
+            'is_active' => 'nullable|boolean',
         ]);
 
         $validated['slug'] = Str::slug($validated['slug']);
-        $validated['is_active'] = $request->has('is_active');
-        $validated['sort_order'] = $request->input('sort_order', 0);
+        $validated['is_active'] = $request->boolean('is_active');
+        $validated['sort_order'] = (int) $request->input('sort_order', 0);
 
         $category->update($validated);
         return back()->with('success', "Category \"{$category->name}\" updated successfully!");

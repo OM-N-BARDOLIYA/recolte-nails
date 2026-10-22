@@ -16,7 +16,21 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div class="lg:col-span-7 space-y-4">
-            <h2 class="font-serif text-xl font-bold text-[#171412]">Active Categories</h2>
+            <div class="flex items-center justify-between">
+                <h2 class="font-serif text-xl font-bold text-[#171412]">Categories ({{ $categories->count() }})</h2>
+                <div class="flex items-center gap-2 text-xs">
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10.5px] font-semibold">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                        {{ $categories->where('is_active', true)->count() }} Active
+                    </span>
+                    @if($categories->where('is_active', false)->count() > 0)
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-neutral-100 border border-neutral-300 text-neutral-600 text-[10.5px] font-semibold">
+                            <span class="w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+                            {{ $categories->where('is_active', false)->count() }} Hidden
+                        </span>
+                    @endif
+                </div>
+            </div>
 
             <div class="space-y-3">
                 @foreach($categories as $cat)
@@ -28,9 +42,22 @@
                                     {{ $cat->icon_emoji ?? '💅' }}
                                 </span>
                                 <div class="min-w-0">
-                                    <div class="font-serif text-base font-bold text-[#171412] truncate">{{ $cat->name }}</div>
+                                    <div class="flex items-center gap-2">
+                                        <div class="font-serif text-base font-bold text-[#171412] truncate">{{ $cat->name }}</div>
+                                        @if($cat->is_active)
+                                            <span class="inline-flex items-center px-1.5 py-0.5 rounded-none bg-emerald-50 border border-emerald-200 text-emerald-800 text-[9.5px] font-bold uppercase tracking-wider">
+                                                Active
+                                            </span>
+                                        @else
+                                            <span class="inline-flex items-center px-1.5 py-0.5 rounded-none bg-neutral-100 border border-neutral-300 text-neutral-600 text-[9.5px] font-bold uppercase tracking-wider">
+                                                Hidden
+                                            </span>
+                                        @endif
+                                    </div>
                                     <div class="text-[11px] text-[#8C7A6B] truncate font-light flex items-center gap-2 mt-0.5">
                                         <span class="font-mono text-[10.5px] text-[#A89F91]">/{{ $cat->slug }}</span>
+                                        <span class="text-[#ECE6DE]">•</span>
+                                        <span class="text-[10px] text-[#8C7A6B]">Order: {{ $cat->sort_order }}</span>
                                         @if($cat->description)
                                             <span class="text-[#ECE6DE]">•</span>
                                             <span class="truncate">{{ $cat->description }}</span>
@@ -143,6 +170,21 @@
                                             class="w-full px-3.5 py-2 bg-white border border-[#ECE6DE] rounded-none text-xs text-[#171412] focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15"
                                         >
                                     </div>
+
+                                    <!-- Status (Active / Visible in Catalog) -->
+                                    <div class="sm:col-span-12 pt-2 border-t border-[#ECE6DE]/60">
+                                        <label class="inline-flex items-center gap-2 cursor-pointer select-none">
+                                            <input 
+                                                type="checkbox" 
+                                                name="is_active" 
+                                                value="1" 
+                                                {{ $cat->is_active ? 'checked' : '' }}
+                                                class="w-4 h-4 rounded-none border-[#ECE6DE] text-[#171412] accent-[#171412] focus:ring-0"
+                                            >
+                                            <span class="text-xs font-semibold text-[#171412]">Visible in Customer Catalog (Active)</span>
+                                        </label>
+                                        <p class="text-[11px] text-[#8C7A6B] ml-6">When unchecked, this category is hidden from frontend shoppers in the catalog.</p>
+                                    </div>
                                 </div>
 
                                 <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#ECE6DE]">
@@ -216,6 +258,20 @@
                             value="0" 
                             class="w-full px-4 py-2 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15"
                         />
+                    </div>
+
+                    <div class="pt-1">
+                        <label class="inline-flex items-center gap-2 cursor-pointer select-none">
+                            <input 
+                                type="checkbox" 
+                                name="is_active" 
+                                value="1" 
+                                checked
+                                class="w-4 h-4 rounded-none border-[#ECE6DE] text-[#171412] accent-[#171412] focus:ring-0"
+                            >
+                            <span class="text-xs font-semibold text-[#171412]">Visible in Customer Catalog (Active)</span>
+                        </label>
+                        <p class="text-[11px] text-[#8C7A6B] ml-6">Category pill will be published immediately on the catalog.</p>
                     </div>
 
                     <x-button 
