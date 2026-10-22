@@ -14,58 +14,64 @@
     $initialBadgesJson = json_encode(!empty($trust_strip['items']) ? $trust_strip['items'] : $defaultTrustList);
 @endphp
 
-<div class="space-y-6 max-w-5xl mx-auto" x-data="{ 
-    activeTab: 'hero',
-    activeHeroSlide: 0,
-    heroBg: '{{ $hero['bg_image'] ?? asset('images/banners/hero-slide-main-recolte.png') }}',
-    slide0: '{{ $hero['slides'][0]['bg_image'] ?? $hero['bg_image'] ?? asset('images/banners/hero-slide-main-recolte.png') }}',
-    slide1: '{{ $hero['slides'][1]['bg_image'] ?? asset('images/banners/hero-slide-spotlight-96.png') }}',
-    slide2: '{{ $hero['slides'][2]['bg_image'] ?? asset('images/banners/hero-slide-dust-collector.png') }}',
-    slide3: '{{ $hero['slides'][3]['bg_image'] ?? asset('images/banners/hero-slide-uv-led-lamp.png') }}',
-    slide4: '{{ $hero['slides'][4]['bg_image'] ?? asset('images/banners/hero-slide-cat-eye-60.png') }}',
-    cat0: '{{ $categories_section['categories'][0]['image'] ?? asset('images/products/recolte-cat-nail-kits.jpg') }}',
-    cat1: '{{ $categories_section['categories'][1]['image'] ?? asset('images/products/recolte-cat-uv-lamps.jpg') }}',
-    cat2: '{{ $categories_section['categories'][2]['image'] ?? asset('images/products/recolte-cat-builder-gel.jpg') }}',
-    cat3: '{{ $categories_section['categories'][3]['image'] ?? asset('images/products/recolte-cat-tips.jpg') }}',
-    showcaseImg: '{{ $showcase['image'] ?? asset('images/banners/recolte-colors-showcase.jpg') }}?v={{ file_exists(public_path('images/banners/recolte-colors-showcase.jpg')) ? filemtime(public_path('images/banners/recolte-colors-showcase.jpg')) : time() }}',
-    video0: '{{ $instagram['posts'][0]['video'] ?? asset('uploads/pages/about_insta_video_0_1789736475.mp4') }}',
-    video1: '{{ $instagram['posts'][1]['video'] ?? asset('uploads/pages/about_insta_video_1_1789736475.mp4') }}',
-    video2: '{{ $instagram['posts'][2]['video'] ?? asset('uploads/pages/about_insta_video_2_1789736475.mp4') }}',
-    trustBadges: {!! $initialBadgesJson !!},
-    addTrustBadge() {
-        if (this.trustBadges.length >= 8) {
-            alert('Maximum of 8 badges allowed.');
-            return;
+<script>
+function homePageManager() {
+    return {
+        activeTab: 'hero',
+        activeHeroSlide: 0,
+        heroBg: '{{ $hero['bg_image'] ?? asset('images/banners/hero-slide-main-recolte.png') }}',
+        slide0: '{{ $hero['slides'][0]['bg_image'] ?? $hero['bg_image'] ?? asset('images/banners/hero-slide-main-recolte.png') }}',
+        slide1: '{{ $hero['slides'][1]['bg_image'] ?? asset('images/banners/hero-slide-spotlight-96.png') }}',
+        slide2: '{{ $hero['slides'][2]['bg_image'] ?? asset('images/banners/hero-slide-dust-collector.png') }}',
+        slide3: '{{ $hero['slides'][3]['bg_image'] ?? asset('images/banners/hero-slide-uv-led-lamp.png') }}',
+        slide4: '{{ $hero['slides'][4]['bg_image'] ?? asset('images/banners/hero-slide-cat-eye-60.png') }}',
+        cat0: '{{ $categories_section['categories'][0]['image'] ?? asset('images/products/recolte-cat-nail-kits.jpg') }}',
+        cat1: '{{ $categories_section['categories'][1]['image'] ?? asset('images/products/recolte-cat-uv-lamps.jpg') }}',
+        cat2: '{{ $categories_section['categories'][2]['image'] ?? asset('images/products/recolte-cat-builder-gel.jpg') }}',
+        cat3: '{{ $categories_section['categories'][3]['image'] ?? asset('images/products/recolte-cat-tips.jpg') }}',
+        showcaseImg: '{{ $showcase['image'] ?? asset('images/banners/recolte-colors-showcase.jpg') }}?v={{ file_exists(public_path('images/banners/recolte-colors-showcase.jpg')) ? filemtime(public_path('images/banners/recolte-colors-showcase.jpg')) : time() }}',
+        video0: '{{ $instagram['posts'][0]['video'] ?? asset('uploads/pages/about_insta_video_0_1789736475.mp4') }}',
+        video1: '{{ $instagram['posts'][1]['video'] ?? asset('uploads/pages/about_insta_video_1_1789736475.mp4') }}',
+        video2: '{{ $instagram['posts'][2]['video'] ?? asset('uploads/pages/about_insta_video_2_1789736475.mp4') }}',
+        trustBadges: {!! $initialBadgesJson !!},
+        addTrustBadge() {
+            if (this.trustBadges.length >= 8) {
+                alert('Maximum of 8 badges allowed.');
+                return;
+            }
+            this.trustBadges.push({
+                title: 'New Value Assurance',
+                sub: 'Satisfaction Guaranteed',
+                icon: 'star',
+                image: ''
+            });
+        },
+        removeTrustBadge(index) {
+            if (this.trustBadges.length <= 1) {
+                alert('You must have at least 1 badge.');
+                return;
+            }
+            if (confirm('Are you sure you want to remove this badge?')) {
+                this.trustBadges.splice(index, 1);
+            }
+        },
+        handleBadgeFile(e, index) {
+            const file = e.target.files[0];
+            if (file) {
+                this.trustBadges[index].image = URL.createObjectURL(file);
+            }
+        },
+        handleFile(e, key) {
+            const file = e.target.files[0];
+            if (file) {
+                this[key] = URL.createObjectURL(file);
+            }
         }
-        this.trustBadges.push({
-            title: 'New Value Assurance',
-            sub: 'Satisfaction Guaranteed',
-            icon: 'star',
-            image: ''
-        });
-    },
-    removeTrustBadge(index) {
-        if (this.trustBadges.length <= 1) {
-            alert('You must have at least 1 badge.');
-            return;
-        }
-        if (confirm('Are you sure you want to remove this badge?')) {
-            this.trustBadges.splice(index, 1);
-        }
-    },
-    handleBadgeFile(e, index) {
-        const file = e.target.files[0];
-        if (file) {
-            this.trustBadges[index].image = URL.createObjectURL(file);
-        }
-    },
-    handleFile(e, key) {
-        const file = e.target.files[0];
-        if (file) {
-            this[key] = URL.createObjectURL(file);
-        }
-    }
-}">
+    };
+}
+</script>
+
+<div class="space-y-6 max-w-5xl mx-auto" x-data="homePageManager()">
     
     <!-- Top Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
