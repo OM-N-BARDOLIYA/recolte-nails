@@ -64,11 +64,12 @@
             transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
         }
 
-        textarea:focus {
+        /* Global luxury focus states for all inputs and textareas in Atelier CMS */
+        input:focus, textarea:focus, select:focus {
             outline: none !important;
-            border-color: #171412 !important;
+            border-color: #A33B47 !important;
             background-color: #ffffff !important;
-            box-shadow: 0 0 0 1px rgba(23, 20, 18, 0.15) !important;
+            box-shadow: 0 0 0 2px rgba(163, 59, 71, 0.15) !important;
         }
 
         /* High clarity tabular numbers for data & stats */
@@ -90,7 +91,7 @@
     @php
         $navLinkClass = function($active) {
             return $active 
-                ? 'flex items-center gap-3 px-3.5 py-2.5 rounded-none bg-[#FBEFE9] text-[#A33B47] font-semibold border-l-2 border-[#C48B71] shadow-2xs transition-all'
+                ? 'flex items-center gap-3 px-3.5 py-2.5 rounded-none bg-[#FBEFE9] text-[#A33B47] font-semibold border-l-2 border-[#A33B47] shadow-2xs transition-all'
                 : 'flex items-center gap-3 px-3.5 py-2.5 rounded-none text-[#171412] hover:text-[#A33B47] hover:bg-[#FAF8F5] transition-all font-normal';
         };
     @endphp
@@ -104,8 +105,8 @@
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 group">
                     <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Recolte Logo" class="h-9 w-auto object-contain select-none transition-transform group-hover:scale-105">
                     <div>
-                        <div class="font-serif text-[15px] font-bold text-[#171412] tracking-wide leading-tight">Recolte Nails</div>
-                        <div class="text-[9px] font-semibold tracking-[0.22em] text-[#8C7A6B] uppercase">Atelier Studio CMS</div>
+                        <div class="font-serif text-[15px] font-bold text-[#171412] tracking-wide leading-tight group-hover:text-[#A33B47] transition-colors">Recolte Nails</div>
+                        <div class="text-[9px] font-semibold tracking-[0.22em] text-[#A33B47] uppercase">Atelier Studio CMS</div>
                     </div>
                 </a>
             </div>
@@ -121,7 +122,10 @@
                     <span>Dashboard</span>
                 </a>
 
-                <div class="pt-5 pb-1.5 px-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B]">Catalog Management</div>
+                <div class="pt-5 pb-1.5 px-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#A33B47]/80 flex items-center gap-1.5">
+                    <span class="text-[8px] text-[#A33B47]">✦</span>
+                    <span>Catalog Management</span>
+                </div>
 
                 <a 
                     href="{{ route('admin.products.index') }}" 
@@ -139,7 +143,10 @@
                     <span>Categories</span>
                 </a>
 
-                <div class="pt-5 pb-1.5 px-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B]">Dynamic Page Content</div>
+                <div class="pt-5 pb-1.5 px-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#A33B47]/80 flex items-center gap-1.5">
+                    <span class="text-[8px] text-[#A33B47]">✦</span>
+                    <span>Dynamic Page Content</span>
+                </div>
 
                 <a 
                     href="{{ route('admin.pages.home') }}" 
@@ -173,7 +180,10 @@
                     <span>Catalog</span>
                 </a>
 
-                <div class="pt-5 pb-1.5 px-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B]">System &amp; Settings</div>
+                <div class="pt-5 pb-1.5 px-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#A33B47]/80 flex items-center gap-1.5">
+                    <span class="text-[8px] text-[#A33B47]">✦</span>
+                    <span>System &amp; Settings</span>
+                </div>
 
                 <a 
                     href="{{ route('admin.settings.index', ['tab' => 'studio']) }}" 
@@ -207,7 +217,7 @@
             <a 
                 href="{{ route('home') }}" 
                 target="_blank" 
-                class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-none bg-white hover:bg-[#FBEFE9] border border-[#ECE6DE] hover:border-[#171412] text-xs font-semibold text-[#171412] hover:text-[#A33B47] transition-all shadow-2xs group"
+                class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-none bg-white hover:bg-[#FBEFE9] border border-[#ECE6DE] hover:border-[#A33B47] text-xs font-semibold text-[#171412] hover:text-[#A33B47] transition-all shadow-2xs group"
             >
                 <span class="flex items-center gap-2">
                     <span class="text-sm">🌐</span>
@@ -219,7 +229,7 @@
             <!-- Admin Profile Box -->
             <div class="p-3 bg-white rounded-none border border-[#ECE6DE] shadow-2xs space-y-2.5">
                 <div class="flex items-center gap-2.5 min-w-0">
-                    <div class="w-8 h-8 rounded-none bg-[#171412] text-white text-xs font-bold flex items-center justify-center shrink-0">
+                    <div class="w-8 h-8 rounded-none bg-[#A33B47] text-white text-xs font-bold flex items-center justify-center shrink-0 shadow-2xs">
                         {{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}
                     </div>
                     <div class="min-w-0 flex-1">
@@ -250,8 +260,8 @@
         <header class="bg-white border-b border-[#ECE6DE] px-6 sm:px-8 py-3 flex items-center justify-between shrink-0">
             <div class="flex items-center gap-2 text-xs text-[#8C7A6B]">
                 <span class="font-medium text-[#171412]">Recolte Admin</span>
-                <span>/</span>
-                <span class="capitalize text-[#171412] font-semibold">{{ request()->segment(2) ?? 'Dashboard' }}</span>
+                <span class="text-[#A33B47]">/</span>
+                <span class="capitalize text-[#A33B47] font-semibold">{{ request()->segment(2) ?? 'Dashboard' }}</span>
             </div>
             <div class="flex items-center gap-4">
                 <a href="{{ route('home') }}" target="_blank" class="hidden sm:inline-flex items-center gap-1 text-xs text-[#8C7A6B] hover:text-[#171412] transition-colors">

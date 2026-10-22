@@ -12,12 +12,12 @@
                 <span>✦</span>
                 <span>Atelier Inventory Studio</span>
             </div>
-            <h1 class="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#171412] tracking-tight">Product Catalog</h1>
+            <h1 class="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#171412] tracking-tight">Product <span class="text-[#A33B47] italic">Catalog</span></h1>
             <p class="text-xs sm:text-sm text-[#736B63] mt-1 font-light">Manage, organize, and curate all Japanese salon gels, bespoke press-ons, and equipment.</p>
         </div>
 
         <div class="flex items-center gap-3">
-            <x-button :href="route('admin.products.create')" variant="primary" size="md">
+            <x-button :href="route('admin.products.create')" variant="maroon" size="md">
                 <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
                 </svg>
@@ -31,11 +31,11 @@
         <!-- All Products -->
         <a 
             href="{{ route('admin.products.index', array_merge(request()->except(['status', 'page']))) }}"
-            class="p-4 bg-white border transition-all duration-200 block shadow-2xs hover:shadow-xs {{ !request('status') ? 'border-[#171412]/70 bg-[#FAF8F5]/50' : 'border-[#ECE6DE] hover:border-[#171412]/50' }}"
+            class="p-4 bg-white border transition-all duration-200 block shadow-2xs hover:shadow-xs {{ !request('status') ? 'border-[#A33B47] ring-1 ring-[#A33B47]/20 bg-[#FBEFE9]/25' : 'border-[#ECE6DE] hover:border-[#A33B47]/40' }}"
         >
             <div class="flex items-center justify-between">
-                <span class="text-[11px] font-bold uppercase tracking-wider text-[#736B63]">All Products</span>
-                <span class="w-2 h-2 rounded-full bg-[#171412]"></span>
+                <span class="text-[11px] font-bold uppercase tracking-wider {{ !request('status') ? 'text-[#A33B47]' : 'text-[#736B63]' }}">All Products</span>
+                <span class="w-2 h-2 rounded-full {{ !request('status') ? 'bg-[#A33B47]' : 'bg-[#171412]' }}"></span>
             </div>
             <div class="mt-2 text-2xl font-serif font-bold text-[#171412] tabular-nums">
                 {{ $stats['total'] ?? $products->total() }}

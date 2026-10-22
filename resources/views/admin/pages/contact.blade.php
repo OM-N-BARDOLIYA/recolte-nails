@@ -65,7 +65,7 @@ function contactPageManager() {
                 <span class="text-[#A33B47]">✦</span>
                 <span>Concierge CMS</span>
             </div>
-            <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">Contact Lounge Content Manager</h1>
+            <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">Contact Lounge <span class="text-[#A33B47] italic">Content Manager</span></h1>
             <p class="text-xs sm:text-sm text-[#6A625A] font-light">100% synchronized to live storefront: Lounge Header, Contact Channels (WhatsApp, Email, Paris Atelier), Operating Hours, and WhatsApp Topic Selector.</p>
         </div>
 
@@ -80,7 +80,7 @@ function contactPageManager() {
             type="button"
             @click="activeTab = 'header'" 
             class="px-4 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all shrink-0 cursor-pointer border"
-            :class="activeTab === 'header' ? 'bg-[#171412] text-white border-[#171412]' : 'bg-white text-[#6A625A] hover:bg-[#FAF8F5] hover:text-[#171412] border-[#ECE6DE]'"
+            :class="activeTab === 'header' ? 'bg-[#A33B47] text-white border-[#A33B47] shadow-xs' : 'bg-white text-[#6A625A] hover:bg-[#FBEFE9] hover:text-[#A33B47] hover:border-[#A33B47]/40 border-[#ECE6DE]'"
         >
             <span>🌟</span> 1. Header &amp; Intro
         </button>
@@ -89,7 +89,7 @@ function contactPageManager() {
             type="button"
             @click="activeTab = 'channels'" 
             class="px-4 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all shrink-0 cursor-pointer border"
-            :class="activeTab === 'channels' ? 'bg-[#171412] text-white border-[#171412]' : 'bg-white text-[#6A625A] hover:bg-[#FAF8F5] hover:text-[#171412] border-[#ECE6DE]'"
+            :class="activeTab === 'channels' ? 'bg-[#A33B47] text-white border-[#A33B47] shadow-xs' : 'bg-white text-[#6A625A] hover:bg-[#FBEFE9] hover:text-[#A33B47] hover:border-[#A33B47]/40 border-[#ECE6DE]'"
         >
             <span>📞</span> 2. Channels &amp; Hours
         </button>
@@ -98,7 +98,7 @@ function contactPageManager() {
             type="button"
             @click="activeTab = 'topics'" 
             class="px-4 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all shrink-0 cursor-pointer border"
-            :class="activeTab === 'topics' ? 'bg-[#171412] text-white border-[#171412]' : 'bg-white text-[#6A625A] hover:bg-[#FAF8F5] hover:text-[#171412] border-[#ECE6DE]'"
+            :class="activeTab === 'topics' ? 'bg-[#A33B47] text-white border-[#A33B47] shadow-xs' : 'bg-white text-[#6A625A] hover:bg-[#FBEFE9] hover:text-[#A33B47] hover:border-[#A33B47]/40 border-[#ECE6DE]'"
         >
             <span>💬</span> 3. WhatsApp Topics &amp; Badges
         </button>

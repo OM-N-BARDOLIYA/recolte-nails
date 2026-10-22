@@ -50,7 +50,7 @@ function aboutPageManager() {
                 <span class="text-[#A33B47]">✦</span>
                 <span>Brand Narrative CMS</span>
             </div>
-            <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">About Atelier Content Manager</h1>
+            <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">About Atelier <span class="text-[#A33B47] italic">Content Manager</span></h1>
             <p class="text-xs sm:text-sm text-[#6A625A] font-light">100% synchronized to live storefront: 7s Hero Stories (4 Slides), 4-Step Creation Journey, VIP Concierge Showcase (3 Photos), and Instagram Grid.</p>
         </div>
 
@@ -66,7 +66,7 @@ function aboutPageManager() {
             type="button"
             @click="activeTab = 'hero'" 
             class="px-4 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all shrink-0 cursor-pointer border"
-            :class="activeTab === 'hero' ? 'bg-[#171412] text-white border-[#171412]' : 'bg-white text-[#6A625A] hover:bg-[#FAF8F5] hover:text-[#171412] border-[#ECE6DE]'"
+            :class="activeTab === 'hero' ? 'bg-[#A33B47] text-white border-[#A33B47] shadow-xs' : 'bg-white text-[#6A625A] hover:bg-[#FBEFE9] hover:text-[#A33B47] hover:border-[#A33B47]/40 border-[#ECE6DE]'"
         >
             <span>🌟</span> 1. Hero Stories (4 Slides)
         </button>
@@ -75,7 +75,7 @@ function aboutPageManager() {
             type="button"
             @click="activeTab = 'steps'" 
             class="px-4 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all shrink-0 cursor-pointer border"
-            :class="activeTab === 'steps' ? 'bg-[#171412] text-white border-[#171412]' : 'bg-white text-[#6A625A] hover:bg-[#FAF8F5] hover:text-[#171412] border-[#ECE6DE]'"
+            :class="activeTab === 'steps' ? 'bg-[#A33B47] text-white border-[#A33B47] shadow-xs' : 'bg-white text-[#6A625A] hover:bg-[#FBEFE9] hover:text-[#A33B47] hover:border-[#A33B47]/40 border-[#ECE6DE]'"
         >
             <span>⏳</span> 2. Creation Journey (4 Steps)
         </button>
@@ -84,7 +84,7 @@ function aboutPageManager() {
             type="button"
             @click="activeTab = 'concierge'" 
             class="px-4 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all shrink-0 cursor-pointer border"
-            :class="activeTab === 'concierge' ? 'bg-[#171412] text-white border-[#171412]' : 'bg-white text-[#6A625A] hover:bg-[#FAF8F5] hover:text-[#171412] border-[#ECE6DE]'"
+            :class="activeTab === 'concierge' ? 'bg-[#A33B47] text-white border-[#A33B47] shadow-xs' : 'bg-white text-[#6A625A] hover:bg-[#FBEFE9] hover:text-[#A33B47] hover:border-[#A33B47]/40 border-[#ECE6DE]'"
         >
             <span>💬</span> 3. VIP Concierge (3 Photos)
         </button>
@@ -93,7 +93,7 @@ function aboutPageManager() {
             type="button" 
             @click="activeTab = 'instagram'" 
             class="px-4 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all shrink-0 cursor-pointer border"
-            :class="activeTab === 'instagram' ? 'bg-[#171412] text-white border-[#171412]' : 'bg-white text-[#6A625A] hover:bg-[#FAF8F5] hover:text-[#171412] border-[#ECE6DE]'"
+            :class="activeTab === 'instagram' ? 'bg-[#A33B47] text-white border-[#A33B47] shadow-xs' : 'bg-white text-[#6A625A] hover:bg-[#FBEFE9] hover:text-[#A33B47] hover:border-[#A33B47]/40 border-[#ECE6DE]'"
         >
             <span>📸</span> 4. Instagram Video Reels (3 Videos)
         </button>

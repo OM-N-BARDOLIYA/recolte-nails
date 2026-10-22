@@ -12,14 +12,14 @@
                 <span class="text-[#A33B47]">✦</span>
                 <span>Live Studio Overview</span>
             </div>
-            <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">Atelier CMS Dashboard</h1>
+            <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">Atelier CMS <span class="text-[#A33B47] italic">Dashboard</span></h1>
             <p class="text-xs sm:text-sm text-[#6A625A] font-light">Dynamically manage Recolte Nails collections, page copy, and studio concierge.</p>
         </div>
 
         <div class="flex items-center gap-3">
             <a 
                 href="{{ route('admin.products.create') }}" 
-                class="px-6 py-3 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] shadow-xs hover:shadow-md transition-all flex items-center gap-2"
+                class="px-6 py-3 rounded-none bg-[#A33B47] hover:bg-[#882F3A] text-white text-xs font-bold uppercase tracking-[0.18em] shadow-xs hover:shadow-md transition-all flex items-center gap-2 border border-[#A33B47]"
             >
                 <span>+ Add New Product</span>
             </a>
@@ -72,7 +72,10 @@
         <!-- Recent Products Table -->
         <div class="lg:col-span-8 p-6 sm:p-8 rounded-none bg-white border border-[#ECE6DE] space-y-5 shadow-2xs">
             <div class="flex items-center justify-between border-b border-[#ECE6DE] pb-4">
-                <h2 class="font-serif text-xl font-bold text-[#171412]">Recent Nail Collections</h2>
+                <h2 class="font-serif text-xl font-bold text-[#171412] flex items-center gap-2">
+                    <span class="text-[#A33B47]">✦</span>
+                    <span>Recent Nail Collections</span>
+                </h2>
                 <a href="{{ route('admin.products.index') }}" class="text-xs text-[#A33B47] hover:underline font-bold uppercase tracking-wider">View All Products →</a>
             </div>
 
@@ -124,7 +127,10 @@
         <div class="lg:col-span-4 space-y-6">
             <div class="p-6 rounded-none bg-white border border-[#ECE6DE] space-y-4 shadow-2xs">
                 <div class="border-b border-[#ECE6DE] pb-2">
-                    <h3 class="font-serif text-lg font-bold text-[#171412]">Studio WhatsApp Routing</h3>
+                    <h3 class="font-serif text-lg font-bold text-[#171412] flex items-center gap-2">
+                        <span class="text-[#A33B47]">✦</span>
+                        <span>Studio WhatsApp Routing</span>
+                    </h3>
                     <p class="text-[11px] text-[#8C7A6B]">Live 1-Click order destination</p>
                 </div>
                 
@@ -149,7 +155,10 @@
 
             <div class="p-6 rounded-none bg-white border border-[#ECE6DE] space-y-3 shadow-2xs">
                 <div class="flex items-center justify-between border-b border-[#ECE6DE] pb-2">
-                    <h3 class="font-serif text-lg font-bold text-[#171412]">Dynamic Page Editors</h3>
+                    <h3 class="font-serif text-lg font-bold text-[#171412] flex items-center gap-2">
+                        <span class="text-[#A33B47]">✦</span>
+                        <span>Dynamic Page Editors</span>
+                    </h3>
                     <span class="text-[10px] text-[#8C7A6B] font-bold uppercase tracking-[0.2em]">Website Copy</span>
                 </div>
 

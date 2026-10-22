@@ -17,7 +17,11 @@
                 <span>Product Catalog Studio</span>
             </div>
             <h1 class="font-serif text-3xl font-medium text-[#171412] tracking-tight">
-                {{ $isEdit ? 'Edit: ' . $product->title : 'Create New Product' }}
+                @if($isEdit)
+                    Edit: <span class="text-[#A33B47] italic">{{ $product->title }}</span>
+                @else
+                    Create <span class="text-[#A33B47] italic">New Product</span>
+                @endif
             </h1>
             <p class="text-xs sm:text-sm text-[#6A625A] font-light">Configure pricing, luxury descriptions, multi-angle gallery, and local shade image uploads.</p>
         </div>
@@ -63,7 +67,10 @@
 
         <!-- ── 1. BASIC PRODUCT INFO ── -->
         <div class="p-6 sm:p-8 rounded-none bg-white border border-[#ECE6DE] space-y-6 shadow-2xs">
-            <h2 class="font-serif text-xl font-bold text-[#171412] border-b border-[#ECE6DE] pb-3">1. Basic Information &amp; Pricing</h2>
+            <h2 class="font-serif text-xl font-bold text-[#171412] border-b border-[#ECE6DE] pb-3 flex items-center gap-2">
+                <span class="text-[#A33B47]">✦</span>
+                <span>1. Basic Information &amp; Pricing</span>
+            </h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <!-- Title -->
@@ -154,7 +161,10 @@
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-[#ECE6DE] pb-4">
                 <div class="space-y-1">
                     <div class="flex flex-wrap items-center gap-2.5">
-                        <h2 class="font-serif text-xl font-bold text-[#171412]">2. Visual Media Studio</h2>
+                        <h2 class="font-serif text-xl font-bold text-[#171412] flex items-center gap-2">
+                            <span class="text-[#A33B47]">✦</span>
+                            <span>2. Visual Media Studio</span>
+                        </h2>
                         <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FAF8F5] border border-[#ECE6DE] text-[#736B63] text-[11px] font-medium tracking-wide whitespace-nowrap">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
                             <span>Drag &amp; Drop Reordering</span>
@@ -412,7 +422,10 @@
         <div class="p-6 sm:p-8 rounded-none bg-white border border-[#ECE6DE] space-y-6 shadow-2xs">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#ECE6DE] pb-4">
                 <div>
-                    <h2 class="font-serif text-xl font-bold text-[#171412]">3. Product Variations</h2>
+                    <h2 class="font-serif text-xl font-bold text-[#171412] flex items-center gap-2">
+                        <span class="text-[#A33B47]">✦</span>
+                        <span>3. Product Variations</span>
+                    </h2>
                     <p class="text-[11px] text-[#8C7A6B]">Choose whether this product uses Color Shades (e.g. Pearl Glaze), Number Filters (e.g. 01 to 09 for BIAB Builder Gel), or No Variations.</p>
                 </div>
 
@@ -591,7 +604,10 @@
         <div class="p-6 sm:p-8 rounded-none bg-white border border-[#ECE6DE] space-y-6 shadow-2xs">
             <div class="flex items-center justify-between border-b border-[#ECE6DE] pb-3">
                 <div>
-                    <h2 class="font-serif text-xl font-bold text-[#171412]">4. Sizing &amp; Volume Options</h2>
+                    <h2 class="font-serif text-xl font-bold text-[#171412] flex items-center gap-2">
+                        <span class="text-[#A33B47]">✦</span>
+                        <span>4. Sizing &amp; Volume Options</span>
+                    </h2>
                     <p class="text-[11px] text-[#8C7A6B]">Press-on sizes (XS, S, M, L) or Gel bottle volumes (15ml, 30ml).</p>
                 </div>
                 <x-button 
@@ -652,7 +668,7 @@
 
             <button 
                 type="submit" 
-                class="px-8 py-3.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs sm:text-sm font-bold uppercase tracking-[0.18em] shadow-xs hover:shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                class="px-8 py-3.5 rounded-none bg-[#A33B47] hover:bg-[#882F3A] text-white text-xs sm:text-sm font-bold uppercase tracking-[0.18em] shadow-xs hover:shadow-md transition-all flex items-center gap-2 cursor-pointer border border-[#A33B47]"
             >
                 <span>{{ $isEdit ? 'Save & Update Product' : 'Publish Product to Live Website' }}</span>
                 <span>→</span>

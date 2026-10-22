@@ -11,7 +11,7 @@
             <span>Global Configuration &amp; Security</span>
         </div>
         <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">
-            {{ $activeTab === 'security' ? 'Admin Access & Credentials' : 'Studio & WhatsApp Settings' }}
+            {{ $activeTab === 'security' ? 'Admin Access & ' : 'Studio & ' }}<span class="text-[#A33B47] italic">{{ $activeTab === 'security' ? 'Credentials' : 'WhatsApp Settings' }}</span>
         </h1>
         <p class="text-xs sm:text-sm text-[#6A625A] font-light">
             {{ $activeTab === 'security' 
@@ -24,7 +24,7 @@
     <div class="flex items-center gap-2 border-b border-[#ECE6DE] pb-px">
         <a 
             href="{{ route('admin.settings.index', ['tab' => 'studio']) }}"
-            class="px-5 py-3 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 border-b-2 {{ $activeTab !== 'security' ? 'border-[#171412] text-[#171412] bg-white shadow-2xs' : 'border-transparent text-[#8C7A6B] hover:text-[#171412] hover:bg-[#FAF8F5]' }}"
+            class="px-5 py-3 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 border-b-2 {{ $activeTab !== 'security' ? 'border-[#A33B47] text-[#A33B47] bg-white shadow-2xs' : 'border-transparent text-[#8C7A6B] hover:text-[#171412] hover:bg-[#FAF8F5]' }}"
         >
             <span>⚙️</span>
             <span>Studio &amp; WhatsApp Info</span>
@@ -137,7 +137,7 @@
             <div class="flex justify-end">
                 <button 
                     type="submit" 
-                    class="px-8 py-3.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] shadow-xs hover:shadow-md transition-all cursor-pointer"
+                    class="px-8 py-3.5 rounded-none bg-[#A33B47] hover:bg-[#882F3A] text-white text-xs font-bold uppercase tracking-[0.18em] shadow-xs hover:shadow-md transition-all cursor-pointer border border-[#A33B47]"
                 >
                     Save Studio Settings →
                 </button>
@@ -270,7 +270,7 @@
             <div class="flex justify-end">
                 <button 
                     type="submit" 
-                    class="px-8 py-3.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] shadow-xs hover:shadow-md transition-all cursor-pointer"
+                    class="px-8 py-3.5 rounded-none bg-[#A33B47] hover:bg-[#882F3A] text-white text-xs font-bold uppercase tracking-[0.18em] shadow-xs hover:shadow-md transition-all cursor-pointer border border-[#A33B47]"
                 >
                     Update Admin Credentials →
                 </button>

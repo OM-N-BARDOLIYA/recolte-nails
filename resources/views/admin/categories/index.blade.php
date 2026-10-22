@@ -10,14 +10,17 @@
             <span class="text-[#A33B47]">✦</span>
             <span>Catalog Taxonomy</span>
         </div>
-        <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">Categories &amp; Collections</h1>
+        <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">Categories &amp; <span class="text-[#A33B47] italic">Collections</span></h1>
         <p class="text-xs sm:text-sm text-[#6A625A] font-light">Organize your catalog archives into accessible category pills and collection filters.</p>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div class="lg:col-span-7 space-y-4">
             <div class="flex items-center justify-between">
-                <h2 class="font-serif text-xl font-bold text-[#171412]">Categories ({{ $categories->count() }})</h2>
+                <h2 class="font-serif text-xl font-bold text-[#171412] flex items-center gap-2">
+                    <span class="text-[#A33B47]">✦</span>
+                    <span>Categories ({{ $categories->count() }})</span>
+                </h2>
                 <div class="flex items-center gap-2 text-xs">
                     <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10.5px] font-semibold">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
@@ -198,7 +201,7 @@
                                     </x-button>
                                     <x-button 
                                         type="submit" 
-                                        variant="primary"
+                                        variant="maroon"
                                         size="sm"
                                     >
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -214,7 +217,10 @@
 
         <div class="lg:col-span-5">
             <div class="p-6 sm:p-8 rounded-none bg-white border border-[#ECE6DE] space-y-4 shadow-2xs sticky top-6">
-                <h2 class="font-serif text-xl font-bold text-[#171412] border-b border-[#ECE6DE] pb-3">+ Create New Category</h2>
+                <h2 class="font-serif text-xl font-bold text-[#171412] border-b border-[#ECE6DE] pb-3 flex items-center gap-2">
+                    <span class="text-[#A33B47]">✦</span>
+                    <span>Create New Category</span>
+                </h2>
 
                 <form method="POST" action="{{ route('admin.categories.store') }}" class="space-y-4">
                     @csrf
@@ -276,7 +282,7 @@
 
                     <x-button 
                         type="submit" 
-                        variant="primary"
+                        variant="maroon"
                         size="lg"
                         fullWidth
                     >

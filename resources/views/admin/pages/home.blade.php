@@ -155,7 +155,7 @@ function homePageManager() {
                 <span class="text-[#A33B47]">✦</span>
                 <span>Dynamic Page Content</span>
             </div>
-            <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">Homepage Content Manager</h1>
+            <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">Homepage <span class="text-[#A33B47] italic">Content Manager</span></h1>
             <p class="text-xs sm:text-sm text-[#6A625A] font-light">100% synchronized to live storefront: HD Hero Banner, 5-Column Trust Strip, Shop by Category, Colors Showcase, and Instagram Grid.</p>
         </div>
 
@@ -170,7 +170,7 @@ function homePageManager() {
             type="button"
             @click="activeTab = 'hero'" 
             class="px-4 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all shrink-0 cursor-pointer border"
-            :class="activeTab === 'hero' ? 'bg-[#171412] text-white border-[#171412]' : 'bg-white text-[#6A625A] hover:bg-[#FAF8F5] hover:text-[#171412] border-[#ECE6DE]'"
+            :class="activeTab === 'hero' ? 'bg-[#A33B47] text-white border-[#A33B47] shadow-xs' : 'bg-white text-[#6A625A] hover:bg-[#FBEFE9] hover:text-[#A33B47] hover:border-[#A33B47]/40 border-[#ECE6DE]'"
         >
             <span>✨</span> 1. Hero Banner
         </button>
@@ -179,7 +179,7 @@ function homePageManager() {
             type="button"
             @click="activeTab = 'trust'" 
             class="px-4 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all shrink-0 cursor-pointer border"
-            :class="activeTab === 'trust' ? 'bg-[#171412] text-white border-[#171412]' : 'bg-white text-[#6A625A] hover:bg-[#FAF8F5] hover:text-[#171412] border-[#ECE6DE]'"
+            :class="activeTab === 'trust' ? 'bg-[#A33B47] text-white border-[#A33B47] shadow-xs' : 'bg-white text-[#6A625A] hover:bg-[#FBEFE9] hover:text-[#A33B47] hover:border-[#A33B47]/40 border-[#ECE6DE]'"
         >
             <span>🛡️</span> 2. Trust Strip
         </button>
@@ -188,7 +188,7 @@ function homePageManager() {
             type="button"
             @click="activeTab = 'categories'" 
             class="px-4 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all shrink-0 cursor-pointer border"
-            :class="activeTab === 'categories' ? 'bg-[#171412] text-white border-[#171412]' : 'bg-white text-[#6A625A] hover:bg-[#FAF8F5] hover:text-[#171412] border-[#ECE6DE]'"
+            :class="activeTab === 'categories' ? 'bg-[#A33B47] text-white border-[#A33B47] shadow-xs' : 'bg-white text-[#6A625A] hover:bg-[#FBEFE9] hover:text-[#A33B47] hover:border-[#A33B47]/40 border-[#ECE6DE]'"
         >
             <span>🧴</span> 3. Shop by Category
         </button>
@@ -197,7 +197,7 @@ function homePageManager() {
             type="button"
             @click="activeTab = 'showcase'" 
             class="px-4 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all shrink-0 cursor-pointer border"
-            :class="activeTab === 'showcase' ? 'bg-[#171412] text-white border-[#171412]' : 'bg-white text-[#6A625A] hover:bg-[#FAF8F5] hover:text-[#171412] border-[#ECE6DE]'"
+            :class="activeTab === 'showcase' ? 'bg-[#A33B47] text-white border-[#A33B47] shadow-xs' : 'bg-white text-[#6A625A] hover:bg-[#FBEFE9] hover:text-[#A33B47] hover:border-[#A33B47]/40 border-[#ECE6DE]'"
         >
             <span>🎨</span> 4. Colors Showcase
         </button>
@@ -206,7 +206,7 @@ function homePageManager() {
             type="button"
             @click="activeTab = 'instagram'" 
             class="px-4 py-2.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all shrink-0 cursor-pointer border"
-            :class="activeTab === 'instagram' ? 'bg-[#171412] text-white border-[#171412]' : 'bg-white text-[#6A625A] hover:bg-[#FAF8F5] hover:text-[#171412] border-[#ECE6DE]'"
+            :class="activeTab === 'instagram' ? 'bg-[#A33B47] text-white border-[#A33B47] shadow-xs' : 'bg-white text-[#6A625A] hover:bg-[#FBEFE9] hover:text-[#A33B47] hover:border-[#A33B47]/40 border-[#ECE6DE]'"
         >
             <span>📸</span> 5. Instagram Community
         </button>

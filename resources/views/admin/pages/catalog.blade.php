@@ -24,7 +24,7 @@
                 <span class="text-[#A33B47]">✦</span>
                 <span>Dynamic Page Content</span>
             </div>
-            <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">Catalog Page Header &amp; Banner</h1>
+            <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">Catalog Page <span class="text-[#A33B47] italic">Header &amp; Banner</span></h1>
             <p class="text-xs sm:text-sm text-[#6A625A] font-light">Customize the Haute Nail Catalog banner, typography, descriptions, and the WhatsApp bespoke sizing advice card.</p>
         </div>
 
@@ -233,7 +233,7 @@
             <span class="text-xs text-[#6A625A] font-light">Changes will reflect immediately on the public Catalog page (/products).</span>
             <button 
                 type="submit" 
-                class="px-8 py-3.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs sm:text-sm font-bold uppercase tracking-[0.18em] shadow-xs hover:shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                class="px-8 py-3.5 rounded-none bg-[#A33B47] hover:bg-[#882F3A] text-white text-xs sm:text-sm font-bold uppercase tracking-[0.18em] shadow-xs hover:shadow-md transition-all flex items-center gap-2 cursor-pointer border border-[#A33B47]"
             >
                 <span>Save Catalog Banner Changes</span>
                 <span>→</span>

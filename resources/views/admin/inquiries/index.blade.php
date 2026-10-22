@@ -10,7 +10,7 @@
             <span class="text-[#A33B47]">✦</span>
             <span>Studio Inbox</span>
         </div>
-        <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">Customer Inquiries</h1>
+        <h1 class="font-serif text-3xl sm:text-4xl font-medium text-[#171412] tracking-tight">Customer <span class="text-[#A33B47] italic">Inquiries</span></h1>
         <p class="text-xs sm:text-sm text-[#6A625A] font-light">Direct client messages, custom sizing requests, and inquiries submitted through the contact form.</p>
     </div>
 
