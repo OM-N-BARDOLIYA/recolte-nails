@@ -333,45 +333,25 @@ function homePageManager() {
         <!-- ════════════════ TAB 2: TRUST PROPOSITION STRIP ════════════════ -->
         <div x-show="activeTab === 'trust'" class="space-y-6">
             <div class="p-6 sm:p-8 rounded-none bg-white border border-[#ECE6DE] space-y-6 shadow-2xs">
-                <div class="border-b border-[#ECE6DE] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="border-b border-[#ECE6DE] pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <h2 class="font-serif text-xl font-medium text-[#171412]">5-Column Value &amp; Trust Proposition Badges</h2>
-                        <p class="text-xs text-[#6A625A] mt-1 font-light">Appears directly below the hero banner. Upload custom badge logos/icons or choose from curated luxury vector icons.</p>
+                        <div class="flex items-center gap-2.5 mb-1">
+                            <h2 class="font-serif text-xl font-medium text-[#171412]">Value &amp; Trust Proposition Badges</h2>
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#FAF8F5] border border-[#ECE6DE] text-[11px] font-bold text-[#A33B47] uppercase tracking-wider shrink-0">
+                                <span x-text="trustBadges.length"></span>
+                                <span>Badges Active</span>
+                            </span>
+                        </div>
+                        <p class="text-xs text-[#6A625A] font-light">Appears directly below the hero banner. Add, delete, and customize any number of luxury trust badges with custom logo uploads or vector icons.</p>
                     </div>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAF8F5] border border-[#ECE6DE] text-[10.5px] font-bold text-[#A33B47] uppercase tracking-wider shrink-0">
-                        <span>5 Badges Active</span>
-                    </span>
-                </div>
-
-                @php 
-                    $defaultIcons = ['diamond', 'shield', 'truck', 'support', 'star'];
-                    $trustItems = $trust_strip['items'] ?? [
-                        ['title' => 'Premium Quality', 'sub' => 'Products', 'icon' => 'diamond', 'image' => null],
-                        ['title' => 'Safe & Skin Friendly', 'sub' => 'Formulas', 'icon' => 'shield', 'image' => null],
-                        ['title' => 'Fast & Reliable', 'sub' => 'Shipping', 'icon' => 'truck', 'image' => null],
-                        ['title' => 'Expert Support', 'sub' => 'Always', 'icon' => 'support', 'image' => null],
-                        ['title' => 'Trusted by', 'sub' => 'Professionals', 'icon' => 'star', 'image' => null],
-                    ];
-                @endphp
-
-                <div class="border-b border-[#ECE6DE] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div>
-                        <h2 class="font-serif text-xl font-medium text-[#171412]">Dynamic Value &amp; Trust Proposition Badges</h2>
-                        <p class="text-xs text-[#6A625A] mt-1 font-light">Appears directly below the hero banner. Add, delete, and customize any number of luxury trust badges with custom logos or vector icons.</p>
-                    </div>
-                    <div class="flex items-center gap-2.5">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAF8F5] border border-[#ECE6DE] text-[10.5px] font-bold text-[#A33B47] uppercase tracking-wider shrink-0">
-                            <span x-text="trustBadges.length + ' Badges Active'"></span>
-                        </span>
-                        <button 
-                            type="button" 
-                            @click="addTrustBadge()"
-                            class="px-4 py-1.5 bg-[#171412] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs"
-                        >
-                            <span>+</span>
-                            <span>Add New Badge</span>
-                        </button>
-                    </div>
+                    <button 
+                        type="button" 
+                        @click="addTrustBadge()"
+                        class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.14em] transition-all shrink-0 cursor-pointer shadow-2xs whitespace-nowrap"
+                    >
+                        <span class="text-sm font-bold leading-none">＋</span>
+                        <span>Add New Badge</span>
+                    </button>
                 </div>
 
                 <div class="space-y-6">
