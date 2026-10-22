@@ -66,7 +66,7 @@
                             </td>
 
                             <td class="py-4 px-5 text-right">
-                                <form method="POST" action="{{ route('admin.inquiries.destroy', $inq->id) }}" onsubmit="return confirm('Delete this inquiry?');">
+                                <form method="POST" action="{{ route('admin.inquiries.destroy', $inq->id) }}" data-confirm="Permanently delete inquiry from &quot;{{ addslashes($inq->name) }}&quot;?" data-confirm-title="Delete Inquiry">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="p-1.5 rounded-none bg-rose-50 hover:bg-rose-100 text-[#A33B47] transition-colors border border-rose-200 cursor-pointer">

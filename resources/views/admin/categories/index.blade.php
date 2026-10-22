@@ -53,7 +53,7 @@
                                     <span>Edit</span>
                                 </button>
 
-                                <form method="POST" action="{{ route('admin.categories.destroy', $cat->id) }}" onsubmit="return confirm('Delete this category? Products will be unlinked.');" class="inline-block">
+                                <form method="POST" action="{{ route('admin.categories.destroy', $cat->id) }}" data-confirm="Permanently delete category &quot;{{ addslashes($cat->name) }}&quot;? Associated products will be safely unlinked." data-confirm-title="Delete Category" class="inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="p-1.5 text-xs text-[#A33B47] hover:text-white hover:bg-[#A33B47] border border-transparent hover:border-[#A33B47] transition-all cursor-pointer leading-none flex items-center justify-center" title="Delete category">

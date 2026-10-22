@@ -346,7 +346,7 @@
                                     </a>
 
                                     <!-- Delete Button -->
-                                    <form method="POST" action="{{ route('admin.products.destroy', $product->id) }}" onsubmit="return confirm('Permanently remove &quot;{{ addslashes($product->title) }}&quot; from catalog?');" class="inline">
+                                    <form method="POST" action="{{ route('admin.products.destroy', $product->id) }}" data-confirm="Permanently remove &quot;{{ addslashes($product->title) }}&quot; from catalog?" data-confirm-title="Delete Product" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button 

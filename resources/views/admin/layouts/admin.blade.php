@@ -253,8 +253,9 @@
             </div>
         </header>
 
-        <!-- Floating Luxury Atelier CMS Toaster -->
+        <!-- Floating Luxury Atelier CMS Toaster & Modal Box -->
         @include('admin.components.toaster')
+        @include('admin.components.confirm-modal')
 
         <!-- Main Body Content -->
         <main class="p-6 sm:p-8 lg:p-10 max-w-7xl w-full mx-auto space-y-8 flex-grow">

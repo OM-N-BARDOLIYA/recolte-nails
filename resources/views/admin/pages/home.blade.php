@@ -36,7 +36,9 @@ function homePageManager() {
         trustBadges: {!! $initialBadgesJson !!},
         addTrustBadge() {
             if (this.trustBadges.length >= 8) {
-                alert('Maximum of 8 badges allowed.');
+                if (window.showToast) {
+                    window.showToast('Maximum of 8 proposition badges allowed to maintain storefront aesthetic.', 'warning', 'Limit Reached');
+                }
                 return;
             }
             this.trustBadges.push({
@@ -45,13 +47,32 @@ function homePageManager() {
                 icon: 'star',
                 image: ''
             });
+            if (window.showToast) {
+                window.showToast('New proposition badge added. Fill details and save.', 'success', 'Badge Added');
+            }
         },
         removeTrustBadge(index) {
             if (this.trustBadges.length <= 1) {
-                alert('You must have at least 1 badge.');
+                if (window.showToast) {
+                    window.showToast('You must have at least 1 proposition badge for the storefront.', 'warning', 'Action Required');
+                }
                 return;
             }
-            if (confirm('Are you sure you want to remove this badge?')) {
+            const badgeTitle = this.trustBadges[index].title || 'this badge';
+            if (window.confirmModal) {
+                window.confirmModal({
+                    title: 'Delete Proposition Badge?',
+                    message: 'Are you sure you want to delete "' + badgeTitle + '"? You can still cancel without saving.',
+                    confirmText: 'Yes, Delete Badge',
+                    type: 'danger',
+                    onConfirm: () => {
+                        this.trustBadges.splice(index, 1);
+                        if (window.showToast) {
+                            window.showToast('Proposition badge removed.', 'info', 'Badge Removed');
+                        }
+                    }
+                });
+            } else {
                 this.trustBadges.splice(index, 1);
             }
         },

@@ -28,10 +28,28 @@
         },
         removeTopic(idx) {
             if (this.topics.length <= 1) {
-                alert('You must have at least 1 inquiry topic for the live website.');
+                if (window.showToast) {
+                    window.showToast('You must have at least 1 inquiry topic for the live website.', 'warning', 'Action Required');
+                }
                 return;
             }
-            this.topics.splice(idx, 1);
+            const topicLabel = this.topics[idx].label || 'this topic';
+            if (window.confirmModal) {
+                window.confirmModal({
+                    title: 'Remove Inquiry Topic?',
+                    message: 'Are you sure you want to delete "' + topicLabel + '" from the contact concierge?',
+                    confirmText: 'Yes, Remove Topic',
+                    type: 'danger',
+                    onConfirm: () => {
+                        this.topics.splice(idx, 1);
+                        if (window.showToast) {
+                            window.showToast('Inquiry topic removed.', 'info', 'Topic Removed');
+                        }
+                    }
+                });
+            } else {
+                this.topics.splice(idx, 1);
+            }
         }
     }">
     
