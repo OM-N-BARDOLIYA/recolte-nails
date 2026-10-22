@@ -99,7 +99,7 @@
                 variant="primary"
                 size="sm"
                 @click="confirmAction()"
-                :class="{
+                x-bind:class="{
                     '!bg-[#A33B47] hover:!bg-[#882F3A] !border-[#A33B47]': type === 'danger',
                     '!bg-amber-600 hover:!bg-amber-700 !border-amber-600': type === 'warning',
                     '!bg-[#171412] hover:!bg-black !border-[#171412]': type === 'info'
