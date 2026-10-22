@@ -3,6 +3,17 @@
 @section('title', 'Homepage Content Manager — Atelier CMS')
 
 @section('content')
+@php
+    $defaultTrustList = [
+        ['title' => 'Premium Quality', 'sub' => 'Products', 'icon' => 'diamond', 'image' => ''],
+        ['title' => 'Safe & Skin Friendly', 'sub' => 'Formulas', 'icon' => 'shield', 'image' => ''],
+        ['title' => 'Fast & Reliable', 'sub' => 'Shipping', 'icon' => 'truck', 'image' => ''],
+        ['title' => 'Expert Support', 'sub' => 'Always', 'icon' => 'support', 'image' => ''],
+        ['title' => 'Trusted by', 'sub' => 'Professionals', 'icon' => 'star', 'image' => ''],
+    ];
+    $initialBadgesJson = json_encode(!empty($trust_strip['items']) ? $trust_strip['items'] : $defaultTrustList);
+@endphp
+
 <div class="space-y-6 max-w-5xl mx-auto" x-data="{ 
     activeTab: 'hero',
     activeHeroSlide: 0,
@@ -20,13 +31,7 @@
     video0: '{{ $instagram['posts'][0]['video'] ?? asset('uploads/pages/about_insta_video_0_1789736475.mp4') }}',
     video1: '{{ $instagram['posts'][1]['video'] ?? asset('uploads/pages/about_insta_video_1_1789736475.mp4') }}',
     video2: '{{ $instagram['posts'][2]['video'] ?? asset('uploads/pages/about_insta_video_2_1789736475.mp4') }}',
-    trustBadges: @json($trust_strip['items'] ?? [
-        ['title' => 'Premium Quality', 'sub' => 'Products', 'icon' => 'diamond', 'image' => ''],
-        ['title' => 'Safe & Skin Friendly', 'sub' => 'Formulas', 'icon' => 'shield', 'image' => ''],
-        ['title' => 'Fast & Reliable', 'sub' => 'Shipping', 'icon' => 'truck', 'image' => ''],
-        ['title' => 'Expert Support', 'sub' => 'Always', 'icon' => 'support', 'image' => ''],
-        ['title' => 'Trusted by', 'sub' => 'Professionals', 'icon' => 'star', 'image' => ''],
-    ]),
+    trustBadges: {!! $initialBadgesJson !!},
     addTrustBadge() {
         if (this.trustBadges.length >= 8) {
             alert('Maximum of 8 badges allowed.');
