@@ -131,23 +131,26 @@
 
                 <div x-show="open" 
                     x-cloak
+                    data-lenis-prevent
                     x-transition:enter="transition ease-out duration-150"
                     x-transition:enter-start="opacity-0 -translate-y-1 scale-98"
                     x-transition:enter-end="opacity-100 translate-y-0 scale-100"
                     x-transition:leave="transition ease-in duration-100"
                     x-transition:leave-start="opacity-100 translate-y-0 scale-100"
                     x-transition:leave-end="opacity-0 -translate-y-1 scale-98"
-                    class="absolute left-0 right-0 z-50 mt-1.5 bg-white border border-[#ECE6DE] shadow-xl py-1.5 max-h-72 flex flex-col min-w-[220px]">
+                    class="absolute left-0 right-0 z-50 mt-1.5 bg-white border border-[#ECE6DE] shadow-xl py-1.5 max-h-72 flex flex-col min-w-[220px] overscroll-contain">
                     
                     @if($categories->count() > 6)
-                    <div class="px-2.5 pb-2 pt-1 border-b border-[#ECE6DE]">
+                    <div class="px-2.5 pb-2 pt-1 border-b border-[#ECE6DE] shrink-0">
                         <input type="text" x-model="search" placeholder="Filter categories..." 
                             @click.stop
                             class="w-full px-2.5 py-1.5 rounded-none text-[11px] bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] focus:outline-none focus:border-[#A33B47]">
                     </div>
                     @endif
 
-                    <div class="overflow-y-auto luxury-scrollbar divide-y divide-[#ECE6DE]/30 py-1">
+                    <div class="overflow-y-auto luxury-scrollbar divide-y divide-[#ECE6DE]/30 py-1 flex-1 min-h-0 overscroll-contain"
+                        data-lenis-prevent
+                        style="overscroll-behavior: contain; -webkit-overflow-scrolling: touch;">
                         <button type="button" 
                             x-show="!search || 'all categories'.includes(search.toLowerCase())"
                             @click="document.getElementById('admin-category-filter-input').value = ''; open = false; $el.closest('form').submit();"

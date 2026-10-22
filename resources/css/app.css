@@ -469,4 +469,5 @@ select option:checked {
 .luxury-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: #D8D2CB #FAF8F5;
+  overscroll-behavior: contain;
 }

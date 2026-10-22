@@ -259,16 +259,19 @@
                         <!-- Custom Floating Menu Panel -->
                         <div x-show="categoryOpen" 
                             x-cloak
+                            data-lenis-prevent
+                            data-lenis-prevent-wheel
+                            data-lenis-prevent-touch
                             x-transition:enter="transition ease-out duration-150"
                             x-transition:enter-start="opacity-0 -translate-y-1 scale-98"
                             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
                             x-transition:leave="transition ease-in duration-100"
                             x-transition:leave-start="opacity-100 translate-y-0 scale-100"
                             x-transition:leave-end="opacity-0 -translate-y-1 scale-98"
-                            class="absolute left-0 right-0 z-50 mt-1.5 bg-white border border-[#ECE6DE] shadow-xl py-1.5 max-h-72 flex flex-col">
+                            class="absolute left-0 right-0 z-50 mt-1.5 bg-white border border-[#ECE6DE] shadow-xl py-1.5 max-h-72 flex flex-col overscroll-contain">
                             
                             <!-- Search inside dropdown for rapid filter -->
-                            <div class="px-3 pb-2 pt-1 border-b border-[#ECE6DE]">
+                            <div class="px-3 pb-2 pt-1 border-b border-[#ECE6DE] shrink-0">
                                 <div class="relative">
                                     <input type="text" x-model="categorySearch" placeholder="Filter collections..." 
                                         @click.stop
@@ -280,7 +283,11 @@
                             </div>
 
                             <!-- Options List -->
-                            <div class="overflow-y-auto luxury-scrollbar divide-y divide-[#ECE6DE]/30 py-1">
+                            <div class="overflow-y-auto luxury-scrollbar divide-y divide-[#ECE6DE]/30 py-1 flex-1 min-h-0 overscroll-contain"
+                                data-lenis-prevent
+                                data-lenis-prevent-wheel
+                                data-lenis-prevent-touch
+                                style="overscroll-behavior: contain; -webkit-overflow-scrolling: touch;">
                                 <!-- All Collections Option -->
                                 <button type="button" 
                                     x-show="!categorySearch || 'all collections'.includes(categorySearch.toLowerCase())"
@@ -325,13 +332,16 @@
                         <!-- Custom Floating Sort Menu Panel -->
                         <div x-show="sortOpen" 
                             x-cloak
+                            data-lenis-prevent
+                            data-lenis-prevent-wheel
+                            data-lenis-prevent-touch
                             x-transition:enter="transition ease-out duration-150"
                             x-transition:enter-start="opacity-0 -translate-y-1 scale-98"
                             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
                             x-transition:leave="transition ease-in duration-100"
                             x-transition:leave-start="opacity-100 translate-y-0 scale-100"
                             x-transition:leave-end="opacity-0 -translate-y-1 scale-98"
-                            class="absolute left-0 right-0 z-50 mt-1.5 bg-white border border-[#ECE6DE] shadow-xl py-1.5 divide-y divide-[#ECE6DE]/30">
+                            class="absolute left-0 right-0 z-50 mt-1.5 bg-white border border-[#ECE6DE] shadow-xl py-1.5 divide-y divide-[#ECE6DE]/30 overscroll-contain">
                             
                             <button type="button" 
                                 @click="applyFilter(null, 'featured', null); sortOpen = false"
