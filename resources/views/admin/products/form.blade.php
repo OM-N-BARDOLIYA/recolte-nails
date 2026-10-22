@@ -295,16 +295,6 @@
                                     </template>
                                 </div>
 
-                                <!-- Top-Right: Distinct, High-Contrast Circular Remove Button -->
-                                <div class="absolute top-2 right-2 z-20">
-                                    <x-close-button 
-                                        size="xs" 
-                                        variant="white"
-                                        @click.stop="removeGalleryItem(gIndex)"
-                                        class="shadow-xs border-[#C5BCB2] text-[#171412] hover:!bg-[#A33B47] hover:!text-white hover:!border-[#A33B47]"
-                                        title="Remove media"
-                                    />
-                                </div>
 
                                 <!-- Bottom Overlay Action: Quick "Set Cover" Button (Hover over secondary cards) -->
                                 <template x-if="gIndex > 0 && !item.isVideo">
