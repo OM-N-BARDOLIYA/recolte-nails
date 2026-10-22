@@ -39,14 +39,15 @@
                 <span class="text-[#A33B47]">✦</span>
                 <span x-text="tagText">Atelier Action Confirmation</span>
             </div>
-            <button 
-                type="button" 
+            <x-button 
+                variant="ghost" 
+                size="icon-xs"
                 @click="close()"
-                class="text-[#8C7A6B] hover:text-[#171412] text-sm p-1 transition-colors cursor-pointer"
+                class="!text-[#8C7A6B] hover:!text-[#171412] text-sm p-1"
                 title="Cancel"
             >
                 ✕
-            </button>
+            </x-button>
         </div>
 
         <!-- Content Area -->
@@ -86,27 +87,27 @@
 
         <!-- Action Buttons -->
         <div class="pt-3 border-t border-[#ECE6DE] flex items-center justify-end gap-2.5">
-            <button 
-                type="button" 
+            <x-button 
+                variant="secondary"
+                size="sm"
                 @click="close()"
-                class="px-4 py-2 bg-white hover:bg-[#FAF8F5] text-[#736B63] hover:text-[#171412] border border-[#ECE6DE] text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
                 x-text="cancelText"
             >
                 Cancel
-            </button>
-            <button 
-                type="button" 
+            </x-button>
+            <x-button 
+                variant="primary"
+                size="sm"
                 @click="confirmAction()"
-                class="px-5 py-2 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-xs cursor-pointer"
                 :class="{
-                    'bg-[#A33B47] hover:bg-[#882F3A]': type === 'danger',
-                    'bg-amber-600 hover:bg-amber-700': type === 'warning',
-                    'bg-[#171412] hover:bg-black': type === 'info'
+                    '!bg-[#A33B47] hover:!bg-[#882F3A] !border-[#A33B47]': type === 'danger',
+                    '!bg-amber-600 hover:!bg-amber-700 !border-amber-600': type === 'warning',
+                    '!bg-[#171412] hover:!bg-black !border-[#171412]': type === 'info'
                 }"
                 x-text="confirmText"
             >
                 Confirm
-            </button>
+            </x-button>
         </div>
     </div>
 </div>

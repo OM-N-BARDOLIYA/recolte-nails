@@ -44,21 +44,22 @@
                                     {{ $cat->products_count }} {{ Str::plural('item', $cat->products_count) }}
                                 </span>
 
-                                <button 
+                                <x-button 
                                     type="button" 
                                     @click="editing = true" 
-                                    class="px-3 py-1.5 text-xs text-[#171412] hover:text-[#A33B47] hover:bg-[#FAF8F5] border border-[#ECE6DE] font-semibold uppercase tracking-wider transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                                    variant="secondary"
+                                    size="sm"
                                 >
                                     <svg class="w-3 h-3 text-[#8C7A6B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
                                     <span>Edit</span>
-                                </button>
+                                </x-button>
 
                                 <form method="POST" action="{{ route('admin.categories.destroy', $cat->id) }}" data-confirm="Permanently delete category &quot;{{ addslashes($cat->name) }}&quot;? Associated products will be safely unlinked." data-confirm-title="Delete Category" class="inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="p-1.5 text-xs text-[#A33B47] hover:text-white hover:bg-[#A33B47] border border-transparent hover:border-[#A33B47] transition-all cursor-pointer leading-none flex items-center justify-center" title="Delete category">
+                                    <x-button type="submit" variant="danger" size="icon-sm" title="Delete category">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                                    </button>
+                                    </x-button>
                                 </form>
                             </div>
                         </div>
@@ -147,20 +148,22 @@
                                 </div>
 
                                 <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#ECE6DE]">
-                                    <button 
+                                    <x-button 
                                         type="button" 
                                         @click="editing = false" 
-                                        class="px-4 py-2 bg-white hover:bg-[#FAF8F5] border border-[#ECE6DE] text-xs font-semibold text-[#6A625A] hover:text-[#171412] transition-colors cursor-pointer"
+                                        variant="secondary"
+                                        size="sm"
                                     >
                                         Cancel
-                                    </button>
-                                    <button 
+                                    </x-button>
+                                    <x-button 
                                         type="submit" 
-                                        class="px-5 py-2 bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.14em] shadow-xs hover:shadow-sm transition-all cursor-pointer flex items-center gap-1.5"
+                                        variant="primary"
+                                        size="sm"
                                     >
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                                         <span>Save Changes</span>
-                                    </button>
+                                    </x-button>
                                 </div>
                             </form>
                         </div>
@@ -217,12 +220,14 @@
                         />
                     </div>
 
-                    <button 
+                    <x-button 
                         type="submit" 
-                        class="w-full py-3.5 px-6 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] shadow-xs hover:shadow-md transition-all pt-2 cursor-pointer"
+                        variant="primary"
+                        size="lg"
+                        fullWidth
                     >
                         Add Category Pill
-                    </button>
+                    </x-button>
                 </form>
             </div>
         </div>

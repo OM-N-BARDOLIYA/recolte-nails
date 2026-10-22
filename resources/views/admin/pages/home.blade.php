@@ -105,10 +105,9 @@ function homePageManager() {
             <p class="text-xs sm:text-sm text-[#6A625A] font-light">100% synchronized to live storefront: HD Hero Banner, 5-Column Trust Strip, Shop by Category, Colors Showcase, and Instagram Grid.</p>
         </div>
 
-        <a href="{{ route('home') }}" target="_blank" class="px-5 py-2.5 rounded-none bg-white hover:bg-[#FAF8F5] text-xs font-bold uppercase tracking-wider text-[#171412] border border-[#ECE6DE] transition-all shadow-2xs shrink-0 flex items-center gap-1.5">
-            <span>View Live Homepage</span>
-            <span>↗</span>
-        </a>
+        <x-button :href="route('home')" target="_blank" variant="secondary" size="md" icon="↗" iconPosition="right">
+            View Live Homepage
+        </x-button>
     </div>
 
     <!-- Section Navigation Tabs -->
@@ -344,9 +343,9 @@ function homePageManager() {
                 @endfor
 
                 <div class="pt-4 border-t border-[#ECE6DE] flex justify-end">
-                    <button type="submit" class="px-6 py-2.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] transition-all shadow-xs">
-                        Save Hero Carousel Changes 💾
-                    </button>
+                    <x-button type="submit" variant="primary" size="md" icon="💾" iconPosition="right">
+                        Save Hero Carousel Changes
+                    </x-button>
                 </div>
             </div>
         </div>
@@ -365,14 +364,9 @@ function homePageManager() {
                         </div>
                         <p class="text-xs text-[#6A625A] font-light">Appears directly below the hero banner. Add, delete, and customize any number of luxury trust badges with custom logo uploads or vector icons.</p>
                     </div>
-                    <button 
-                        type="button" 
-                        @click="addTrustBadge()"
-                        class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.14em] transition-all shrink-0 cursor-pointer shadow-2xs whitespace-nowrap"
-                    >
-                        <span class="text-sm font-bold leading-none">＋</span>
-                        <span>Add New Badge</span>
-                    </button>
+                    <x-button type="button" @click="addTrustBadge()" variant="primary" size="md" icon="＋">
+                        Add New Badge
+                    </x-button>
                 </div>
 
                 <div class="space-y-6">
@@ -382,15 +376,16 @@ function homePageManager() {
                                 <span class="font-serif font-bold text-sm text-[#A33B47]" x-text="'Badge #' + (index + 1) + ': ' + (badge.title || 'Untitled')"></span>
                                 <div class="flex items-center gap-3">
                                     <span class="text-[10.5px] uppercase tracking-wider text-[#8C7A6B] font-semibold" x-text="'Position ' + (index + 1) + ' of ' + trustBadges.length"></span>
-                                    <button 
+                                    <x-button 
                                         type="button" 
                                         @click="removeTrustBadge(index)" 
-                                        class="text-[11px] font-bold text-rose-600 hover:text-rose-800 flex items-center gap-1 cursor-pointer transition-colors px-2.5 py-1 border border-rose-200 hover:border-rose-400 bg-rose-50"
+                                        variant="danger" 
+                                        size="xs" 
+                                        icon="🗑️"
                                         title="Delete this badge"
                                     >
-                                        <span>🗑️</span>
-                                        <span>Delete Badge</span>
-                                    </button>
+                                        Delete Badge
+                                    </x-button>
                                 </div>
                             </div>
 
@@ -521,9 +516,9 @@ function homePageManager() {
                 </div>
 
                 <div class="pt-4 border-t border-[#ECE6DE] flex justify-end">
-                    <button type="submit" class="px-6 py-2.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] transition-all shadow-xs">
-                        Save Trust Strip Changes 💾
-                    </button>
+                    <x-button type="submit" variant="primary" size="md" icon="💾" iconPosition="right">
+                        Save Trust Strip Changes
+                    </x-button>
                 </div>
             </div>
         </div>
@@ -605,9 +600,9 @@ function homePageManager() {
                 </div>
 
                 <div class="pt-4 border-t border-[#ECE6DE] flex justify-end">
-                    <button type="submit" class="px-6 py-2.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] transition-all shadow-xs">
-                        Save Categories Changes 💾
-                    </button>
+                    <x-button type="submit" variant="primary" size="md" icon="💾" iconPosition="right">
+                        Save Categories Changes
+                    </x-button>
                 </div>
             </div>
         </div>
@@ -677,9 +672,9 @@ function homePageManager() {
                 </div>
 
                 <div class="pt-4 border-t border-[#ECE6DE] flex justify-end">
-                    <button type="submit" class="px-6 py-2.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] transition-all shadow-xs">
-                        Save Showcase Changes 💾
-                    </button>
+                    <x-button type="submit" variant="primary" size="md" icon="💾" iconPosition="right">
+                        Save Showcase Changes
+                    </x-button>
                 </div>
             </div>
         </div>
@@ -794,9 +789,9 @@ function homePageManager() {
                 </div>
 
                 <div class="pt-4 border-t border-[#ECE6DE] flex justify-end">
-                    <button type="submit" class="px-6 py-2.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] transition-all shadow-xs">
-                        Save Instagram Changes 💾
-                    </button>
+                    <x-button type="submit" variant="primary" size="md" icon="💾" iconPosition="right">
+                        Save Instagram Changes
+                    </x-button>
                 </div>
             </div>
         </div>

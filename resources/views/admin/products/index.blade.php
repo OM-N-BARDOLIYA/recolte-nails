@@ -17,15 +17,12 @@
         </div>
 
         <div class="flex items-center gap-3">
-            <a 
-                href="{{ route('admin.products.create') }}" 
-                class="inline-flex items-center gap-2 px-5 py-3 bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.16em] shadow-xs hover:shadow-md transition-all duration-200 group cursor-pointer"
-            >
+            <x-button :href="route('admin.products.create')" variant="primary" size="md">
                 <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
                 </svg>
                 <span>Add New Product</span>
-            </a>
+            </x-button>
         </div>
     </div>
 
@@ -134,9 +131,9 @@
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="px-5 py-2.5 rounded-none bg-[#171412] hover:bg-black text-xs font-bold uppercase tracking-[0.16em] text-white transition-colors cursor-pointer shrink-0">
+            <x-button type="submit" variant="primary" size="md">
                 Search
-            </button>
+            </x-button>
 
             <!-- Reset Filter Link -->
             @if(request()->hasAny(['search', 'category', 'status']))
@@ -321,43 +318,46 @@
                             <td class="py-4 px-5 text-right whitespace-nowrap">
                                 <div class="inline-flex items-center gap-1.5">
                                     <!-- View Live Storefront Button -->
-                                    <a 
-                                        href="{{ route('products.show', $product->slug) }}" 
+                                    <x-button 
+                                        :href="route('products.show', $product->slug)" 
                                         target="_blank" 
-                                        class="p-2 text-[#736B63] hover:text-[#171412] bg-white hover:bg-[#FAF8F5] border border-[#ECE6DE] transition-colors"
+                                        variant="secondary"
+                                        size="icon"
                                         title="View Live Storefront Page"
                                     >
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                         </svg>
-                                    </a>
+                                    </x-button>
 
                                     <!-- Edit Button -->
-                                    <a 
-                                        href="{{ route('admin.products.edit', $product->id) }}" 
-                                        class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-[#171412] text-[#171412] hover:text-white border border-[#ECE6DE] hover:border-[#171412] text-xs font-bold uppercase tracking-wider transition-all duration-150 shadow-2xs"
+                                    <x-button 
+                                        :href="route('admin.products.edit', $product->id)" 
+                                        variant="secondary"
+                                        size="sm"
                                         title="Edit Product"
                                     >
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
                                         <span>Edit</span>
-                                    </a>
+                                    </x-button>
 
                                     <!-- Delete Button -->
                                     <form method="POST" action="{{ route('admin.products.destroy', $product->id) }}" data-confirm="Permanently remove &quot;{{ addslashes($product->title) }}&quot; from catalog?" data-confirm-title="Delete Product" class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button 
+                                        <x-button 
                                             type="submit" 
-                                            class="p-2 text-[#8C7A6B] hover:text-red-700 bg-white hover:bg-red-50 border border-[#ECE6DE] hover:border-red-200 transition-colors cursor-pointer"
+                                            variant="danger"
+                                            size="icon"
                                             title="Delete Product"
                                         >
                                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                             </svg>
-                                        </button>
+                                        </x-button>
                                     </form>
                                 </div>
                             </td>

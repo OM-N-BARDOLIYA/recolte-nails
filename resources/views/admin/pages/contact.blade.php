@@ -69,10 +69,9 @@ function contactPageManager() {
             <p class="text-xs sm:text-sm text-[#6A625A] font-light">100% synchronized to live storefront: Lounge Header, Contact Channels (WhatsApp, Email, Paris Atelier), Operating Hours, and WhatsApp Topic Selector.</p>
         </div>
 
-        <a href="{{ route('contact') }}" target="_blank" class="px-5 py-2.5 rounded-none bg-white hover:bg-[#FAF8F5] text-xs font-bold uppercase tracking-wider text-[#171412] border border-[#ECE6DE] transition-all shadow-2xs shrink-0 flex items-center gap-1.5">
-            <span>View Live Contact Page</span>
-            <span>↗</span>
-        </a>
+        <x-button :href="route('contact')" target="_blank" variant="secondary" size="md" icon="↗" iconPosition="right">
+            View Live Contact Page
+        </x-button>
     </div>
 
     <!-- Navigation Tabs -->
@@ -149,9 +148,9 @@ function contactPageManager() {
                 </div>
 
                 <div class="pt-4 border-t border-[#ECE6DE] flex justify-end">
-                    <button type="submit" class="px-6 py-2.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] transition-all shadow-xs cursor-pointer">
-                        Save Header Changes 💾
-                    </button>
+                    <x-button type="submit" variant="primary" size="md" icon="💾" iconPosition="right">
+                        Save Header Changes
+                    </x-button>
                 </div>
             </div>
         </div>
@@ -264,9 +263,9 @@ function contactPageManager() {
                 </div>
 
                 <div class="pt-4 border-t border-[#ECE6DE] flex justify-end">
-                    <button type="submit" class="px-6 py-2.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] transition-all shadow-xs cursor-pointer">
-                        Save Channels &amp; Hours Changes 💾
-                    </button>
+                    <x-button type="submit" variant="primary" size="md" icon="💾" iconPosition="right">
+                        Save Channels &amp; Hours Changes
+                    </x-button>
                 </div>
             </div>
 
@@ -330,10 +329,9 @@ function contactPageManager() {
                             <h3 class="font-serif font-medium text-sm text-[#A33B47]">Interactive WhatsApp Topic Chips &amp; Messages</h3>
                             <span class="text-xs text-[#8C7A6B]">Visitors select a chip on the website and this message is automatically pre-filled in their WhatsApp.</span>
                         </div>
-                        <button type="button" @click="addTopic()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all shadow-2xs shrink-0 cursor-pointer">
-                            <span>➕</span>
-                            <span>Add New Topic</span>
-                        </button>
+                        <x-button type="button" @click="addTopic()" variant="primary" size="sm" icon="➕">
+                            Add New Topic
+                        </x-button>
                     </div>
 
                     <div class="space-y-3">
@@ -351,9 +349,9 @@ function contactPageManager() {
                                     <input type="text" :name="'topics[' + index + '][msg]'" x-model="topic.msg" placeholder="Hello Recolte Nails! ..." required class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] focus:border-[#171412] outline-none">
                                 </div>
                                 <div class="sm:col-span-1 flex items-center justify-center pt-2 sm:pt-0">
-                                    <button type="button" @click="removeTopic(index)" class="p-2 rounded-none bg-rose-50 hover:bg-rose-100 text-rose-600 hover:text-rose-800 transition-colors text-xs font-bold cursor-pointer" title="Delete Topic">
+                                    <x-button type="button" @click="removeTopic(index)" variant="danger" size="icon-sm" title="Delete Topic">
                                         🗑
-                                    </button>
+                                    </x-button>
                                 </div>
                             </div>
                         </template>
@@ -361,18 +359,17 @@ function contactPageManager() {
 
                     <!-- Bottom Bar with Add Button and Count -->
                     <div class="flex flex-col sm:flex-row justify-between items-center gap-3 pt-2">
-                        <button type="button" @click="addTopic()" class="inline-flex items-center gap-2 px-4 py-2 rounded-none bg-white hover:bg-[#FAF8F5] border border-[#ECE6DE] hover:border-[#171412] text-xs font-bold uppercase tracking-wider text-[#171412] transition-all shadow-2xs cursor-pointer">
-                            <span>➕</span>
-                            <span>Add Another Inquiry Topic</span>
-                        </button>
+                        <x-button type="button" @click="addTopic()" variant="secondary" size="sm" icon="➕">
+                            Add Another Inquiry Topic
+                        </x-button>
                         <span class="text-xs font-bold font-mono text-[#8C7A6B]" x-text="'Total Topics: ' + topics.length"></span>
                     </div>
                 </div>
 
                 <div class="pt-4 border-t border-[#ECE6DE] flex justify-end">
-                    <button type="submit" class="px-6 py-2.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.18em] transition-all shadow-xs cursor-pointer">
-                        Save WhatsApp Topics &amp; Badges 💾
-                    </button>
+                    <x-button type="submit" variant="primary" size="md" icon="💾" iconPosition="right">
+                        Save WhatsApp Topics &amp; Badges
+                    </x-button>
                 </div>
             </div>
         </div>
