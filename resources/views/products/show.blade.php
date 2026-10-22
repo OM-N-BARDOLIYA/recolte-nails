@@ -211,7 +211,7 @@
                             <button type="button" @click="setImage(item, idx)"
                                 class="relative rounded-none overflow-hidden aspect-square w-16 sm:w-20 lg:w-24 shrink-0 border-2 transition-all cursor-pointer group/thumb"
                                 :class="[
-                                    activeImageIndex === idx ? 'border-[#171412] ring-2 ring-[#171412]/15 opacity-100 shadow-xs' : 'border-[#ECE6DE] opacity-75 hover:opacity-100 hover:border-[#C5A880]',
+                                    activeImageIndex === idx ? 'border-[#A33B47] ring-2 ring-[#A33B47]/20 opacity-100 shadow-xs' : 'border-[#ECE6DE] opacity-75 hover:opacity-100 hover:border-[#A33B47]/40',
                                     isWhiteBackground(item) ? 'bg-white' : 'bg-[#FAF8F5]',
                                     isDriveUncutImage(item) ? 'p-1 flex items-center justify-center' : ''
                                 ]">
@@ -356,7 +356,7 @@
                                             @click="selectShade(sh, idx)"
                                             :title="sh.name"
                                             class="rounded-full transition-all duration-150 cursor-pointer focus:outline-none flex items-center justify-center p-0.5 select-none"
-                                            :class="selectedShade === sh.name ? 'ring-1 ring-offset-2 ring-black ring-offset-white' : 'hover:opacity-80'">
+                                            :class="selectedShade === sh.name ? 'ring-2 ring-offset-2 ring-[#A33B47] ring-offset-white' : 'hover:opacity-80'">
                                             <span class="block w-6 h-6 rounded-full border border-black/15 shadow-2xs"
                                                 :style="'background-color:' + (sh.hex || '#E8B4B8')"></span>
                                         </button>
