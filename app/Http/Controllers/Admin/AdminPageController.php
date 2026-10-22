@@ -229,45 +229,79 @@ class AdminPageController extends Controller
             'slides' => $slides,
         ]);
 
-        // 2. Trust Proposition Strip
-        $existingTrust = PageContent::getSection('home', 'trust_strip', []);
-        $defaultTrust = [
-            ['title' => 'Premium Quality', 'sub' => 'Products', 'icon' => 'diamond', 'image' => null],
-            ['title' => 'Safe & Skin Friendly', 'sub' => 'Formulas', 'icon' => 'shield', 'image' => null],
-            ['title' => 'Fast & Reliable', 'sub' => 'Shipping', 'icon' => 'truck', 'image' => null],
-            ['title' => 'Expert Support', 'sub' => 'Always', 'icon' => 'support', 'image' => null],
-            ['title' => 'Trusted by', 'sub' => 'Professionals', 'icon' => 'star', 'image' => null],
-        ];
+        // 2. Dynamic Value & Trust Proposition Strip (Add / Delete / Reorder)
+        $trustInputs = $request->input('trust_items');
+        $trustFiles = $request->file('trust_image_files', []);
         $trustItems = [];
-        $defaultIcons = ['diamond', 'shield', 'truck', 'support', 'star'];
-        for ($i = 0; $i < 5; $i++) {
-            $prevTitle = $existingTrust['items'][$i]['title'] ?? ($defaultTrust[$i]['title'] ?? '');
-            $prevSub = $existingTrust['items'][$i]['sub'] ?? ($defaultTrust[$i]['sub'] ?? '');
-            $prevIcon = $existingTrust['items'][$i]['icon'] ?? ($defaultIcons[$i] ?? 'star');
-            $prevImage = $existingTrust['items'][$i]['image'] ?? null;
 
-            $inputTitle = $request->input("trust_{$i}_title");
-            $inputSub = $request->input("trust_{$i}_sub");
-            $inputIcon = $request->input("trust_{$i}_icon", $prevIcon);
+        if (is_array($trustInputs) && count($trustInputs) > 0) {
+            foreach ($trustInputs as $idx => $tData) {
+                $title = trim($tData['title'] ?? '');
+                $sub = trim($tData['sub'] ?? '');
+                if ($title === '' && $sub === '') continue;
 
-            $itemImage = $prevImage;
-            if ($request->hasFile("trust_{$i}_image_file")) {
-                $f = $request->file("trust_{$i}_image_file");
-                $fn = "trust_icon_{$i}_" . time() . '.' . $f->getClientOriginalExtension();
-                $f->move(public_path('uploads/pages'), $fn);
-                $itemImage = asset('uploads/pages/' . $fn);
-            } elseif ($request->input("trust_{$i}_remove_image") === '1') {
-                $itemImage = null;
-            } elseif ($request->filled("trust_{$i}_image")) {
-                $itemImage = $request->input("trust_{$i}_image");
+                $icon = !empty($tData['icon']) ? $tData['icon'] : 'star';
+                $image = !empty($tData['image']) ? $tData['image'] : null;
+
+                // Check if remove image was clicked
+                if (($tData['remove_image'] ?? '0') === '1') {
+                    $image = null;
+                }
+
+                // Check if file was uploaded for this badge index
+                if (isset($trustFiles[$idx]) && $trustFiles[$idx]->isValid()) {
+                    $f = $trustFiles[$idx];
+                    $fn = "trust_badge_{$idx}_" . time() . '.' . $f->getClientOriginalExtension();
+                    $f->move(public_path('uploads/pages'), $fn);
+                    $image = asset('uploads/pages/' . $fn);
+                }
+
+                $trustItems[] = [
+                    'title' => $title,
+                    'sub' => $sub,
+                    'icon' => $icon,
+                    'image' => $image,
+                ];
             }
-
-            $trustItems[] = [
-                'title' => ($inputTitle !== null && trim($inputTitle) !== '') ? $inputTitle : $prevTitle,
-                'sub' => ($inputSub !== null && trim($inputSub) !== '') ? $inputSub : $prevSub,
-                'icon' => $inputIcon ?: ($defaultIcons[$i] ?? 'star'),
-                'image' => $itemImage,
+        } else {
+            $existingTrust = PageContent::getSection('home', 'trust_strip', []);
+            $defaultTrust = [
+                ['title' => 'Premium Quality', 'sub' => 'Products', 'icon' => 'diamond', 'image' => null],
+                ['title' => 'Safe & Skin Friendly', 'sub' => 'Formulas', 'icon' => 'shield', 'image' => null],
+                ['title' => 'Fast & Reliable', 'sub' => 'Shipping', 'icon' => 'truck', 'image' => null],
+                ['title' => 'Expert Support', 'sub' => 'Always', 'icon' => 'support', 'image' => null],
+                ['title' => 'Trusted by', 'sub' => 'Professionals', 'icon' => 'star', 'image' => null],
             ];
+            $defaultIcons = ['diamond', 'shield', 'truck', 'support', 'star'];
+            for ($i = 0; $i < 5; $i++) {
+                $prevTitle = $existingTrust['items'][$i]['title'] ?? ($defaultTrust[$i]['title'] ?? '');
+                $prevSub = $existingTrust['items'][$i]['sub'] ?? ($defaultTrust[$i]['sub'] ?? '');
+                $prevIcon = $existingTrust['items'][$i]['icon'] ?? ($defaultIcons[$i] ?? 'star');
+                $prevImage = $existingTrust['items'][$i]['image'] ?? null;
+
+                $inputTitle = $request->input("trust_{$i}_title");
+                $inputSub = $request->input("trust_{$i}_sub");
+                $inputIcon = $request->input("trust_{$i}_icon", $prevIcon);
+
+                $itemImage = $prevImage;
+                if ($request->hasFile("trust_{$i}_image_file")) {
+                    $f = $request->file("trust_{$i}_image_file");
+                    $fn = "trust_icon_{$i}_" . time() . '.' . $f->getClientOriginalExtension();
+                    $f->move(public_path('uploads/pages'), $fn);
+                    $itemImage = asset('uploads/pages/' . $fn);
+                } elseif ($request->input("trust_{$i}_remove_image") === '1') {
+                    $itemImage = null;
+                } elseif ($request->filled("trust_{$i}_image")) {
+                    $itemImage = $request->input("trust_{$i}_image");
+                }
+
+                $trustItems[] = [
+                    'title' => ($inputTitle !== null && trim($inputTitle) !== '') ? $inputTitle : $prevTitle,
+                    'sub' => ($inputSub !== null && trim($inputSub) !== '') ? $inputSub : $prevSub,
+                    'icon' => $inputIcon ?: ($defaultIcons[$i] ?? 'star'),
+                    'image' => $itemImage,
+                ];
+            }
         }
         PageContent::setSection('home', 'trust_strip', ['items' => $trustItems]);
 

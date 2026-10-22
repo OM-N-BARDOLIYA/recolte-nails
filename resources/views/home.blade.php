@@ -198,24 +198,32 @@
         </div>
     </section>
 
-    <!-- ── 5-COLUMN VALUE & TRUST PROPOSITION STRIP (DIRECTLY UNDER BANNER) ── -->
+    <!-- ── VALUE & TRUST PROPOSITION STRIP (DIRECTLY UNDER BANNER) ── -->
     <section class="w-full bg-white border-b border-gray-100 py-6 sm:py-8 shadow-2xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-5 divide-y md:divide-y-0 md:divide-x divide-gray-200/80">
-
-                @php
-                    $defaultTrust = [
-                        ['title' => 'Premium Quality', 'sub' => 'Products', 'icon' => 'diamond', 'image' => null],
-                        ['title' => 'Safe & Skin Friendly', 'sub' => 'Formulas', 'icon' => 'shield', 'image' => null],
-                        ['title' => 'Fast & Reliable', 'sub' => 'Shipping', 'icon' => 'truck', 'image' => null],
-                        ['title' => 'Expert Support', 'sub' => 'Always', 'icon' => 'support', 'image' => null],
-                        ['title' => 'Trusted by', 'sub' => 'Professionals', 'icon' => 'star', 'image' => null],
-                    ];
-                    $trustItems = $trust_strip['items'] ?? $defaultTrust;
-                @endphp
+            @php
+                $defaultTrust = [
+                    ['title' => 'Premium Quality', 'sub' => 'Products', 'icon' => 'diamond', 'image' => null],
+                    ['title' => 'Safe & Skin Friendly', 'sub' => 'Formulas', 'icon' => 'shield', 'image' => null],
+                    ['title' => 'Fast & Reliable', 'sub' => 'Shipping', 'icon' => 'truck', 'image' => null],
+                    ['title' => 'Expert Support', 'sub' => 'Always', 'icon' => 'support', 'image' => null],
+                    ['title' => 'Trusted by', 'sub' => 'Professionals', 'icon' => 'star', 'image' => null],
+                ];
+                $trustItems = !empty($trust_strip['items']) ? $trust_strip['items'] : $defaultTrust;
+                $tCount = count($trustItems);
+                $gridCols = match($tCount) {
+                    1 => 'grid-cols-1 max-w-sm',
+                    2 => 'grid-cols-2 max-w-2xl',
+                    3 => 'grid-cols-1 sm:grid-cols-3 max-w-4xl',
+                    4 => 'grid-cols-2 lg:grid-cols-4 max-w-5xl',
+                    6 => 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6',
+                    default => 'grid-cols-2 md:grid-cols-5',
+                };
+            @endphp
+            <div class="grid {{ $gridCols }} mx-auto divide-y md:divide-y-0 md:divide-x divide-gray-200/80">
 
                 @foreach($trustItems as $idx => $tItem)
-                <div class="flex flex-col items-center text-center p-3 sm:p-4 group {{ $idx === 4 ? 'col-span-2 md:col-span-1' : '' }}">
+                <div class="flex flex-col items-center text-center p-3 sm:p-4 group {{ ($tCount % 2 !== 0 && $idx === $tCount - 1 && $tCount > 1) ? 'col-span-2 md:col-span-1' : '' }}">
                     <div class="text-[#171412] group-hover:text-[#A33B47] transition-colors mb-2.5 flex items-center justify-center h-8">
                         @if(!empty($tItem['image']))
                             <img src="{{ $tItem['image'] }}" alt="{{ $tItem['title'] ?? 'Trust Logo' }}" class="w-7 h-7 sm:w-8 sm:h-8 object-contain transition-transform group-hover:scale-110">
