@@ -152,23 +152,23 @@
                 <div>
                     <div class="flex items-center gap-2.5">
                         <h2 class="font-serif text-xl font-bold text-[#171412]">2. Visual Media Studio (Images &amp; Videos)</h2>
-                        <span class="px-2 py-0.5 rounded-none bg-[#FBEFE9] text-[#A33B47] text-[10px] font-bold uppercase tracking-wider border border-[#ECE6DE]">
-                            Drag &amp; Drop Enabled
+                        <span class="px-2 py-0.5 rounded-none bg-[#FBEFE9] text-[#A33B47] text-[10px] font-bold uppercase tracking-wider border border-[#A33B47]/20">
+                            ✦ Drag &amp; Drop Reordering
                         </span>
                     </div>
                     <p class="text-[11px] text-[#8C7A6B] mt-1">
-                        Drag and drop any photo or video card to change its index manually. Card <span class="font-bold text-[#171412]">#1</span> is the storefront primary cover!
+                        Drag cards to set display sequence. Tile <span class="font-bold text-[#171412]">#1</span> is the storefront primary cover image.
                     </p>
                 </div>
 
                 <!-- Live Media Counter Badge -->
                 <div class="flex items-center gap-2 self-start sm:self-auto">
-                    <div class="px-3 py-1.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[11px] text-[#171412] font-semibold flex items-center gap-2">
+                    <div class="px-3.5 py-1.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs text-[#171412] font-semibold flex items-center gap-2.5 shadow-2xs">
                         <span>Total Media: <strong class="text-[#A33B47]" x-text="galleryItems.length"></strong></span>
                         <span class="text-[#ECE6DE]">|</span>
-                        <span class="text-[#8C7A6B] text-[10.5px]"><span x-text="galleryItems.filter(i => !i.isVideo).length"></span> Photos</span>
+                        <span class="text-[#8C7A6B] text-[11px]"><span class="font-bold text-[#171412]" x-text="galleryItems.filter(i => !i.isVideo).length"></span> Photos</span>
                         <span class="text-[#ECE6DE]">|</span>
-                        <span class="text-[#8C7A6B] text-[10.5px]"><span x-text="galleryItems.filter(i => i.isVideo).length"></span> Videos</span>
+                        <span class="text-[#8C7A6B] text-[11px]"><span class="font-bold text-[#171412]" x-text="galleryItems.filter(i => i.isVideo).length"></span> Videos</span>
                     </div>
                 </div>
             </div>
@@ -197,37 +197,44 @@
             <input type="hidden" name="main_image" :value="mainImageUrl || ''">
 
             <!-- ── INTERACTIVE DRAG & DROP MEDIA GRID ── -->
-            <div class="space-y-3">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-1">
-                    <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-[#8C7A6B]">
-                        Visual Order (Drag &amp; drop cards to reorder index):
-                    </span>
+            <div class="space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
+                    <div class="inline-flex items-center gap-1.5 text-[10.5px] font-semibold uppercase tracking-[0.18em] text-[#8C7A6B]">
+                        <span>✦ Media Sequence</span>
+                        <span class="text-[#A89F97] font-normal normal-case tracking-normal">(Drag tile or use shift arrows)</span>
+                    </div>
 
                     <!-- Action buttons shown when items exist in gallery -->
                     <div x-show="galleryItems.length > 0" class="flex items-center gap-2 flex-wrap">
-                        <button 
+                        <x-button 
                             type="button" 
+                            variant="primary"
+                            size="sm"
                             onclick="document.getElementById('gallery_files_input').click()"
-                            class="px-3.5 py-1.5 rounded-none bg-[#171412] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                            icon="📁"
                         >
-                            <span>📁</span> Choose Files
-                        </button>
+                            Choose Files
+                        </x-button>
 
-                        <button 
+                        <x-button 
                             type="button" 
+                            variant="secondary"
+                            size="sm"
                             onclick="document.getElementById('gallery_folder_input').click()"
-                            class="px-3.5 py-1.5 rounded-none bg-stone-800 hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                            icon="📂"
                         >
-                            <span>📂</span> Import Folder
-                        </button>
+                            Import Folder
+                        </x-button>
 
-                        <button 
+                        <x-button 
                             type="button" 
+                            variant="secondary"
+                            size="sm"
                             @click="addMediaUrl()"
-                            class="px-3 py-1.5 rounded-none bg-white hover:bg-[#FAF8F5] text-[#171412] border border-[#ECE6DE] text-[11px] font-semibold transition-all flex items-center gap-1 cursor-pointer"
+                            icon="🔗"
                         >
-                            <span>🔗</span> Add URL
-                        </button>
+                            Add via URL
+                        </x-button>
                     </div>
                 </div>
 
@@ -240,85 +247,102 @@
                             @dragleave="onDragLeave($event, gIndex)"
                             @drop="onDrop($event, gIndex)"
                             @dragend="onDragEnd($event)"
-                            class="relative group rounded-none bg-white border transition-all select-none overflow-hidden flex flex-col justify-between"
+                            class="relative group rounded-none bg-white border transition-all duration-200 select-none overflow-hidden flex flex-col justify-between shadow-2xs hover:shadow-md cursor-grab active:cursor-grabbing"
                             :class="{
                                 'opacity-40 ring-2 ring-[#A33B47] ring-offset-2 scale-95': draggedIndex === gIndex,
-                                'ring-2 ring-emerald-600 scale-[1.02] shadow-md border-emerald-500': dragOverIndex === gIndex && draggedIndex !== gIndex,
-                                'border-[#A33B47] ring-1 ring-[#A33B47]/20 shadow-xs': gIndex === 0 && draggedIndex !== gIndex && dragOverIndex !== gIndex,
-                                'border-[#ECE6DE] hover:border-[#C48B71] shadow-2xs': gIndex !== 0 && draggedIndex !== gIndex && dragOverIndex !== gIndex
+                                'ring-2 ring-emerald-600 scale-[1.03] shadow-lg border-emerald-500': dragOverIndex === gIndex && draggedIndex !== gIndex,
+                                'border-[#171412] ring-1 ring-[#171412]/30': gIndex === 0 && draggedIndex !== gIndex && dragOverIndex !== gIndex,
+                                'border-[#ECE6DE] hover:border-[#171412]': gIndex !== 0 && draggedIndex !== gIndex && dragOverIndex !== gIndex
                             }"
                         >
                             <!-- Top Preview Box (Full Width, Square aspect ratio) -->
-                            <div class="relative w-full aspect-square bg-[#FAF8F5] border-b border-[#ECE6DE] overflow-hidden flex items-center justify-center p-2 group/media">
+                            <div class="relative w-full aspect-square bg-[#FAF8F5] overflow-hidden flex items-center justify-center p-2.5 group/media">
                                 <!-- Image Preview -->
                                 <template x-if="!item.isVideo">
-                                    <img :src="item.preview || item.url" class="w-full h-full object-contain pointer-events-none transition-transform group-hover/media:scale-105 duration-200">
+                                    <img :src="item.preview || item.url" class="w-full h-full object-contain pointer-events-none transition-transform group-hover/media:scale-105 duration-300 ease-out">
                                 </template>
 
                                 <!-- Video Preview -->
                                 <template x-if="item.isVideo">
                                     <div class="relative w-full h-full bg-[#171412] flex items-center justify-center overflow-hidden">
-                                        <video :src="item.preview || item.url" muted preload="metadata" class="w-full h-full object-contain opacity-85 pointer-events-none"></video>
-                                        <div class="absolute inset-0 bg-black/35 flex items-center justify-center">
-                                            <div class="w-7 h-7 rounded-full bg-white text-[#171412] flex items-center justify-center pl-0.5 shadow-sm">
-                                                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                        <video :src="item.preview || item.url" muted preload="metadata" class="w-full h-full object-contain opacity-90 pointer-events-none"></video>
+                                        <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+                                            <div class="w-8 h-8 rounded-full bg-white/95 text-[#171412] flex items-center justify-center pl-0.5 shadow-md">
+                                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                             </div>
                                         </div>
                                     </div>
                                 </template>
 
-                                <!-- Top Left: Index Badge -->
-                                <div class="absolute top-1.5 left-1.5 z-10">
+                                <!-- Top-Left: Badge (#1 Cover vs #Index) -->
+                                <div class="absolute top-2 left-2 z-10 pointer-events-none">
                                     <template x-if="gIndex === 0">
-                                        <span class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-[#A33B47] text-white text-[8.5px] font-bold uppercase tracking-wider shadow-xs">
-                                            <span>★</span> Cover
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-[#171412] text-white text-[9px] font-bold uppercase tracking-[0.14em] shadow-xs">
+                                            <span class="text-[#C5A880]">★</span>
+                                            <span>Cover</span>
                                         </span>
                                     </template>
                                     <template x-if="gIndex > 0">
-                                        <span class="inline-flex items-center px-1.5 py-0.5 bg-black/80 backdrop-blur-xs text-white text-[8.5px] font-bold shadow-xs">
+                                        <span class="inline-flex items-center px-1.5 py-0.5 bg-white/95 backdrop-blur-xs text-[#171412] border border-[#ECE6DE] text-[9.5px] font-mono font-bold shadow-2xs">
                                             #<span x-text="gIndex + 1"></span>
                                         </span>
                                     </template>
                                 </div>
 
-                                <!-- Top Right: Drag Handle Icon -->
-                                <div class="absolute top-1.5 right-1.5 z-10 px-1 py-0.5 bg-white/90 hover:bg-white text-[#171412] border border-[#ECE6DE] shadow-xs cursor-grab active:cursor-grabbing text-xs leading-none flex items-center gap-0.5" title="Drag to reorder index">
-                                    <span class="font-mono text-xs select-none leading-none">⠿</span>
+                                <!-- Top-Right: Smooth Animated Circular Remove Button -->
+                                <div class="absolute top-2 right-2 z-10">
+                                    <x-close-button 
+                                        size="xs" 
+                                        variant="white"
+                                        @click.stop="removeGalleryItem(gIndex)"
+                                        class="shadow-xs hover:!bg-[#A33B47] hover:!text-white hover:!border-[#A33B47]"
+                                        title="Remove media"
+                                    />
                                 </div>
 
-                                <!-- Bottom Left: Media Type Pill -->
-                                <div class="absolute bottom-1.5 left-1.5 z-10 px-1.5 py-0.5 text-white text-[8px] font-bold uppercase tracking-wider shadow-2xs"
-                                    :class="item.isVideo ? 'bg-[#A33B47]' : (item.type === 'existing' ? 'bg-black/75' : 'bg-emerald-700')"
-                                    x-text="item.isVideo ? '▶ Video' : (item.type === 'file' ? 'New' : 'Photo')">
-                                </div>
-
-                                <!-- Bottom Right: Quick "Set Cover" Button (on hover) -->
+                                <!-- Bottom Overlay Action: Quick "Set Cover" Button (Hover over secondary cards) -->
                                 <template x-if="gIndex > 0 && !item.isVideo">
                                     <button 
                                         type="button" 
-                                        @click="makeCover(gIndex)"
-                                        class="absolute bottom-1.5 right-1.5 z-10 opacity-0 group-hover/media:opacity-100 bg-white/95 hover:bg-[#A33B47] text-[#171412] hover:text-white border border-[#ECE6DE] text-[8px] font-bold px-1.5 py-0.5 uppercase tracking-wider transition-all shadow-xs cursor-pointer"
-                                        title="Move this photo to #1 Cover"
+                                        @click.stop="makeCover(gIndex)"
+                                        class="absolute bottom-2 left-2 right-2 py-1.5 bg-[#171412]/95 hover:bg-black text-white text-[9.5px] font-bold uppercase tracking-wider backdrop-blur-xs transition-all duration-200 opacity-0 group-hover/media:opacity-100 shadow-md cursor-pointer flex items-center justify-center gap-1 z-10 select-none"
+                                        title="Promote this photo to #1 Primary Cover"
                                     >
-                                        ★ Set Cover
+                                        <span class="text-[#C5A880]">★</span>
+                                        <span>Set as Cover</span>
                                     </button>
                                 </template>
                             </div>
 
-                            <!-- Bottom Content Area -->
-                            <div class="p-2 space-y-1.5 bg-white">
-                                <!-- Name / Label -->
-                                <div class="text-[10px] font-semibold text-[#171412] truncate text-center" x-text="item.name || (item.isVideo ? ('Video #' + (gIndex + 1)) : ('Photo #' + (gIndex + 1)))"></div>
+                            <!-- Bottom Metadata Strip (Structured, Clean, No Clutter) -->
+                            <div class="px-2.5 py-2 bg-white border-t border-[#ECE6DE] flex items-center justify-between gap-1 text-[10px]">
+                                <!-- Media Type & Label -->
+                                <div class="flex items-center gap-1.5 min-w-0">
+                                    <span class="w-1.5 h-1.5 rounded-full shrink-0"
+                                        :class="item.isVideo ? 'bg-[#A33B47]' : (gIndex === 0 ? 'bg-[#171412]' : 'bg-emerald-600')"></span>
+                                    <span class="font-medium text-[#2C2723] truncate leading-tight"
+                                        x-text="item.name || (item.isVideo ? ('Reel #' + (gIndex + 1)) : (gIndex === 0 ? 'Primary Cover' : ('Photo #' + (gIndex + 1))))"></span>
+                                </div>
 
-                                <!-- Remove Button (Full Width & Clean) -->
-                                <div class="pt-1.5 border-t border-[#ECE6DE]">
+                                <!-- Quick Micro Shift Controls (‹ / ›) on hover -->
+                                <div class="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
                                     <button 
                                         type="button" 
-                                        @click="removeGalleryItem(gIndex)"
-                                        class="w-full h-6.5 flex items-center justify-center bg-rose-50 hover:bg-[#A33B47] text-[#A33B47] hover:text-white border border-rose-200 text-[9.5px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
-                                        title="Remove this item"
+                                        @click.stop="moveItem(gIndex, -1)" 
+                                        :disabled="gIndex === 0"
+                                        class="w-4.5 h-4.5 rounded-none flex items-center justify-center text-[#8C7A6B] hover:text-[#171412] hover:bg-[#FAF8F5] disabled:opacity-20 disabled:hover:bg-transparent cursor-pointer font-bold leading-none"
+                                        title="Shift Left"
                                     >
-                                        ✕ Remove
+                                        ‹
+                                    </button>
+                                    <button 
+                                        type="button" 
+                                        @click.stop="moveItem(gIndex, 1)" 
+                                        :disabled="gIndex === galleryItems.length - 1"
+                                        class="w-4.5 h-4.5 rounded-none flex items-center justify-center text-[#8C7A6B] hover:text-[#171412] hover:bg-[#FAF8F5] disabled:opacity-20 disabled:hover:bg-transparent cursor-pointer font-bold leading-none"
+                                        title="Shift Right"
+                                    >
+                                        ›
                                     </button>
                                 </div>
                             </div>
@@ -343,27 +367,33 @@
                         Choose individual files, import an entire folder from your computer, or drag &amp; drop files directly into this area.
                     </div>
                     <div class="flex justify-center items-center gap-2.5 pt-2 flex-wrap">
-                        <button 
+                        <x-button 
                             type="button" 
+                            variant="primary"
+                            size="md"
                             onclick="document.getElementById('gallery_files_input').click()"
-                            class="px-4 py-2 bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
+                            icon="📁"
                         >
-                            <span>📁</span> Choose Files
-                        </button>
-                        <button 
+                            Choose Files
+                        </x-button>
+                        <x-button 
                             type="button" 
+                            variant="secondary"
+                            size="md"
                             onclick="document.getElementById('gallery_folder_input').click()"
-                            class="px-4 py-2 bg-stone-800 hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
+                            icon="📂"
                         >
-                            <span>📂</span> Import Folder
-                        </button>
-                        <button 
+                            Import Folder
+                        </x-button>
+                        <x-button 
                             type="button" 
+                            variant="secondary"
+                            size="md"
                             @click="addMediaUrl()"
-                            class="px-3.5 py-2 bg-white hover:bg-stone-50 border border-[#ECE6DE] text-[#171412] text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5"
+                            icon="🔗"
                         >
-                            <span>🔗</span> Add via URL
-                        </button>
+                            Add via URL
+                        </x-button>
                     </div>
                 </div>
             </div>
