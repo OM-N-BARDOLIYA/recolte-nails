@@ -12,6 +12,9 @@
         ['title' => 'Trusted by', 'sub' => 'Professionals', 'icon' => 'star', 'image' => ''],
     ];
     $initialBadgesJson = json_encode(!empty($trust_strip['items']) ? $trust_strip['items'] : $defaultTrustList);
+    $cats = $categories_section['categories'] ?? [];
+    $heroSlides = $hero['slides'] ?? [];
+    $instaPosts = $instagram['posts'] ?? [];
 @endphp
 
 <script>
@@ -25,14 +28,65 @@ function homePageManager() {
         slide2: '{{ $hero['slides'][2]['bg_image'] ?? asset('images/banners/hero-slide-dust-collector.png') }}',
         slide3: '{{ $hero['slides'][3]['bg_image'] ?? asset('images/banners/hero-slide-uv-led-lamp.png') }}',
         slide4: '{{ $hero['slides'][4]['bg_image'] ?? asset('images/banners/hero-slide-cat-eye-60.png') }}',
+
+        // Hero Slide Text Fields (Live Preview Reactive)
+        slideSub0: {!! json_encode(old('slide_0_sub_descriptor', $heroSlides[0]['sub_descriptor'] ?? 'NAILS • BEAUTY • YOU')) !!},
+        slideScript0: {!! json_encode(old('slide_0_script_line', $heroSlides[0]['script_line'] ?? 'Create • Express • Shine')) !!},
+        slideDesc0: {!! json_encode(old('slide_0_subtitle', $heroSlides[0]['subtitle'] ?? 'Premium Nail Products for Professionals & Enthusiasts')) !!},
+        slideCta0: {!! json_encode(old('slide_0_cta_text', $heroSlides[0]['cta_text'] ?? 'SHOP NOW')) !!},
+
+        slideSub1: {!! json_encode(old('slide_1_sub_descriptor', $heroSlides[1]['sub_descriptor'] ?? 'SPOTLIGHT ATELIER • 96 SALON SHADES')) !!},
+        slideScript1: {!! json_encode(old('slide_1_script_line', $heroSlides[1]['script_line'] ?? 'Curated Color Harmony')) !!},
+        slideDesc1: {!! json_encode(old('slide_1_subtitle', $heroSlides[1]['subtitle'] ?? '96 Master Palette Gel Polish Shades Engineered for Runway Manicures & Salon Artists')) !!},
+        slideCta1: {!! json_encode(old('slide_1_cta_text', $heroSlides[1]['cta_text'] ?? 'EXPLORE 96 PALETTES')) !!},
+
+        slideSub2: {!! json_encode(old('slide_2_sub_descriptor', $heroSlides[2]['sub_descriptor'] ?? 'PROFESSIONAL SALON TECH • AIR PURITY')) !!},
+        slideScript2: {!! json_encode(old('slide_2_script_line', $heroSlides[2]['script_line'] ?? 'Pure Salon Comfort')) !!},
+        slideDesc2: {!! json_encode(old('slide_2_subtitle', $heroSlides[2]['subtitle'] ?? 'High-Powered Turbo Ventilation & Micro-Filtration for a Clean, Dust-Free Atelier Environment')) !!},
+        slideCta2: {!! json_encode(old('slide_2_cta_text', $heroSlides[2]['cta_text'] ?? 'DISCOVER EQUIPMENT')) !!},
+
+        slideSub3: {!! json_encode(old('slide_3_sub_descriptor', $heroSlides[3]['sub_descriptor'] ?? 'ADVANCED UV/LED TECH • DUAL OPTICS')) !!},
+        slideScript3: {!! json_encode(old('slide_3_script_line', $heroSlides[3]['script_line'] ?? 'Fast & Flawless Curing')) !!},
+        slideDesc3: {!! json_encode(old('slide_3_subtitle', $heroSlides[3]['subtitle'] ?? 'Salon-Grade Smart Timing & 120s Sensor Curing for Mirror-Shine Durability and Zero Heat Spikes')) !!},
+        slideCta3: {!! json_encode(old('slide_3_cta_text', $heroSlides[3]['cta_text'] ?? 'SHOP UV/LED LAMPS')) !!},
+
+        slideSub4: {!! json_encode(old('slide_4_sub_descriptor', $heroSlides[4]['sub_descriptor'] ?? 'VELVET MAGNETIC COUTURE • 60 SHADES')) !!},
+        slideScript4: {!! json_encode(old('slide_4_script_line', $heroSlides[4]['script_line'] ?? 'Chameleon Magnetic Depth')) !!},
+        slideDesc4: {!! json_encode(old('slide_4_subtitle', $heroSlides[4]['subtitle'] ?? '60 Dimensional Cat-Eye Magnetic Gels with Pearlescent Beams & Multi-Angle Velvet Reflections')) !!},
+        slideCta4: {!! json_encode(old('slide_4_cta_text', $heroSlides[4]['cta_text'] ?? 'SHOP CAT EYE GELS')) !!},
+
+        // Tab 3: Shop by Category Fields (Live Preview Reactive)
+        catSectionTitle: {!! json_encode(old('categories_title', $categories_section['title'] ?? 'Shop by Category')) !!},
+        catSectionSub: {!! json_encode(old('categories_subtitle', $categories_section['subtitle'] ?? 'Everything you need for perfect nails')) !!},
         cat0: '{{ $categories_section['categories'][0]['image'] ?? asset('images/products/recolte-cat-nail-kits.jpg') }}',
         cat1: '{{ $categories_section['categories'][1]['image'] ?? asset('images/products/recolte-cat-uv-lamps.jpg') }}',
         cat2: '{{ $categories_section['categories'][2]['image'] ?? asset('images/products/recolte-cat-builder-gel.jpg') }}',
         cat3: '{{ $categories_section['categories'][3]['image'] ?? asset('images/products/recolte-cat-tips.jpg') }}',
+
+        catTitle0: {!! json_encode(old('cat_0_title', $cats[0]['title'] ?? 'Shades')) !!},
+        catBtn0: {!! json_encode(old('cat_0_btn_text', $cats[0]['btn_text'] ?? 'Shop Now')) !!},
+        catTitle1: {!! json_encode(old('cat_1_title', $cats[1]['title'] ?? 'UV Lamps')) !!},
+        catBtn1: {!! json_encode(old('cat_1_btn_text', $cats[1]['btn_text'] ?? 'Shop Now')) !!},
+        catTitle2: {!! json_encode(old('cat_2_title', $cats[2]['title'] ?? 'Builder Gel')) !!},
+        catBtn2: {!! json_encode(old('cat_2_btn_text', $cats[2]['btn_text'] ?? 'Shop Now')) !!},
+        catTitle3: {!! json_encode(old('cat_3_title', $cats[3]['title'] ?? 'Tips')) !!},
+        catBtn3: {!! json_encode(old('cat_3_btn_text', $cats[3]['btn_text'] ?? 'Shop Now')) !!},
+
+        // Tab 4: Colors Showcase Banner Fields (Live Preview Reactive)
         showcaseImg: '{{ $showcase['image'] ?? asset('images/banners/recolte-colors-showcase.jpg') }}?v={{ file_exists(public_path('images/banners/recolte-colors-showcase.jpg')) ? filemtime(public_path('images/banners/recolte-colors-showcase.jpg')) : time() }}',
+        showcaseTitle1: {!! json_encode(old('showcase_title_line1', $showcase['title_line1'] ?? 'Colors that')) !!},
+        showcaseTitle2: {!! json_encode(old('showcase_title_line2', $showcase['title_line2'] ?? 'cultivate confidence')) !!},
+        showcaseDesc: {!! json_encode(old('showcase_description', $showcase['description'] ?? 'Dedicated to salon-grade perfection, Japanese gel formulas, and effortless everyday elegance.')) !!},
+        showcaseBtn: {!! json_encode(old('showcase_btn_text', $showcase['btn_text'] ?? 'Find more')) !!},
+
+        // Tab 5: Instagram Community Fields (Live Preview Reactive)
         video0: '{{ $instagram['posts'][0]['video'] ?? asset('uploads/pages/about_insta_video_0_1789736475.mp4') }}',
         video1: '{{ $instagram['posts'][1]['video'] ?? asset('uploads/pages/about_insta_video_1_1789736475.mp4') }}',
         video2: '{{ $instagram['posts'][2]['video'] ?? asset('uploads/pages/about_insta_video_2_1789736475.mp4') }}',
+        instaAlt0: {!! json_encode(old('insta_0_alt', $instaPosts[0]['alt'] ?? 'Recolte Salon Gel Application')) !!},
+        instaAlt1: {!! json_encode(old('insta_1_alt', $instaPosts[1]['alt'] ?? 'Crimson & Gold Atelier Waves')) !!},
+        instaAlt2: {!! json_encode(old('insta_2_alt', $instaPosts[2]['alt'] ?? 'Rose Gold Leopard Couture Art')) !!},
+
         trustBadges: {!! $initialBadgesJson !!},
         addTrustBadge() {
             if (this.trustBadges.length >= 8) {
@@ -304,10 +358,22 @@ function homePageManager() {
                             />
                             <p class="text-[10px] text-[#8C7A6B]">High-resolution panorama (recommended 2048×818 or 21:9 ratio). Crisp silk vector rendering.</p>
                         </div>
-                        <div class="md:col-span-5 flex flex-col items-center justify-center p-2.5 rounded-none bg-white border border-[#ECE6DE] shadow-2xs">
-                            <span class="text-[10px] font-semibold text-[#8C7A6B] uppercase tracking-wider mb-1.5">Slide {{ $i + 1 }} Banner Preview</span>
-                            <div class="w-full aspect-[21/9] rounded-none overflow-hidden bg-stone-100 border border-[#ECE6DE]">
-                                <img :src="slide{{ $i }}" class="w-full h-full object-cover" alt="Slide {{ $i + 1 }} Preview" />
+                        <div class="md:col-span-5 flex flex-col p-2.5 rounded-none bg-white border border-[#ECE6DE] shadow-2xs">
+                            <div class="flex items-center justify-between pb-1.5 mb-1.5 border-b border-[#ECE6DE]">
+                                <span class="text-[10px] font-semibold text-[#8C7A6B] uppercase tracking-wider">Slide {{ $i + 1 }} Live Banner Preview</span>
+                                <span class="text-[9px] font-mono text-[#A33B47] uppercase bg-[#FAF8F5] border border-[#ECE6DE] px-1.5 py-0.5">Live Mirror</span>
+                            </div>
+                            <div class="w-full aspect-[21/9] rounded-none overflow-hidden bg-stone-900 border border-[#ECE6DE] relative flex items-center justify-start group">
+                                <img :src="slide{{ $i }}" class="absolute inset-0 w-full h-full object-cover pointer-events-none" alt="Slide {{ $i + 1 }} Preview" />
+                                <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/70 to-transparent pointer-events-none"></div>
+                                <div class="relative z-10 p-2.5 sm:p-3 max-w-[78%] space-y-0.5">
+                                    <p class="text-[7.5px] sm:text-[8px] font-bold tracking-[0.2em] text-[#171412] uppercase truncate" x-text="slideSub{{ $i }} || 'NAILS • BEAUTY • YOU'"></p>
+                                    <p class="text-[9.5px] sm:text-[11px] font-serif italic text-[#A33B47] leading-tight truncate" x-text="slideScript{{ $i }} || 'Create • Express • Shine'"></p>
+                                    <p class="text-[6.5px] sm:text-[7.5px] text-[#444444] line-clamp-1 leading-snug" x-text="slideDesc{{ $i }} || 'Premium Nail Products for Professionals & Enthusiasts'"></p>
+                                    <div class="pt-0.5">
+                                        <span class="inline-block px-1.5 py-0.5 bg-[#171412] text-white text-[6.5px] font-bold uppercase tracking-wider shadow-2xs" x-text="(slideCta{{ $i }} || 'SHOP NOW') + ' →'"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -316,22 +382,22 @@ function homePageManager() {
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-[#ECE6DE]">
                         <div class="space-y-1">
                             <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Sub-Descriptor Line</label>
-                            <input type="text" name="slide_{{ $i }}_sub_descriptor" value="{{ old("slide_{$i}_sub_descriptor", $heroSlides[$i]['sub_descriptor'] ?? '') }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-[#171412] text-xs font-bold tracking-widest uppercase focus:outline-none focus:border-[#171412]">
+                            <input type="text" name="slide_{{ $i }}_sub_descriptor" x-model="slideSub{{ $i }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-[#171412] text-xs font-bold tracking-widest uppercase focus:outline-none focus:border-[#171412]">
                         </div>
 
                         <div class="space-y-1">
                             <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Script Cursive Accent Line</label>
-                            <input type="text" name="slide_{{ $i }}_script_line" value="{{ old("slide_{$i}_script_line", $heroSlides[$i]['script_line'] ?? '') }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-[#171412] text-xs font-serif italic focus:outline-none focus:border-[#171412]">
+                            <input type="text" name="slide_{{ $i }}_script_line" x-model="slideScript{{ $i }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-[#171412] text-xs font-serif italic focus:outline-none focus:border-[#171412]">
                         </div>
 
                         <div class="space-y-1 sm:col-span-2">
                             <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Subtitle Tagline</label>
-                            <input type="text" name="slide_{{ $i }}_subtitle" value="{{ old("slide_{$i}_subtitle", $heroSlides[$i]['subtitle'] ?? '') }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-[#171412] text-xs leading-relaxed focus:outline-none focus:border-[#171412]">
+                            <input type="text" name="slide_{{ $i }}_subtitle" x-model="slideDesc{{ $i }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-[#171412] text-xs leading-relaxed focus:outline-none focus:border-[#171412]">
                         </div>
 
                         <div class="space-y-1">
                             <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">CTA Button Text</label>
-                            <input type="text" name="slide_{{ $i }}_cta_text" value="{{ old("slide_{$i}_cta_text", $heroSlides[$i]['cta_text'] ?? 'SHOP NOW') }}" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-[#171412] text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-[#171412]">
+                            <input type="text" name="slide_{{ $i }}_cta_text" x-model="slideCta{{ $i }}" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-[#171412] text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-[#171412]">
                         </div>
 
                         <div class="space-y-1">
@@ -527,30 +593,29 @@ function homePageManager() {
         <div x-show="activeTab === 'categories'" class="space-y-6">
             <div class="p-6 sm:p-8 rounded-none bg-white border border-[#ECE6DE] space-y-6 shadow-2xs">
                 <div class="border-b border-[#ECE6DE] pb-4">
-                    <h2 class="font-serif text-xl font-medium text-[#171412]">Shop by Category (4 Clean Product Bottle Cards)</h2>
-                    <p class="text-xs text-[#6A625A] mt-1 font-light">Strictly 1 horizontal row of 4 clean, centered product bottle cards.</p>
+                    <h2 class="font-serif text-xl font-medium text-[#171412]" x-text="(catSectionTitle || 'Shop by Category') + ' (4 Clean Product Bottle Cards)'"></h2>
+                    <p class="text-xs text-[#6A625A] mt-1 font-light" x-text="catSectionSub || 'Strictly 1 horizontal row of 4 clean, centered product bottle cards.'"></p>
                 </div>
 
                 <!-- Section Header Title & Subtitle -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE]">
                     <div class="space-y-1">
                         <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Section Header Title</label>
-                        <input type="text" name="categories_title" value="{{ old('categories_title', $categories_section['title'] ?? 'Shop by Category') }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-sm font-serif font-bold text-[#171412] focus:outline-none focus:border-[#171412]">
+                        <input type="text" name="categories_title" x-model="catSectionTitle" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-sm font-serif font-bold text-[#171412] focus:outline-none focus:border-[#171412]">
                     </div>
                     <div class="space-y-1">
                         <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Section Header Subtitle</label>
-                        <input type="text" name="categories_subtitle" value="{{ old('categories_subtitle', $categories_section['subtitle'] ?? 'Everything you need for perfect nails') }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] focus:outline-none focus:border-[#171412]">
+                        <input type="text" name="categories_subtitle" x-model="catSectionSub" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] focus:outline-none focus:border-[#171412]">
                     </div>
                 </div>
 
                 <!-- 4 Category Cards -->
-                @php $cats = $categories_section['categories'] ?? []; @endphp
                 <div class="space-y-5">
                     @for($i = 0; $i < 4; $i++)
                     <div class="p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] space-y-4">
                         <div class="flex items-center justify-between border-b border-[#ECE6DE] pb-2">
-                            <span class="font-serif font-bold text-sm text-[#A33B47]">Category Card {{ $i + 1 }}</span>
-                            <span class="text-[11px] font-mono text-[#8C7A6B]" x-text="cat{{ $i }}"></span>
+                            <span class="font-serif font-bold text-sm text-[#A33B47]" x-text="'Category Card ' + ({{ $i }} + 1) + ': ' + (catTitle{{ $i }} || 'Untitled')"></span>
+                            <span class="text-[11px] font-mono text-[#8C7A6B] truncate max-w-xs" x-text="cat{{ $i }}"></span>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch">
@@ -558,11 +623,11 @@ function homePageManager() {
                             <div class="md:col-span-7 lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div class="space-y-1">
                                     <label class="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-[#8C7A6B] block">Category Name</label>
-                                    <input type="text" name="cat_{{ $i }}_title" value="{{ old("cat_{$i}_title", $cats[$i]['title'] ?? '') }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-bold text-[#171412] focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15">
+                                    <input type="text" name="cat_{{ $i }}_title" x-model="catTitle{{ $i }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-bold text-[#171412] focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15">
                                 </div>
                                 <div class="space-y-1">
                                     <label class="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-[#8C7A6B] block">Button Text</label>
-                                    <input type="text" name="cat_{{ $i }}_btn_text" value="{{ old("cat_{$i}_btn_text", $cats[$i]['btn_text'] ?? 'Shop Now') }}" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15">
+                                    <input type="text" name="cat_{{ $i }}_btn_text" x-model="catBtn{{ $i }}" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15">
                                 </div>
                                 <div class="space-y-1 sm:col-span-2">
                                     <label class="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-[#8C7A6B] block">Link Target (URL)</label>
@@ -597,9 +662,9 @@ function homePageManager() {
                                     <img :src="cat{{ $i }}" class="w-full h-full object-contain max-h-[250px] rounded-none transition-transform duration-300 group-hover:scale-103" alt="Category {{ $i + 1 }}" />
                                 </div>
                                 <div class="mt-2.5 pt-2 border-t border-[#ECE6DE] flex items-center justify-between text-xs">
-                                    <span class="font-sans font-bold text-[#18181B] truncate text-xs">{{ $cats[$i]['title'] ?? 'Category ' . ($i + 1) }}</span>
+                                    <span class="font-sans font-bold text-[#18181B] truncate text-xs" x-text="catTitle{{ $i }} || 'Category ' + ({{ $i }} + 1)"></span>
                                     <span class="text-[11px] font-semibold text-[#A33B47] flex items-center gap-1 shrink-0">
-                                        <span>{{ $cats[$i]['btn_text'] ?? 'Shop Now' }}</span>
+                                        <span x-text="catBtn{{ $i }} || 'Shop Now'"></span>
                                         <span>→</span>
                                     </span>
                                 </div>
@@ -628,22 +693,22 @@ function homePageManager() {
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div class="space-y-1.5">
                         <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Headline Line 1</label>
-                        <input type="text" name="showcase_title_line1" value="{{ old('showcase_title_line1', $showcase['title_line1'] ?? 'Colors that') }}" required class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-base font-serif font-bold focus:outline-none focus:border-[#171412] focus:bg-white">
+                        <input type="text" name="showcase_title_line1" x-model="showcaseTitle1" required class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-base font-serif font-bold focus:outline-none focus:border-[#171412] focus:bg-white">
                     </div>
 
                     <div class="space-y-1.5">
                         <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Headline Line 2</label>
-                        <input type="text" name="showcase_title_line2" value="{{ old('showcase_title_line2', $showcase['title_line2'] ?? 'cultivate confidence') }}" required class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-base font-serif font-bold focus:outline-none focus:border-[#171412] focus:bg-white">
+                        <input type="text" name="showcase_title_line2" x-model="showcaseTitle2" required class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-base font-serif font-bold focus:outline-none focus:border-[#171412] focus:bg-white">
                     </div>
 
                     <div class="sm:col-span-2 space-y-2.5 my-2">
                         <label class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8C7A6B] block">Description Paragraph</label>
-                        <textarea name="showcase_description" rows="4" required class="w-full px-5 py-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs sm:text-[13.5px] leading-relaxed focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs">{{ old('showcase_description', $showcase['description'] ?? 'Dedicated to salon-grade perfection, Japanese gel formulas, and effortless everyday elegance.') }}</textarea>
+                        <textarea name="showcase_description" x-model="showcaseDesc" rows="4" required class="w-full px-5 py-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs sm:text-[13.5px] leading-relaxed focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs"></textarea>
                     </div>
 
                     <div class="space-y-1.5">
                         <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Button Text</label>
-                        <input type="text" name="showcase_btn_text" value="{{ old('showcase_btn_text', $showcase['btn_text'] ?? 'Find more') }}" class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-[#171412] focus:bg-white">
+                        <input type="text" name="showcase_btn_text" x-model="showcaseBtn" class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-[#171412] focus:bg-white">
                     </div>
 
                     <div class="space-y-1.5">
@@ -666,16 +731,46 @@ function homePageManager() {
                                 <input 
                                     type="text" 
                                     name="showcase_image" 
-                                    x-model="showcaseImg"
+                                    x-model="showcaseImg" 
                                     placeholder="Or Image URL..." 
                                     class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-mono text-[#171412] focus:outline-none focus:border-[#171412]"
                                 />
                             </div>
                             <div class="md:col-span-4 flex flex-col items-center justify-center p-2 rounded-none bg-white border border-[#ECE6DE] shadow-2xs">
-                                <span class="text-[10px] font-semibold text-[#8C7A6B] uppercase tracking-wider mb-1.5">Live Preview</span>
+                                <span class="text-[10px] font-semibold text-[#8C7A6B] uppercase tracking-wider mb-1.5">Photo Thumbnail</span>
                                 <div class="w-full aspect-[4/3] rounded-none overflow-hidden bg-stone-100 border border-[#ECE6DE]">
                                     <img :src="showcaseImg" class="w-full h-full object-cover object-bottom" style="object-position: center bottom;" alt="Showcase Preview" />
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Full Editorial Split Preview Mirror -->
+                    <div class="sm:col-span-2 p-5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] space-y-3">
+                        <div class="flex items-center justify-between pb-2 border-b border-[#ECE6DE]">
+                            <span class="text-[10.5px] font-bold uppercase tracking-[0.18em] text-[#8C7A6B]">Live Editorial Showcase Split Banner Preview</span>
+                            <span class="text-[9px] font-mono text-[#A33B47] uppercase bg-white border border-[#ECE6DE] px-2 py-0.5">Realtime Storefront Mirror</span>
+                        </div>
+                        <div class="w-full grid grid-cols-1 md:grid-cols-2 rounded-none bg-white border border-[#ECE6DE] overflow-hidden shadow-2xs">
+                            <!-- Left: Editorial Typography & Pill Button -->
+                            <div class="p-6 sm:p-8 flex flex-col justify-between space-y-4">
+                                <div class="space-y-2.5">
+                                    <h3 class="font-serif text-xl sm:text-2xl lg:text-3xl font-normal text-[#171412] leading-tight tracking-tight">
+                                        <span class="block" x-text="showcaseTitle1 || 'Colors that'"></span>
+                                        <span class="block italic text-[#A33B47]" x-text="showcaseTitle2 || 'cultivate confidence'"></span>
+                                    </h3>
+                                    <p class="text-xs text-[#5A534E] leading-relaxed line-clamp-3 font-light" x-text="showcaseDesc || 'Dedicated to salon-grade perfection, Japanese gel formulas, and effortless everyday elegance.'"></p>
+                                </div>
+                                <div class="pt-2">
+                                    <span class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#171412] text-white text-[10.5px] font-bold uppercase tracking-[0.18em] shadow-2xs">
+                                        <span x-text="showcaseBtn || 'Find more'"></span>
+                                        <span>→</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- Right: Color Showcase Photography -->
+                            <div class="relative bg-stone-100 min-h-[180px] sm:min-h-[220px] flex items-center justify-center overflow-hidden border-t md:border-t-0 md:border-l border-[#ECE6DE]">
+                                <img :src="showcaseImg" class="w-full h-full object-cover object-bottom max-h-[260px]" style="object-position: center bottom;" alt="Showcase Preview" />
                             </div>
                         </div>
                     </div>
@@ -761,6 +856,9 @@ function homePageManager() {
                                     <div class="absolute top-2 right-2 px-2 py-0.5 bg-black/70 text-white text-[9px] font-bold uppercase tracking-wider border border-white/20">
                                         ▶ Looping
                                     </div>
+                                    <div class="absolute bottom-0 inset-x-0 p-2 bg-gradient-to-t from-black/85 via-black/40 to-transparent">
+                                        <span class="text-white text-[10px] font-medium truncate block" x-text="instaAlt{{ $i }} || 'Reel ' + ({{ $i }} + 1)"></span>
+                                    </div>
                                 </div>
 
                                 <!-- Video Upload & URL -->
@@ -786,7 +884,7 @@ function homePageManager() {
                             <div class="space-y-2 pt-2 border-t border-[#ECE6DE]">
                                 <div class="space-y-1">
                                     <label class="text-[9px] font-semibold uppercase tracking-wider text-[#8C7A6B] block">Reel Caption / Title</label>
-                                    <input type="text" name="insta_{{ $i }}_alt" value="{{ old("insta_{$i}_alt", $posts[$i]['alt'] ?? "Reel " . ($i + 1)) }}" class="w-full px-2.5 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] focus:outline-none focus:border-[#171412]">
+                                    <input type="text" name="insta_{{ $i }}_alt" x-model="instaAlt{{ $i }}" class="w-full px-2.5 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] focus:outline-none focus:border-[#171412]">
                                 </div>
                                 <div class="space-y-1">
                                     <label class="text-[9px] font-semibold uppercase tracking-wider text-[#8C7A6B] block">Instagram Post / Profile Target URL</label>
