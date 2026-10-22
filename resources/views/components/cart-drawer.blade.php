@@ -87,9 +87,21 @@
                             Explore our handmade reusable press-ons, salon gel polishes, and 24K cuticle elixirs.
                         </p>
                     </div>
-                    <div class="pt-2">
+                        @php
+                            $cartCatalogUrl = route('products.index');
+                            if (request()->routeIs('products.show')) {
+                                $currSlug = request()->route('slug');
+                                $pObj = !empty($currSlug) ? \App\Models\Product::where('slug', $currSlug)->first() : null;
+                                if ($pObj) {
+                                    $activeCatSlug = $pObj->categoryRef?->slug ?? \App\Models\Category::where('name', $pObj->category)->first()?->slug ?? \Illuminate\Support\Str::slug($pObj->category);
+                                    if (!empty($activeCatSlug)) {
+                                        $cartCatalogUrl = route('products.index', ['category' => $activeCatSlug]);
+                                    }
+                                }
+                            }
+                        @endphp
                         <a 
-                            href="{{ route('products.index') }}" 
+                            href="{{ $cartCatalogUrl }}" 
                             @click="$store.cart.isOpen = false"
                             class="inline-flex items-center gap-2 px-6 py-3 rounded-none bg-charcoal hover:bg-[#2A2321] text-white text-xs font-bold uppercase tracking-wider shadow-md transition-all"
                         >

@@ -70,8 +70,18 @@
                         @endif
                     </a>
 
+                    @php
+                        $navCatalogUrl = route('products.index');
+                        if (request()->routeIs('products.show')) {
+                            $activeCatSlug = $categorySlug ?? (isset($product) ? ($product->categoryRef?->slug ?? \App\Models\Category::where('name', $product->category)->first()?->slug ?? \Illuminate\Support\Str::slug($product->category)) : null);
+                            if (!empty($activeCatSlug)) {
+                                $navCatalogUrl = route('products.index', ['category' => $activeCatSlug]);
+                            }
+                        }
+                    @endphp
+
                     <!-- Catalog -->
-                    <a href="{{ route('products.index') }}"
+                    <a href="{{ $navCatalogUrl }}"
                         class="transition-colors hover:text-[#A33B47] relative py-1 {{ request()->routeIs('products.*') ? 'text-[#A33B47]' : 'text-[#2b2b2b]' }}">
                         Catalog
                         @if(request()->routeIs('products.*'))
@@ -140,7 +150,7 @@
                     class="block px-3.5 py-2.5 rounded-none text-xs font-semibold uppercase tracking-wider {{ request()->routeIs('about') ? 'text-[#A33B47] bg-[#FBEFE9]' : 'text-gray-800' }}">About</a>
                 <a href="{{ route('contact') }}"
                     class="block px-3.5 py-2.5 rounded-none text-xs font-semibold uppercase tracking-wider {{ request()->routeIs('contact') ? 'text-[#A33B47] bg-[#FBEFE9]' : 'text-gray-800' }}">Contact</a>
-                <a href="{{ route('products.index') }}"
+                <a href="{{ $navCatalogUrl }}"
                     class="block px-3.5 py-2.5 rounded-none text-xs font-semibold uppercase tracking-wider {{ request()->routeIs('products.*') ? 'text-[#A33B47] bg-[#FBEFE9]' : 'text-gray-800' }}">Catalog</a>
                 <button type="button" @click="mobileMenuOpen = false; $store.search.isOpen = true"
                     class="w-full text-left px-3.5 py-2.5 rounded-none text-xs font-semibold uppercase tracking-wider text-gray-800 flex items-center justify-between">
@@ -213,7 +223,7 @@
                         <li><a href="{{ route('contact') }}"
                                 class="hover:text-white hover:translate-x-0.5 inline-block transition-all duration-150">Contact
                                 Us</a></li>
-                        <li><a href="{{ route('products.index') }}"
+                        <li><a href="{{ $navCatalogUrl }}"
                                 class="hover:text-white hover:translate-x-0.5 inline-block transition-all duration-150">Haute
                                 Catalog</a></li>
                     </ul>

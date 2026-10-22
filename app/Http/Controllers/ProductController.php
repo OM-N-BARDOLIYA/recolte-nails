@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\PageContent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -117,7 +118,11 @@ class ProductController extends Controller
                 ->get();
         }
 
-        return view('products.show', compact('product', 'relatedProducts'));
+        $categorySlug = $product->categoryRef?->slug 
+            ?? Category::where('name', $product->category)->first()?->slug 
+            ?? Str::slug($product->category);
+
+        return view('products.show', compact('product', 'relatedProducts', 'categorySlug'));
     }
 
     public function searchApi(Request $request)

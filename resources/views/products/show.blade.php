@@ -113,18 +113,21 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
 
             <!-- ── 1. BREADCRUMBS ── -->
-            <nav class="flex items-center gap-2 text-xs text-[#8C7A6B] font-light tracking-wide">
+            <nav class="flex items-center gap-2 text-xs text-[#8C7A6B] font-light tracking-wide flex-wrap">
                 <a href="{{ route('home') }}" class="hover:text-[#171412] transition-colors">Home</a>
                 <span class="text-[#ECE6DE]">/</span>
                 @php
-                    $catalogQuery = array_filter([
-                        'category' => session('catalog_category'),
-                        'sort' => session('catalog_sort'),
-                        'search' => session('catalog_search'),
-                    ]);
-                    $catalogUrl = !empty($catalogQuery) ? route('products.index', $catalogQuery) : route('products.index');
+                    $prodCatSlug = $categorySlug 
+                        ?? $product->categoryRef?->slug 
+                        ?? \App\Models\Category::where('name', $product->category)->first()?->slug 
+                        ?? \Illuminate\Support\Str::slug($product->category);
+                    $catalogUrl = !empty($prodCatSlug) ? route('products.index', ['category' => $prodCatSlug]) : route('products.index');
                 @endphp
                 <a href="{{ $catalogUrl }}" class="hover:text-[#171412] transition-colors">Catalog</a>
+                @if(!empty($product->category))
+                    <span class="text-[#ECE6DE]">/</span>
+                    <a href="{{ $catalogUrl }}" class="hover:text-[#171412] transition-colors">{{ $product->category }}</a>
+                @endif
                 <span class="text-[#ECE6DE]">/</span>
                 <span class="text-[#171412] font-medium truncate">{{ $product->title }}</span>
             </nav>
@@ -257,10 +260,15 @@
                             </span>
                         @endif
 
-                        <span
-                            class="px-3 py-1 rounded-none bg-white text-[#8C7A6B] text-[10px] font-semibold tracking-widest uppercase border border-[#ECE6DE]">
-                            {{ $product->category }}
-                        </span>
+                        @if(!empty($product->category))
+                            <a href="{{ $catalogUrl }}"
+                                title="Browse all {{ $product->category }} in catalog"
+                                class="px-3 py-1 rounded-none bg-white hover:bg-[#171412] text-[#8C7A6B] hover:text-white text-[10px] font-semibold tracking-widest uppercase border border-[#ECE6DE] hover:border-[#171412] transition-all inline-flex items-center gap-1.5 shadow-2xs group cursor-pointer">
+                                <span>{{ $product->categoryRef?->icon_emoji ?? '💅' }}</span>
+                                <span>{{ $product->category }}</span>
+                                <span class="text-[9px] opacity-60 group-hover:translate-x-0.5 transition-transform">↗</span>
+                            </a>
+                        @endif
                     </div>
 
                     <!-- Title & Tagline -->
@@ -513,11 +521,20 @@
             <!-- ── 3. RELATED PRODUCTS SECTION ── -->
             @if(!empty($relatedProducts) && $relatedProducts->count() > 0)
                 <div class="pt-16 sm:pt-20 border-t border-[#ECE6DE] space-y-8">
-                    <div class="space-y-1">
-                        <div class="text-[11px] font-medium uppercase tracking-[0.25em] text-[#A33B47]">✦ Curated Atelier
-                            Archives</div>
-                        <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-[#171412]">You May Also <span
-                                class="italic text-[#A33B47]">Adore</span></h2>
+                    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                        <div class="space-y-1">
+                            <div class="text-[11px] font-medium uppercase tracking-[0.25em] text-[#A33B47]">✦ Curated Atelier Archives</div>
+                            <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-[#171412]">
+                                You May Also <span class="italic text-[#A33B47]">Adore</span>
+                            </h2>
+                        </div>
+                        @if(!empty($product->category))
+                            <a href="{{ $catalogUrl }}"
+                               class="text-xs font-semibold uppercase tracking-wider text-[#A33B47] hover:text-[#78232D] inline-flex items-center gap-1.5 transition-colors group">
+                                <span>Browse All {{ $product->category }} in Catalog</span>
+                                <span class="group-hover:translate-x-1 transition-transform">→</span>
+                            </a>
+                        @endif
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                         @foreach($relatedProducts as $rel)
