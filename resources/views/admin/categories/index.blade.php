@@ -198,13 +198,13 @@
                         />
                     </div>
 
-                    <div class="space-y-1.5">
-                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#6A625A] block">Description</label>
+                    <div class="space-y-2 my-2">
+                        <label class="text-[11px] font-bold uppercase tracking-[0.16em] text-[#6A625A] block">Category Description</label>
                         <textarea 
                             name="description" 
-                            rows="2" 
+                            rows="4" 
                             placeholder="Brief summary of items in this category..."
-                            class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15"
+                            class="w-full px-5 py-3.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs sm:text-[13px] leading-relaxed focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs placeholder:text-[#A89E94]"
                         ></textarea>
                     </div>
 

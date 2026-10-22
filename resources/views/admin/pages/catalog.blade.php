@@ -138,14 +138,14 @@
                     </div>
                 </div>
 
-                <div class="md:col-span-3 space-y-1.5">
-                    <label class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#6A625A] block">Catalog Description / Story</label>
+                <div class="md:col-span-3 space-y-2.5 my-2">
+                    <label class="text-[11px] font-bold uppercase tracking-[0.16em] text-[#6A625A] block">Catalog Description / Story</label>
                     <textarea 
                         name="hero_description" 
                         x-model="description" 
-                        rows="3" 
+                        rows="5" 
                         placeholder="Write a captivating description of your nail collections, formulas, and craftsmanship..." 
-                        class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs font-light text-[#171412] outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 leading-relaxed"
+                        class="w-full px-5 py-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs sm:text-[13.5px] font-light text-[#171412] outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 leading-relaxed transition-all shadow-2xs placeholder:text-[#A89E94]"
                     ></textarea>
                 </div>
             </div>
@@ -192,14 +192,14 @@
                     >
                 </div>
 
-                <div class="md:col-span-2 space-y-1.5">
-                    <label class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#6A625A] block">Card Description</label>
+                <div class="md:col-span-2 space-y-2.5 my-2">
+                    <label class="text-[11px] font-bold uppercase tracking-[0.16em] text-[#6A625A] block">Card Description</label>
                     <textarea 
                         name="consultation_description" 
                         x-model="cardDesc" 
-                        rows="2" 
+                        rows="3" 
                         placeholder="e.g. Send a quick photo of your natural nail bed for custom fit recommendations from our artists." 
-                        class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs font-light text-[#171412] outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 leading-relaxed"
+                        class="w-full px-5 py-3.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs sm:text-[13.5px] font-light text-[#171412] outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 leading-relaxed transition-all shadow-2xs placeholder:text-[#A89E94]"
                     ></textarea>
                 </div>
 

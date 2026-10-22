@@ -153,13 +153,13 @@ function aboutPageManager() {
                                     <input type="text" name="story_{{ $i }}_title_highlight" value="{{ $sHighlight }}" placeholder="e.g. Zero salon waiting time." class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#A33B47]/30 text-xs font-semibold italic text-[#A33B47] outline-none focus:border-[#A33B47]">
                                     <span class="text-[10px] text-[#8C7A6B] block">Automatically styled in italic accent on the live page</span>
                                 </div>
-                                <div class="space-y-1 sm:col-span-2">
-                                    <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Paragraph 1</label>
-                                    <textarea name="story_{{ $i }}_p1" rows="2" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] leading-relaxed outline-none focus:border-[#171412]">{{ $s['p1'] ?? '' }}</textarea>
+                                <div class="space-y-2 sm:col-span-2 my-1.5">
+                                    <label class="text-[10.5px] font-bold uppercase tracking-[0.18em] text-[#8C7A6B] block">Paragraph 1</label>
+                                    <textarea name="story_{{ $i }}_p1" rows="3" class="w-full px-4.5 py-3.5 rounded-none bg-white border border-[#ECE6DE] text-xs sm:text-[13.5px] text-[#171412] leading-relaxed outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs">{{ $s['p1'] ?? '' }}</textarea>
                                 </div>
-                                <div class="space-y-1 sm:col-span-2">
-                                    <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Paragraph 2</label>
-                                    <textarea name="story_{{ $i }}_p2" rows="2" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] leading-relaxed outline-none focus:border-[#171412]">{{ $s['p2'] ?? '' }}</textarea>
+                                <div class="space-y-2 sm:col-span-2 my-1.5">
+                                    <label class="text-[10.5px] font-bold uppercase tracking-[0.18em] text-[#8C7A6B] block">Paragraph 2</label>
+                                    <textarea name="story_{{ $i }}_p2" rows="3" class="w-full px-4.5 py-3.5 rounded-none bg-white border border-[#ECE6DE] text-xs sm:text-[13.5px] text-[#171412] leading-relaxed outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs">{{ $s['p2'] ?? '' }}</textarea>
                                 </div>
                                 <div class="space-y-2 sm:col-span-2">
                                     <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Slide Showcase Image</label>
@@ -260,9 +260,9 @@ function aboutPageManager() {
                             <input type="text" name="steps_header_title" value="{{ $steps['header_title'] ?? 'The 4-Step Atelier Creation Journey' }}" class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs font-bold font-serif text-[#171412] outline-none focus:border-[#171412]">
                         </div>
                     </div>
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Header Description</label>
-                        <textarea name="steps_header_desc" rows="2" class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] leading-relaxed outline-none focus:border-[#171412]">{{ $steps['header_desc'] ?? '' }}</textarea>
+                    <div class="space-y-2 my-1.5">
+                        <label class="text-[10.5px] font-bold uppercase tracking-[0.18em] text-[#8C7A6B] block">Header Description</label>
+                        <textarea name="steps_header_desc" rows="3" class="w-full px-4.5 py-3.5 rounded-none bg-white border border-[#ECE6DE] text-xs sm:text-[13.5px] text-[#171412] leading-relaxed outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs">{{ $steps['header_desc'] ?? '' }}</textarea>
                     </div>
                 </div>
 
@@ -280,9 +280,9 @@ function aboutPageManager() {
                                 <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Step Title</label>
                                 <input type="text" name="step{{ $st }}_title" value="{{ $steps['step' . $st . '_title'] ?? 'Step Title ' . $st }}" class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs font-bold text-[#171412] outline-none focus:border-[#171412]">
                             </div>
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Description</label>
-                                <textarea name="step{{ $st }}_desc" rows="3" class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] leading-relaxed outline-none focus:border-[#171412]">{{ $steps['step' . $st . '_desc'] ?? '' }}</textarea>
+                            <div class="space-y-2 my-1.5">
+                                <label class="text-[10.5px] font-bold uppercase tracking-[0.18em] text-[#8C7A6B] block">Description</label>
+                                <textarea name="step{{ $st }}_desc" rows="3" class="w-full px-4.5 py-3.5 rounded-none bg-white border border-[#ECE6DE] text-xs sm:text-[13.5px] text-[#171412] leading-relaxed outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs">{{ $steps['step' . $st . '_desc'] ?? '' }}</textarea>
                             </div>
                         </div>
                     @endfor
@@ -309,9 +309,9 @@ function aboutPageManager() {
                         <input type="text" name="concierge_title" value="{{ $concierge['title'] ?? 'Your Dream Manicure, Curated in Real-Time.' }}" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] font-serif text-sm font-bold text-[#171412] outline-none focus:border-[#171412]">
                     </div>
 
-                    <div class="space-y-1 sm:col-span-2">
-                        <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Description Narrative</label>
-                        <textarea name="concierge_desc" rows="3" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] leading-relaxed outline-none focus:border-[#171412]">{{ $concierge['desc'] ?? '' }}</textarea>
+                    <div class="sm:col-span-2 space-y-2.5 my-2">
+                        <label class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8C7A6B] block">Description Narrative</label>
+                        <textarea name="concierge_desc" rows="4" class="w-full px-5 py-4 rounded-none bg-white border border-[#ECE6DE] text-xs sm:text-[13.5px] text-[#171412] leading-relaxed outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs">{{ $concierge['desc'] ?? '' }}</textarea>
                     </div>
 
                     <div class="p-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] space-y-2">
@@ -470,9 +470,9 @@ function aboutPageManager() {
                         <input type="text" name="insta_title" value="{{ old('insta_title', $instagram['title'] ?? 'Join Our Nail Community') }}" required class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-sm font-serif font-bold text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white">
                     </div>
 
-                    <div class="space-y-1.5 sm:col-span-2">
-                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Subtitle Paragraph</label>
-                        <textarea name="insta_subtitle" rows="2" class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs leading-relaxed text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white">{{ old('insta_subtitle', $instagram['subtitle'] ?? 'Follow @recolte_gelpolish for seasonal nail art tutorials, custom press-on launches, and salon-grade transformations.') }}</textarea>
+                    <div class="sm:col-span-2 space-y-2.5 my-2">
+                        <label class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8C7A6B] block">Subtitle Paragraph</label>
+                        <textarea name="insta_subtitle" rows="3" class="w-full px-5 py-3.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs sm:text-[13.5px] leading-relaxed text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs">{{ old('insta_subtitle', $instagram['subtitle'] ?? 'Follow @recolte_gelpolish for seasonal nail art tutorials, custom press-on launches, and salon-grade transformations.') }}</textarea>
                     </div>
 
                     <div class="space-y-1.5">

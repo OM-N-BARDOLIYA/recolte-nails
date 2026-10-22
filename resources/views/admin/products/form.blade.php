@@ -136,13 +136,16 @@
                 </div>
 
                 <!-- Description -->
-                <div class="space-y-1.5 sm:col-span-2">
-                    <label class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#6A625A] block">Full Luxury Description</label>
+                <div class="sm:col-span-2 my-2 space-y-2.5">
+                    <div class="flex items-center justify-between">
+                        <label class="text-[11px] font-bold uppercase tracking-[0.16em] text-[#6A625A] block">Full Luxury Description</label>
+                        <span class="text-[10px] text-[#8C7A6B]">Detailed editorial overview shown in client product drawers</span>
+                    </div>
                     <textarea 
                         name="description" 
                         x-model="description" 
-                        rows="3" 
-                        class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs leading-relaxed focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15"
+                        rows="6" 
+                        class="w-full px-5 py-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs sm:text-[13.5px] leading-relaxed focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs placeholder:text-[#A89E94]"
                         placeholder="Enter full luxury description..."
                     ></textarea>
                 </div>

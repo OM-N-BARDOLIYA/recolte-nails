@@ -47,10 +47,28 @@
         }
 
         /* Clean and comfortable inputs for data management */
-        input[type="text"], input[type="number"], input[type="password"], input[type="email"], textarea, select {
+        input[type="text"], input[type="number"], input[type="password"], input[type="email"], select {
             font-size: 13.5px !important;
             line-height: 1.5 !important;
             color: #171412 !important;
+        }
+
+        /* Luxury, spacious, breathable textarea styling across Atelier CMS */
+        textarea {
+            padding: 14px 18px !important;
+            line-height: 1.65 !important;
+            min-height: 105px;
+            font-size: 13.5px !important;
+            color: #171412 !important;
+            border-radius: 0px !important;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+        }
+
+        textarea:focus {
+            outline: none !important;
+            border-color: #171412 !important;
+            background-color: #ffffff !important;
+            box-shadow: 0 0 0 1px rgba(23, 20, 18, 0.15) !important;
         }
 
         /* High clarity tabular numbers for data & stats */

@@ -141,9 +141,9 @@ function contactPageManager() {
                     </div>
 
                     <!-- Subtitle -->
-                    <div class="sm:col-span-12 space-y-1.5">
-                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Introductory Description</label>
-                        <textarea name="header_subtitle" rows="3" required class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs leading-relaxed focus:outline-none focus:border-[#171412] focus:bg-white">{{ old('header_subtitle', $header['subtitle'] ?? 'Our Parisian studio specialists are ready to assist with custom nail sizing, bespoke press-on designs, and express order dispatch.') }}</textarea>
+                    <div class="sm:col-span-12 space-y-2.5 my-2">
+                        <label class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8C7A6B] block">Introductory Description</label>
+                        <textarea name="header_subtitle" rows="4" required class="w-full px-5 py-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs sm:text-[13.5px] leading-relaxed focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs">{{ old('header_subtitle', $header['subtitle'] ?? 'Our Parisian studio specialists are ready to assist with custom nail sizing, bespoke press-on designs, and express order dispatch.') }}</textarea>
                     </div>
                 </div>
 
@@ -177,9 +177,9 @@ function contactPageManager() {
                         <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Action Link Text</label>
                         <input type="text" name="whatsapp_btn_text" value="{{ old('whatsapp_btn_text', $cards['whatsapp_btn_text'] ?? 'Open Direct WhatsApp') }}" required class="w-full px-3.5 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs font-bold text-[#171412] focus:outline-none focus:border-[#171412]">
                     </div>
-                    <div class="sm:col-span-2 space-y-1">
-                        <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Card Description</label>
-                        <textarea name="whatsapp_desc" rows="2" class="w-full px-3.5 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs leading-relaxed text-[#171412] focus:outline-none focus:border-[#171412]">{{ old('whatsapp_desc', $cards['whatsapp_desc'] ?? 'Chat directly with our studio artists for instant sizing help and real-time guidance.') }}</textarea>
+                    <div class="sm:col-span-2 space-y-2 my-2">
+                        <label class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8C7A6B] block">Card Description</label>
+                        <textarea name="whatsapp_desc" rows="3" class="w-full px-4.5 py-3.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs sm:text-[13.5px] leading-relaxed text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs">{{ old('whatsapp_desc', $cards['whatsapp_desc'] ?? 'Chat directly with our studio artists for instant sizing help and real-time guidance.') }}</textarea>
                     </div>
                 </div>
             </div>
@@ -200,9 +200,9 @@ function contactPageManager() {
                             <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Email Address</label>
                             <input type="email" name="contact_email" value="{{ old('contact_email', $cards['email'] ?? 'concierge@recoltenails.com') }}" required class="w-full px-3.5 py-2 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs font-mono text-[#171412] focus:outline-none focus:border-[#171412]">
                         </div>
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Card Description</label>
-                            <textarea name="email_desc" rows="2" class="w-full px-3.5 py-2 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs leading-relaxed text-[#171412] focus:outline-none focus:border-[#171412]">{{ old('email_desc', $cards['email_desc'] ?? 'For wholesale inquiries, press collaborations, and custom bridal suites.') }}</textarea>
+                        <div class="space-y-2 my-2">
+                            <label class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8C7A6B] block">Card Description</label>
+                            <textarea name="email_desc" rows="3" class="w-full px-4.5 py-3.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs sm:text-[13.5px] leading-relaxed text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs">{{ old('email_desc', $cards['email_desc'] ?? 'For wholesale inquiries, press collaborations, and custom bridal suites.') }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -217,9 +217,9 @@ function contactPageManager() {
                             <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Card Title</label>
                             <input type="text" name="address_title" value="{{ old('address_title', $cards['address_title'] ?? 'Paris Atelier') }}" required class="w-full px-3.5 py-2 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs font-bold text-[#171412] focus:outline-none focus:border-[#171412]">
                         </div>
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Physical Studio Address</label>
-                            <textarea name="contact_address" rows="3" required class="w-full px-3.5 py-2 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs leading-relaxed text-[#171412] focus:outline-none focus:border-[#171412]">{{ old('contact_address', $cards['address'] ?? '12 Rue de la Paix, 75001 Paris, France. By appointment only.') }}</textarea>
+                        <div class="space-y-2 my-2">
+                            <label class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8C7A6B] block">Physical Studio Address</label>
+                            <textarea name="contact_address" rows="3" required class="w-full px-4.5 py-3.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs sm:text-[13.5px] leading-relaxed text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs">{{ old('contact_address', $cards['address'] ?? '12 Rue de la Paix, 75001 Paris, France. By appointment only.') }}</textarea>
                         </div>
                     </div>
                 </div>

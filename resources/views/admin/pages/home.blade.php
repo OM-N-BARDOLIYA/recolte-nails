@@ -626,9 +626,9 @@ function homePageManager() {
                         <input type="text" name="showcase_title_line2" value="{{ old('showcase_title_line2', $showcase['title_line2'] ?? 'cultivate confidence') }}" required class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-base font-serif font-bold focus:outline-none focus:border-[#171412] focus:bg-white">
                     </div>
 
-                    <div class="space-y-1.5 sm:col-span-2">
-                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Description Paragraph</label>
-                        <textarea name="showcase_description" rows="3" required class="w-full px-4 py-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs leading-relaxed focus:outline-none focus:border-[#171412] focus:bg-white">{{ old('showcase_description', $showcase['description'] ?? 'Dedicated to salon-grade perfection, Japanese gel formulas, and effortless everyday elegance.') }}</textarea>
+                    <div class="sm:col-span-2 space-y-2.5 my-2">
+                        <label class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8C7A6B] block">Description Paragraph</label>
+                        <textarea name="showcase_description" rows="4" required class="w-full px-5 py-4 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs sm:text-[13.5px] leading-relaxed focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs">{{ old('showcase_description', $showcase['description'] ?? 'Dedicated to salon-grade perfection, Japanese gel formulas, and effortless everyday elegance.') }}</textarea>
                     </div>
 
                     <div class="space-y-1.5">
@@ -698,9 +698,9 @@ function homePageManager() {
                         <input type="text" name="insta_title" value="{{ old('insta_title', $instagram['title'] ?? 'Join Our Nail Community') }}" required class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-sm font-serif font-bold text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white">
                     </div>
 
-                    <div class="space-y-1.5 sm:col-span-2">
-                        <label class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Subtitle Paragraph</label>
-                        <textarea name="insta_subtitle" rows="2" class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs leading-relaxed text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white">{{ old('insta_subtitle', $instagram['subtitle'] ?? 'Follow @recolte_gelpolish for seasonal nail art tutorials, custom press-on launches, and salon-grade transformations.') }}</textarea>
+                    <div class="sm:col-span-2 space-y-2.5 my-2">
+                        <label class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8C7A6B] block">Subtitle Paragraph</label>
+                        <textarea name="insta_subtitle" rows="3" class="w-full px-5 py-3.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs sm:text-[13.5px] leading-relaxed text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white focus:ring-1 focus:ring-[#171412]/15 transition-all shadow-2xs">{{ old('insta_subtitle', $instagram['subtitle'] ?? 'Follow @recolte_gelpolish for seasonal nail art tutorials, custom press-on launches, and salon-grade transformations.') }}</textarea>
                     </div>
 
                     <div class="space-y-1.5">
