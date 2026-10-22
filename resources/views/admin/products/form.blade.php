@@ -495,12 +495,15 @@
                             </div>
 
                             <!-- Remove Button -->
-                            <x-close-button 
-                                size="sm" 
-                                variant="danger"
-                                @click="removeShade(index)" 
-                                title="Remove Shade"
-                            />
+                            <div class="pr-1 shrink-0">
+                                <x-close-button 
+                                    size="xs" 
+                                    variant="white"
+                                    @click="removeShade(index)" 
+                                    class="shadow-xs hover:!bg-[#A33B47] hover:!text-white hover:!border-[#A33B47]"
+                                    title="Remove Shade"
+                                />
+                            </div>
                         </div>
                     </template>
 
@@ -565,12 +568,12 @@
                             <!-- Hidden hex field to keep structure standard -->
                             <input type="hidden" name="shades_hex[]" :value="shade.hex || '#171412'">
 
-                            <!-- Delete button -->
+                            <!-- Delete button (cleanly positioned inside the card) -->
                             <x-close-button 
                                 size="xs" 
-                                variant="danger"
+                                variant="white"
                                 @click="removeShade(index)" 
-                                class="absolute -top-1.5 -right-1.5"
+                                class="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity shadow-xs hover:!bg-[#A33B47] hover:!text-white hover:!border-[#A33B47]"
                                 title="Remove Number"
                             />
                         </div>
@@ -605,33 +608,45 @@
                     <h2 class="font-serif text-xl font-bold text-[#171412]">4. Sizing &amp; Volume Options</h2>
                     <p class="text-[11px] text-[#8C7A6B]">Press-on sizes (XS, S, M, L) or Gel bottle volumes (15ml, 30ml).</p>
                 </div>
-                <button 
+                <x-button 
                     type="button" 
+                    variant="secondary"
+                    size="sm"
                     @click="addSize()" 
-                    class="px-5 py-2 rounded-none bg-white hover:bg-[#FAF8F5] text-[#171412] border border-[#ECE6DE] text-xs font-bold uppercase tracking-wider transition-all shadow-2xs cursor-pointer"
+                    icon="+"
                 >
-                    + Add Size Option
-                </button>
+                    Add Size Option
+                </x-button>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 <template x-for="(size, sIndex) in sizes" :key="sIndex">
-                    <div class="flex items-center gap-2 p-3 rounded-none bg-[#FAF8F5] border border-[#ECE6DE]">
+                    <div class="group relative flex items-center bg-[#FAF8F5] hover:bg-white border border-[#ECE6DE] hover:border-[#171412] focus-within:border-[#171412] focus-within:bg-white focus-within:ring-1 focus-within:ring-[#171412]/15 transition-all shadow-2xs">
+                        <span class="pl-3 pr-1 text-[11px] font-mono font-bold text-[#8C7A6B] select-none shrink-0">
+                            #<span x-text="sIndex + 1"></span>
+                        </span>
                         <input 
                             type="text" 
                             name="sizes[]" 
                             x-model="sizes[sIndex]" 
-                            class="flex-grow px-3 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-semibold text-[#171412]" 
-                            placeholder="e.g. XS (Petite)"
+                            class="w-full px-2.5 py-2.5 bg-transparent border-0 text-xs font-semibold text-[#171412] placeholder-[#A89F97] focus:outline-none focus:ring-0" 
+                            placeholder="e.g. 15ml Atelier Bottle or XS"
                         />
-                        <x-close-button 
-                            size="sm"
-                            variant="danger"
-                            @click="removeSize(sIndex)"
-                            title="Remove Size"
-                        />
+                        <div class="pr-2.5 shrink-0">
+                            <x-close-button 
+                                size="xs"
+                                variant="white"
+                                @click="removeSize(sIndex)"
+                                class="shadow-xs hover:!bg-[#A33B47] hover:!text-white hover:!border-[#A33B47]"
+                                title="Remove Size"
+                            />
+                        </div>
                     </div>
                 </template>
+            </div>
+
+            <div x-show="sizes.length === 0" class="text-xs text-[#8C7A6B] py-6 text-center border-2 border-dashed border-[#ECE6DE] rounded-none">
+                No size or volume options defined. Click "+ Add Size Option" above if this product has size choices.
             </div>
         </div>
 
