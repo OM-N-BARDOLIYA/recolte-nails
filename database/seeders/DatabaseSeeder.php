@@ -1150,7 +1150,6 @@ class DatabaseSeeder extends Seeder
                 'main_image' => '/uploads/products/catalog/SOLID_GLUE_GEL_Solid_Glue_Gel_1_.jpg',
                 'images' => [
                     '/uploads/products/catalog/SOLID_GLUE_GEL_Solid_Glue_Gel_1_.jpg',
-                    '/videos/products/product-reel-1.mp4',
                     '/uploads/products/catalog/SOLID_GLUE_GEL_Solid_Glue_Gel_2_.jpg',
                     '/uploads/products/catalog/SOLID_GLUE_GEL_Solid_Glue_Gel_3_.jpg',
                 ],
