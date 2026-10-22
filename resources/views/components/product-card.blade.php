@@ -40,7 +40,7 @@
         <!-- Product Title & Tagline -->
         <a href="{{ route('products.show', $product->slug) }}" class="block">
             <h3
-                class="font-serif text-base sm:text-[17px] font-medium text-[#171412] hover:text-[#A33B47] transition-colors line-clamp-1">
+                class="font-serif text-sm sm:text-[15px] font-medium text-[#171412] hover:text-[#A33B47] transition-colors line-clamp-1">
                 {{ $product->title }}
             </h3>
             @if(!empty($product->tagline))
