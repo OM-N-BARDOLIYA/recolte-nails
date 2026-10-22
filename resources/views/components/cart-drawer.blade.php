@@ -109,7 +109,6 @@
                             <span>↗</span>
                         </a>
                     </div>
-                </div>
 
                 <!-- ITEMS LIST -->
                 <template x-for="(item, index) in $store.cart.items" :key="item.id + '-' + item.shade + '-' + item.size + '-' + index">
