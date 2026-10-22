@@ -59,14 +59,11 @@
                         Clear All
                     </button>
                     
-                    <button 
-                        type="button"
+                    <!-- Smooth Animated Circular Close Button -->
+                    <x-close-button 
                         @click="$store.cart.isOpen = false"
-                        class="w-8 h-8 rounded-none bg-white text-charcoal/70 hover:text-charcoal flex items-center justify-center text-lg font-bold border border-charcoal/10 transition-all shadow-sm cursor-pointer"
-                        aria-label="Close Bag"
-                    >
-                        &times;
-                    </button>
+                        title="Close Bag"
+                    />
                 </div>
             </div>
 

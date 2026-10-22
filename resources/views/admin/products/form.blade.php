@@ -449,14 +449,12 @@
                             </div>
 
                             <!-- Remove Button -->
-                            <button 
-                                type="button" 
+                            <x-close-button 
+                                size="sm" 
+                                variant="danger"
                                 @click="removeShade(index)" 
-                                class="px-2.5 py-1.5 text-xs font-bold text-[#A33B47] hover:bg-red-50 transition-colors cursor-pointer shrink-0"
                                 title="Remove Shade"
-                            >
-                                ✕
-                            </button>
+                            />
                         </div>
                     </template>
 
@@ -522,14 +520,13 @@
                             <input type="hidden" name="shades_hex[]" :value="shade.hex || '#171412'">
 
                             <!-- Delete button -->
-                            <button 
-                                type="button" 
+                            <x-close-button 
+                                size="xs" 
+                                variant="danger"
                                 @click="removeShade(index)" 
-                                class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-[#A33B47] text-white rounded-full text-[10px] font-bold flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity cursor-pointer shadow-xs"
+                                class="absolute -top-1.5 -right-1.5"
                                 title="Remove Number"
-                            >
-                                ✕
-                            </button>
+                            />
                         </div>
                     </template>
                 </div>
@@ -581,13 +578,12 @@
                             class="flex-grow px-3 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-semibold text-[#171412]" 
                             placeholder="e.g. XS (Petite)"
                         />
-                        <button 
-                            type="button" 
+                        <x-close-button 
+                            size="sm"
+                            variant="danger"
                             @click="removeSize(sIndex)"
-                            class="w-7 h-7 rounded-none bg-white hover:bg-rose-50 text-[#A33B47] flex items-center justify-center border border-[#ECE6DE] text-xs font-bold cursor-pointer"
-                        >
-                            ✕
-                        </button>
+                            title="Remove Size"
+                        />
                     </div>
                 </template>
             </div>

@@ -15,14 +15,12 @@
         data-lenis-prevent
         class="bg-white rounded-none border border-rose/20 shadow-2xl max-w-md w-full p-6 sm:p-7 space-y-5 relative transform transition-all max-h-[90vh] overflow-y-auto"
     >
-        <!-- Close Button (Square) -->
-        <button 
+        <!-- Smooth Animated Circular Close Button -->
+        <x-close-button 
             @click="modalOpen = false" 
-            class="absolute top-4 right-4 w-8 h-8 rounded-none bg-cream-dark/50 hover:bg-rose-light text-charcoal/60 hover:text-charcoal flex items-center justify-center text-lg font-bold border border-charcoal/10 transition-all"
-            aria-label="Close Modal"
-        >
-            &times;
-        </button>
+            class="absolute top-4 right-4 z-10"
+            title="Close Order Modal"
+        />
         
         <template x-if="modalProduct">
             <div class="space-y-5">

@@ -70,28 +70,23 @@
                 </div>
 
                 <!-- Clear Query Button -->
-                <button 
-                    type="button"
+                <x-close-button 
+                    size="sm"
+                    variant="subtle"
                     x-show="query.length > 0"
                     @click="query = ''; onQueryChange(); $refs.searchInput.focus();"
-                    class="shrink-0 w-6 h-6 rounded-full bg-[#FAF8F5] hover:bg-[#ECE6DE] text-[#8C7A6B] hover:text-[#171412] flex items-center justify-center text-xs transition-colors cursor-pointer"
-                    aria-label="Clear Search"
+                    title="Clear Search"
                     style="display: none;"
-                >
-                    ✕
-                </button>
+                />
 
                 <!-- Close Modal Button -->
-                <button 
-                    type="button"
+                <x-close-button 
+                    size="md"
+                    variant="subtle"
                     @click="$store.search.close()"
-                    class="shrink-0 p-1.5 rounded-none text-[#8C7A6B] hover:text-[#A33B47] hover:bg-[#FAF8F5] transition-colors border border-transparent hover:border-[#ECE6DE] cursor-pointer ml-1"
-                    aria-label="Close Search Window"
-                >
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                </button>
+                    class="ml-1"
+                    title="Close Search Window"
+                />
             </div>
 
             <!-- ── QUICK POPULAR SEARCHES PILLS ── -->

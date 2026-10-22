@@ -80,17 +80,14 @@
                 <p class="text-[12.5px] text-[#2C2723] font-medium leading-snug break-words" x-text="t.message"></p>
             </div>
 
-            <!-- Clean Minimal Dismiss Button -->
-            <button 
-                type="button" 
+            <!-- Clean Animated Dismiss Button -->
+            <x-close-button 
+                size="sm"
+                variant="ghost"
                 @click="removeToast(t.id)"
-                class="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[#A89F97] hover:text-[#171412] hover:bg-stone-100 transition-all cursor-pointer -mr-1 -mt-0.5"
-                aria-label="Dismiss notification"
-            >
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
+                class="-mr-1 -mt-0.5"
+                title="Dismiss notification"
+            />
 
             <!-- Ultra-Smooth Animated Hardware-Accelerated Progress Line -->
             <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-stone-100 overflow-hidden">

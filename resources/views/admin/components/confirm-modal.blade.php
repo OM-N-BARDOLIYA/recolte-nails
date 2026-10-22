@@ -39,15 +39,12 @@
                 <span class="text-[#A33B47]">✦</span>
                 <span x-text="tagText">Atelier Action Confirmation</span>
             </div>
-            <x-button 
-                variant="ghost" 
-                size="icon-xs"
-                @click="close()"
-                class="!text-[#8C7A6B] hover:!text-[#171412] text-sm p-1"
+            <x-close-button 
+                size="sm"
+                variant="subtle"
+                @click="close()" 
                 title="Cancel"
-            >
-                ✕
-            </x-button>
+            />
         </div>
 
         <!-- Content Area -->

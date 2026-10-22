@@ -76,14 +76,12 @@
                                         <span class="text-[11px] font-bold uppercase tracking-[0.16em] text-[#171412]">Editing Category</span>
                                         <span class="text-xs text-[#8C7A6B] font-serif font-normal italic">({{ $cat->name }})</span>
                                     </div>
-                                    <button 
-                                        type="button" 
+                                    <x-close-button 
+                                        size="sm" 
+                                        variant="subtle"
                                         @click="editing = false" 
-                                        class="text-[11px] text-[#8C7A6B] hover:text-[#171412] font-semibold uppercase tracking-wider transition-colors cursor-pointer flex items-center gap-1"
-                                    >
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                                        <span>Close</span>
-                                    </button>
+                                        title="Close edit form" 
+                                    />
                                 </div>
 
                                 <div class="grid grid-cols-1 sm:grid-cols-12 gap-3.5">
