@@ -7,6 +7,26 @@
                     searchQuery: '{{ $searchQuery }}',
                     sortOption: '{{ $currentSort }}',
                     isLoading: false,
+                    categoryOpen: false,
+                    categorySearch: '',
+                    sortOpen: false,
+                    categoriesMap: {
+                        'all': 'All Collections ({{ $categories->count() }})',
+                        @foreach($categories as $cat)
+                        '{{ $cat->slug }}': '{{ addslashes($cat->name) }}',
+                        @endforeach
+                    },
+                    get currentCategoryName() {
+                        return this.categoriesMap[this.selectedCategory] || 'All Collections ({{ $categories->count() }})';
+                    },
+                    get currentSortLabel() {
+                        const map = {
+                            'featured': 'Sort: Featured Collection',
+                            'rating': 'Sort: Highest Rated (★)',
+                            'bestsellers': 'Sort: Bestsellers Only'
+                        };
+                        return map[this.sortOption] || 'Sort: Featured';
+                    },
 
                     init() {
                         // Handle browser Back / Forward buttons seamlessly
@@ -222,38 +242,120 @@
                         </form>
                     </div>
 
-                    <!-- Category Quick Select Dropdown (Synced with Pills!) -->
-                    <div class="md:col-span-3">
-                        <div class="relative group">
-                            <select x-model="selectedCategory" @change="applyFilter(selectedCategory)"
-                                class="w-full pl-4 pr-10 py-2.5 rounded-none border border-[#ECE6DE] bg-[#FAF8F5] text-xs font-medium text-[#171412] focus:outline-none focus:border-[#A33B47] focus:ring-2 focus:ring-[#A33B47]/15 cursor-pointer hover:bg-white hover:border-[#A33B47] transition-all duration-200 shadow-2xs">
-                                <option value="all">✦ All Collections ({{ $categories->count() }})</option>
-                                @foreach($categories as $cat)
-                                    <option value="{{ $cat->slug }}">{{ $cat->name }}</option>
-                                @endforeach
-                            </select>
-                            <div class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#8C7A6B] group-hover:text-[#A33B47] transition-colors">
+                    <!-- Category Custom Luxury Dropdown (Synced with Pills!) -->
+                    <div class="md:col-span-3 relative" @click.outside="categoryOpen = false" @keydown.escape.window="categoryOpen = false">
+                        <button type="button" 
+                            @click="categoryOpen = !categoryOpen; sortOpen = false"
+                            class="w-full pl-4 pr-10 py-2.5 rounded-none border border-[#ECE6DE] bg-[#FAF8F5] hover:bg-white hover:border-[#A33B47] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#A33B47] focus:ring-2 focus:ring-[#A33B47]/15 cursor-pointer transition-all duration-200 shadow-2xs text-left flex items-center justify-between group">
+                            <span class="truncate pr-2" x-text="'✦ ' + currentCategoryName"></span>
+                            <div class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#8C7A6B] group-hover:text-[#A33B47] transition-transform duration-200"
+                                :class="categoryOpen ? 'rotate-180 text-[#A33B47]' : ''">
                                 <svg class="w-3.5 h-3.5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
+                            </div>
+                        </button>
+
+                        <!-- Custom Floating Menu Panel -->
+                        <div x-show="categoryOpen" 
+                            x-cloak
+                            x-transition:enter="transition ease-out duration-150"
+                            x-transition:enter-start="opacity-0 -translate-y-1 scale-98"
+                            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                            x-transition:leave="transition ease-in duration-100"
+                            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                            x-transition:leave-end="opacity-0 -translate-y-1 scale-98"
+                            class="absolute left-0 right-0 z-50 mt-1.5 bg-white border border-[#ECE6DE] shadow-xl py-1.5 max-h-72 flex flex-col">
+                            
+                            <!-- Search inside dropdown for rapid filter -->
+                            <div class="px-3 pb-2 pt-1 border-b border-[#ECE6DE]">
+                                <div class="relative">
+                                    <input type="text" x-model="categorySearch" placeholder="Filter collections..." 
+                                        @click.stop
+                                        class="w-full pl-7 pr-3 py-1.5 rounded-none text-[11px] bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] focus:outline-none focus:border-[#A33B47] placeholder-[#8C7A6B]/70">
+                                    <svg class="w-3.5 h-3.5 text-[#8C7A6B] absolute left-2 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Options List -->
+                            <div class="overflow-y-auto luxury-scrollbar divide-y divide-[#ECE6DE]/30 py-1">
+                                <!-- All Collections Option -->
+                                <button type="button" 
+                                    x-show="!categorySearch || 'all collections'.includes(categorySearch.toLowerCase())"
+                                    @click="applyFilter('all'); categoryOpen = false"
+                                    class="w-full px-4 py-2.5 text-left text-xs flex items-center justify-between transition-colors cursor-pointer"
+                                    :class="selectedCategory === 'all' || !selectedCategory ? 'bg-[#FBEFE9] text-[#A33B47] font-bold' : 'text-[#171412] hover:bg-[#FAF8F5] hover:text-[#A33B47] font-medium'">
+                                    <span>✦ All Collections ({{ $categories->count() }})</span>
+                                    <span x-show="selectedCategory === 'all' || !selectedCategory" class="text-xs text-[#A33B47] font-bold">✓</span>
+                                </button>
+
+                                @foreach($categories as $cat)
+                                    <button type="button" 
+                                        x-show="!categorySearch || '{{ strtolower(addslashes($cat->name)) }}'.includes(categorySearch.toLowerCase())"
+                                        @click="applyFilter('{{ $cat->slug }}'); categoryOpen = false"
+                                        class="w-full px-4 py-2.5 text-left text-xs flex items-center justify-between transition-colors cursor-pointer"
+                                        :class="selectedCategory === '{{ $cat->slug }}' ? 'bg-[#FBEFE9] text-[#A33B47] font-bold' : 'text-[#171412] hover:bg-[#FAF8F5] hover:text-[#A33B47] font-medium'">
+                                        <span class="flex items-center gap-2 truncate">
+                                            <span>{{ $cat->icon_emoji ?? '💅' }}</span>
+                                            <span class="truncate">{{ $cat->name }}</span>
+                                        </span>
+                                        <span x-show="selectedCategory === '{{ $cat->slug }}'" class="text-xs text-[#A33B47] font-bold">✓</span>
+                                    </button>
+                                @endforeach
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sort Dropdown -->
-                    <div class="md:col-span-3">
-                        <div class="relative group">
-                            <select id="sort-select" x-model="sortOption" @change="applyFilter(null, sortOption, null)"
-                                class="w-full pl-4 pr-10 py-2.5 rounded-none border border-[#ECE6DE] bg-[#FAF8F5] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#A33B47] focus:ring-2 focus:ring-[#A33B47]/15 cursor-pointer hover:bg-white hover:border-[#A33B47] transition-all duration-200 shadow-2xs">
-                                <option value="featured">Sort: Featured Collection</option>
-                                <option value="rating">Sort: Highest Rated (★)</option>
-                                <option value="bestsellers">Sort: Bestsellers Only</option>
-                            </select>
-                            <div class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#8C7A6B] group-hover:text-[#A33B47] transition-colors">
+                    <!-- Sort Custom Luxury Dropdown -->
+                    <div class="md:col-span-3 relative" @click.outside="sortOpen = false" @keydown.escape.window="sortOpen = false">
+                        <button type="button" 
+                            @click="sortOpen = !sortOpen; categoryOpen = false"
+                            class="w-full pl-4 pr-10 py-2.5 rounded-none border border-[#ECE6DE] bg-[#FAF8F5] hover:bg-white hover:border-[#A33B47] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#A33B47] focus:ring-2 focus:ring-[#A33B47]/15 cursor-pointer transition-all duration-200 shadow-2xs text-left flex items-center justify-between group">
+                            <span class="truncate pr-2" x-text="currentSortLabel"></span>
+                            <div class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#8C7A6B] group-hover:text-[#A33B47] transition-transform duration-200"
+                                :class="sortOpen ? 'rotate-180 text-[#A33B47]' : ''">
                                 <svg class="w-3.5 h-3.5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </div>
+                        </button>
+
+                        <!-- Custom Floating Sort Menu Panel -->
+                        <div x-show="sortOpen" 
+                            x-cloak
+                            x-transition:enter="transition ease-out duration-150"
+                            x-transition:enter-start="opacity-0 -translate-y-1 scale-98"
+                            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                            x-transition:leave="transition ease-in duration-100"
+                            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                            x-transition:leave-end="opacity-0 -translate-y-1 scale-98"
+                            class="absolute left-0 right-0 z-50 mt-1.5 bg-white border border-[#ECE6DE] shadow-xl py-1.5 divide-y divide-[#ECE6DE]/30">
+                            
+                            <button type="button" 
+                                @click="applyFilter(null, 'featured', null); sortOpen = false"
+                                class="w-full px-4 py-2.5 text-left text-xs flex items-center justify-between transition-colors cursor-pointer"
+                                :class="sortOption === 'featured' || !sortOption ? 'bg-[#FBEFE9] text-[#A33B47] font-bold' : 'text-[#171412] hover:bg-[#FAF8F5] hover:text-[#A33B47] font-medium'">
+                                <span>✦ Featured Collection</span>
+                                <span x-show="sortOption === 'featured' || !sortOption" class="text-xs text-[#A33B47] font-bold">✓</span>
+                            </button>
+
+                            <button type="button" 
+                                @click="applyFilter(null, 'rating', null); sortOpen = false"
+                                class="w-full px-4 py-2.5 text-left text-xs flex items-center justify-between transition-colors cursor-pointer"
+                                :class="sortOption === 'rating' ? 'bg-[#FBEFE9] text-[#A33B47] font-bold' : 'text-[#171412] hover:bg-[#FAF8F5] hover:text-[#A33B47] font-medium'">
+                                <span>★ Highest Rated</span>
+                                <span x-show="sortOption === 'rating'" class="text-xs text-[#A33B47] font-bold">✓</span>
+                            </button>
+
+                            <button type="button" 
+                                @click="applyFilter(null, 'bestsellers', null); sortOpen = false"
+                                class="w-full px-4 py-2.5 text-left text-xs flex items-center justify-between transition-colors cursor-pointer"
+                                :class="sortOption === 'bestsellers' ? 'bg-[#FBEFE9] text-[#A33B47] font-bold' : 'text-[#171412] hover:bg-[#FAF8F5] hover:text-[#A33B47] font-medium'">
+                                <span>🔥 Bestsellers Only</span>
+                                <span x-show="sortOption === 'bestsellers'" class="text-xs text-[#A33B47] font-bold">✓</span>
+                            </button>
                         </div>
                     </div>
 

@@ -56,14 +56,46 @@
                                 </td>
 
                                 <td class="py-4 px-3">
-                                    <form method="POST" action="{{ route('admin.inquiries.update-status', $inq->id) }}">
+                                    <form method="POST" action="{{ route('admin.inquiries.update-status', $inq->id) }}" id="status-form-{{ $inq->id }}">
                                         @csrf
-                                        <select name="status" onchange="this.form.submit()"
-                                            class="py-1.5 pl-3 pr-8 rounded-none text-[10.5px] font-bold uppercase tracking-wider bg-[#FAF8F5] hover:bg-white border border-[#ECE6DE] hover:border-[#A33B47] text-[#171412] focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 focus:outline-none cursor-pointer transition-all shadow-2xs">
-                                            <option value="new" {{ $inq->status === 'new' ? 'selected' : '' }}>🟢 New</option>
-                                            <option value="contacted" {{ $inq->status === 'contacted' ? 'selected' : '' }}>🟡 Contacted</option>
-                                            <option value="resolved" {{ $inq->status === 'resolved' ? 'selected' : '' }}>⚪ Resolved</option>
-                                        </select>
+                                        <input type="hidden" name="status" id="status-input-{{ $inq->id }}" value="{{ $inq->status }}">
+                                        <div class="relative inline-block text-left" x-data="{ statusOpen: false }" @click.outside="statusOpen = false" @keydown.escape.window="statusOpen = false">
+                                            <button type="button" @click="statusOpen = !statusOpen"
+                                                class="py-1.5 pl-3 pr-7 rounded-none text-[10.5px] font-bold uppercase tracking-wider bg-[#FAF8F5] hover:bg-white border border-[#ECE6DE] hover:border-[#A33B47] text-[#171412] focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 focus:outline-none cursor-pointer transition-all shadow-2xs flex items-center justify-between gap-2 group">
+                                                <span>
+                                                    @if($inq->status === 'new') 🟢 New
+                                                    @elseif($inq->status === 'contacted') 🟡 Contacted
+                                                    @else ⚪ Resolved
+                                                    @endif
+                                                </span>
+                                                <svg class="w-3 h-3 text-[#8C7A6B] group-hover:text-[#A33B47] transition-transform duration-200 pointer-events-none" :class="statusOpen ? 'rotate-180 text-[#A33B47]' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                            </button>
+                                            
+                                            <!-- Custom Dropdown Menu -->
+                                            <div x-show="statusOpen" x-cloak
+                                                x-transition:enter="transition ease-out duration-100"
+                                                x-transition:enter-start="opacity-0 scale-95"
+                                                x-transition:enter-end="opacity-100 scale-100"
+                                                class="absolute left-0 z-30 mt-1 min-w-[140px] bg-white border border-[#ECE6DE] shadow-xl py-1 divide-y divide-[#ECE6DE]/30">
+                                                <button type="button" @click="document.getElementById('status-input-{{ $inq->id }}').value = 'new'; document.getElementById('status-form-{{ $inq->id }}').submit();"
+                                                    class="w-full px-3 py-2 text-left text-[11px] font-semibold flex items-center justify-between hover:bg-[#FAF8F5] cursor-pointer {{ $inq->status === 'new' ? 'text-[#A33B47] bg-[#FBEFE9] font-bold' : 'text-[#171412]' }}">
+                                                    <span>🟢 New</span>
+                                                    @if($inq->status === 'new')<span class="text-xs font-bold text-[#A33B47]">✓</span>@endif
+                                                </button>
+                                                <button type="button" @click="document.getElementById('status-input-{{ $inq->id }}').value = 'contacted'; document.getElementById('status-form-{{ $inq->id }}').submit();"
+                                                    class="w-full px-3 py-2 text-left text-[11px] font-semibold flex items-center justify-between hover:bg-[#FAF8F5] cursor-pointer {{ $inq->status === 'contacted' ? 'text-[#A33B47] bg-[#FBEFE9] font-bold' : 'text-[#171412]' }}">
+                                                    <span>🟡 Contacted</span>
+                                                    @if($inq->status === 'contacted')<span class="text-xs font-bold text-[#A33B47]">✓</span>@endif
+                                                </button>
+                                                <button type="button" @click="document.getElementById('status-input-{{ $inq->id }}').value = 'resolved'; document.getElementById('status-form-{{ $inq->id }}').submit();"
+                                                    class="w-full px-3 py-2 text-left text-[11px] font-semibold flex items-center justify-between hover:bg-[#FAF8F5] cursor-pointer {{ $inq->status === 'resolved' ? 'text-[#A33B47] bg-[#FBEFE9] font-bold' : 'text-[#171412]' }}">
+                                                    <span>⚪ Resolved</span>
+                                                    @if($inq->status === 'resolved')<span class="text-xs font-bold text-[#A33B47]">✓</span>@endif
+                                                </button>
+                                            </div>
+                                        </div>
                                     </form>
                                 </td>
 

@@ -114,20 +114,59 @@
                 />
             </div>
 
-            <!-- Category Filter Dropdown -->
-            <div class="min-w-[190px]">
-                <select 
-                    name="category" 
-                    onchange="this.form.submit()" 
-                    class="w-full py-2.5 px-3.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs text-[#171412] font-semibold focus:outline-none focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 focus:bg-white cursor-pointer transition-all shadow-2xs"
-                >
-                    <option value="">All Categories</option>
-                    @foreach($categories as $cat)
-                        <option value="{{ $cat->name }}" {{ request('category') == $cat->name ? 'selected' : '' }}>
-                            {{ $cat->name }}
-                        </option>
-                    @endforeach
-                </select>
+            <!-- Category Filter Custom Dropdown -->
+            <div class="min-w-[210px] relative" x-data="{ open: false, search: '' }" @click.outside="open = false" @keydown.escape.window="open = false">
+                <input type="hidden" name="category" value="{{ request('category') }}" id="admin-category-filter-input">
+                <button type="button" 
+                    @click="open = !open"
+                    class="w-full py-2.5 px-3.5 rounded-none bg-[#FAF8F5] hover:bg-white border border-[#ECE6DE] hover:border-[#A33B47] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 focus:bg-white cursor-pointer transition-all shadow-2xs text-left flex items-center justify-between group">
+                    <span class="truncate pr-2">{{ request('category') ?: 'All Categories' }}</span>
+                    <div class="pointer-events-none text-[#8C7A6B] group-hover:text-[#A33B47] transition-transform duration-200"
+                        :class="open ? 'rotate-180 text-[#A33B47]' : ''">
+                        <svg class="w-3.5 h-3.5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </button>
+
+                <div x-show="open" 
+                    x-cloak
+                    x-transition:enter="transition ease-out duration-150"
+                    x-transition:enter-start="opacity-0 -translate-y-1 scale-98"
+                    x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                    x-transition:leave="transition ease-in duration-100"
+                    x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                    x-transition:leave-end="opacity-0 -translate-y-1 scale-98"
+                    class="absolute left-0 right-0 z-50 mt-1.5 bg-white border border-[#ECE6DE] shadow-xl py-1.5 max-h-72 flex flex-col min-w-[220px]">
+                    
+                    @if($categories->count() > 6)
+                    <div class="px-2.5 pb-2 pt-1 border-b border-[#ECE6DE]">
+                        <input type="text" x-model="search" placeholder="Filter categories..." 
+                            @click.stop
+                            class="w-full px-2.5 py-1.5 rounded-none text-[11px] bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] focus:outline-none focus:border-[#A33B47]">
+                    </div>
+                    @endif
+
+                    <div class="overflow-y-auto luxury-scrollbar divide-y divide-[#ECE6DE]/30 py-1">
+                        <button type="button" 
+                            x-show="!search || 'all categories'.includes(search.toLowerCase())"
+                            @click="document.getElementById('admin-category-filter-input').value = ''; open = false; $el.closest('form').submit();"
+                            class="w-full px-3.5 py-2 text-left text-xs flex items-center justify-between transition-colors cursor-pointer {{ !request('category') ? 'bg-[#FBEFE9] text-[#A33B47] font-bold' : 'text-[#171412] hover:bg-[#FAF8F5] hover:text-[#A33B47] font-medium' }}">
+                            <span>All Categories</span>
+                            @if(!request('category')) <span class="text-xs text-[#A33B47] font-bold">✓</span> @endif
+                        </button>
+
+                        @foreach($categories as $cat)
+                            <button type="button" 
+                                x-show="!search || '{{ strtolower(addslashes($cat->name)) }}'.includes(search.toLowerCase())"
+                                @click="document.getElementById('admin-category-filter-input').value = '{{ addslashes($cat->name) }}'; open = false; $el.closest('form').submit();"
+                                class="w-full px-3.5 py-2 text-left text-xs flex items-center justify-between transition-colors cursor-pointer {{ request('category') == $cat->name ? 'bg-[#FBEFE9] text-[#A33B47] font-bold' : 'text-[#171412] hover:bg-[#FAF8F5] hover:text-[#A33B47] font-medium' }}">
+                                <span class="truncate">{{ $cat->name }}</span>
+                                @if(request('category') == $cat->name) <span class="text-xs text-[#A33B47] font-bold">✓</span> @endif
+                            </button>
+                        @endforeach
+                    </div>
+                </div>
             </div>
 
             <!-- Submit Button -->

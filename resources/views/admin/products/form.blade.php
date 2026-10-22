@@ -99,20 +99,71 @@
                     />
                 </div>
 
-                <!-- Category -->
-                <div class="space-y-1.5 sm:col-span-2">
+                <!-- Category Custom Dropdown -->
+                <div class="space-y-1.5 sm:col-span-2 relative" 
+                     x-data="{ 
+                        open: false, 
+                        search: '', 
+                        selectedVal: '{{ old('category', $product->category ?? '') }}',
+                        selectedText: '{{ old('category', $product->category ?? 'Select Category') }}',
+                        init() {
+                            @foreach($categories as $cat)
+                                if (this.selectedVal === '{{ addslashes($cat->name ?? $cat->title) }}') {
+                                    this.selectedText = '{{ $cat->icon_emoji ?? $cat->icon ?? '💅' }} {{ addslashes($cat->name ?? $cat->title) }}';
+                                }
+                            @endforeach
+                        }
+                     }" 
+                     @click.outside="open = false" 
+                     @keydown.escape.window="open = false">
                     <label class="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#6A625A] block">Category *</label>
-                    <select 
-                        name="category" 
-                        required 
-                        class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs font-semibold focus:outline-none focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 focus:bg-white cursor-pointer transition-all shadow-2xs"
-                    >
-                        @foreach($categories as $cat)
-                            <option value="{{ $cat->name ?? $cat->title }}" {{ old('category', $product->category ?? '') === ($cat->name ?? $cat->title) ? 'selected' : '' }}>
-                                {{ $cat->icon_emoji ?? $cat->icon ?? '💅' }} {{ $cat->name ?? $cat->title }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <input type="hidden" name="category" :value="selectedVal" required>
+
+                    <button type="button" 
+                        @click="open = !open"
+                        class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] hover:bg-white border border-[#ECE6DE] hover:border-[#A33B47] text-[#171412] text-xs font-semibold focus:outline-none focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 focus:bg-white cursor-pointer transition-all shadow-2xs text-left flex items-center justify-between group">
+                        <span class="truncate pr-2" x-text="selectedText"></span>
+                        <div class="pointer-events-none text-[#8C7A6B] group-hover:text-[#A33B47] transition-transform duration-200"
+                            :class="open ? 'rotate-180 text-[#A33B47]' : ''">
+                            <svg class="w-3.5 h-3.5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </button>
+
+                    <div x-show="open" 
+                        x-cloak
+                        x-transition:enter="transition ease-out duration-150"
+                        x-transition:enter-start="opacity-0 -translate-y-1 scale-98"
+                        x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                        x-transition:leave="transition ease-in duration-100"
+                        x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                        x-transition:leave-end="opacity-0 -translate-y-1 scale-98"
+                        class="absolute left-0 right-0 z-50 mt-1.5 bg-white border border-[#ECE6DE] shadow-xl py-1.5 max-h-72 flex flex-col">
+                        
+                        <div class="px-3 pb-2 pt-1 border-b border-[#ECE6DE]">
+                            <input type="text" x-model="search" placeholder="Type to search category..." 
+                                @click.stop
+                                class="w-full px-3 py-1.5 rounded-none text-xs bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] focus:outline-none focus:border-[#A33B47]">
+                        </div>
+
+                        <div class="overflow-y-auto luxury-scrollbar divide-y divide-[#ECE6DE]/30 py-1">
+                            @foreach($categories as $cat)
+                                @php $catVal = $cat->name ?? $cat->title; $catEmoji = $cat->icon_emoji ?? $cat->icon ?? '💅'; @endphp
+                                <button type="button" 
+                                    x-show="!search || '{{ strtolower(addslashes($catVal)) }}'.includes(search.toLowerCase())"
+                                    @click="selectedVal = '{{ addslashes($catVal) }}'; selectedText = '{{ $catEmoji }} {{ addslashes($catVal) }}'; open = false;"
+                                    class="w-full px-4 py-2.5 text-left text-xs flex items-center justify-between transition-colors cursor-pointer"
+                                    :class="selectedVal === '{{ addslashes($catVal) }}' ? 'bg-[#FBEFE9] text-[#A33B47] font-bold' : 'text-[#171412] hover:bg-[#FAF8F5] hover:text-[#A33B47] font-medium'">
+                                    <span class="flex items-center gap-2 truncate">
+                                        <span>{{ $catEmoji }}</span>
+                                        <span class="truncate">{{ $catVal }}</span>
+                                    </span>
+                                    <span x-show="selectedVal === '{{ addslashes($catVal) }}'" class="text-xs text-[#A33B47] font-bold">✓</span>
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Short Tagline -->
@@ -429,23 +480,56 @@
                     <p class="text-[11px] text-[#8C7A6B]">Choose whether this product uses Color Shades (e.g. Pearl Glaze), Number Filters (e.g. 01 to 09 for BIAB Builder Gel), or No Variations.</p>
                 </div>
 
-                <!-- Sleek Compact Dropdown Selector -->
-                <div class="flex items-center gap-2.5 shrink-0 w-full md:w-auto">
+                <!-- Sleek Compact Custom Luxury Dropdown Selector -->
+                <div class="flex items-center gap-2.5 shrink-0 w-full md:w-auto" x-data="{ modeOpen: false }" @click.outside="modeOpen = false" @keydown.escape.window="modeOpen = false">
                     <label class="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8C7A6B] shrink-0">Mode:</label>
-                    <div class="relative w-full md:w-[210px]">
-                        <select 
-                            x-model="filterType"
-                            @change="setFilterType(filterType)"
-                            class="w-full pl-3.5 pr-8 py-2 rounded-none bg-[#FAF8F5] hover:bg-white border border-[#ECE6DE] hover:border-[#A33B47] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 focus:bg-white cursor-pointer transition-all shadow-2xs appearance-none"
-                        >
-                            <option value="none">⚪ None (Single Item)</option>
-                            <option value="color">🎨 Color Shades</option>
-                            <option value="numbers">🔢 Number Filters</option>
-                        </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-[#8C7A6B] group-hover:text-[#A33B47] transition-colors">
-                            <svg class="w-3.5 h-3.5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                            </svg>
+                    <div class="relative w-full md:w-[220px]">
+                        <button type="button" 
+                            @click="modeOpen = !modeOpen"
+                            class="w-full pl-3.5 pr-8 py-2 rounded-none bg-[#FAF8F5] hover:bg-white border border-[#ECE6DE] hover:border-[#A33B47] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 cursor-pointer transition-all shadow-2xs flex items-center justify-between group text-left">
+                            <span class="truncate" x-text="filterType === 'color' ? '🎨 Color Shades' : (filterType === 'numbers' ? '🔢 Number Filters' : '⚪ None (Single Item)')"></span>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-[#8C7A6B] group-hover:text-[#A33B47] transition-transform duration-200"
+                                :class="modeOpen ? 'rotate-180 text-[#A33B47]' : ''">
+                                <svg class="w-3.5 h-3.5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
+                        </button>
+
+                        <!-- Custom Floating Menu Panel -->
+                        <div x-show="modeOpen" 
+                            x-cloak
+                            x-transition:enter="transition ease-out duration-150"
+                            x-transition:enter-start="opacity-0 -translate-y-1 scale-98"
+                            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                            x-transition:leave="transition ease-in duration-100"
+                            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                            x-transition:leave-end="opacity-0 -translate-y-1 scale-98"
+                            class="absolute left-0 right-0 z-50 mt-1 bg-white border border-[#ECE6DE] shadow-xl py-1 divide-y divide-[#ECE6DE]/30">
+                            
+                            <button type="button" 
+                                @click="setFilterType('none'); modeOpen = false"
+                                class="w-full px-3 py-2 text-left text-xs flex items-center justify-between transition-colors cursor-pointer"
+                                :class="filterType === 'none' ? 'bg-[#FBEFE9] text-[#A33B47] font-bold' : 'text-[#171412] hover:bg-[#FAF8F5] hover:text-[#A33B47] font-medium'">
+                                <span>⚪ None (Single Item)</span>
+                                <span x-show="filterType === 'none'" class="text-xs text-[#A33B47] font-bold">✓</span>
+                            </button>
+
+                            <button type="button" 
+                                @click="setFilterType('color'); modeOpen = false"
+                                class="w-full px-3 py-2 text-left text-xs flex items-center justify-between transition-colors cursor-pointer"
+                                :class="filterType === 'color' ? 'bg-[#FBEFE9] text-[#A33B47] font-bold' : 'text-[#171412] hover:bg-[#FAF8F5] hover:text-[#A33B47] font-medium'">
+                                <span>🎨 Color Shades</span>
+                                <span x-show="filterType === 'color'" class="text-xs text-[#A33B47] font-bold">✓</span>
+                            </button>
+
+                            <button type="button" 
+                                @click="setFilterType('numbers'); modeOpen = false"
+                                class="w-full px-3 py-2 text-left text-xs flex items-center justify-between transition-colors cursor-pointer"
+                                :class="filterType === 'numbers' ? 'bg-[#FBEFE9] text-[#A33B47] font-bold' : 'text-[#171412] hover:bg-[#FAF8F5] hover:text-[#A33B47] font-medium'">
+                                <span>🔢 Number Filters</span>
+                                <span x-show="filterType === 'numbers'" class="text-xs text-[#A33B47] font-bold">✓</span>
+                            </button>
                         </div>
                     </div>
                 </div>

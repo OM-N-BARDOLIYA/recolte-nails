@@ -532,23 +532,44 @@ function homePageManager() {
                                             <input type="hidden" :name="'trust_items[' + index + '][remove_image]'" :value="badge.image ? '0' : '1'">
                                         </div>
 
-                                        <div>
+                                        <div x-data="{ 
+                                            iconOpen: false,
+                                            icons: [
+                                                { id: 'diamond', label: '💎 Diamond (Premium Quality)' },
+                                                { id: 'shield', label: '🛡️ Shield Check (Safe & Skin Friendly)' },
+                                                { id: 'truck', label: '🚚 Fast Delivery Van (Shipping)' },
+                                                { id: 'support', label: '💡 Lamp / Support (Expert Support)' },
+                                                { id: 'star', label: '⭐ Star (Trusted by Professionals)' },
+                                                { id: 'award', label: '🏆 Award Rosette (Certified Quality)' },
+                                                { id: 'sparkles', label: '✨ Sparkles (Luxury Finish)' },
+                                                { id: 'heart', label: '🤍 Heart (Care & Satisfaction)' },
+                                                { id: 'leaf', label: '🌿 Botanical Leaf (Clean Formulas)' }
+                                            ]
+                                        }" class="relative" @click.outside="iconOpen = false" @keydown.escape.window="iconOpen = false">
                                             <label class="text-[9.5px] font-bold uppercase tracking-wider text-[#6A625A] block mb-1">Or Choose Vector Icon</label>
-                                            <select 
-                                                :name="'trust_items[' + index + '][icon]'" 
-                                                x-model="badge.icon"
-                                                class="w-full px-3 py-2 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 focus:bg-white transition-all shadow-2xs cursor-pointer"
-                                            >
-                                                <option value="diamond">💎 Diamond (Premium Quality)</option>
-                                                <option value="shield">🛡️ Shield Check (Safe &amp; Skin Friendly)</option>
-                                                <option value="truck">🚚 Fast Delivery Van (Shipping)</option>
-                                                <option value="support">💡 Lamp / Support (Expert Support)</option>
-                                                <option value="star">⭐ Star (Trusted by Professionals)</option>
-                                                <option value="award">🏆 Award Rosette (Certified Quality)</option>
-                                                <option value="sparkles">✨ Sparkles (Luxury Finish)</option>
-                                                <option value="heart">🤍 Heart (Care &amp; Satisfaction)</option>
-                                                <option value="leaf">🌿 Botanical Leaf (Clean Formulas)</option>
-                                            </select>
+                                            <input type="hidden" :name="'trust_items[' + index + '][icon]'" :value="badge.icon">
+                                            <button type="button" @click="iconOpen = !iconOpen"
+                                                class="w-full px-3 py-2 rounded-none bg-[#FAF8F5] hover:bg-white border border-[#ECE6DE] hover:border-[#A33B47] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 transition-all shadow-2xs cursor-pointer flex items-center justify-between text-left group">
+                                                <span class="truncate" x-text="icons.find(i => i.id === badge.icon)?.label || '💎 Diamond (Default)'"></span>
+                                                <svg class="w-3.5 h-3.5 text-[#8C7A6B] group-hover:text-[#A33B47] transition-transform duration-200 pointer-events-none" :class="iconOpen ? 'rotate-180 text-[#A33B47]' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                            </button>
+                                            
+                                            <div x-show="iconOpen" x-cloak
+                                                x-transition:enter="transition ease-out duration-100"
+                                                x-transition:enter-start="opacity-0 scale-95"
+                                                x-transition:enter-end="opacity-100 scale-100"
+                                                class="absolute left-0 right-0 z-30 mt-1 max-h-56 overflow-y-auto luxury-scrollbar bg-white border border-[#ECE6DE] shadow-xl py-1 divide-y divide-[#ECE6DE]/30">
+                                                <template x-for="item in icons" :key="item.id">
+                                                    <button type="button" @click="badge.icon = item.id; iconOpen = false"
+                                                        class="w-full px-3 py-2 text-left text-xs flex items-center justify-between hover:bg-[#FAF8F5] cursor-pointer"
+                                                        :class="badge.icon === item.id ? 'text-[#A33B47] bg-[#FBEFE9] font-bold' : 'text-[#171412] font-medium'">
+                                                        <span x-text="item.label"></span>
+                                                        <span x-show="badge.icon === item.id" class="text-xs font-bold text-[#A33B47]">✓</span>
+                                                    </button>
+                                                </template>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

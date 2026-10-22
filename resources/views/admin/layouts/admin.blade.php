@@ -133,6 +133,25 @@
             font-weight: 600 !important;
         }
 
+        /* Luxury Thin Scrollbar for Custom Dropdown Menus */
+        .luxury-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .luxury-scrollbar::-webkit-scrollbar-track {
+            background: #FAF8F5;
+        }
+        .luxury-scrollbar::-webkit-scrollbar-thumb {
+            background: #D8D2CB;
+            border-radius: 4px;
+        }
+        .luxury-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #A33B47;
+        }
+        .luxury-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: #D8D2CB #FAF8F5;
+        }
+
         /* Luxury, spacious, breathable textarea styling across Atelier CMS */
         textarea {
             padding: 14px 18px !important;
