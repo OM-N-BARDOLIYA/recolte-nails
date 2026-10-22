@@ -154,16 +154,14 @@
                             </div>
                         </div>
 
-                        <!-- Remove Button (Square, safe touch space) -->
-                        <button 
-                            type="button"
+                        <!-- Remove Button (Proper Round with Smooth Animation) -->
+                        <x-close-button 
+                            size="sm"
+                            variant="ghost"
                             @click="$store.cart.removeItem(index)"
-                            class="absolute top-2 right-2 w-6 h-6 rounded-none text-charcoal/40 hover:text-rose-dark flex items-center justify-center text-sm transition-colors cursor-pointer"
-                            title="Remove Item"
-                            aria-label="Remove item"
-                        >
-                            &times;
-                        </button>
+                            class="absolute top-2 right-2 hover:!bg-rose-50 hover:!text-[#A33B47]"
+                            title="Remove item"
+                        />
 
                     </div>
                 </template>

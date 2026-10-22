@@ -162,8 +162,13 @@
                         <button type="button"
                             x-show="selectedCategory !== 'all' || (searchQuery && searchQuery.trim() !== '') || sortOption !== 'featured'"
                             @click="resetAll()"
-                            class="inline-flex items-center gap-1 text-xs font-semibold text-[#A33B47] hover:underline uppercase tracking-wider shrink-0 cursor-pointer">
-                            ✕ Clear All Filters
+                            class="group inline-flex items-center gap-1.5 text-xs font-semibold text-[#A33B47] hover:text-[#78232D] uppercase tracking-wider shrink-0 cursor-pointer transition-colors">
+                            <span class="w-5 h-5 rounded-full bg-rose-50 border border-rose-200 text-[#A33B47] group-hover:bg-[#A33B47] group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-2xs">
+                                <svg class="w-3 h-3 transition-transform duration-300 ease-out group-hover:rotate-90 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </span>
+                            <span>Clear All Filters</span>
                         </button>
                     </div>
                 </div>

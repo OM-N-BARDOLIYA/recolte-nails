@@ -116,13 +116,16 @@
                             class="absolute -top-1 -right-1.5 w-4 h-4 rounded-full bg-[#111111] text-white text-[9px] font-bold flex items-center justify-center leading-none">0</span>
                     </button>
 
-                    <!-- Mobile Hamburger Button -->
+                    <!-- Mobile Hamburger / Close Button -->
                     <button type="button" @click="mobileMenuOpen = !mobileMenuOpen"
-                        class="md:hidden p-1 hover:text-[#A33B47] transition-colors ml-1"
+                        class="group md:hidden w-8 h-8 rounded-full flex items-center justify-center hover:bg-[#FAF8F5] text-charcoal hover:text-[#A33B47] transition-all duration-300 ml-1 cursor-pointer select-none active:scale-95"
+                        :title="mobileMenuOpen ? 'Close Menu' : 'Open Menu'"
                         aria-label="Toggle Navigation Menu">
-                        <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
+                        <svg x-show="!mobileMenuOpen" class="w-5 h-5 transition-transform duration-300 group-hover:scale-105" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg x-show="mobileMenuOpen" x-cloak class="w-4 h-4 transition-transform duration-300 group-hover:rotate-90 text-[#A33B47]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
