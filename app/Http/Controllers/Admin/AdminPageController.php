@@ -251,13 +251,13 @@ class AdminPageController extends Controller
             $inputIcon = $request->input("trust_{$i}_icon", $prevIcon);
 
             $itemImage = $prevImage;
-            if ($request->boolean("trust_{$i}_remove_image")) {
-                $itemImage = null;
-            } elseif ($request->hasFile("trust_{$i}_image_file")) {
+            if ($request->hasFile("trust_{$i}_image_file")) {
                 $f = $request->file("trust_{$i}_image_file");
                 $fn = "trust_icon_{$i}_" . time() . '.' . $f->getClientOriginalExtension();
                 $f->move(public_path('uploads/pages'), $fn);
                 $itemImage = asset('uploads/pages/' . $fn);
+            } elseif ($request->input("trust_{$i}_remove_image") === '1') {
+                $itemImage = null;
             } elseif ($request->filled("trust_{$i}_image")) {
                 $itemImage = $request->input("trust_{$i}_image");
             }

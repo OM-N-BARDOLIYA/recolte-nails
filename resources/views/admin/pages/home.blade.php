@@ -20,6 +20,16 @@
     video0: '{{ $instagram['posts'][0]['video'] ?? asset('uploads/pages/about_insta_video_0_1789736475.mp4') }}',
     video1: '{{ $instagram['posts'][1]['video'] ?? asset('uploads/pages/about_insta_video_1_1789736475.mp4') }}',
     video2: '{{ $instagram['posts'][2]['video'] ?? asset('uploads/pages/about_insta_video_2_1789736475.mp4') }}',
+    trustImg0: '{{ $trust_strip['items'][0]['image'] ?? '' }}',
+    trustImg1: '{{ $trust_strip['items'][1]['image'] ?? '' }}',
+    trustImg2: '{{ $trust_strip['items'][2]['image'] ?? '' }}',
+    trustImg3: '{{ $trust_strip['items'][3]['image'] ?? '' }}',
+    trustImg4: '{{ $trust_strip['items'][4]['image'] ?? '' }}',
+    trustIcon0: '{{ $trust_strip['items'][0]['icon'] ?? 'diamond' }}',
+    trustIcon1: '{{ $trust_strip['items'][1]['icon'] ?? 'shield' }}',
+    trustIcon2: '{{ $trust_strip['items'][2]['icon'] ?? 'truck' }}',
+    trustIcon3: '{{ $trust_strip['items'][3]['icon'] ?? 'support' }}',
+    trustIcon4: '{{ $trust_strip['items'][4]['icon'] ?? 'star' }}',
     handleFile(e, key) {
         const file = e.target.files[0];
         if (file) {
@@ -328,65 +338,93 @@
                                 <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Logo / Icon Badge</label>
                                 
                                 <div class="flex items-center gap-3">
-                                    <div class="w-14 h-14 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] flex items-center justify-center p-2 shrink-0">
-                                        @if(!empty($curImage))
-                                            <img src="{{ $curImage }}" alt="Custom Logo" class="max-w-full max-h-full object-contain">
-                                        @else
-                                            <div class="text-[#A33B47]">
-                                                @if($curIcon === 'diamond')
-                                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 9l10 13L22 9l-10-7zm0 0v22M2 9h20M7 9l5 13 5-13" /></svg>
-                                                @elseif($curIcon === 'shield')
-                                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
-                                                @elseif($curIcon === 'truck')
-                                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375A1.125 1.125 0 012.25 17.625V6.375c0-.621.504-1.125 1.125-1.125h11.25c.621 0 1.125.504 1.125 1.125v1.5m-13.5 0h13.5m0 0l3 3m-3-3v8.625c0 .621.504 1.125 1.125 1.125H21a.75.75 0 00.75-.75V11.25l-2.25-3H16.5m0 0v8.625m3.75 1.875a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H16.5" /></svg>
-                                                @elseif($curIcon === 'support')
-                                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.75 12.75v1.5a6.75 6.75 0 01-13.5 0v-1.5m0 0A3.75 3.75 0 019 9h6a3.75 3.75 0 013.75 3.75zm-13.5 0a3.75 3.75 0 00-2.25 3.425v.825a3 3 0 003 3h1.5m11.25-7.25a3.75 3.75 0 012.25 3.425v.825a3 3 0 01-3 3h-1.5" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75v3m-3 0h6" /></svg>
-                                                @elseif($curIcon === 'award')
-                                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.504-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.004 0H9.496m5.004 0a3 3 0 002.996-2.658L18 4.5H6l.504 8.217A3 3 0 009.496 15.375" /></svg>
-                                                @elseif($curIcon === 'sparkles')
-                                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" /></svg>
-                                                @elseif($curIcon === 'heart')
-                                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
-                                                @elseif($curIcon === 'leaf')
-                                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918" /></svg>
-                                                @else
-                                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" /></svg>
-                                                @endif
+                                    <div class="w-14 h-14 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] flex items-center justify-center p-2 shrink-0 overflow-hidden relative">
+                                        <!-- Realtime Custom Image Preview (if chosen or saved) -->
+                                        <img 
+                                            :src="trustImg{{ $i }}" 
+                                            alt="Custom Logo" 
+                                            class="max-w-full max-h-full object-contain"
+                                            x-show="trustImg{{ $i }}"
+                                        >
+                                        
+                                        <!-- Realtime Vector Icon (if no image) -->
+                                        <div class="text-[#A33B47]" x-show="!trustImg{{ $i }}">
+                                            <div x-show="trustIcon{{ $i }} === 'diamond'">
+                                                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 9l10 13L22 9l-10-7zm0 0v22M2 9h20M7 9l5 13 5-13" /></svg>
                                             </div>
-                                        @endif
+                                            <div x-show="trustIcon{{ $i }} === 'shield'">
+                                                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+                                            </div>
+                                            <div x-show="trustIcon{{ $i }} === 'truck'">
+                                                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375A1.125 1.125 0 012.25 17.625V6.375c0-.621.504-1.125 1.125-1.125h11.25c.621 0 1.125.504 1.125 1.125v1.5m-13.5 0h13.5m0 0l3 3m-3-3v8.625c0 .621.504 1.125 1.125 1.125H21a.75.75 0 00.75-.75V11.25l-2.25-3H16.5m0 0v8.625m3.75 1.875a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H16.5" /></svg>
+                                            </div>
+                                            <div x-show="trustIcon{{ $i }} === 'support'">
+                                                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.75 12.75v1.5a6.75 6.75 0 01-13.5 0v-1.5m0 0A3.75 3.75 0 019 9h6a3.75 3.75 0 013.75 3.75zm-13.5 0a3.75 3.75 0 00-2.25 3.425v.825a3 3 0 003 3h1.5m11.25-7.25a3.75 3.75 0 012.25 3.425v.825a3 3 0 01-3 3h-1.5" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75v3m-3 0h6" /></svg>
+                                            </div>
+                                            <div x-show="trustIcon{{ $i }} === 'award'">
+                                                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.504-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.004 0H9.496m5.004 0a3 3 0 002.996-2.658L18 4.5H6l.504 8.217A3 3 0 009.496 15.375" /></svg>
+                                            </div>
+                                            <div x-show="trustIcon{{ $i }} === 'sparkles'">
+                                                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" /></svg>
+                                            </div>
+                                            <div x-show="trustIcon{{ $i }} === 'heart'">
+                                                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+                                            </div>
+                                            <div x-show="trustIcon{{ $i }} === 'leaf'">
+                                                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918" /></svg>
+                                            </div>
+                                            <div x-show="trustIcon{{ $i }} === 'star' || !['diamond','shield','truck','support','award','sparkles','heart','leaf'].includes(trustIcon{{ $i }})">
+                                                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" /></svg>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="text-[11px] text-[#6A625A] space-y-1">
-                                        <div class="font-bold text-[#171412]">{{ !empty($curImage) ? 'Custom Uploaded Logo' : 'Vector Icon' }}</div>
-                                        <div class="text-[10px] text-[#8C7A6B]">Display size: 32x32px</div>
+                                        <div class="font-bold text-[#171412]" x-text="trustImg{{ $i }} ? 'Custom Logo Active' : 'Vector Icon Active'"></div>
+                                        <div class="text-[10px] text-[#8C7A6B]">Display size: 32×32px</div>
                                     </div>
                                 </div>
 
                                 <div class="space-y-2 pt-2 border-t border-[#ECE6DE]">
                                     <div>
                                         <label class="text-[9.5px] font-bold uppercase tracking-wider text-[#6A625A] block mb-1">Upload Custom Logo (PNG, SVG, JPG)</label>
-                                        <input type="file" name="trust_{{ $i }}_image_file" accept="image/*,.svg" class="w-full text-[11px] text-[#6A625A] file:mr-2 file:py-1.5 file:px-3 file:rounded-none file:border file:border-[#ECE6DE] file:text-[10.5px] file:font-bold file:bg-[#FAF8F5] file:text-[#171412] hover:file:bg-[#ECE6DE] cursor-pointer">
-                                        <input type="hidden" name="trust_{{ $i }}_image" value="{{ $curImage }}">
+                                        <input 
+                                            type="file" 
+                                            name="trust_{{ $i }}_image_file" 
+                                            accept="image/*,.svg" 
+                                            x-ref="trustInput{{ $i }}"
+                                            @change="handleFile($event, 'trustImg{{ $i }}')"
+                                            class="w-full text-[11px] text-[#6A625A] file:mr-2 file:py-1.5 file:px-3 file:rounded-none file:border file:border-[#ECE6DE] file:text-[10.5px] file:font-bold file:bg-[#FAF8F5] file:text-[#171412] hover:file:bg-[#ECE6DE] cursor-pointer"
+                                        >
+                                        <input type="hidden" name="trust_{{ $i }}_image" :value="trustImg{{ $i }}">
                                     </div>
 
-                                    @if(!empty($curImage))
-                                    <div class="flex items-center gap-1.5 pt-1">
-                                        <input type="checkbox" id="remove_trust_{{ $i }}" name="trust_{{ $i }}_remove_image" value="1" class="rounded-none border-[#ECE6DE] text-[#A33B47] focus:ring-0">
-                                        <label for="remove_trust_{{ $i }}" class="text-[10px] font-bold text-rose-600 cursor-pointer">Revert to Vector Icon</label>
+                                    <div x-show="trustImg{{ $i }}" class="pt-1">
+                                        <button 
+                                            type="button" 
+                                            @click="trustImg{{ $i }} = ''; if ($refs.trustInput{{ $i }}) $refs.trustInput{{ $i }}.value = '';" 
+                                            class="text-[10.5px] font-bold text-rose-600 hover:text-rose-800 flex items-center gap-1 cursor-pointer"
+                                        >
+                                            <span>✕</span> Revert to Vector Icon
+                                        </button>
+                                        <input type="hidden" name="trust_{{ $i }}_remove_image" :value="trustImg{{ $i }} ? '0' : '1'">
                                     </div>
-                                    @endif
 
                                     <div>
                                         <label class="text-[9.5px] font-bold uppercase tracking-wider text-[#6A625A] block mb-1">Or Choose Vector Icon</label>
-                                        <select name="trust_{{ $i }}_icon" class="w-full px-2.5 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-medium text-[#171412] focus:outline-none focus:border-[#171412]">
-                                            <option value="diamond" {{ $curIcon === 'diamond' ? 'selected' : '' }}>💎 Diamond (Premium Quality)</option>
-                                            <option value="shield" {{ $curIcon === 'shield' ? 'selected' : '' }}>🛡️ Shield Check (Safe &amp; Skin Friendly)</option>
-                                            <option value="truck" {{ $curIcon === 'truck' ? 'selected' : '' }}>🚚 Fast Delivery Van (Shipping)</option>
-                                            <option value="support" {{ $curIcon === 'support' ? 'selected' : '' }}>💡 Lamp / Support (Expert Support)</option>
-                                            <option value="star" {{ $curIcon === 'star' ? 'selected' : '' }}>⭐ Star (Trusted by Professionals)</option>
-                                            <option value="award" {{ $curIcon === 'award' ? 'selected' : '' }}>🏆 Award Rosette (Certified Quality)</option>
-                                            <option value="sparkles" {{ $curIcon === 'sparkles' ? 'selected' : '' }}>✨ Sparkles (Luxury Finish)</option>
-                                            <option value="heart" {{ $curIcon === 'heart' ? 'selected' : '' }}>🤍 Heart (Care &amp; Satisfaction)</option>
-                                            <option value="leaf" {{ $curIcon === 'leaf' ? 'selected' : '' }}>🌿 Botanical Leaf (Clean Formulas)</option>
+                                        <select 
+                                            name="trust_{{ $i }}_icon" 
+                                            x-model="trustIcon{{ $i }}"
+                                            class="w-full px-2.5 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-medium text-[#171412] focus:outline-none focus:border-[#171412]"
+                                        >
+                                            <option value="diamond">💎 Diamond (Premium Quality)</option>
+                                            <option value="shield">🛡️ Shield Check (Safe &amp; Skin Friendly)</option>
+                                            <option value="truck">🚚 Fast Delivery Van (Shipping)</option>
+                                            <option value="support">💡 Lamp / Support (Expert Support)</option>
+                                            <option value="star">⭐ Star (Trusted by Professionals)</option>
+                                            <option value="award">🏆 Award Rosette (Certified Quality)</option>
+                                            <option value="sparkles">✨ Sparkles (Luxury Finish)</option>
+                                            <option value="heart">🤍 Heart (Care &amp; Satisfaction)</option>
+                                            <option value="leaf">🌿 Botanical Leaf (Clean Formulas)</option>
                                         </select>
                                     </div>
                                 </div>
