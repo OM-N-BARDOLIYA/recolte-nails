@@ -11,7 +11,9 @@
     <!-- Clean, Highly Legible & Professional Admin Typography: Inter & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
 
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}?v={{ time() }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -24,30 +26,60 @@
         }
 
         /* Global Clean Admin Typography Stack */
-        body, input, textarea, select, button, table, td, th, p, span, div, label, li, a, .font-sans {
+        body,
+        input,
+        textarea,
+        select,
+        button,
+        table,
+        td,
+        th,
+        p,
+        span,
+        div,
+        label,
+        li,
+        a,
+        .font-sans {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
             letter-spacing: -0.011em;
         }
 
         /* Modern Crisp Display Headers (Plus Jakarta Sans) */
-        h1, h2, h3, h4, h5, h6, .font-serif, .font-display {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .font-serif,
+        .font-display {
             font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
             letter-spacing: -0.025em;
         }
 
         /* Clean Monospace for SKUs, slugs, and tech codes */
-        .font-mono, code, pre {
+        .font-mono,
+        code,
+        pre {
             font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
             letter-spacing: -0.02em;
         }
 
         /* Improved legibility for small uppercase labels */
-        .tracking-\[0\.22em\], .tracking-\[0\.18em\], .tracking-\[0\.16em\], .tracking-widest {
+        .tracking-\[0\.22em\],
+        .tracking-\[0\.18em\],
+        .tracking-\[0\.16em\],
+        .tracking-widest {
             letter-spacing: 0.06em !important;
         }
 
         /* Clean and comfortable inputs for data management */
-        input[type="text"], input[type="number"], input[type="password"], input[type="email"], select {
+        input[type="text"],
+        input[type="number"],
+        input[type="password"],
+        input[type="email"],
+        select {
             font-size: 13.5px !important;
             line-height: 1.5 !important;
             color: #171412 !important;
@@ -65,7 +97,9 @@
         }
 
         /* Global luxury focus states for all inputs and textareas in Atelier CMS */
-        input:focus, textarea:focus, select:focus {
+        input:focus,
+        textarea:focus,
+        select:focus {
             outline: none !important;
             border-color: #A33B47 !important;
             background-color: #ffffff !important;
@@ -73,7 +107,8 @@
         }
 
         /* High clarity tabular numbers for data & stats */
-        .tabular-nums, table td {
+        .tabular-nums,
+        table td {
             font-variant-numeric: tabular-nums;
         }
 
@@ -86,127 +121,110 @@
     </style>
 </head>
 
-<body class="min-h-screen text-[#171412] font-sans antialiased bg-[#FAF8F5] flex flex-col md:flex-row selection:bg-[#FBEFE9] selection:text-[#A33B47]">
+<body
+    class="min-h-screen text-[#171412] font-sans antialiased bg-[#FAF8F5] flex flex-col md:flex-row selection:bg-[#FBEFE9] selection:text-[#A33B47]">
 
     @php
-        $navLinkClass = function($active) {
-            return $active 
+        $navLinkClass = function ($active) {
+            return $active
                 ? 'flex items-center gap-3 px-3.5 py-2.5 rounded-none bg-[#FBEFE9] text-[#A33B47] font-semibold border-l-2 border-[#A33B47] shadow-2xs transition-all'
                 : 'flex items-center gap-3 px-3.5 py-2.5 rounded-none text-[#171412] hover:text-[#A33B47] hover:bg-[#FAF8F5] transition-all font-normal';
         };
     @endphp
 
     <!-- ── 1. LUXURY ATELIER SIDEBAR ── -->
-    <aside class="w-full md:w-64 bg-white border-b md:border-b-0 md:border-r border-[#ECE6DE] flex flex-col justify-between shrink-0 z-30 md:sticky md:top-0 md:h-screen md:overflow-y-auto">
-        
+    <aside
+        class="w-full md:w-64 bg-white border-b md:border-b-0 md:border-r border-[#ECE6DE] flex flex-col justify-between shrink-0 z-30 md:sticky md:top-0 md:h-screen md:overflow-y-auto">
+
         <div>
             <!-- Brand Logo & Header (Aligned with Storefront Navbar) -->
             <div class="p-5 border-b border-[#ECE6DE] flex items-center justify-between bg-white">
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 group">
-                    <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Recolte Logo" class="h-9 w-auto object-contain select-none transition-transform group-hover:scale-105">
+                    <img src="{{ asset('images/logo.png') }}?v={{ time() }}" alt="Recolte Logo"
+                        class="h-9 w-auto object-contain select-none transition-transform group-hover:scale-105">
                     <div>
-                        <div class="font-serif text-[15px] font-bold text-[#171412] tracking-wide leading-tight group-hover:text-[#A33B47] transition-colors">Recolte Nails</div>
-                        <div class="text-[9px] font-semibold tracking-[0.22em] text-[#A33B47] uppercase">Atelier Studio CMS</div>
+                        <div
+                            class="font-serif text-[15px] font-bold text-[#171412] tracking-wide leading-tight group-hover:text-[#A33B47] transition-colors">
+                            Recolte Nails</div>
+                        <div class="text-[9px] font-semibold tracking-[0.22em] text-[#A33B47] uppercase">Atelier Studio
+                            CMS</div>
                     </div>
                 </a>
             </div>
 
             <!-- Navigation Links -->
             <nav class="p-4 space-y-1 text-xs">
-                
-                <a 
-                    href="{{ route('admin.dashboard') }}" 
-                    class="{{ $navLinkClass(request()->routeIs('admin.dashboard')) }}"
-                >
+
+                <a href="{{ route('admin.dashboard') }}"
+                    class="{{ $navLinkClass(request()->routeIs('admin.dashboard')) }}">
                     <span class="text-sm">📊</span>
                     <span>Dashboard</span>
                 </a>
 
-                <div class="pt-5 pb-1.5 px-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#A33B47]/80 flex items-center gap-1.5">
+                <div
+                    class="pt-5 pb-1.5 px-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#A33B47]/80 flex items-center gap-1.5">
                     <span class="text-[8px] text-[#A33B47]">✦</span>
                     <span>Catalog Management</span>
                 </div>
 
-                <a 
-                    href="{{ route('admin.products.index') }}" 
-                    class="{{ $navLinkClass(request()->routeIs('admin.products.*')) }}"
-                >
+                <a href="{{ route('admin.products.index') }}"
+                    class="{{ $navLinkClass(request()->routeIs('admin.products.*')) }}">
                     <span class="text-sm">💅</span>
                     <span>All Products</span>
                 </a>
 
-                <a 
-                    href="{{ route('admin.categories.index') }}" 
-                    class="{{ $navLinkClass(request()->routeIs('admin.categories.*')) }}"
-                >
+                <a href="{{ route('admin.categories.index') }}"
+                    class="{{ $navLinkClass(request()->routeIs('admin.categories.*')) }}">
                     <span class="text-sm">🎨</span>
                     <span>Categories</span>
                 </a>
 
-                <div class="pt-5 pb-1.5 px-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#A33B47]/80 flex items-center gap-1.5">
+                <div
+                    class="pt-5 pb-1.5 px-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#A33B47]/80 flex items-center gap-1.5">
                     <span class="text-[8px] text-[#A33B47]">✦</span>
                     <span>Dynamic Page Content</span>
                 </div>
 
-                <a 
-                    href="{{ route('admin.pages.home') }}" 
-                    class="{{ $navLinkClass(request()->routeIs('admin.pages.home')) }}"
-                >
+                <a href="{{ route('admin.pages.home') }}"
+                    class="{{ $navLinkClass(request()->routeIs('admin.pages.home')) }}">
                     <span class="text-sm">🏠</span>
                     <span>Home</span>
                 </a>
 
-                <a 
-                    href="{{ route('admin.pages.about') }}" 
-                    class="{{ $navLinkClass(request()->routeIs('admin.pages.about')) }}"
-                >
+                <a href="{{ route('admin.pages.about') }}"
+                    class="{{ $navLinkClass(request()->routeIs('admin.pages.about')) }}">
                     <span class="text-sm">📖</span>
                     <span>About</span>
                 </a>
 
-                <a 
-                    href="{{ route('admin.pages.contact') }}" 
-                    class="{{ $navLinkClass(request()->routeIs('admin.pages.contact')) }}"
-                >
+                <a href="{{ route('admin.pages.contact') }}"
+                    class="{{ $navLinkClass(request()->routeIs('admin.pages.contact')) }}">
                     <span class="text-sm">📞</span>
                     <span>Contact</span>
                 </a>
 
-                <a 
-                    href="{{ route('admin.pages.catalog') }}" 
-                    class="{{ $navLinkClass(request()->routeIs('admin.pages.catalog')) }}"
-                >
+                <a href="{{ route('admin.pages.catalog') }}"
+                    class="{{ $navLinkClass(request()->routeIs('admin.pages.catalog')) }}">
                     <span class="text-sm">🛍️</span>
                     <span>Catalog</span>
                 </a>
 
-                <div class="pt-5 pb-1.5 px-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#A33B47]/80 flex items-center gap-1.5">
+                <div
+                    class="pt-5 pb-1.5 px-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#A33B47]/80 flex items-center gap-1.5">
                     <span class="text-[8px] text-[#A33B47]">✦</span>
                     <span>System &amp; Settings</span>
                 </div>
 
-                <a 
-                    href="{{ route('admin.settings.index', ['tab' => 'studio']) }}" 
-                    class="{{ $navLinkClass(request()->routeIs('admin.settings.*') && request('tab') !== 'security') }}"
-                >
+                <a href="{{ route('admin.settings.index', ['tab' => 'studio']) }}"
+                    class="{{ $navLinkClass(request()->routeIs('admin.settings.*') && request('tab') !== 'security') }}">
                     <span class="text-sm">⚙️</span>
                     <span>Studio &amp; WhatsApp</span>
                 </a>
 
-                <a 
-                    href="{{ route('admin.settings.security') }}" 
-                    class="{{ $navLinkClass(request()->routeIs('admin.settings.security') || (request()->routeIs('admin.settings.*') && request('tab') === 'security')) }}"
-                >
+                <a href="{{ route('admin.settings.security') }}"
+                    class="{{ $navLinkClass(request()->routeIs('admin.settings.security') || (request()->routeIs('admin.settings.*') && request('tab') === 'security')) }}">
                     <span class="text-sm">🔐</span>
                     <span>Admin Access &amp; Password</span>
-                </a>
-
-                <a 
-                    href="{{ route('admin.inquiries.index') }}" 
-                    class="{{ $navLinkClass(request()->routeIs('admin.inquiries.*')) }}"
-                >
-                    <span class="text-sm">💬</span>
-                    <span>Customer Inquiries</span>
                 </a>
 
             </nav>
@@ -214,11 +232,8 @@
 
         <!-- User Profile & Website Shortcut -->
         <div class="p-4 border-t border-[#ECE6DE] bg-[#FAF8F5]/80 space-y-2.5">
-            <a 
-                href="{{ route('home') }}" 
-                target="_blank" 
-                class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-none bg-white hover:bg-[#FBEFE9] border border-[#ECE6DE] hover:border-[#A33B47] text-xs font-semibold text-[#171412] hover:text-[#A33B47] transition-all shadow-2xs group"
-            >
+            <a href="{{ route('home') }}" target="_blank"
+                class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-none bg-white hover:bg-[#FBEFE9] border border-[#ECE6DE] hover:border-[#A33B47] text-xs font-semibold text-[#171412] hover:text-[#A33B47] transition-all shadow-2xs group">
                 <span class="flex items-center gap-2">
                     <span class="text-sm">🌐</span>
                     <span>View Live Storefront</span>
@@ -229,21 +244,27 @@
             <!-- Admin Profile Box -->
             <div class="p-3 bg-white rounded-none border border-[#ECE6DE] shadow-2xs space-y-2.5">
                 <div class="flex items-center gap-2.5 min-w-0">
-                    <div class="w-8 h-8 rounded-none bg-[#A33B47] text-white text-xs font-bold flex items-center justify-center shrink-0 shadow-2xs">
+                    <div
+                        class="w-8 h-8 rounded-none bg-[#A33B47] text-white text-xs font-bold flex items-center justify-center shrink-0 shadow-2xs">
                         {{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}
                     </div>
                     <div class="min-w-0 flex-1">
-                        <div class="text-xs font-semibold text-[#171412] truncate">{{ Auth::user()?->name ?? 'Admin' }}</div>
-                        <div class="text-[10px] text-[#8C7A6B] truncate">{{ Auth::user()?->username ? '@' . Auth::user()->username : (Auth::user()?->email ?? 'admin@recoltenails.com') }}</div>
+                        <div class="text-xs font-semibold text-[#171412] truncate">{{ Auth::user()?->name ?? 'Admin' }}
+                        </div>
+                        <div class="text-[10px] text-[#8C7A6B] truncate">
+                            {{ Auth::user()?->username ? '@' . Auth::user()->username : (Auth::user()?->email ?? '') }}
+                        </div>
                     </div>
                 </div>
 
                 <!-- Prominent Logout Button -->
                 <form method="POST" action="{{ route('admin.logout') }}" class="w-full pt-2 border-t border-[#ECE6DE]">
                     @csrf
-                    <button type="submit" class="w-full flex items-center justify-center gap-2 py-1.5 px-3 rounded-none bg-[#FAF8F5] hover:bg-red-50 text-[#736B63] hover:text-red-700 border border-[#E5DFD7] hover:border-red-200 text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer">
+                    <button type="submit"
+                        class="w-full flex items-center justify-center gap-2 py-1.5 px-3 rounded-none bg-[#FAF8F5] hover:bg-red-50 text-[#736B63] hover:text-red-700 border border-[#E5DFD7] hover:border-red-200 text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer">
                         <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
                         <span>Logout</span>
                     </button>
@@ -255,7 +276,7 @@
 
     <!-- ── 2. MAIN CONTENT AREA ── -->
     <div class="flex-grow flex flex-col min-w-0 bg-[#FAF8F5]">
-        
+
         <!-- Top Admin Header Bar with Quick Logout -->
         <header class="bg-white border-b border-[#ECE6DE] px-6 sm:px-8 py-3 flex items-center justify-between shrink-0">
             <div class="flex items-center gap-2 text-xs text-[#8C7A6B]">
@@ -264,16 +285,20 @@
                 <span class="capitalize text-[#A33B47] font-semibold">{{ request()->segment(2) ?? 'Dashboard' }}</span>
             </div>
             <div class="flex items-center gap-4">
-                <a href="{{ route('home') }}" target="_blank" class="hidden sm:inline-flex items-center gap-1 text-xs text-[#8C7A6B] hover:text-[#171412] transition-colors">
+                <a href="{{ route('home') }}" target="_blank"
+                    class="hidden sm:inline-flex items-center gap-1 text-xs text-[#8C7A6B] hover:text-[#171412] transition-colors">
                     <span>Storefront</span>
                     <span>↗</span>
                 </a>
                 <span class="hidden sm:inline text-[#ECE6DE]">|</span>
                 <form method="POST" action="{{ route('admin.logout') }}" class="inline">
                     @csrf
-                    <x-button type="submit" variant="ghost" size="xs" class="hover:!bg-red-50 hover:!border-red-200 !text-[#8C7A6B] hover:!text-red-700" title="Sign Out">
+                    <x-button type="submit" variant="ghost" size="xs"
+                        class="hover:!bg-red-50 hover:!border-red-200 !text-[#8C7A6B] hover:!text-red-700"
+                        title="Sign Out">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
                         <span>Logout</span>
                     </x-button>
@@ -292,7 +317,8 @@
 
         <!-- Luxury Dark Atelier Footer (100% matched to Storefront Footer) -->
         <footer class="bg-[#171412] text-[#FAF8F5] border-t border-[#26221E] px-6 py-5 text-center text-xs">
-            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[#D4CDC5]/80">
+            <div
+                class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[#D4CDC5]/80">
                 <div class="flex items-center gap-2">
                     <span class="text-[#A33B47]">✦</span>
                     <span class="font-serif tracking-wider text-[#FAF8F5]">Recolte Nails Paris</span>
@@ -307,4 +333,5 @@
     </div>
 
 </body>
+
 </html>

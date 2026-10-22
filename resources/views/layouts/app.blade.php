@@ -15,31 +15,11 @@
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}?v={{ time() }}">
     <script>
         window.recolteConfig = {
             whatsappNumber: '{{ preg_replace('/[^0-9]/', '', \App\Models\SiteSetting::get('whatsapp_number', '917016266727')) }}',
-            phone: '{{ \App\Models\SiteSetting::get('phone', '+91 7016266727') }}',
-            logInquiryUrl: '{{ route('inquiries.log-whatsapp') }}',
-            csrfToken: '{{ csrf_token() }}'
-        };
-
-        window.logWhatsAppInquiry = function(payload) {
-            try {
-                const url = window.recolteConfig?.logInquiryUrl || '/inquiries/log-whatsapp';
-                const token = window.recolteConfig?.csrfToken || document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-                fetch(url, {
-                    method: 'POST',
-                    keepalive: true,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': token,
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                }).catch(() => {});
-            } catch (e) {}
+            phone: '{{ \App\Models\SiteSetting::get('phone', '+91 7016266727') }}'
         };
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -124,9 +104,7 @@
 
                     <!-- Account / User Icon -->
                     <a href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}"
-                        target="_blank" rel="noopener noreferrer" 
-                        @click="window.logWhatsAppInquiry({ source: 'whatsapp_contact', subject: 'Header VIP Support Chat', message: 'Hello Recolte Nails Support, I need assistance.', metadata: { location: 'header' } })"
-                        class="p-1 hover:text-[#A33B47] transition-colors"
+                        target="_blank" rel="noopener noreferrer" class="p-1 hover:text-[#A33B47] transition-colors"
                         aria-label="Account / Support">
                         <svg class="w-4.5 h-4.5 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
@@ -151,13 +129,18 @@
                     <!-- Mobile Hamburger / Close Button -->
                     <button type="button" @click="mobileMenuOpen = !mobileMenuOpen"
                         class="group md:hidden w-8 h-8 rounded-full flex items-center justify-center hover:bg-[#FAF8F5] text-charcoal hover:text-[#A33B47] transition-all duration-300 ml-1 cursor-pointer select-none active:scale-95"
-                        :title="mobileMenuOpen ? 'Close Menu' : 'Open Menu'"
-                        aria-label="Toggle Navigation Menu">
-                        <svg x-show="!mobileMenuOpen" class="w-5 h-5 transition-transform duration-300 group-hover:scale-105" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        :title="mobileMenuOpen ? 'Close Menu' : 'Open Menu'" aria-label="Toggle Navigation Menu">
+                        <svg x-show="!mobileMenuOpen"
+                            class="w-5 h-5 transition-transform duration-300 group-hover:scale-105" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
-                        <svg x-show="mobileMenuOpen" x-cloak class="w-4 h-4 transition-transform duration-300 group-hover:rotate-90 text-[#A33B47]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <svg x-show="mobileMenuOpen" x-cloak
+                            class="w-4 h-4 transition-transform duration-300 group-hover:rotate-90 text-[#A33B47]"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
@@ -260,7 +243,6 @@
                             <span class="text-[#D8D2CB]">Direct WhatsApp:</span>
                             <a href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}"
                                 target="_blank" rel="noopener noreferrer"
-                                @click="window.logWhatsAppInquiry({ source: 'whatsapp_contact', subject: 'Footer Direct WhatsApp Inquiry', message: 'Hello Recolte Nails Concierge, I have an inquiry.', metadata: { location: 'footer' } })"
                                 class="text-[#FAF8F5] hover:text-[#C5A880] transition-colors font-medium">
                                 {{ \App\Models\SiteSetting::get('phone', '+91 7016266727') }}
                             </a>

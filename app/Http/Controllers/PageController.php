@@ -201,39 +201,4 @@ class PageController extends Controller
 
         return back()->with('success', 'Thank you! Your message has been received by our studio concierge.');
     }
-
-    /**
-     * Asynchronously log customer WhatsApp click inquiries with structured data
-     */
-    public function logWhatsAppInquiry(Request $request)
-    {
-        $validated = $request->validate([
-            'subject' => 'nullable|string|max:255',
-            'message' => 'required|string',
-            'source' => 'nullable|string|max:100',
-            'name' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:50',
-            'email' => 'nullable|string|max:255',
-            'metadata' => 'nullable|array',
-        ]);
-
-        $inquiry = Inquiry::create([
-            'name' => $validated['name'] ?? 'WhatsApp Client',
-            'email' => $validated['email'] ?? null,
-            'phone' => $validated['phone'] ?? null,
-            'subject' => $validated['subject'] ?? 'WhatsApp Inquiry',
-            'message' => $validated['message'],
-            'source' => $validated['source'] ?? 'whatsapp_product',
-            'type' => 'whatsapp',
-            'metadata' => $validated['metadata'] ?? [],
-            'ip_address' => $request->ip(),
-            'status' => 'new',
-        ]);
-
-        return response()->json([
-            'success' => true,
-            'id' => $inquiry->id,
-        ]);
-    }
 }
-

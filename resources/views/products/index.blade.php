@@ -3,85 +3,85 @@
 @section("content")
 
     <section class="py-12 sm:py-16 bg-[#FAF8F5] min-h-screen" x-data="{
-                selectedCategory: '{{ $selectedCategory }}',
-                searchQuery: '{{ $searchQuery }}',
-                sortOption: '{{ $currentSort }}',
-                isLoading: false,
+                    selectedCategory: '{{ $selectedCategory }}',
+                    searchQuery: '{{ $searchQuery }}',
+                    sortOption: '{{ $currentSort }}',
+                    isLoading: false,
 
-                init() {
-                    // Handle browser Back / Forward buttons seamlessly
-                    window.addEventListener('popstate', () => {
-                        const popParams = new URLSearchParams(window.location.search);
-                        this.selectedCategory = popParams.get('category') || 'all';
-                        this.sortOption = popParams.get('sort') || 'featured';
-                        this.searchQuery = popParams.get('search') || '';
-                        this.fetchCatalogContent(window.location.href, false);
-                    });
-                },
-
-                async applyFilter(newCat = null, newSort = null, newSearch = null) {
-                    if (newCat !== null) {
-                        this.selectedCategory = newCat;
-                        if (newCat === 'all') {
-                            this.searchQuery = '';
-                        }
-                    }
-                    if (newSort !== null) this.sortOption = newSort;
-                    if (newSearch !== null) this.searchQuery = newSearch;
-
-                    // Clean URL params: only include active non-default filters
-                    const params = new URLSearchParams();
-                    if (this.selectedCategory && this.selectedCategory !== 'all') {
-                        params.set('category', this.selectedCategory);
-                    }
-                    if (this.sortOption && this.sortOption !== 'featured') {
-                        params.set('sort', this.sortOption);
-                    }
-                    if (this.searchQuery && this.searchQuery.trim() !== '') {
-                        params.set('search', this.searchQuery.trim());
-                    }
-
-                    const targetUrl = '{{ route('products.index') }}' + (params.toString() ? '?' + params.toString() : '');
-                    await this.fetchCatalogContent(targetUrl, true, targetUrl);
-                },
-
-                async fetchCatalogContent(fetchUrl, updateHistory = true, pushUrl = null) {
-                    this.isLoading = true;
-                    try {
-                        const response = await fetch(fetchUrl, {
-                            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                    init() {
+                        // Handle browser Back / Forward buttons seamlessly
+                        window.addEventListener('popstate', () => {
+                            const popParams = new URLSearchParams(window.location.search);
+                            this.selectedCategory = popParams.get('category') || 'all';
+                            this.sortOption = popParams.get('sort') || 'featured';
+                            this.searchQuery = popParams.get('search') || '';
+                            this.fetchCatalogContent(window.location.href, false);
                         });
-                        const html = await response.text();
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(html, 'text/html');
+                    },
 
-                        // Swap products grid & count without any scroll jump
-                        const newGrid = doc.getElementById('catalog-products-section');
-                        const currentGrid = document.getElementById('catalog-products-section');
-                        if (newGrid && currentGrid) {
-                            currentGrid.innerHTML = newGrid.innerHTML;
+                    async applyFilter(newCat = null, newSort = null, newSearch = null) {
+                        if (newCat !== null) {
+                            this.selectedCategory = newCat;
+                            if (newCat === 'all') {
+                                this.searchQuery = '';
+                            }
+                        }
+                        if (newSort !== null) this.sortOption = newSort;
+                        if (newSearch !== null) this.searchQuery = newSearch;
+
+                        // Clean URL params: only include active non-default filters
+                        const params = new URLSearchParams();
+                        if (this.selectedCategory && this.selectedCategory !== 'all') {
+                            params.set('category', this.selectedCategory);
+                        }
+                        if (this.sortOption && this.sortOption !== 'featured') {
+                            params.set('sort', this.sortOption);
+                        }
+                        if (this.searchQuery && this.searchQuery.trim() !== '') {
+                            params.set('search', this.searchQuery.trim());
                         }
 
-                        // Update URL in browser bar smoothly
-                        if (updateHistory) {
-                            window.history.pushState({}, '', pushUrl || fetchUrl);
+                        const targetUrl = '{{ route('products.index') }}' + (params.toString() ? '?' + params.toString() : '');
+                        await this.fetchCatalogContent(targetUrl, true, targetUrl);
+                    },
+
+                    async fetchCatalogContent(fetchUrl, updateHistory = true, pushUrl = null) {
+                        this.isLoading = true;
+                        try {
+                            const response = await fetch(fetchUrl, {
+                                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                            });
+                            const html = await response.text();
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, 'text/html');
+
+                            // Swap products grid & count without any scroll jump
+                            const newGrid = doc.getElementById('catalog-products-section');
+                            const currentGrid = document.getElementById('catalog-products-section');
+                            if (newGrid && currentGrid) {
+                                currentGrid.innerHTML = newGrid.innerHTML;
+                            }
+
+                            // Update URL in browser bar smoothly
+                            if (updateHistory) {
+                                window.history.pushState({}, '', pushUrl || fetchUrl);
+                            }
+                        } catch (e) {
+                            console.error('Filter fetch error:', e);
+                            // Fallback to normal navigation if fetch fails
+                            window.location.href = pushUrl || fetchUrl;
+                        } finally {
+                            this.isLoading = false;
                         }
-                    } catch (e) {
-                        console.error('Filter fetch error:', e);
-                        // Fallback to normal navigation if fetch fails
-                        window.location.href = pushUrl || fetchUrl;
-                    } finally {
-                        this.isLoading = false;
+                    },
+
+                    resetAll() {
+                        this.selectedCategory = 'all';
+                        this.searchQuery = '';
+                        this.sortOption = 'featured';
+                        this.applyFilter('all', 'featured', '');
                     }
-                },
-
-                resetAll() {
-                    this.selectedCategory = 'all';
-                    this.searchQuery = '';
-                    this.sortOption = 'featured';
-                    this.applyFilter('all', 'featured', '');
-                }
-            }">
+                }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             <!-- ── 1. EDITORIAL HERO BANNER (SQUARE LUXURY) ── -->
             <div
@@ -101,7 +101,8 @@
 
                         <h1
                             class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#FAF8F5] leading-tight">
-                            {{ $catalog_hero['title_prefix'] ?? 'The Atelier' }} <span class="italic font-normal text-[#C5A880]">{{ $catalog_hero['title_highlight'] ?? 'Catalog' }}</span>
+                            {{ $catalog_hero['title_prefix'] ?? 'The Atelier' }} <span
+                                class="italic font-normal text-[#C5A880]">{{ $catalog_hero['title_highlight'] ?? 'Catalog' }}</span>
                         </h1>
 
                         <p class="text-xs sm:text-sm text-[#D4CDC5] font-light leading-relaxed max-w-lg">
@@ -110,29 +111,28 @@
                     </div>
 
                     @if(!isset($catalog_consultation['is_enabled']) || $catalog_consultation['is_enabled'])
-                    <!-- Fast WhatsApp Consultation Card (Square) -->
-                    <div
-                        class="bg-white/5 backdrop-blur-md rounded-none p-6 border border-white/10 space-y-3.5 shrink-0 max-w-sm">
-                        <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#C5A880]">
-                            <span>{{ $catalog_consultation['icon'] ?? '📏' }}</span>
-                            <span>{{ $catalog_consultation['tag'] ?? 'Bespoke Sizing Consultation' }}</span>
+                        <!-- Fast WhatsApp Consultation Card (Square) -->
+                        <div
+                            class="bg-white/5 backdrop-blur-md rounded-none p-6 border border-white/10 space-y-3.5 shrink-0 max-w-sm">
+                            <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#C5A880]">
+                                <span>{{ $catalog_consultation['icon'] ?? '📏' }}</span>
+                                <span>{{ $catalog_consultation['tag'] ?? 'Bespoke Sizing Consultation' }}</span>
+                            </div>
+                            <p class="text-xs text-[#A89F97] font-light leading-relaxed">
+                                {{ $catalog_consultation['description'] ?? 'Send a quick photo of your natural nail bed for custom fit recommendations from our artists.' }}
+                            </p>
+                            <a href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text={{ urlencode($catalog_consultation['whatsapp_msg'] ?? 'Hello Recolte Nails, I need assistance with nail sizing.') }}"
+                                target="_blank" rel="noopener noreferrer"
+                                class="w-full py-3 px-5 rounded-none bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-xs flex items-center justify-center gap-2 group">
+                                <svg class="w-4 h-4 fill-current transition-transform group-hover:scale-110"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.144 4.18 4.287-1.124z" />
+                                </svg>
+                                <span>{{ $catalog_consultation['btn_text'] ?? 'Sizing Advice on WhatsApp' }}</span>
+                                <span class="text-xs transition-transform group-hover:translate-x-0.5">↗</span>
+                            </a>
                         </div>
-                        <p class="text-xs text-[#A89F97] font-light leading-relaxed">
-                            {{ $catalog_consultation['description'] ?? 'Send a quick photo of your natural nail bed for custom fit recommendations from our artists.' }}
-                        </p>
-                        <a href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text={{ urlencode($catalog_consultation['whatsapp_msg'] ?? 'Hello Recolte Nails, I need assistance with nail sizing.') }}"
-                            target="_blank" rel="noopener noreferrer"
-                            @click="window.logWhatsAppInquiry({ source: 'whatsapp_sizing', subject: 'Catalog Sizing Consultation', message: '{{ addslashes($catalog_consultation['whatsapp_msg'] ?? 'Hello Recolte Nails, I need assistance with nail sizing.') }}', metadata: { page: 'catalog' } })"
-                            class="w-full py-3 px-5 rounded-none bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-xs flex items-center justify-center gap-2 group">
-                            <svg class="w-4 h-4 fill-current transition-transform group-hover:scale-110"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.144 4.18 4.287-1.124z" />
-                            </svg>
-                            <span>{{ $catalog_consultation['btn_text'] ?? 'Sizing Advice on WhatsApp' }}</span>
-                            <span class="text-xs transition-transform group-hover:translate-x-0.5">↗</span>
-                        </a>
-                    </div>
                     @endif
                 </div>
             </div>
@@ -146,7 +146,8 @@
                         <span class="text-xs font-bold uppercase tracking-[0.16em] text-[#171412]">
                             Browse Collections
                         </span>
-                        <span class="text-[11px] font-semibold text-[#8C7A6B] bg-[#FAF8F5] px-2.5 py-0.5 rounded-full border border-[#ECE6DE]">
+                        <span
+                            class="text-[11px] font-semibold text-[#8C7A6B] bg-[#FAF8F5] px-2.5 py-0.5 rounded-full border border-[#ECE6DE]">
                             {{ $categories->count() }} Categories
                         </span>
                     </div>
@@ -164,9 +165,12 @@
                             x-show="selectedCategory !== 'all' || (searchQuery && searchQuery.trim() !== '') || sortOption !== 'featured'"
                             @click="resetAll()"
                             class="group inline-flex items-center gap-1.5 text-xs font-semibold text-[#A33B47] hover:text-[#78232D] uppercase tracking-wider shrink-0 cursor-pointer transition-colors">
-                            <span class="w-5 h-5 rounded-full bg-rose-50 border border-rose-200 text-[#A33B47] group-hover:bg-[#A33B47] group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-2xs">
-                                <svg class="w-3 h-3 transition-transform duration-300 ease-out group-hover:rotate-90 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            <span
+                                class="w-5 h-5 rounded-full bg-rose-50 border border-rose-200 text-[#A33B47] group-hover:bg-[#A33B47] group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-2xs">
+                                <svg class="w-3 h-3 transition-transform duration-300 ease-out group-hover:rotate-90 pointer-events-none"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </span>
                             <span>Clear All Filters</span>
@@ -178,8 +182,8 @@
                 <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
                     <button type="button" @click="applyFilter('all', 'featured', '')"
                         :class="(selectedCategory === 'all' || !selectedCategory) 
-                            ? 'bg-[#171412] text-white shadow-xs font-semibold ring-2 ring-[#171412]/20' 
-                            : 'bg-[#FAF8F5] text-[#2C2420] border border-[#ECE6DE] hover:border-[#171412] hover:bg-white hover:text-black font-normal'"
+                                ? 'bg-[#171412] text-white shadow-xs font-semibold ring-2 ring-[#171412]/20' 
+                                : 'bg-[#FAF8F5] text-[#2C2420] border border-[#ECE6DE] hover:border-[#171412] hover:bg-white hover:text-black font-normal'"
                         class="px-3.5 py-2 rounded-full text-xs uppercase tracking-wider transition-all duration-150 cursor-pointer select-none">
                         ✦ All Products
                     </button>
@@ -187,8 +191,8 @@
                     @foreach($categories as $cat)
                         <button type="button" @click="applyFilter('{{ $cat->slug }}')"
                             :class="(selectedCategory === '{{ $cat->slug }}' || selectedCategory === '{{ $cat->name }}') 
-                                ? 'bg-[#171412] text-white shadow-xs font-semibold ring-2 ring-[#171412]/20' 
-                                : 'bg-[#FAF8F5] text-[#2C2420] border border-[#ECE6DE] hover:border-[#171412] hover:bg-white hover:text-black font-normal'"
+                                        ? 'bg-[#171412] text-white shadow-xs font-semibold ring-2 ring-[#171412]/20' 
+                                        : 'bg-[#FAF8F5] text-[#2C2420] border border-[#ECE6DE] hover:border-[#171412] hover:bg-white hover:text-black font-normal'"
                             class="px-3.5 py-2 rounded-full text-xs uppercase tracking-wider transition-all duration-150 cursor-pointer select-none flex items-center gap-1.5">
                             <span class="text-xs">{{ $cat->icon_emoji ?? '✦' }}</span>
                             <span>{{ $cat->name }}</span>
@@ -228,7 +232,8 @@
                                     <option value="{{ $cat->slug }}">{{ $cat->name }}</option>
                                 @endforeach
                             </select>
-                            <div class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#8C7A6B] text-[10px]">
+                            <div
+                                class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#8C7A6B] text-[10px]">
                                 ▼
                             </div>
                         </div>
@@ -243,7 +248,8 @@
                                 <option value="rating">Sort: Highest Rated (★)</option>
                                 <option value="bestsellers">Sort: Bestsellers Only</option>
                             </select>
-                            <div class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#8C7A6B] text-[10px]">
+                            <div
+                                class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#8C7A6B] text-[10px]">
                                 ▼
                             </div>
                         </div>

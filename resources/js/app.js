@@ -176,40 +176,6 @@ document.addEventListener('alpine:init', () => {
 
             const whatsappNumber = window.recolteConfig?.whatsappNumber || '917016266727';
             return 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(message);
-        },
-
-        logWhatsAppOrder() {
-            if (this.items.length === 0) return;
-            let message = `Hello Recolte Nails, I would like to place an order for the following ${this.totalCount} item(s):\n\n`;
-            this.items.forEach((item, idx) => {
-                const details = [];
-                if (item.shade) details.push(`Shade: ${item.shade}`);
-                if (item.size) details.push(`Size: ${item.size}`);
-                details.push(`Qty: ${item.quantity}`);
-                message += `${idx + 1}. ${item.title} (${details.join(', ')})\n`;
-            });
-            message += `\nTotal Items: ${this.totalCount}\nPlease confirm availability and payment details.`;
-
-            if (typeof window.logWhatsAppInquiry === 'function') {
-                window.logWhatsAppInquiry({
-                    source: 'whatsapp_cart',
-                    subject: `Bag Checkout: ${this.totalCount} item(s) (${this.items.length} products)`,
-                    message: message,
-                    metadata: {
-                        total_count: this.totalCount,
-                        items: this.items.map(item => ({
-                            id: item.id,
-                            title: item.title,
-                            slug: item.slug,
-                            price: item.price,
-                            shade: item.shade,
-                            size: item.size,
-                            quantity: item.quantity,
-                            image: item.image
-                        }))
-                    }
-                });
-            }
         }
     });
 
@@ -294,9 +260,9 @@ function initScrollAnimations() {
         if (container.closest('.hero-slider, [x-data*="heroSlides"], header')) return;
 
         const cards = Array.from(container.children).filter(child => {
-            return child.matches('div, a, article') && 
-                   !child.matches('style, script, template') &&
-                   child.offsetWidth > 60 && child.offsetHeight > 40;
+            return child.matches('div, a, article') &&
+                !child.matches('style, script, template') &&
+                child.offsetWidth > 60 && child.offsetHeight > 40;
         });
 
         cards.forEach((card, idx) => {

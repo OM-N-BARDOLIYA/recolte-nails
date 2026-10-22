@@ -3,113 +3,113 @@
 @section("content")
 
     <div class="py-8 sm:py-14 bg-[#FAF8F5] min-h-screen text-[#171412]" x-data="{
-                mainImage: '{{ !empty($product->images[0]) ? $product->images[0] : $product->main_image }}',
-                activeImageIndex: 0,
-                images: {{ json_encode(!empty($product->images) && count($product->images) > 0 ? array_values($product->images) : [$product->main_image]) }},
-                shades: {{ json_encode($product->shades ?? []) }},
-                selectedShade: '{{ !empty($product->shades) ? ($product->shades[0]['name'] ?? '') : '' }}',
-                selectedSize: '{{ !empty($product->sizes) ? $product->sizes[0] : 'Standard' }}',
-                quantity: 1,
-                unitPrice: {{ $product->price ?? 0 }},
-                unitOriginalPrice: {{ $product->original_price ?? $product->price ?? 0 }},
-                isFavorited: false,
+                    mainImage: '{{ !empty($product->images[0]) ? $product->images[0] : $product->main_image }}',
+                    activeImageIndex: 0,
+                    images: {{ json_encode(!empty($product->images) && count($product->images) > 0 ? array_values($product->images) : [$product->main_image]) }},
+                    shades: {{ json_encode($product->shades ?? []) }},
+                    selectedShade: '{{ !empty($product->shades) ? ($product->shades[0]['name'] ?? '') : '' }}',
+                    selectedSize: '{{ !empty($product->sizes) ? $product->sizes[0] : 'Standard' }}',
+                    quantity: 1,
+                    unitPrice: {{ $product->price ?? 0 }},
+                    unitOriginalPrice: {{ $product->original_price ?? $product->price ?? 0 }},
+                    isFavorited: false,
 
-                isVideo(url) {
-                    if (!url) return false;
-                    return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url);
-                },
+                    isVideo(url) {
+                        if (!url) return false;
+                        return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url);
+                    },
 
-                isBuilderGel: {{ $product->slug === 'recolte-sculpting-master-builder-gel' ? 'true' : 'false' }},
+                    isBuilderGel: {{ $product->slug === 'recolte-sculpting-master-builder-gel' ? 'true' : 'false' }},
 
-                isDriveUncutImage(url) {
-                    if (!url) return false;
-                    if (this.isBuilderGel) return true;
-                    return url.includes('color_book_with_bottle_1_') || 
-                           url.includes('color_book_with_bottle_2_') ||
-                           url.includes('10colors_cat_eye_2_') ||
-                           url.includes('Solid_Glue_Gel_2_') ||
-                           url.includes('Solid_Glue_Gel_3_') ||
-                           url.includes('6_IN_1_TOP_COAT_02') ||
-                           url.includes('6_IN_1_TOP_COAT_03') ||
-                           url.includes('6_IN_1_TOP_COAT_04') ||
-                           url.includes('6_IN_1_TOP_COAT_05') ||
-                           url.includes('6_IN_1_TOP_COAT_06');
-                },
+                    isDriveUncutImage(url) {
+                        if (!url) return false;
+                        if (this.isBuilderGel) return true;
+                        return url.includes('color_book_with_bottle_1_') || 
+                               url.includes('color_book_with_bottle_2_') ||
+                               url.includes('10colors_cat_eye_2_') ||
+                               url.includes('Solid_Glue_Gel_2_') ||
+                               url.includes('Solid_Glue_Gel_3_') ||
+                               url.includes('6_IN_1_TOP_COAT_02') ||
+                               url.includes('6_IN_1_TOP_COAT_03') ||
+                               url.includes('6_IN_1_TOP_COAT_04') ||
+                               url.includes('6_IN_1_TOP_COAT_05') ||
+                               url.includes('6_IN_1_TOP_COAT_06');
+                    },
 
-                isWhiteBackground(url) {
-                    if (!url) return false;
-                    if (this.isBuilderGel) return true;
-                    return url.includes('Solid_Glue_Gel_2_') || 
-                           url.includes('Solid_Glue_Gel_3_');
-                },
+                    isWhiteBackground(url) {
+                        if (!url) return false;
+                        if (this.isBuilderGel) return true;
+                        return url.includes('Solid_Glue_Gel_2_') || 
+                               url.includes('Solid_Glue_Gel_3_');
+                    },
 
-                // Interactive Hover Zoom State & Handlers (Amazon / Calyx Nails style)
-                isZoomed: false,
-                zoomX: 50,
-                zoomY: 50,
+                    // Interactive Hover Zoom State & Handlers (Amazon / Calyx Nails style)
+                    isZoomed: false,
+                    zoomX: 50,
+                    zoomY: 50,
 
-                handleZoomMove(e) {
-                    if (this.isVideo(this.mainImage)) return;
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
-                    const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
-                    this.zoomX = x.toFixed(2);
-                    this.zoomY = y.toFixed(2);
-                    this.isZoomed = true;
-                },
+                    handleZoomMove(e) {
+                        if (this.isVideo(this.mainImage)) return;
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+                        const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+                        this.zoomX = x.toFixed(2);
+                        this.zoomY = y.toFixed(2);
+                        this.isZoomed = true;
+                    },
 
-                handleZoomLeave() {
-                    this.isZoomed = false;
-                    this.zoomX = 50;
-                    this.zoomY = 50;
-                },
+                    handleZoomLeave() {
+                        this.isZoomed = false;
+                        this.zoomX = 50;
+                        this.zoomY = 50;
+                    },
 
-                get subtotal() {
-                    return this.unitPrice * this.quantity;
-                },
+                    get subtotal() {
+                        return this.unitPrice * this.quantity;
+                    },
 
-                get subtotalOriginal() {
-                    return this.unitOriginalPrice * this.quantity;
-                },
+                    get subtotalOriginal() {
+                        return this.unitOriginalPrice * this.quantity;
+                    },
 
-                nextImage() {
-                    this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
-                    this.mainImage = this.images[this.activeImageIndex];
-                    this.handleMediaChange();
-                },
+                    nextImage() {
+                        this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
+                        this.mainImage = this.images[this.activeImageIndex];
+                        this.handleMediaChange();
+                    },
 
-                prevImage() {
-                    this.activeImageIndex = (this.activeImageIndex - 1 + this.images.length) % this.images.length;
-                    this.mainImage = this.images[this.activeImageIndex];
-                    this.handleMediaChange();
-                },
+                    prevImage() {
+                        this.activeImageIndex = (this.activeImageIndex - 1 + this.images.length) % this.images.length;
+                        this.mainImage = this.images[this.activeImageIndex];
+                        this.handleMediaChange();
+                    },
 
-                setImage(img, index) {
-                    this.mainImage = img;
-                    this.activeImageIndex = index;
-                    this.handleMediaChange();
-                },
+                    setImage(img, index) {
+                        this.mainImage = img;
+                        this.activeImageIndex = index;
+                        this.handleMediaChange();
+                    },
 
-                handleMediaChange() {
-                    this.isZoomed = false;
-                    this.zoomX = 50;
-                    this.zoomY = 50;
-                    if (this.isVideo(this.mainImage)) {
-                        this.$nextTick(() => {
-                            const vid = this.$refs.mainVideoPlayer;
-                            if (vid) {
-                                vid.currentTime = 0;
-                                vid.play().catch(() => {});
-                            }
-                        });
+                    handleMediaChange() {
+                        this.isZoomed = false;
+                        this.zoomX = 50;
+                        this.zoomY = 50;
+                        if (this.isVideo(this.mainImage)) {
+                            this.$nextTick(() => {
+                                const vid = this.$refs.mainVideoPlayer;
+                                if (vid) {
+                                    vid.currentTime = 0;
+                                    vid.play().catch(() => {});
+                                }
+                            });
+                        }
+                    },
+
+                    selectShade(shadeObj) {
+                        this.selectedShade = shadeObj.name;
+                        // Images do not change according to filters; images only change when manually clicking another image.
                     }
-                },
-
-                selectShade(shadeObj) {
-                    this.selectedShade = shadeObj.name;
-                    // Images do not change according to filters; images only change when manually clicking another image.
-                }
-            }">
+                }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
 
             <!-- ── 1. BREADCRUMBS ── -->
@@ -117,9 +117,9 @@
                 <a href="{{ route('home') }}" class="hover:text-[#171412] transition-colors">Home</a>
                 <span class="text-[#ECE6DE]">/</span>
                 @php
-                    $prodCatSlug = $categorySlug 
-                        ?? $product->categoryRef?->slug 
-                        ?? \App\Models\Category::where('name', $product->category)->first()?->slug 
+                    $prodCatSlug = $categorySlug
+                        ?? $product->categoryRef?->slug
+                        ?? \App\Models\Category::where('name', $product->category)->first()?->slug
                         ?? \Illuminate\Support\Str::slug($product->category);
                     $catalogUrl = !empty($prodCatSlug) ? route('products.index', ['category' => $prodCatSlug]) : route('products.index');
                 @endphp
@@ -143,15 +143,12 @@
                     @endphp
 
                     <!-- Main Showcase Media Container (Square luxury frame) -->
-                    <div
-                        class="relative rounded-none overflow-hidden aspect-square w-full select-none border border-[#ECE6DE] shadow-xs group flex items-center justify-center transition-colors"
+                    <div class="relative rounded-none overflow-hidden aspect-square w-full select-none border border-[#ECE6DE] shadow-xs group flex items-center justify-center transition-colors"
                         :class="isWhiteBackground(mainImage) ? 'bg-white' : 'bg-[#FAF8F5]'">
 
                         <!-- Photo Viewer (Uncut & framed for specific items, with Amazon/Calyx Nails hover zoom) -->
-                        <div x-show="!isVideo(mainImage)" 
-                            @mousemove="handleZoomMove($event)"
-                            @mouseleave="handleZoomLeave()"
-                            @mouseenter="isZoomed = true"
+                        <div x-show="!isVideo(mainImage)" @mousemove="handleZoomMove($event)"
+                            @mouseleave="handleZoomLeave()" @mouseenter="isZoomed = true"
                             class="w-full h-full relative overflow-hidden cursor-zoom-in select-none"
                             :class="isDriveUncutImage(mainImage) ? ('flex items-center justify-center ' + (isWhiteBackground(mainImage) ? 'bg-white p-2 sm:p-4' : 'p-2 sm:p-3')) : ''">
                             <img :src="mainImage" src="{{ $product->main_image }}" alt="{{ $product->title }}"
@@ -161,12 +158,11 @@
                                 onerror="this.onerror=null;this.src='{{ asset('images/products/recolte-cat-tips.jpg') }}'" />
 
                             <!-- Hover to Zoom Pill Badge -->
-                            <div x-show="!isZoomed"
-                                x-transition:leave="transition ease-in duration-150"
-                                x-transition:leave-start="opacity-100"
-                                x-transition:leave-end="opacity-0"
+                            <div x-show="!isZoomed" x-transition:leave="transition ease-in duration-150"
+                                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
                                 class="absolute bottom-3 right-3 pointer-events-none z-10 hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-white/90 backdrop-blur-xs text-[#171412] text-[10px] font-medium tracking-wide uppercase border border-[#ECE6DE] shadow-xs">
-                                <svg class="w-3 h-3 text-[#A33B47] stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
+                                <svg class="w-3 h-3 text-[#A33B47] stroke-current fill-none" viewBox="0 0 24 24"
+                                    stroke-width="2">
                                     <circle cx="11" cy="11" r="7"></circle>
                                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                                     <line x1="11" y1="8" x2="11" y2="14"></line>
@@ -211,15 +207,14 @@
                             <button type="button" @click="setImage(item, idx)"
                                 class="relative rounded-none overflow-hidden aspect-square w-16 sm:w-20 lg:w-24 shrink-0 border-2 transition-all cursor-pointer group/thumb"
                                 :class="[
-                                    activeImageIndex === idx ? 'border-[#A33B47] ring-2 ring-[#A33B47]/20 opacity-100 shadow-xs' : 'border-[#ECE6DE] opacity-75 hover:opacity-100 hover:border-[#A33B47]/40',
-                                    isWhiteBackground(item) ? 'bg-white' : 'bg-[#FAF8F5]',
-                                    isDriveUncutImage(item) ? 'p-1 flex items-center justify-center' : ''
-                                ]">
+                                        activeImageIndex === idx ? 'border-[#A33B47] ring-2 ring-[#A33B47]/20 opacity-100 shadow-xs' : 'border-[#ECE6DE] opacity-75 hover:opacity-100 hover:border-[#A33B47]/40',
+                                        isWhiteBackground(item) ? 'bg-white' : 'bg-[#FAF8F5]',
+                                        isDriveUncutImage(item) ? 'p-1 flex items-center justify-center' : ''
+                                    ]">
 
                                 <!-- Photo Thumbnail -->
                                 <template x-if="!isVideo(item)">
-                                    <img :src="item" :alt="'Thumbnail ' + (idx + 1)" 
-                                        class="w-full h-full"
+                                    <img :src="item" :alt="'Thumbnail ' + (idx + 1)" class="w-full h-full"
                                         :class="isDriveUncutImage(item) ? 'object-contain' : 'object-cover'" />
                                 </template>
 
@@ -261,8 +256,7 @@
                         @endif
 
                         @if(!empty($product->category))
-                            <a href="{{ $catalogUrl }}"
-                                title="Browse all {{ $product->category }} in catalog"
+                            <a href="{{ $catalogUrl }}" title="Browse all {{ $product->category }} in catalog"
                                 class="px-3 py-1 rounded-none bg-white hover:bg-[#171412] text-[#8C7A6B] hover:text-white text-[10px] font-semibold tracking-widest uppercase border border-[#ECE6DE] hover:border-[#171412] transition-all inline-flex items-center gap-1.5 shadow-2xs group cursor-pointer">
                                 <span>{{ $product->categoryRef?->icon_emoji ?? '💅' }}</span>
                                 <span>{{ $product->category }}</span>
@@ -327,8 +321,8 @@
                                         <button type="button" role="radio" :aria-checked="selectedShade === sh.name"
                                             @click="selectShade(sh, idx)"
                                             :class="selectedShade === sh.name 
-                                                ? 'border-black bg-black text-white font-normal' 
-                                                : 'border-[#E5E5E5] bg-white text-[#171412] hover:border-black font-normal'"
+                                                            ? 'border-black bg-black text-white font-normal' 
+                                                            : 'border-[#E5E5E5] bg-white text-[#171412] hover:border-black font-normal'"
                                             class="min-w-[42px] h-[40px] px-3.5 border text-xs transition-colors flex items-center justify-center cursor-pointer select-none">
                                             <span x-text="sh.name"></span>
                                         </button>
@@ -341,8 +335,8 @@
                                         <button type="button" role="radio" :aria-checked="selectedShade === sh.name"
                                             @click="selectShade(sh, idx)"
                                             :class="selectedShade === sh.name 
-                                                ? 'border-black bg-black text-white font-normal' 
-                                                : 'border-[#E5E5E5] bg-white text-[#171412] hover:border-black font-normal'"
+                                                            ? 'border-black bg-black text-white font-normal' 
+                                                            : 'border-[#E5E5E5] bg-white text-[#171412] hover:border-black font-normal'"
                                             class="min-w-[130px] h-[40px] px-4 border text-xs transition-colors flex items-center justify-center cursor-pointer select-none">
                                             <span x-text="sh.name"></span>
                                         </button>
@@ -353,8 +347,7 @@
                                 <div class="flex items-center gap-3 flex-wrap" role="radiogroup" aria-label="Select Color">
                                     <template x-for="(sh, idx) in shades" :key="idx">
                                         <button type="button" role="radio" :aria-checked="selectedShade === sh.name"
-                                            @click="selectShade(sh, idx)"
-                                            :title="sh.name"
+                                            @click="selectShade(sh, idx)" :title="sh.name"
                                             class="rounded-full transition-all duration-150 cursor-pointer focus:outline-none flex items-center justify-center p-0.5 select-none"
                                             :class="selectedShade === sh.name ? 'ring-2 ring-offset-2 ring-[#A33B47] ring-offset-white' : 'hover:opacity-80'">
                                             <span class="block w-6 h-6 rounded-full border border-black/15 shadow-2xs"
@@ -370,7 +363,7 @@
                     <div class="space-y-2.5 pt-1">
                         <div class="flex items-center justify-between text-xs">
                             <span class="font-semibold text-[#171412]">Size</span>
-                            <button type="button" 
+                            <button type="button"
                                 @click="alert('For custom atelier sizing, bespoke fit advice, or salon refills, please contact our concierge via WhatsApp!')"
                                 class="text-[#6A625A] hover:text-black transition-colors font-normal flex items-center gap-1 cursor-pointer">
                                 <span>Size guide</span>
@@ -383,8 +376,8 @@
                                     <button type="button" role="radio" :aria-checked="selectedSize === '{{ $sz }}'"
                                         @click="selectedSize = '{{ $sz }}'"
                                         :class="selectedSize === '{{ $sz }}' 
-                                            ? 'border-black bg-black text-white font-normal' 
-                                            : 'border-[#E5E5E5] bg-white text-[#171412] hover:border-black font-normal'"
+                                                        ? 'border-black bg-black text-white font-normal' 
+                                                        : 'border-[#E5E5E5] bg-white text-[#171412] hover:border-black font-normal'"
                                         class="min-w-[42px] h-[40px] px-3.5 border text-xs transition-colors flex items-center justify-center cursor-pointer select-none">
                                         {{ $sz }}
                                     </button>
@@ -402,11 +395,11 @@
                     <div class="space-y-2.5 pt-1">
                         <label class="font-semibold text-xs text-[#171412] block">Quantity</label>
                         <div class="flex items-center gap-4 flex-wrap">
-                            <div class="h-[40px] border border-[#E5E5E5] bg-white flex items-center justify-between px-3 w-[120px] select-none">
+                            <div
+                                class="h-[40px] border border-[#E5E5E5] bg-white flex items-center justify-between px-3 w-[120px] select-none">
                                 <button type="button" @click="if (quantity > 1) quantity--"
                                     class="text-base text-[#6A625A] hover:text-black transition-colors px-1 cursor-pointer disabled:opacity-30"
-                                    :disabled="quantity <= 1"
-                                    aria-label="Decrease quantity">
+                                    :disabled="quantity <= 1" aria-label="Decrease quantity">
                                     −
                                 </button>
                                 <span class="font-normal text-xs text-[#171412]" x-text="quantity"></span>
@@ -433,16 +426,16 @@
 
                             <!-- 1. ADD TO CART BUTTON (SQUARE PRIMARY ACTION) -->
                             <button type="button" @click="$store.cart.addItem({
-                                        id: {{ $product->id }},
-                                        title: '{{ addslashes($product->title) }}',
-                                        slug: '{{ $product->slug }}',
-                                        price: {{ $product->price ?? 0 }},
-                                        original_price: {{ $product->original_price ?? $product->price ?? 0 }},
-                                        image: isVideo(mainImage) ? '{{ asset($product->main_image) }}' : mainImage,
-                                        shade: selectedShade,
-                                        size: selectedSize,
-                                        quantity: quantity
-                                    })"
+                                            id: {{ $product->id }},
+                                            title: '{{ addslashes($product->title) }}',
+                                            slug: '{{ $product->slug }}',
+                                            price: {{ $product->price ?? 0 }},
+                                            original_price: {{ $product->original_price ?? $product->price ?? 0 }},
+                                            image: isVideo(mainImage) ? '{{ asset($product->main_image) }}' : mainImage,
+                                            shade: selectedShade,
+                                            size: selectedSize,
+                                            quantity: quantity
+                                        })"
                                 class="w-full py-4 px-6 rounded-none bg-[#171412] hover:bg-black text-white text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer select-none"
                                 aria-label="Add {{ $product->title }} to Cart">
                                 <svg class="w-4 h-4 text-[#C5A880] fill-none stroke-current" viewBox="0 0 24 24"
@@ -458,31 +451,14 @@
                                 $whatsappNum = preg_replace('/[^0-9]/', '', \App\Models\SiteSetting::get('whatsapp_number', '917016266727')) ?: '917016266727';
                             @endphp
                             <a :href="'https://wa.me/' + (window.recolteConfig?.whatsappNumber || '{{ $whatsappNum }}') + '?text=' + encodeURIComponent(
-                                        'Hello Recolte Nails, I would like to order:\n\n' +
-                                        '• Product: {{ addslashes($product->title) }}\n' +
-                                        (selectedShade ? '• Shade: ' + selectedShade + '\n' : '') +
-                                        (selectedSize ? '• Size: ' + selectedSize + '\n' : '') +
-                                        '• Quantity: ' + quantity + '\n' +
-                                        '• Link: ' + window.location.href + '\n\n' +
-                                        'Please confirm availability.'
-                                    )" 
-                                @click="window.logWhatsAppInquiry({
-                                    source: 'whatsapp_product',
-                                    subject: 'Order: {{ addslashes($product->title) }}' + (selectedShade ? ' (' + selectedShade + ')' : '') + (selectedSize ? ' [' + selectedSize + ']' : '') + ' x' + quantity,
-                                    message: 'Hello Recolte Nails, I would like to order:\n\n• Product: {{ addslashes($product->title) }}\n' + (selectedShade ? '• Shade: ' + selectedShade + '\n' : '') + (selectedSize ? '• Size: ' + selectedSize + '\n' : '') + '• Quantity: ' + quantity + '\n• Link: ' + window.location.href + '\n\nPlease confirm availability.',
-                                    metadata: {
-                                        product_id: {{ $product->id }},
-                                        product_title: '{{ addslashes($product->title) }}',
-                                        product_slug: '{{ $product->slug }}',
-                                        category: '{{ addslashes($product->category) }}',
-                                        shade: selectedShade,
-                                        size: selectedSize,
-                                        quantity: quantity,
-                                        image: isVideo(mainImage) ? '{{ asset($product->main_image) }}' : mainImage,
-                                        url: window.location.href
-                                    }
-                                })"
-                                target="_blank" rel="noopener noreferrer"
+                                            'Hello Recolte Nails, I would like to order:\n\n' +
+                                            '• Product: {{ $product->title }}\n' +
+                                            (selectedShade ? '• Shade: ' + selectedShade + '\n' : '') +
+                                            (selectedSize ? '• Size: ' + selectedSize + '\n' : '') +
+                                            '• Quantity: ' + quantity + '\n' +
+                                            '• Link: ' + window.location.href + '\n\n' +
+                                            'Please confirm availability.'
+                                        )" target="_blank" rel="noopener noreferrer"
                                 class="w-full py-4 px-6 rounded-none bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-[13px] font-bold tracking-[0.16em] uppercase shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2.5 select-none">
                                 <svg class="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24" aria-hidden="true">
                                     <path
@@ -500,15 +476,19 @@
                         @endphp
 
                         @if($isFullKitComplimentaryNote)
-                            <div class="py-2.5 px-3.5 bg-[#FAF8F5] border border-[#ECE6DE] text-xs tracking-wide text-[#171412] flex items-start gap-2 shadow-2xs">
-                                <span class="font-bold text-[#A33B47] uppercase text-[11px] tracking-wider shrink-0 mt-0.5">NOTE:</span>
+                            <div
+                                class="py-2.5 px-3.5 bg-[#FAF8F5] border border-[#ECE6DE] text-xs tracking-wide text-[#171412] flex items-start gap-2 shadow-2xs">
+                                <span
+                                    class="font-bold text-[#A33B47] uppercase text-[11px] tracking-wider shrink-0 mt-0.5">NOTE:</span>
                                 <span class="font-medium text-[#171412] leading-relaxed uppercase text-[11px] tracking-wide">
                                     ONLY FULL KIT AVAILABLE WITH TOP COAT BASE COAT AND MATT COAT COMPLEMENTRY
                                 </span>
                             </div>
                         @elseif($isPaintingGelNote)
-                            <div class="py-2.5 px-3.5 bg-[#FAF8F5] border border-[#ECE6DE] text-xs tracking-wide text-[#171412] flex items-start gap-2 shadow-2xs">
-                                <span class="font-bold text-[#A33B47] uppercase text-[11px] tracking-wider shrink-0 mt-0.5">NOTE:</span>
+                            <div
+                                class="py-2.5 px-3.5 bg-[#FAF8F5] border border-[#ECE6DE] text-xs tracking-wide text-[#171412] flex items-start gap-2 shadow-2xs">
+                                <span
+                                    class="font-bold text-[#A33B47] uppercase text-[11px] tracking-wider shrink-0 mt-0.5">NOTE:</span>
                                 <span class="font-medium text-[#171412] leading-relaxed uppercase text-[11px] tracking-wide">
                                     NON SPREADABLE
                                 </span>
@@ -518,36 +498,12 @@
                         <!-- 3. Sizing / Inquiry Sub-Links -->
                         <div class="flex items-center justify-between text-xs text-[#8C7A6B] pt-1">
                             <a href="https://wa.me/{{ $whatsappNum }}?text=Hello%20Recolte%20Nails,%20I%20have%20a%20sizing%20question%20regarding%20{{ urlencode($product->title) }}."
-                                @click="window.logWhatsAppInquiry({
-                                    source: 'whatsapp_sizing',
-                                    subject: 'Sizing Consultation: {{ addslashes($product->title) }}',
-                                    message: 'Hello Recolte Nails, I have a sizing question regarding {{ addslashes($product->title) }}.',
-                                    metadata: {
-                                        product_id: {{ $product->id }},
-                                        product_title: '{{ addslashes($product->title) }}',
-                                        product_slug: '{{ $product->slug }}',
-                                        image: '{{ asset($product->main_image) }}',
-                                        url: window.location.href
-                                    }
-                                })"
                                 target="_blank" rel="noopener noreferrer"
                                 class="hover:text-[#A33B47] transition-colors flex items-center gap-1.5 font-light">
                                 <span>📏 Custom Sizing Consultation</span>
                             </a>
 
                             <a href="https://wa.me/{{ $whatsappNum }}?text=Hello%20Recolte%20Nails,%20I%20have%20an%20inquiry%20regarding%20{{ urlencode($product->title) }}."
-                                @click="window.logWhatsAppInquiry({
-                                    source: 'whatsapp_artist',
-                                    subject: 'Artist Inquiry: {{ addslashes($product->title) }}',
-                                    message: 'Hello Recolte Nails, I have an inquiry regarding {{ addslashes($product->title) }}.',
-                                    metadata: {
-                                        product_id: {{ $product->id }},
-                                        product_title: '{{ addslashes($product->title) }}',
-                                        product_slug: '{{ $product->slug }}',
-                                        image: '{{ asset($product->main_image) }}',
-                                        url: window.location.href
-                                    }
-                                })"
                                 target="_blank"
                                 class="hover:text-[#A33B47] transition-colors flex items-center gap-1.5 font-light">
                                 <span>💬 Ask an Artist</span>
@@ -564,14 +520,15 @@
                 <div class="pt-16 sm:pt-20 border-t border-[#ECE6DE] space-y-8">
                     <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                         <div class="space-y-1">
-                            <div class="text-[11px] font-medium uppercase tracking-[0.25em] text-[#A33B47]">✦ Curated Atelier Archives</div>
+                            <div class="text-[11px] font-medium uppercase tracking-[0.25em] text-[#A33B47]">✦ Curated Atelier
+                                Archives</div>
                             <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-[#171412]">
                                 You May Also <span class="italic text-[#A33B47]">Adore</span>
                             </h2>
                         </div>
                         @if(!empty($product->category))
                             <a href="{{ $catalogUrl }}"
-                               class="text-xs font-semibold uppercase tracking-wider text-[#A33B47] hover:text-[#78232D] inline-flex items-center gap-1.5 transition-colors group">
+                                class="text-xs font-semibold uppercase tracking-wider text-[#A33B47] hover:text-[#78232D] inline-flex items-center gap-1.5 transition-colors group">
                                 <span>Browse All {{ $product->category }} in Catalog</span>
                                 <span class="group-hover:translate-x-1 transition-transform">→</span>
                             </a>

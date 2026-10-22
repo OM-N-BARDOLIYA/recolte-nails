@@ -21,7 +21,6 @@ Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/franchise', [PageController::class, 'franchise'])->name('franchise');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact', [PageController::class, 'submitInquiry'])->name('contact.submit')->middleware('throttle:6,1');
-Route::post('/inquiries/log-whatsapp', [PageController::class, 'logWhatsAppInquiry'])->name('inquiries.log-whatsapp');
 
 // ── ADMIN CMS AUTHENTICATION ROUTES ──
 Route::prefix('admin')->name('admin.')->group(function () {
