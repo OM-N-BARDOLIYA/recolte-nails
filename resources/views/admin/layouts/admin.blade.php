@@ -78,11 +78,59 @@
         input[type="text"],
         input[type="number"],
         input[type="password"],
-        input[type="email"],
-        select {
+        input[type="email"] {
             font-size: 13.5px !important;
             line-height: 1.5 !important;
             color: #171412 !important;
+        }
+
+        /* Bespoke Luxury Dropdown Select Styling across Atelier CMS */
+        select {
+            appearance: none !important;
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            background-color: #FAF8F5 !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238C7A6B' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: right 0.85rem center !important;
+            background-size: 1rem 1rem !important;
+            padding-right: 2.5rem !important;
+            border: 1px solid #ECE6DE !important;
+            border-radius: 0px !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            color: #171412 !important;
+            cursor: pointer !important;
+            box-shadow: 0 1px 2px rgba(23, 20, 18, 0.02) !important;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, background-image 0.15s ease !important;
+        }
+
+        select:hover {
+            background-color: #FFFFFF !important;
+            border-color: #A33B47 !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23A33B47' stroke-width='2.2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+        }
+
+        select:focus {
+            outline: none !important;
+            background-color: #FFFFFF !important;
+            border-color: #A33B47 !important;
+            box-shadow: 0 0 0 3px rgba(163, 59, 71, 0.14) !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23A33B47' stroke-width='2.2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+        }
+
+        select option {
+            background-color: #FFFFFF !important;
+            color: #171412 !important;
+            padding: 8px 12px !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+        }
+
+        select option:checked {
+            background-color: #FBEFE9 !important;
+            color: #A33B47 !important;
+            font-weight: 600 !important;
         }
 
         /* Luxury, spacious, breathable textarea styling across Atelier CMS */
@@ -98,8 +146,7 @@
 
         /* Global luxury focus states for all inputs and textareas in Atelier CMS */
         input:focus,
-        textarea:focus,
-        select:focus {
+        textarea:focus {
             outline: none !important;
             border-color: #A33B47 !important;
             background-color: #ffffff !important;

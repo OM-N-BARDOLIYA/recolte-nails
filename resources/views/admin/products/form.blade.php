@@ -105,7 +105,7 @@
                     <select 
                         name="category" 
                         required 
-                        class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs font-semibold focus:outline-none focus:border-[#171412] focus:bg-white cursor-pointer"
+                        class="w-full px-4 py-2.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] text-xs font-semibold focus:outline-none focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 focus:bg-white cursor-pointer transition-all shadow-2xs"
                     >
                         @foreach($categories as $cat)
                             <option value="{{ $cat->name ?? $cat->title }}" {{ old('category', $product->category ?? '') === ($cat->name ?? $cat->title) ? 'selected' : '' }}>
@@ -436,13 +436,13 @@
                         <select 
                             x-model="filterType"
                             @change="setFilterType(filterType)"
-                            class="w-full pl-3.5 pr-8 py-2 rounded-none bg-[#FAF8F5] hover:bg-white border border-[#ECE6DE] hover:border-[#171412] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white cursor-pointer transition-colors shadow-2xs appearance-none"
+                            class="w-full pl-3.5 pr-8 py-2 rounded-none bg-[#FAF8F5] hover:bg-white border border-[#ECE6DE] hover:border-[#A33B47] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 focus:bg-white cursor-pointer transition-all shadow-2xs appearance-none"
                         >
                             <option value="none">⚪ None (Single Item)</option>
                             <option value="color">🎨 Color Shades</option>
                             <option value="numbers">🔢 Number Filters</option>
                         </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-[#8C7A6B]">
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-[#8C7A6B] group-hover:text-[#A33B47] transition-colors">
                             <svg class="w-3.5 h-3.5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                             </svg>

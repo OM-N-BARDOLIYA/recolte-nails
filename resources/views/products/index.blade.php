@@ -224,33 +224,35 @@
 
                     <!-- Category Quick Select Dropdown (Synced with Pills!) -->
                     <div class="md:col-span-3">
-                        <div class="relative">
+                        <div class="relative group">
                             <select x-model="selectedCategory" @change="applyFilter(selectedCategory)"
-                                class="w-full pl-3.5 pr-8 py-2.5 rounded-full border border-[#ECE6DE] bg-[#FAF8F5] text-xs font-medium text-[#171412] focus:outline-none focus:border-[#171412] cursor-pointer hover:bg-white transition-colors appearance-none">
+                                class="w-full pl-4 pr-10 py-2.5 rounded-none border border-[#ECE6DE] bg-[#FAF8F5] text-xs font-medium text-[#171412] focus:outline-none focus:border-[#A33B47] focus:ring-2 focus:ring-[#A33B47]/15 cursor-pointer hover:bg-white hover:border-[#A33B47] transition-all duration-200 shadow-2xs">
                                 <option value="all">✦ All Collections ({{ $categories->count() }})</option>
                                 @foreach($categories as $cat)
                                     <option value="{{ $cat->slug }}">{{ $cat->name }}</option>
                                 @endforeach
                             </select>
-                            <div
-                                class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#8C7A6B] text-[10px]">
-                                ▼
+                            <div class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#8C7A6B] group-hover:text-[#A33B47] transition-colors">
+                                <svg class="w-3.5 h-3.5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                </svg>
                             </div>
                         </div>
                     </div>
 
                     <!-- Sort Dropdown -->
                     <div class="md:col-span-3">
-                        <div class="relative">
+                        <div class="relative group">
                             <select id="sort-select" x-model="sortOption" @change="applyFilter(null, sortOption, null)"
-                                class="w-full pl-3.5 pr-8 py-2.5 rounded-full border border-[#ECE6DE] bg-[#FAF8F5] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#171412] cursor-pointer hover:bg-white transition-colors appearance-none">
-                                <option value="featured">Sort: Featured</option>
+                                class="w-full pl-4 pr-10 py-2.5 rounded-none border border-[#ECE6DE] bg-[#FAF8F5] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#A33B47] focus:ring-2 focus:ring-[#A33B47]/15 cursor-pointer hover:bg-white hover:border-[#A33B47] transition-all duration-200 shadow-2xs">
+                                <option value="featured">Sort: Featured Collection</option>
                                 <option value="rating">Sort: Highest Rated (★)</option>
                                 <option value="bestsellers">Sort: Bestsellers Only</option>
                             </select>
-                            <div
-                                class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#8C7A6B] text-[10px]">
-                                ▼
+                            <div class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#8C7A6B] group-hover:text-[#A33B47] transition-colors">
+                                <svg class="w-3.5 h-3.5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                </svg>
                             </div>
                         </div>
                     </div>

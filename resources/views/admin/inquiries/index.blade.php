@@ -59,12 +59,10 @@
                                     <form method="POST" action="{{ route('admin.inquiries.update-status', $inq->id) }}">
                                         @csrf
                                         <select name="status" onchange="this.form.submit()"
-                                            class="py-1 px-2.5 rounded-none text-[10px] font-bold uppercase tracking-wider bg-[#FAF8F5] border border-[#ECE6DE] text-[#171412] focus:outline-none cursor-pointer">
+                                            class="py-1.5 pl-3 pr-8 rounded-none text-[10.5px] font-bold uppercase tracking-wider bg-[#FAF8F5] hover:bg-white border border-[#ECE6DE] hover:border-[#A33B47] text-[#171412] focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 focus:outline-none cursor-pointer transition-all shadow-2xs">
                                             <option value="new" {{ $inq->status === 'new' ? 'selected' : '' }}>🟢 New</option>
-                                            <option value="contacted" {{ $inq->status === 'contacted' ? 'selected' : '' }}>🟡
-                                                Contacted</option>
-                                            <option value="resolved" {{ $inq->status === 'resolved' ? 'selected' : '' }}>⚪
-                                                Resolved</option>
+                                            <option value="contacted" {{ $inq->status === 'contacted' ? 'selected' : '' }}>🟡 Contacted</option>
+                                            <option value="resolved" {{ $inq->status === 'resolved' ? 'selected' : '' }}>⚪ Resolved</option>
                                         </select>
                                     </form>
                                 </td>

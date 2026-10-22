@@ -115,11 +115,11 @@
             </div>
 
             <!-- Category Filter Dropdown -->
-            <div class="min-w-[170px]">
+            <div class="min-w-[190px]">
                 <select 
                     name="category" 
                     onchange="this.form.submit()" 
-                    class="w-full py-2.5 px-3.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs text-[#171412] font-medium focus:outline-none focus:border-[#171412] focus:bg-white cursor-pointer"
+                    class="w-full py-2.5 px-3.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs text-[#171412] font-semibold focus:outline-none focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 focus:bg-white cursor-pointer transition-all shadow-2xs"
                 >
                     <option value="">All Categories</option>
                     @foreach($categories as $cat)

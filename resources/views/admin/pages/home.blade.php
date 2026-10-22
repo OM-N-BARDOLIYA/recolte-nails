@@ -537,7 +537,7 @@ function homePageManager() {
                                             <select 
                                                 :name="'trust_items[' + index + '][icon]'" 
                                                 x-model="badge.icon"
-                                                class="w-full px-2.5 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-medium text-[#171412] focus:outline-none focus:border-[#171412]"
+                                                class="w-full px-3 py-2 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#A33B47] focus:ring-1 focus:ring-[#A33B47]/20 focus:bg-white transition-all shadow-2xs cursor-pointer"
                                             >
                                                 <option value="diamond">💎 Diamond (Premium Quality)</option>
                                                 <option value="shield">🛡️ Shield Check (Safe &amp; Skin Friendly)</option>
