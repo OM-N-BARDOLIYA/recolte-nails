@@ -553,45 +553,55 @@ function homePageManager() {
                             <span class="text-[11px] font-mono text-[#8C7A6B]" x-text="cat{{ $i }}"></span>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch">
                             <!-- Left: Inputs -->
-                            <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="md:col-span-7 lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div class="space-y-1">
-                                    <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Category Name</label>
-                                    <input type="text" name="cat_{{ $i }}_title" value="{{ old("cat_{$i}_title", $cats[$i]['title'] ?? '') }}" required class="w-full px-3 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs font-bold text-[#171412] focus:outline-none focus:border-[#171412]">
+                                    <label class="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-[#8C7A6B] block">Category Name</label>
+                                    <input type="text" name="cat_{{ $i }}_title" value="{{ old("cat_{$i}_title", $cats[$i]['title'] ?? '') }}" required class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-bold text-[#171412] focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15">
                                 </div>
                                 <div class="space-y-1">
-                                    <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Button Text</label>
-                                    <input type="text" name="cat_{{ $i }}_btn_text" value="{{ old("cat_{$i}_btn_text", $cats[$i]['btn_text'] ?? 'Shop Now') }}" class="w-full px-3 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] focus:outline-none focus:border-[#171412]">
+                                    <label class="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-[#8C7A6B] block">Button Text</label>
+                                    <input type="text" name="cat_{{ $i }}_btn_text" value="{{ old("cat_{$i}_btn_text", $cats[$i]['btn_text'] ?? 'Shop Now') }}" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15">
                                 </div>
                                 <div class="space-y-1 sm:col-span-2">
-                                    <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Link Target (URL)</label>
-                                    <input type="text" name="cat_{{ $i }}_link" value="{{ old("cat_{$i}_link", $cats[$i]['link'] ?? '/products') }}" class="w-full px-3 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs font-mono text-[#171412] focus:outline-none focus:border-[#171412]">
+                                    <label class="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-[#8C7A6B] block">Link Target (URL)</label>
+                                    <input type="text" name="cat_{{ $i }}_link" value="{{ old("cat_{$i}_link", $cats[$i]['link'] ?? '/products') }}" class="w-full px-3.5 py-2.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-mono text-[#171412] focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15">
                                 </div>
                                 <div class="space-y-1 sm:col-span-2">
-                                    <label class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8C7A6B] block">Upload Image / Replace</label>
+                                    <label class="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-[#8C7A6B] block">Upload Image / Replace</label>
                                     <input 
                                         type="file" 
                                         name="cat_{{ $i }}_image_file" 
                                         accept="image/*" 
                                         @change="handleFile($event, 'cat{{ $i }}')"
-                                        class="w-full px-3 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] file:mr-2 file:py-1 file:px-3 file:rounded-none file:border-0 file:text-[10px] file:font-bold file:uppercase file:bg-[#171412] file:text-white cursor-pointer"
+                                        class="w-full px-3 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs text-[#171412] file:mr-3 file:py-1.5 file:px-3 file:rounded-none file:border-0 file:text-[10.5px] file:font-bold file:uppercase file:bg-[#171412] file:text-white cursor-pointer"
                                     />
                                     <input 
                                         type="text" 
                                         name="cat_{{ $i }}_image" 
                                         x-model="cat{{ $i }}"
                                         placeholder="Or Image URL..." 
-                                        class="w-full px-3 py-1.5 rounded-none bg-white border border-[#ECE6DE] text-xs font-mono mt-1 text-[#171412] focus:outline-none focus:border-[#171412]"
+                                        class="w-full px-3.5 py-2 rounded-none bg-white border border-[#ECE6DE] text-xs font-mono mt-1 text-[#171412] focus:outline-none focus:border-[#171412] focus:ring-1 focus:ring-[#171412]/15"
                                     />
                                 </div>
                             </div>
 
-                            <!-- Right: Preview -->
-                            <div class="md:col-span-4 flex flex-col items-center justify-center p-3 rounded-none bg-white border border-[#ECE6DE] shadow-2xs">
-                                <span class="text-[10px] font-semibold text-[#8C7A6B] uppercase tracking-wider mb-1.5">Card Preview</span>
-                                <div class="w-24 h-24 rounded-none overflow-hidden bg-[#FAF8F5] border border-[#ECE6DE] p-2 flex items-center justify-center">
-                                    <img :src="cat{{ $i }}" class="w-full h-full object-cover rounded-none" alt="Category {{ $i + 1 }}" />
+                            <!-- Right: Preview (Expanded height filling wasted space) -->
+                            <div class="md:col-span-5 lg:col-span-4 flex flex-col p-4 rounded-none bg-white border border-[#ECE6DE] shadow-2xs h-full justify-between">
+                                <div class="flex items-center justify-between pb-2 mb-2.5 border-b border-[#ECE6DE]">
+                                    <span class="text-[10.5px] font-bold text-[#8C7A6B] uppercase tracking-[0.16em]">Card Preview</span>
+                                    <span class="text-[9px] font-mono text-[#A33B47] uppercase bg-[#FAF8F5] border border-[#ECE6DE] px-2 py-0.5">Storefront Card</span>
+                                </div>
+                                <div class="w-full flex-1 min-h-[210px] sm:min-h-[230px] rounded-none overflow-hidden bg-[#FAF8F5] border border-[#ECE6DE] p-3 flex items-center justify-center relative group">
+                                    <img :src="cat{{ $i }}" class="w-full h-full object-contain max-h-[250px] rounded-none transition-transform duration-300 group-hover:scale-103" alt="Category {{ $i + 1 }}" />
+                                </div>
+                                <div class="mt-2.5 pt-2 border-t border-[#ECE6DE] flex items-center justify-between text-xs">
+                                    <span class="font-sans font-bold text-[#18181B] truncate text-xs">{{ $cats[$i]['title'] ?? 'Category ' . ($i + 1) }}</span>
+                                    <span class="text-[11px] font-semibold text-[#A33B47] flex items-center gap-1 shrink-0">
+                                        <span>{{ $cats[$i]['btn_text'] ?? 'Shop Now' }}</span>
+                                        <span>→</span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
