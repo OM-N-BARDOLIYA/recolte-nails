@@ -122,12 +122,12 @@
                     <a 
                         :href="product.url"
                         @click="$store.search.close()"
-                        class="group flex items-center gap-3.5 p-2.5 sm:p-3 bg-white border border-[#ECE6DE] hover:border-[#171412] transition-all cursor-pointer relative"
-                        :class="selectedIndex === index ? 'border-[#171412] ring-1 ring-[#171412]/20 bg-[#FAF8F5]' : ''"
+                        class="group flex items-center gap-3.5 p-2.5 sm:p-3 bg-white border border-[#ECE6DE] hover:border-[#A33B47] transition-all cursor-pointer relative"
+                        :class="selectedIndex === index ? 'border-[#A33B47] ring-1 ring-[#A33B47]/25 bg-[#FAF8F5]' : ''"
                         @mouseenter="selectedIndex = index"
                     >
                         <!-- Product Thumbnail -->
-                        <div class="w-13 h-13 sm:w-16 sm:h-16 shrink-0 aspect-square bg-[#FAF8F5] border border-[#ECE6DE] overflow-hidden flex items-center justify-center p-0.5">
+                        <div class="w-13 h-13 sm:w-16 sm:h-16 shrink-0 aspect-square bg-[#FAF8F5] border border-[#ECE6DE] group-hover:border-[#A33B47]/30 overflow-hidden flex items-center justify-center p-0.5 transition-colors">
                             <img 
                                 :src="product.image" 
                                 :alt="product.title" 
@@ -152,6 +152,7 @@
 
                             <h4 
                                 class="font-serif text-sm sm:text-[15px] font-medium text-[#171412] group-hover:text-[#A33B47] transition-colors truncate"
+                                :class="selectedIndex === index ? 'text-[#A33B47]' : 'text-[#171412]'"
                                 x-text="product.title"
                             ></h4>
 
@@ -163,7 +164,10 @@
                         </div>
 
                         <!-- Right Navigation Indicator -->
-                        <div class="shrink-0 text-[#8C7A6B] group-hover:text-[#A33B47] transition-all pr-1 group-hover:translate-x-0.5">
+                        <div 
+                            class="shrink-0 text-[#8C7A6B] group-hover:text-[#A33B47] transition-all pr-1 group-hover:translate-x-0.5"
+                            :class="selectedIndex === index ? 'text-[#A33B47] translate-x-0.5' : ''"
+                        >
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                             </svg>
