@@ -298,10 +298,10 @@
                                 <!-- Top-Right: Distinct, High-Contrast Circular Remove Button -->
                                 <div class="absolute top-2 right-2 z-20">
                                     <x-close-button 
-                                        size="sm" 
+                                        size="xs" 
                                         variant="white"
                                         @click.stop="removeGalleryItem(gIndex)"
-                                        class="shadow-md border-[#C5BCB2] text-[#171412] hover:!bg-[#A33B47] hover:!text-white hover:!border-[#A33B47] ring-1 ring-black/10"
+                                        class="shadow-xs border-[#C5BCB2] text-[#171412] hover:!bg-[#A33B47] hover:!text-white hover:!border-[#A33B47]"
                                         title="Remove media"
                                     />
                                 </div>
@@ -902,9 +902,28 @@ function productForm() {
         },
 
         removeGalleryItem(index) {
-            this.galleryItems.splice(index, 1);
-            this.syncDataTransfer();
-            this.syncMainCover();
+            const item = this.galleryItems[index];
+            const label = item ? (item.name || (item.isVideo ? ('Video #' + (index + 1)) : ('Photo #' + (index + 1)))) : 'this media item';
+
+            const proceed = () => {
+                this.galleryItems.splice(index, 1);
+                this.syncDataTransfer();
+                this.syncMainCover();
+            };
+
+            if (typeof window.confirmModal === 'function') {
+                window.confirmModal({
+                    title: 'Remove Media',
+                    message: `Are you sure you want to remove "${label}" from the product media gallery?`,
+                    confirmText: 'Yes, Remove',
+                    cancelText: 'Cancel',
+                    tagText: 'Media Removal',
+                    type: 'danger',
+                    onConfirm: proceed
+                });
+            } else {
+                proceed();
+            }
         },
 
         syncDataTransfer() {
@@ -973,7 +992,27 @@ function productForm() {
         },
 
         removeShade(index) {
-            this.shades.splice(index, 1);
+            const shade = this.shades[index];
+            const label = (shade && shade.name) ? shade.name : ('Option #' + (index + 1));
+            const typeLabel = this.filterType === 'numbers' ? 'number filter' : 'color shade';
+
+            const proceed = () => {
+                this.shades.splice(index, 1);
+            };
+
+            if (typeof window.confirmModal === 'function') {
+                window.confirmModal({
+                    title: 'Remove Variant Option',
+                    message: `Are you sure you want to remove ${typeLabel} "${label}"?`,
+                    confirmText: 'Yes, Remove',
+                    cancelText: 'Cancel',
+                    tagText: 'Variant Removal',
+                    type: 'danger',
+                    onConfirm: proceed
+                });
+            } else {
+                proceed();
+            }
         },
 
         addSize() {
@@ -981,7 +1020,26 @@ function productForm() {
         },
 
         removeSize(index) {
-            this.sizes.splice(index, 1);
+            const size = this.sizes[index];
+            const label = (size && size.trim()) ? size.trim() : ('Size #' + (index + 1));
+
+            const proceed = () => {
+                this.sizes.splice(index, 1);
+            };
+
+            if (typeof window.confirmModal === 'function') {
+                window.confirmModal({
+                    title: 'Remove Size Option',
+                    message: `Are you sure you want to remove size option "${label}"?`,
+                    confirmText: 'Yes, Remove',
+                    cancelText: 'Cancel',
+                    tagText: 'Size Removal',
+                    type: 'danger',
+                    onConfirm: proceed
+                });
+            } else {
+                proceed();
+            }
         }
     };
 }
