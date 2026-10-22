@@ -27,12 +27,17 @@
                 
                 <!-- Product Header Card -->
                 <div class="flex gap-4 items-center pr-6">
-                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-none bg-white border border-[#ECE6DE] shadow-sm shrink-0 p-1 flex items-center justify-center">
-                        <img 
-                            :src="modalProduct.main_image" 
-                            :alt="modalProduct.title" 
-                            class="w-full h-full object-contain"
-                        />
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-none bg-white border border-[#ECE6DE] shadow-sm shrink-0 p-1 flex items-center justify-center overflow-hidden">
+                        <template x-if="modalProduct.main_image && (modalProduct.main_image.endsWith('.mp4') || modalProduct.main_image.endsWith('.mov') || modalProduct.main_image.endsWith('.webm'))">
+                            <video :src="modalProduct.main_image" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                        </template>
+                        <template x-if="!modalProduct.main_image || !(modalProduct.main_image.endsWith('.mp4') || modalProduct.main_image.endsWith('.mov') || modalProduct.main_image.endsWith('.webm'))">
+                            <img 
+                                :src="modalProduct.main_image" 
+                                :alt="modalProduct.title" 
+                                class="w-full h-full object-contain"
+                            />
+                        </template>
                     </div>
                     <div class="space-y-0.5 min-w-0">
                         <span class="text-[9px] uppercase font-extrabold text-rose-dark tracking-[0.16em]" x-text="modalProduct.category"></span>

@@ -300,12 +300,12 @@
 
 
                                 <!-- Bottom Overlay Action: Quick "Set Cover" Button (Hover over secondary cards) -->
-                                <template x-if="gIndex > 0 && !item.isVideo">
+                                <template x-if="gIndex > 0">
                                     <button 
                                         type="button" 
                                         @click.stop="makeCover(gIndex)"
                                         class="absolute bottom-2 left-2 right-2 py-1.5 bg-[#171412]/95 hover:bg-black text-white text-[9.5px] font-bold uppercase tracking-wider backdrop-blur-xs transition-all duration-200 opacity-0 group-hover/media:opacity-100 shadow-md cursor-pointer flex items-center justify-center gap-1 z-10 select-none"
-                                        title="Promote this photo to #1 Primary Cover"
+                                        title="Promote this media to #1 Primary Cover"
                                     >
                                         <span class="text-[#C5A880]">★</span>
                                         <span>Set as Cover</span>

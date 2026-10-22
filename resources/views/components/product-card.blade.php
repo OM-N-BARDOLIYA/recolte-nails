@@ -4,16 +4,27 @@
     <!-- 1. PRODUCT IMAGE CONTAINER WITH TOP-RIGHT WISHLIST HEART -->
     <div class="relative overflow-hidden rounded-xl bg-[#FAF8F5] aspect-square w-full select-none border border-[#ECE6DE]">
 
-        <!-- Clickable Link around image -->
+        @php
+            $isMainVideo = !empty($product->main_image) && (
+                str_ends_with(strtolower($product->main_image), '.mp4') || 
+                str_ends_with(strtolower($product->main_image), '.mov') || 
+                str_ends_with(strtolower($product->main_image), '.webm')
+            );
+            $hasVideo = $isMainVideo || (!empty($product->images) && collect($product->images)->contains(fn($img) => str_ends_with(strtolower($img), '.mp4') || str_ends_with(strtolower($img), '.mov') || str_ends_with(strtolower($img), '.webm')));
+        @endphp
+
+        <!-- Clickable Link around image / video -->
         <a href="{{ route('products.show', $product->slug) }}" class="block w-full h-full">
-            <img src="{{ $product->main_image }}" alt="{{ $product->title }}"
-                class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-95"
-                onerror="this.onerror=null;this.src='{{ asset('images/products/recolte-cat-tips.jpg') }}'" />
+            @if($isMainVideo)
+                <video src="{{ $product->main_image }}" autoplay loop muted playsinline
+                    class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-95"></video>
+            @else
+                <img src="{{ $product->main_image }}" alt="{{ $product->title }}"
+                    class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-95"
+                    onerror="this.onerror=null;this.src='{{ asset('images/products/recolte-cat-tips.jpg') }}'" />
+            @endif
         </a>
 
-        @php
-            $hasVideo = !empty($product->images) && collect($product->images)->contains(fn($img) => str_ends_with(strtolower($img), '.mp4') || str_ends_with(strtolower($img), '.mov'));
-        @endphp
         @if($hasVideo)
             <div class="absolute top-3.5 left-3.5 z-20 px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-xs text-white text-[10px] font-medium tracking-wider uppercase flex items-center gap-1 select-none pointer-events-none">
                 <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>

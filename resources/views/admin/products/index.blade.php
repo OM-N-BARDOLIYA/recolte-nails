@@ -177,12 +177,16 @@
                             <td class="py-4 px-5">
                                 <div class="flex items-center gap-4">
                                     <div class="relative w-14 h-14 bg-white border border-[#ECE6DE] rounded-none shrink-0 overflow-hidden shadow-2xs group-hover:border-[#171412]/30 transition-colors p-0.5">
-                                        <img 
-                                            src="{{ $product->main_image }}" 
-                                            alt="{{ $product->title }}" 
-                                            class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
-                                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=300&q=80'"
-                                        />
+                                        @if(str_ends_with(strtolower($product->main_image), '.mp4') || str_ends_with(strtolower($product->main_image), '.mov') || str_ends_with(strtolower($product->main_image), '.webm'))
+                                            <video src="{{ $product->main_image }}" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                                        @else
+                                            <img 
+                                                src="{{ $product->main_image }}" 
+                                                alt="{{ $product->title }}" 
+                                                class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                                                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=300&q=80'"
+                                            />
+                                        @endif
                                     </div>
                                     <div class="min-w-0 flex-1">
                                         <div class="flex items-center gap-2">

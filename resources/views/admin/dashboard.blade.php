@@ -90,7 +90,11 @@
                         @foreach($recentProducts as $prod)
                             <tr class="hover:bg-[#FAF8F5]/80 transition-colors">
                                 <td class="py-3.5 px-3 flex items-center gap-3">
-                                    <img src="{{ $prod->main_image }}" alt="{{ $prod->title }}" class="w-11 h-11 rounded-none object-cover bg-black/5 shrink-0 border border-[#ECE6DE]">
+                                    @if(str_ends_with(strtolower($prod->main_image), '.mp4') || str_ends_with(strtolower($prod->main_image), '.mov') || str_ends_with(strtolower($prod->main_image), '.webm'))
+                                        <video src="{{ $prod->main_image }}" autoplay loop muted playsinline class="w-11 h-11 rounded-none object-cover bg-black/5 shrink-0 border border-[#ECE6DE]"></video>
+                                    @else
+                                        <img src="{{ $prod->main_image }}" alt="{{ $prod->title }}" class="w-11 h-11 rounded-none object-cover bg-black/5 shrink-0 border border-[#ECE6DE]">
+                                    @endif
                                     <div class="min-w-0">
                                         <div class="font-serif text-sm font-bold text-[#171412] truncate max-w-[200px]">{{ $prod->title }}</div>
                                         <div class="text-[10px] text-[#8C7A6B]">{{ count($prod->shades ?? []) }} shades &bull; {{ count($prod->sizes ?? []) }} sizes</div>

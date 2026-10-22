@@ -2015,8 +2015,9 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Recolte Professional White Cat Eye Gel Polish is an essential atelier staple for bridal manicures, ethereal French cat-eye lines, and milky velvet glazed nails. Crafted with high-luminance white magnetic iron particles suspended in an optical milk-jelly base, it creates a radiant halo of pearl light.',
                 'key_ingredients' => 'Milky White Acrylate Gel, Micronized White Titanium & Silver Magnetic Flakes, Optical Brighteners, HEMA-Free Polymers',
                 'how_to_use' => '1. Apply Recolte Base Coat or sheer nude base (cure 60s). 2. Apply White Cat Eye gel. 3. Hover magnet along the tip or center for 5-10s. 4. Cure 60 seconds. 5. Top with Recolte Glossy Top Coat.',
-                'main_image' => '/uploads/products/catalog/CATEYES_WHITE_CATEYE_thumb.jpg',
+                'main_image' => '/uploads/products/catalog/CATEYES_WHITE_CATEYE_video.mp4',
                 'images' => [
+                    '/uploads/products/catalog/CATEYES_WHITE_CATEYE_video.mp4',
                     '/uploads/products/catalog/CATEYES_WHITE_CATEYE_thumb.jpg',
                 ],
                 'shades' => [
