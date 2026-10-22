@@ -15,10 +15,11 @@
     $activeTopics = !empty($topics_widget['topics']) ? $topics_widget['topics'] : $defaultTopics;
 @endphp
 
-<div class="space-y-6 max-w-5xl mx-auto" 
-    x-data="{ 
+<script>
+function contactPageManager() {
+    return {
         activeTab: 'header',
-        topics: {{ json_encode($activeTopics) }},
+        topics: {!! json_encode($activeTopics) !!},
         addTopic() {
             this.topics.push({
                 id: 'topic_' + Date.now(),
@@ -51,7 +52,11 @@
                 this.topics.splice(idx, 1);
             }
         }
-    }">
+    };
+}
+</script>
+
+<div class="space-y-6 max-w-5xl mx-auto" x-data="contactPageManager()">
     
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

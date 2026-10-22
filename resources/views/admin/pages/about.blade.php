@@ -7,8 +7,9 @@
     $stories = $hero['stories'] ?? [];
 @endphp
 
-<div class="space-y-6 max-w-5xl mx-auto" 
-    x-data="{ 
+<script>
+function aboutPageManager() {
+    return {
         activeTab: 'hero',
         previewStory0: '{{ $stories[0]['img'] ?? '' }}',
         previewStory1: '{{ $stories[1]['img'] ?? '' }}',
@@ -30,11 +31,17 @@
             const f = e.target.files[0];
             if (f) {
                 const r = new FileReader();
-                r.onload = ev => this[targetVar] = ev.target.result;
+                r.onload = function(ev) {
+                    this[targetVar] = ev.target.result;
+                }.bind(this);
                 r.readAsDataURL(f);
             }
         }
-    }">
+    };
+}
+</script>
+
+<div class="space-y-6 max-w-5xl mx-auto" x-data="aboutPageManager()">
     
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
