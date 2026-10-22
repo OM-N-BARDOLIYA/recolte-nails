@@ -1,11 +1,20 @@
 <IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
     RewriteEngine On
 
-    # Block sensitive files
-    RewriteRule ^\.env - [F,L,NC]
-    RewriteRule ^\.git - [F,L,NC]
+    # 1. Prevent access to hidden files and directories (except .well-known for SSL verification)
+    RewriteRule (^|/)\.(?!well-known) - [F,L,NC]
 
-    # Redirect to public directory if document root cannot be changed to /public
+    # 2. Block access to sensitive application source directories
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor|scratch)/ - [F,L,NC]
+
+    # 3. Block access to sensitive root-level files and database dumps
+    RewriteRule ^(composer\.(json|lock)|package(-lock)?\.json|artisan|vite\.config\.js|\.env.*|.*\.sql|.*\.log)$ - [F,L,NC]
+
+    # 4. Redirect all web requests to the public directory
     RewriteCond %{REQUEST_URI} !^/public/
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
