@@ -148,27 +148,33 @@
                 </div>
             </div>        <!-- ── 2. VISUAL MEDIA STUDIO: IMAGES & VIDEOS (MANUAL DRAG & DROP REORDERING) ── -->
         <div class="p-6 sm:p-8 rounded-none bg-white border border-[#ECE6DE] space-y-6 shadow-2xs">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-[#ECE6DE] pb-4">
-                <div>
-                    <div class="flex items-center gap-2.5">
-                        <h2 class="font-serif text-xl font-bold text-[#171412]">2. Visual Media Studio (Images &amp; Videos)</h2>
-                        <span class="px-2 py-0.5 rounded-none bg-[#FBEFE9] text-[#A33B47] text-[10px] font-bold uppercase tracking-wider border border-[#A33B47]/20">
-                            ✦ Drag &amp; Drop Reordering
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-[#ECE6DE] pb-4">
+                <div class="space-y-1">
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <h2 class="font-serif text-xl font-bold text-[#171412]">2. Visual Media Studio</h2>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FAF8F5] border border-[#ECE6DE] text-[#736B63] text-[11px] font-medium tracking-wide whitespace-nowrap">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                            <span>Drag &amp; Drop Reordering</span>
                         </span>
                     </div>
-                    <p class="text-[11px] text-[#8C7A6B] mt-1">
-                        Drag cards to set display sequence. Tile <span class="font-bold text-[#171412]">#1</span> is the storefront primary cover image.
+                    <p class="text-[11px] text-[#8C7A6B]">
+                        Rearrange cards to configure the catalog display order. Card <span class="font-bold text-[#171412]">#1</span> is the storefront primary cover image.
                     </p>
                 </div>
 
-                <!-- Live Media Counter Badge -->
-                <div class="flex items-center gap-2 self-start sm:self-auto">
-                    <div class="px-3.5 py-1.5 rounded-none bg-[#FAF8F5] border border-[#ECE6DE] text-xs text-[#171412] font-semibold flex items-center gap-2.5 shadow-2xs">
-                        <span>Total Media: <strong class="text-[#A33B47]" x-text="galleryItems.length"></strong></span>
-                        <span class="text-[#ECE6DE]">|</span>
-                        <span class="text-[#8C7A6B] text-[11px]"><span class="font-bold text-[#171412]" x-text="galleryItems.filter(i => !i.isVideo).length"></span> Photos</span>
-                        <span class="text-[#ECE6DE]">|</span>
-                        <span class="text-[#8C7A6B] text-[11px]"><span class="font-bold text-[#171412]" x-text="galleryItems.filter(i => i.isVideo).length"></span> Videos</span>
+                <!-- Live Media Counter Metrics (Clean Segmented Counter) -->
+                <div class="inline-flex items-center bg-[#FAF8F5] border border-[#ECE6DE] divide-x divide-[#ECE6DE] rounded-none shadow-2xs self-start lg:self-auto shrink-0 whitespace-nowrap">
+                    <div class="px-3.5 py-2 flex items-center gap-2">
+                        <span class="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#8C7A6B]">Total</span>
+                        <span class="font-mono text-sm font-bold text-[#171412]" x-text="galleryItems.length"></span>
+                    </div>
+                    <div class="px-3.5 py-2 flex items-center gap-2">
+                        <span class="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#8C7A6B]">Photos</span>
+                        <span class="font-mono text-sm font-bold text-emerald-700" x-text="galleryItems.filter(i => !i.isVideo).length"></span>
+                    </div>
+                    <div class="px-3.5 py-2 flex items-center gap-2">
+                        <span class="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#8C7A6B]">Videos</span>
+                        <span class="font-mono text-sm font-bold text-[#A33B47]" x-text="galleryItems.filter(i => i.isVideo).length"></span>
                     </div>
                 </div>
             </div>
@@ -283,19 +289,19 @@
                                         </span>
                                     </template>
                                     <template x-if="gIndex > 0">
-                                        <span class="inline-flex items-center px-1.5 py-0.5 bg-white/95 backdrop-blur-xs text-[#171412] border border-[#ECE6DE] text-[9.5px] font-mono font-bold shadow-2xs">
+                                        <span class="inline-flex items-center px-1.5 py-0.5 bg-white/95 backdrop-blur-xs text-[#171412] border border-[#C5BCB2] text-[9.5px] font-mono font-bold shadow-2xs">
                                             #<span x-text="gIndex + 1"></span>
                                         </span>
                                     </template>
                                 </div>
 
-                                <!-- Top-Right: Smooth Animated Circular Remove Button -->
-                                <div class="absolute top-2 right-2 z-10">
+                                <!-- Top-Right: Distinct, High-Contrast Circular Remove Button -->
+                                <div class="absolute top-2 right-2 z-20">
                                     <x-close-button 
-                                        size="xs" 
+                                        size="sm" 
                                         variant="white"
                                         @click.stop="removeGalleryItem(gIndex)"
-                                        class="shadow-xs hover:!bg-[#A33B47] hover:!text-white hover:!border-[#A33B47]"
+                                        class="shadow-md border-[#C5BCB2] text-[#171412] hover:!bg-[#A33B47] hover:!text-white hover:!border-[#A33B47] ring-1 ring-black/10"
                                         title="Remove media"
                                     />
                                 </div>
@@ -324,13 +330,13 @@
                                         x-text="item.name || (item.isVideo ? ('Reel #' + (gIndex + 1)) : (gIndex === 0 ? 'Primary Cover' : ('Photo #' + (gIndex + 1))))"></span>
                                 </div>
 
-                                <!-- Quick Micro Shift Controls (‹ / ›) on hover -->
-                                <div class="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                                <!-- Quick Micro Actions (Shift left/right + Trash) -->
+                                <div class="flex items-center gap-0.5 shrink-0">
                                     <button 
                                         type="button" 
                                         @click.stop="moveItem(gIndex, -1)" 
                                         :disabled="gIndex === 0"
-                                        class="w-4.5 h-4.5 rounded-none flex items-center justify-center text-[#8C7A6B] hover:text-[#171412] hover:bg-[#FAF8F5] disabled:opacity-20 disabled:hover:bg-transparent cursor-pointer font-bold leading-none"
+                                        class="w-5 h-5 rounded-none flex items-center justify-center text-[#8C7A6B] hover:text-[#171412] hover:bg-[#FAF8F5] disabled:opacity-20 disabled:hover:bg-transparent cursor-pointer font-bold leading-none text-xs"
                                         title="Shift Left"
                                     >
                                         ‹
@@ -339,10 +345,20 @@
                                         type="button" 
                                         @click.stop="moveItem(gIndex, 1)" 
                                         :disabled="gIndex === galleryItems.length - 1"
-                                        class="w-4.5 h-4.5 rounded-none flex items-center justify-center text-[#8C7A6B] hover:text-[#171412] hover:bg-[#FAF8F5] disabled:opacity-20 disabled:hover:bg-transparent cursor-pointer font-bold leading-none"
+                                        class="w-5 h-5 rounded-none flex items-center justify-center text-[#8C7A6B] hover:text-[#171412] hover:bg-[#FAF8F5] disabled:opacity-20 disabled:hover:bg-transparent cursor-pointer font-bold leading-none text-xs"
                                         title="Shift Right"
                                     >
                                         ›
+                                    </button>
+                                    <button 
+                                        type="button" 
+                                        @click.stop="removeGalleryItem(gIndex)"
+                                        class="w-5 h-5 rounded-none flex items-center justify-center text-stone-400 hover:text-[#A33B47] hover:bg-rose-50 cursor-pointer transition-colors"
+                                        title="Remove this item"
+                                    >
+                                        <svg class="w-3.5 h-3.5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
                                     </button>
                                 </div>
                             </div>
