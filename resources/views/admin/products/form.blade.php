@@ -416,32 +416,25 @@
                     <p class="text-[11px] text-[#8C7A6B]">Choose whether this product uses Color Shades (e.g. Pearl Glaze), Number Filters (e.g. 01 to 09 for BIAB Builder Gel), or No Variations.</p>
                 </div>
 
-                <!-- Mode Switcher Tabs -->
-                <div class="inline-flex p-1 bg-[#FAF8F5] border border-[#ECE6DE] rounded-none">
-                    <button 
-                        type="button" 
-                        @click="setFilterType('color')" 
-                        :class="filterType === 'color' ? 'bg-[#171412] text-white shadow-xs' : 'text-[#8C7A6B] hover:text-[#171412]'"
-                        class="px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5"
-                    >
-                        <span>🎨</span> Color Shades
-                    </button>
-                    <button 
-                        type="button" 
-                        @click="setFilterType('numbers')" 
-                        :class="filterType === 'numbers' ? 'bg-[#171412] text-white shadow-xs' : 'text-[#8C7A6B] hover:text-[#171412]'"
-                        class="px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5"
-                    >
-                        <span>🔢</span> Number Filters
-                    </button>
-                    <button 
-                        type="button" 
-                        @click="setFilterType('none')" 
-                        :class="filterType === 'none' ? 'bg-[#171412] text-white shadow-xs' : 'text-[#8C7A6B] hover:text-[#171412]'"
-                        class="px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5"
-                    >
-                        <span>⚪</span> None
-                    </button>
+                <!-- Sleek Compact Dropdown Selector -->
+                <div class="flex items-center gap-2.5 shrink-0 w-full md:w-auto">
+                    <label class="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8C7A6B] shrink-0">Mode:</label>
+                    <div class="relative w-full md:w-[210px]">
+                        <select 
+                            x-model="filterType"
+                            @change="setFilterType(filterType)"
+                            class="w-full pl-3.5 pr-8 py-2 rounded-none bg-[#FAF8F5] hover:bg-white border border-[#ECE6DE] hover:border-[#171412] text-xs font-semibold text-[#171412] focus:outline-none focus:border-[#171412] focus:bg-white cursor-pointer transition-colors shadow-2xs appearance-none"
+                        >
+                            <option value="none">⚪ None (Single Item)</option>
+                            <option value="color">🎨 Color Shades</option>
+                            <option value="numbers">🔢 Number Filters</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-[#8C7A6B]">
+                            <svg class="w-3.5 h-3.5 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
 
