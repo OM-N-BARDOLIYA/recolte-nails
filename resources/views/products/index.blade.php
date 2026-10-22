@@ -122,6 +122,7 @@
                         </p>
                         <a href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text={{ urlencode($catalog_consultation['whatsapp_msg'] ?? 'Hello Recolte Nails, I need assistance with nail sizing.') }}"
                             target="_blank" rel="noopener noreferrer"
+                            @click="window.logWhatsAppInquiry({ source: 'whatsapp_sizing', subject: 'Catalog Sizing Consultation', message: '{{ addslashes($catalog_consultation['whatsapp_msg'] ?? 'Hello Recolte Nails, I need assistance with nail sizing.') }}', metadata: { page: 'catalog' } })"
                             class="w-full py-3 px-5 rounded-none bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-xs flex items-center justify-center gap-2 group">
                             <svg class="w-4 h-4 fill-current transition-transform group-hover:scale-110"
                                 viewBox="0 0 24 24">

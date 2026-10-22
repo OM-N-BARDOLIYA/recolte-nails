@@ -105,6 +105,20 @@
                             (modalSize ? '• Size: ' + modalSize + '\n' : '') +
                             '\nPlease confirm availability.'
                         )" 
+                        @click="window.logWhatsAppInquiry({
+                            source: 'whatsapp_product',
+                            subject: 'Quick Order: ' + modalProduct.title + (modalShade ? ' (' + modalShade + ')' : '') + (modalSize ? ' [' + modalSize + ']' : ''),
+                            message: 'Hello Recolte Nails, I would like to order:\n\n• Product: ' + modalProduct.title + '\n' + (modalShade ? '• Shade: ' + modalShade + '\n' : '') + (modalSize ? '• Size: ' + modalSize + '\n' : '') + '\nPlease confirm availability.',
+                            metadata: {
+                                product_id: modalProduct.id,
+                                product_title: modalProduct.title,
+                                product_slug: modalProduct.slug,
+                                category: modalProduct.category,
+                                shade: modalShade,
+                                size: modalSize,
+                                image: modalProduct.main_image
+                            }
+                        })"
                         target="_blank" 
                         class="w-full py-3.5 bg-[#A33B47] hover:bg-[#78232D] text-white rounded-none font-bold text-xs uppercase tracking-wider shadow-md flex items-center justify-center gap-2.5 transition-colors duration-200"
                     >

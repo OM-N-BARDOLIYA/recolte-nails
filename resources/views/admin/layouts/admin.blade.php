@@ -233,8 +233,8 @@
                         {{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}
                     </div>
                     <div class="min-w-0 flex-1">
-                        <div class="text-xs font-semibold text-[#171412] truncate">{{ Auth::user()->name ?? 'Admin' }}</div>
-                        <div class="text-[10px] text-[#8C7A6B] truncate">{{ Auth::user()->username ? '@' . Auth::user()->username : (Auth::user()->email ?? '') }}</div>
+                        <div class="text-xs font-semibold text-[#171412] truncate">{{ Auth::user()?->name ?? 'Admin' }}</div>
+                        <div class="text-[10px] text-[#8C7A6B] truncate">{{ Auth::user()?->username ? '@' . Auth::user()->username : (Auth::user()?->email ?? 'admin@recoltenails.com') }}</div>
                     </div>
                 </div>
 

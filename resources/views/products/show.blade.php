@@ -459,13 +459,30 @@
                             @endphp
                             <a :href="'https://wa.me/' + (window.recolteConfig?.whatsappNumber || '{{ $whatsappNum }}') + '?text=' + encodeURIComponent(
                                         'Hello Recolte Nails, I would like to order:\n\n' +
-                                        '• Product: {{ $product->title }}\n' +
+                                        '• Product: {{ addslashes($product->title) }}\n' +
                                         (selectedShade ? '• Shade: ' + selectedShade + '\n' : '') +
                                         (selectedSize ? '• Size: ' + selectedSize + '\n' : '') +
                                         '• Quantity: ' + quantity + '\n' +
                                         '• Link: ' + window.location.href + '\n\n' +
                                         'Please confirm availability.'
-                                    )" target="_blank" rel="noopener noreferrer"
+                                    )" 
+                                @click="window.logWhatsAppInquiry({
+                                    source: 'whatsapp_product',
+                                    subject: 'Order: {{ addslashes($product->title) }}' + (selectedShade ? ' (' + selectedShade + ')' : '') + (selectedSize ? ' [' + selectedSize + ']' : '') + ' x' + quantity,
+                                    message: 'Hello Recolte Nails, I would like to order:\n\n• Product: {{ addslashes($product->title) }}\n' + (selectedShade ? '• Shade: ' + selectedShade + '\n' : '') + (selectedSize ? '• Size: ' + selectedSize + '\n' : '') + '• Quantity: ' + quantity + '\n• Link: ' + window.location.href + '\n\nPlease confirm availability.',
+                                    metadata: {
+                                        product_id: {{ $product->id }},
+                                        product_title: '{{ addslashes($product->title) }}',
+                                        product_slug: '{{ $product->slug }}',
+                                        category: '{{ addslashes($product->category) }}',
+                                        shade: selectedShade,
+                                        size: selectedSize,
+                                        quantity: quantity,
+                                        image: isVideo(mainImage) ? '{{ asset($product->main_image) }}' : mainImage,
+                                        url: window.location.href
+                                    }
+                                })"
+                                target="_blank" rel="noopener noreferrer"
                                 class="w-full py-4 px-6 rounded-none bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-[13px] font-bold tracking-[0.16em] uppercase shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2.5 select-none">
                                 <svg class="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24" aria-hidden="true">
                                     <path
@@ -501,12 +518,36 @@
                         <!-- 3. Sizing / Inquiry Sub-Links -->
                         <div class="flex items-center justify-between text-xs text-[#8C7A6B] pt-1">
                             <a href="https://wa.me/{{ $whatsappNum }}?text=Hello%20Recolte%20Nails,%20I%20have%20a%20sizing%20question%20regarding%20{{ urlencode($product->title) }}."
+                                @click="window.logWhatsAppInquiry({
+                                    source: 'whatsapp_sizing',
+                                    subject: 'Sizing Consultation: {{ addslashes($product->title) }}',
+                                    message: 'Hello Recolte Nails, I have a sizing question regarding {{ addslashes($product->title) }}.',
+                                    metadata: {
+                                        product_id: {{ $product->id }},
+                                        product_title: '{{ addslashes($product->title) }}',
+                                        product_slug: '{{ $product->slug }}',
+                                        image: '{{ asset($product->main_image) }}',
+                                        url: window.location.href
+                                    }
+                                })"
                                 target="_blank" rel="noopener noreferrer"
                                 class="hover:text-[#A33B47] transition-colors flex items-center gap-1.5 font-light">
                                 <span>📏 Custom Sizing Consultation</span>
                             </a>
 
                             <a href="https://wa.me/{{ $whatsappNum }}?text=Hello%20Recolte%20Nails,%20I%20have%20an%20inquiry%20regarding%20{{ urlencode($product->title) }}."
+                                @click="window.logWhatsAppInquiry({
+                                    source: 'whatsapp_artist',
+                                    subject: 'Artist Inquiry: {{ addslashes($product->title) }}',
+                                    message: 'Hello Recolte Nails, I have an inquiry regarding {{ addslashes($product->title) }}.',
+                                    metadata: {
+                                        product_id: {{ $product->id }},
+                                        product_title: '{{ addslashes($product->title) }}',
+                                        product_slug: '{{ $product->slug }}',
+                                        image: '{{ asset($product->main_image) }}',
+                                        url: window.location.href
+                                    }
+                                })"
                                 target="_blank"
                                 class="hover:text-[#A33B47] transition-colors flex items-center gap-1.5 font-light">
                                 <span>💬 Ask an Artist</span>

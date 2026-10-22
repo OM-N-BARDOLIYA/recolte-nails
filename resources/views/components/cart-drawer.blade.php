@@ -197,6 +197,7 @@
                 <!-- Primary WhatsApp Multi-Item Order Button (Square) -->
                 <a 
                     :href="$store.cart.getWhatsAppUrl()"
+                    @click="$store.cart.logWhatsAppOrder()"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="w-full py-3.5 sm:py-4 px-4 sm:px-6 rounded-none bg-[#25D366] hover:bg-[#1CA850] active:scale-[0.99] text-white text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 text-center select-none"

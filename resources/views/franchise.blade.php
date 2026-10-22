@@ -20,6 +20,7 @@
                     href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp_number', '917016266727') }}?text=Hello%20Recolte%20Nails,%20I%20am%20interested%20in%20a%20franchise%20partnership." 
                     target="_blank"
                     rel="noopener noreferrer"
+                    @click="window.logWhatsAppInquiry({ source: 'whatsapp_franchise', subject: 'Franchise & Studio Partnership', message: 'Hello Recolte Nails, I am interested in a franchise partnership.', metadata: { page: 'franchise' } })"
                     class="px-8 py-3.5 bg-[#111111] hover:bg-black text-white text-xs font-bold tracking-wider uppercase rounded-none shadow-md transition-colors duration-200 inline-flex items-center gap-2"
                 >
                     <span>Chat on WhatsApp</span>
