@@ -264,6 +264,14 @@ class DatabaseSeeder extends Seeder
                 'sort_order' => 27,
                 'is_active' => true,
             ],
+            [
+                'name' => 'UV LED Lamps',
+                'slug' => 'uv-led-lamps',
+                'icon_emoji' => '💡',
+                'description' => 'Professional salon-grade dual UV/LED curing lamps, portable cordless flash-cure torches, and low-heat painless nail dryers.',
+                'sort_order' => 28,
+                'is_active' => true,
+            ],
         ];
 
         $newCatSlugs = array_column($categories, 'slug');
