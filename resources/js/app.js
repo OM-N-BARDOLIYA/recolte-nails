@@ -174,7 +174,8 @@ document.addEventListener('alpine:init', () => {
 
             message += `\nTotal Items: ${this.totalCount}\nPlease confirm availability and payment details.`;
 
-            return 'https://wa.me/917016266727?text=' + encodeURIComponent(message);
+            const whatsappNumber = window.recolteConfig?.whatsappNumber || '917016266727';
+            return 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(message);
         }
     });
 

@@ -29,6 +29,10 @@ class AdminSettingController extends Controller
     {
         $inputs = $request->except(['_token', '_method']);
 
+        if (!empty($inputs['whatsapp_number'])) {
+            $inputs['whatsapp_number'] = preg_replace('/[^0-9]/', '', $inputs['whatsapp_number']);
+        }
+
         foreach ($inputs as $key => $value) {
             SiteSetting::updateOrCreate(
                 ['key' => $key],
@@ -36,8 +40,22 @@ class AdminSettingController extends Controller
             );
         }
 
+        // Automatically synchronize all stored PageContent records if WhatsApp number changed
+        if (!empty($inputs['whatsapp_number'])) {
+            $newWa = $inputs['whatsapp_number'];
+            $allPages = \App\Models\PageContent::all();
+            foreach ($allPages as $pc) {
+                $rawContent = json_encode($pc->content);
+                if (str_contains($rawContent, 'wa.me/')) {
+                    $updatedJson = preg_replace('/wa\.me\/[0-9]+/', 'wa.me/' . $newWa, $rawContent);
+                    $pc->content = json_decode($updatedJson, true);
+                    $pc->save();
+                }
+            }
+        }
+
         return redirect()->route('admin.settings.index', ['tab' => 'studio'])
-            ->with('success', 'Studio & WhatsApp settings updated successfully!');
+            ->with('success', 'Studio & WhatsApp settings updated successfully! All storefront ordering and inquiry links are now routed to +' . ($inputs['whatsapp_number'] ?? ''));
     }
 
     public function updateSecurity(Request $request)

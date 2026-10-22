@@ -402,6 +402,7 @@ class AdminPageController extends Controller
 
     public function about()
     {
+        $activeWa = preg_replace('/[^0-9]/', '', SiteSetting::get('whatsapp_number', '917016266727')) ?: '917016266727';
         $hero = PageContent::getSection('about', 'hero', [
             'stories' => [
                 [
@@ -443,7 +444,7 @@ class AdminPageController extends Controller
             'btn1_text' => 'Explore Nail Catalog',
             'btn1_url' => '/products',
             'btn2_text' => 'WhatsApp Sizing Help',
-            'btn2_url' => 'https://wa.me/917016266727',
+            'btn2_url' => 'https://wa.me/' . $activeWa,
         ]);
 
         $steps = PageContent::getSection('about', 'steps', [
@@ -506,7 +507,7 @@ class AdminPageController extends Controller
             'f3_title' => '📦 Haute Box',
             'f3_desc' => 'Full prep & glue kit',
             'btn1_text' => 'Order Bespoke Nails on WhatsApp',
-            'btn1_url' => 'https://wa.me/917016266727?text=Hello%20Recolte%20Nails,%20I%20would%20like%20to%20inquire%20about%20a%20custom%20order.',
+            'btn1_url' => 'https://wa.me/' . $activeWa . '?text=Hello%20Recolte%20Nails,%20I%20would%20like%20to%20inquire%20about%20a%20custom%20order.',
             'btn2_text' => 'Explore Ready-to-Wear Catalog',
             'btn2_url' => '/products',
             'img1' => asset('images/products/recolte-cat-gel-polish.jpg'),
@@ -557,6 +558,7 @@ class AdminPageController extends Controller
             ];
         }
 
+        $activeWa = preg_replace('/[^0-9]/', '', SiteSetting::get('whatsapp_number', '917016266727')) ?: '917016266727';
         PageContent::setSection('about', 'hero', [
             'stories' => $stories,
             'card_badge' => $request->input('card_badge', '100% Damage-Free'),
@@ -565,7 +567,7 @@ class AdminPageController extends Controller
             'btn1_text' => $request->input('hero_btn1_text', 'Explore Nail Catalog'),
             'btn1_url' => $request->input('hero_btn1_url', '/products'),
             'btn2_text' => $request->input('hero_btn2_text', 'WhatsApp Sizing Help'),
-            'btn2_url' => $request->input('hero_btn2_url', 'https://wa.me/917016266727'),
+            'btn2_url' => $request->input('hero_btn2_url', 'https://wa.me/' . $activeWa),
         ]);
 
         // 2. Steps Timeline
@@ -654,7 +656,7 @@ class AdminPageController extends Controller
             'f3_title' => $request->input('f3_title', '📦 Haute Box'),
             'f3_desc' => $request->input('f3_desc', 'Full prep & glue kit'),
             'btn1_text' => $request->input('concierge_btn1_text', 'Order Bespoke Nails on WhatsApp'),
-            'btn1_url' => $request->input('concierge_btn1_url', 'https://wa.me/917016266727'),
+            'btn1_url' => $request->input('concierge_btn1_url', 'https://wa.me/' . $activeWa . '?text=Hello%20Recolte%20Nails,%20I%20would%20like%20to%20inquire%20about%20a%20custom%20order.'),
             'btn2_text' => $request->input('concierge_btn2_text', 'Explore Ready-to-Wear Catalog'),
             'btn2_url' => $request->input('concierge_btn2_url', '/products'),
             'img1' => $conciergeImgs['img1'],

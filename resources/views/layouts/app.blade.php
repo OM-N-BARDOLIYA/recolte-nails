@@ -16,6 +16,12 @@
         rel="stylesheet">
 
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}?v={{ time() }}">
+    <script>
+        window.recolteConfig = {
+            whatsappNumber: '{{ preg_replace('/[^0-9]/', '', \App\Models\SiteSetting::get('whatsapp_number', '917016266727')) }}',
+            phone: '{{ \App\Models\SiteSetting::get('phone', '+91 7016266727') }}'
+        };
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>

@@ -11,6 +11,7 @@ class PageController extends Controller
 {
     public function about()
     {
+        $activeWa = preg_replace('/[^0-9]/', '', SiteSetting::get('whatsapp_number', '917016266727')) ?: '917016266727';
         $hero = PageContent::getSection('about', 'hero', [
             'stories' => [
                 [
@@ -52,7 +53,7 @@ class PageController extends Controller
             'btn1_text' => 'Explore Nail Catalog',
             'btn1_url' => '/products',
             'btn2_text' => 'WhatsApp Sizing Help',
-            'btn2_url' => 'https://wa.me/917016266727',
+            'btn2_url' => 'https://wa.me/' . $activeWa,
         ]);
 
         $steps = PageContent::getSection('about', 'steps', [
@@ -114,7 +115,7 @@ class PageController extends Controller
             'f3_title' => '📦 Haute Box',
             'f3_desc' => 'Full prep & glue kit',
             'btn1_text' => 'Order Bespoke Nails on WhatsApp',
-            'btn1_url' => 'https://wa.me/917016266727?text=Hello%20Recolte%20Nails,%20I%20would%20like%20to%20inquire%20about%20a%20custom%20order.',
+            'btn1_url' => 'https://wa.me/' . $activeWa . '?text=Hello%20Recolte%20Nails,%20I%20would%20like%20to%20inquire%20about%20a%20custom%20order.',
             'btn2_text' => 'Explore Ready-to-Wear Catalog',
             'btn2_url' => '/products',
             'img1' => asset('images/products/recolte-cat-gel-polish.jpg'),

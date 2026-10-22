@@ -3,7 +3,7 @@
 @section("content")
 
 @php
-    $whatsappNum = !empty($cards['whatsapp_num']) ? $cards['whatsapp_num'] : \App\Models\SiteSetting::get('whatsapp_number', '917016266727');
+    $whatsappNum = preg_replace('/[^0-9]/', '', \App\Models\SiteSetting::get('whatsapp_number', '917016266727')) ?: '917016266727';
     $contactEmail = !empty($cards['email']) ? $cards['email'] : \App\Models\SiteSetting::get('contact_email', 'concierge@recoltenails.com');
     $contactAddress = !empty($cards['address']) ? $cards['address'] : \App\Models\SiteSetting::get('contact_address', '12 Rue de la Paix, 75001 Paris, France. By appointment only.');
     $defaultTopics = [

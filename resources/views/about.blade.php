@@ -1,6 +1,13 @@
 @extends("layouts.app")
 @section("title", "About Recolte Nails | Haute Nail Couture & Salon Craftsmanship")
 @section("content")
+@php
+    $activeWhatsApp = preg_replace('/[^0-9]/', '', \App\Models\SiteSetting::get('whatsapp_number', '917016266727')) ?: '917016266727';
+    $formatWaUrl = function($url) use ($activeWhatsApp) {
+        if (empty($url)) return "https://wa.me/{$activeWhatsApp}";
+        return preg_replace('/wa\.me\/[0-9]+/', "wa.me/{$activeWhatsApp}", $url);
+    };
+@endphp
 
     <!-- ── 1. HERO: ATELIER STORY & ARTISTRY (100% CMS DYNAMIC 7S ROTATION) ── -->
     <section x-data="aboutHeroSlider()" class="relative py-20 lg:py-28 overflow-hidden bg-[#FAF8F5]">
@@ -73,7 +80,7 @@
                             <span class="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                         </a>
 
-                        <a href="{{ $hero['btn2_url'] ?? 'https://wa.me/917016266727' }}"
+                        <a href="{{ $formatWaUrl($hero['btn2_url'] ?? null) }}"
                             target="_blank"
                             class="px-7 py-3.5 rounded-none bg-white hover:bg-[#FAF8F5] text-[#171412] border border-[#E5DFD7] text-xs font-bold uppercase tracking-wider transition-all shadow-xs flex items-center gap-2">
                             <svg class="w-4 h-4 text-[#25D366] fill-current" viewBox="0 0 24 24">
@@ -403,7 +410,7 @@
 
                     <!-- Action Buttons (Square) -->
                     <div class="pt-3 flex flex-wrap items-center gap-4">
-                        <a href="{{ $concierge['btn1_url'] ?? 'https://wa.me/917016266727' }}"
+                        <a href="{{ $formatWaUrl($concierge['btn1_url'] ?? null) }}"
                             target="_blank"
                             class="px-7 py-3.5 rounded-none bg-[#171412] hover:bg-black text-white text-xs font-bold uppercase tracking-wider shadow-xs hover:shadow-md transition-all flex items-center gap-2 group">
                             <svg class="w-4 h-4 text-[#25D366] fill-current" viewBox="0 0 24 24">

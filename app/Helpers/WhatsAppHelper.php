@@ -4,7 +4,12 @@ namespace App\Helpers;
 
 class WhatsAppHelper
 {
-    public static $phoneNumber = '917016266727';
+    public static function getPhoneNumber()
+    {
+        $num = \App\Models\SiteSetting::get('whatsapp_number', '917016266727');
+        $clean = preg_replace('/[^0-9]/', '', $num);
+        return $clean ?: '917016266727';
+    }
 
     public static function getLink($productTitle, $price = null, $shade = null, $size = null, $quantity = 1, $note = null)
     {
@@ -17,12 +22,12 @@ class WhatsAppHelper
         if ($note) $message .= "• Note: " . $note . "\n";
 
         $message .= "\nPlease confirm availability.";
-        return "https://wa.me/" . self::$phoneNumber . "?text=" . urlencode($message);
+        return "https://wa.me/" . self::getPhoneNumber() . "?text=" . urlencode($message);
     }
 
     public static function getGeneralLink($topic = 'General Inquiry')
     {
         $message = "Hello Recolte Nails, I have an inquiry regarding: " . $topic . ".";
-        return "https://wa.me/" . self::$phoneNumber . "?text=" . urlencode($message);
+        return "https://wa.me/" . self::getPhoneNumber() . "?text=" . urlencode($message);
     }
 }

@@ -446,7 +446,10 @@
                             </button>
 
                             <!-- 2. DIRECT WHATSAPP ORDER BUTTON (SQUARE ACTION) -->
-                            <a :href="'https://wa.me/917016266727?text=' + encodeURIComponent(
+                            @php
+                                $whatsappNum = preg_replace('/[^0-9]/', '', \App\Models\SiteSetting::get('whatsapp_number', '917016266727')) ?: '917016266727';
+                            @endphp
+                            <a :href="'https://wa.me/' + (window.recolteConfig?.whatsappNumber || '{{ $whatsappNum }}') + '?text=' + encodeURIComponent(
                                         'Hello Recolte Nails, I would like to order:\n\n' +
                                         '• Product: {{ $product->title }}\n' +
                                         (selectedShade ? '• Shade: ' + selectedShade + '\n' : '') +
@@ -489,13 +492,13 @@
 
                         <!-- 3. Sizing / Inquiry Sub-Links -->
                         <div class="flex items-center justify-between text-xs text-[#8C7A6B] pt-1">
-                            <a href="https://wa.me/917016266727?text=Hello%20Recolte%20Nails,%20I%20have%20a%20sizing%20question%20regarding%20{{ urlencode($product->title) }}."
+                            <a href="https://wa.me/{{ $whatsappNum }}?text=Hello%20Recolte%20Nails,%20I%20have%20a%20sizing%20question%20regarding%20{{ urlencode($product->title) }}."
                                 target="_blank" rel="noopener noreferrer"
                                 class="hover:text-[#A33B47] transition-colors flex items-center gap-1.5 font-light">
                                 <span>📏 Custom Sizing Consultation</span>
                             </a>
 
-                            <a href="https://wa.me/917016266727?text=Hello%20Recolte%20Nails,%20I%20have%20an%20inquiry%20regarding%20{{ urlencode($product->title) }}."
+                            <a href="https://wa.me/{{ $whatsappNum }}?text=Hello%20Recolte%20Nails,%20I%20have%20an%20inquiry%20regarding%20{{ urlencode($product->title) }}."
                                 target="_blank"
                                 class="hover:text-[#A33B47] transition-colors flex items-center gap-1.5 font-light">
                                 <span>💬 Ask an Artist</span>

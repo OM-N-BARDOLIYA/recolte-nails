@@ -90,8 +90,12 @@
 
                 <!-- WhatsApp Proceed Button with Formatted Inquiry (Square) -->
                 <div class="pt-2">
+                    @php
+                        $cleanWhatsApp = preg_replace('/[^0-9]/', '', \App\Models\SiteSetting::get('whatsapp_number', '917016266727')) ?: '917016266727';
+                        $displayPhone = \App\Models\SiteSetting::get('phone', '+91 7016266727');
+                    @endphp
                     <a 
-                        :href="'https://wa.me/917016266727?text=' + encodeURIComponent(
+                        :href="'https://wa.me/' + (window.recolteConfig?.whatsappNumber || '{{ $cleanWhatsApp }}') + '?text=' + encodeURIComponent(
                             'Hello Recolte Nails, I would like to order:\n\n' +
                             '• Product: ' + modalProduct.title + '\n' +
                             (modalShade ? '• Shade: ' + modalShade + '\n' : '') +
@@ -108,7 +112,7 @@
                     <div class="text-[10px] text-center text-charcoal/50 font-medium pt-2 flex items-center justify-center gap-2">
                         <span>⚡ Direct Studio Response</span>
                         <span>•</span>
-                        <span>Official WhatsApp: 7016266727</span>
+                        <span>Official WhatsApp: {{ $displayPhone }}</span>
                     </div>
                 </div>
 
